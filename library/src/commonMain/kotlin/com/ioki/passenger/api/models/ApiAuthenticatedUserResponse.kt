@@ -14,6 +14,7 @@ public data class ApiAuthenticatedUserResponse(
     @SerialName(value = "analytics_tracking") val analyticsTracking: Boolean?,
     val email: ApiEmail?,
     @SerialName(value = "current_terms_accepted") val currentTermsAccepted: Boolean,
+    @SerialName(value = "minimum_age_confirmed") val minimumAgeConfirmed: Boolean,
     @SerialName(value = "referring_user_set") val referringUserSet: Boolean,
     @SerialName(value = "referral_code") val referralCode: String?,
     @SerialName(value = "remaining_referrals") val remainingReferrals: Int?,
