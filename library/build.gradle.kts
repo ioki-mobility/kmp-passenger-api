@@ -30,10 +30,10 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(libs.kotlinx.serialization)
-                implementation(libs.kotlinx.datetime)
                 implementation(libs.ktor.core)
                 implementation(libs.ktor.serialization)
                 implementation(libs.ktor.client.negotiation)
+                api(libs.kotlinx.datetime)
             }
         }
         val commonTest by getting {
