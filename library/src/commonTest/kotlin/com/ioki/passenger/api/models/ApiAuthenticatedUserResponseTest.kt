@@ -22,6 +22,7 @@ internal class ApiAuthenticatedUserResponseTest : IokiApiModelTest() {
                 analyticsTracking = false,
                 email = userDetail,
                 currentTermsAccepted = true,
+                minimumAgeConfirmed = true,
                 referringUserSet = true,
                 referralCode = "IAMYOURFRIEND",
                 remainingReferrals = 5,
@@ -59,6 +60,7 @@ private val authenticatedUser = """
     "confirmed": true
   },
   "current_terms_accepted": true,
+  "minimum_age_confirmed": true,
   "referring_user_set": true,
   "referral_code": "IAMYOURFRIEND",
   "remaining_referrals": 5,
