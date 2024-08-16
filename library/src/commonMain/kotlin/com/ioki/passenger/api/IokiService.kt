@@ -98,6 +98,7 @@ public fun IokiService(
 
 public interface IokiService :
     PhoneVerificationService,
+    FirebaseService,
     UserService,
     RideService,
     PaymentService,
@@ -114,6 +115,17 @@ public interface PhoneVerificationService {
     ): Result<ApiPhoneVerificationResponse>
 }
 
+public interface FirebaseService {
+    public suspend fun createDevice(deviceRequest: ApiDeviceRequest): Result<ApiDeviceResponse>
+
+    public suspend fun getFirebaseToken(): Result<ApiFirebaseTokenResponse>
+
+    public suspend fun sendFirebaseDebugRecord(
+        debugId: String,
+        firebaseDebugRecord: ApiFirebaseDebugRecordRequest,
+    ): Result<Unit>
+}
+
 public interface UserService {
     public suspend fun requestApiToken(request: ApiRequestTokenRequest): Result<ApiRequestTokenResponse>
 
@@ -122,10 +134,6 @@ public interface UserService {
     public suspend fun getUser(): Result<ApiAuthenticatedUserResponse>
 
     public suspend fun updateUser(request: ApiUpdateUserRequest): Result<ApiAuthenticatedUserResponse>
-
-    public suspend fun createDevice(deviceRequest: ApiDeviceRequest): Result<ApiDeviceResponse>
-
-    public suspend fun getFirebaseToken(): Result<ApiFirebaseTokenResponse>
 
     public suspend fun marketingApproval(): Result<ApiMarketingResponse>
 
@@ -265,11 +273,6 @@ public interface CommonService {
     public suspend fun getStations(request: ApiStationsRequest): Result<List<ApiStationResponse>>
 
     public suspend fun getVenues(): Result<List<ApiVenueResponse>>
-
-    public suspend fun sendFirebaseDebugRecord(
-        debugId: String,
-        firebaseDebugRecord: ApiFirebaseDebugRecordRequest,
-    ): Result<Unit>
 
     public suspend fun getUserNotificationSettings(): Result<List<ApiUserNotificationSettingsResponse>?>
 
