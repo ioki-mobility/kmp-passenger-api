@@ -97,6 +97,8 @@ public fun IokiService(
 }
 
 public interface IokiService :
+    BootstrapService,
+    ClientService,
     PhoneVerificationService,
     FirebaseService,
     UserService,
@@ -114,7 +116,8 @@ public interface IokiService :
     PaymentService,
     PublicTransportService,
     TicketingService,
-    CommonService
+    StationsService,
+    VenuesService
 
 public interface PhoneVerificationService {
     public suspend fun solveCaptcha(captchaId: String, captchaRequest: ApiCaptchaRequest): Result<Unit>
@@ -309,13 +312,19 @@ public interface TicketingService {
     ): Result<ApiTicketingVoucherResponse>
 }
 
-public interface CommonService {
+public interface BootstrapService {
     public suspend fun getBootstrap(): Result<ApiBootstrapResponse>
+}
 
+public interface ClientService {
     public suspend fun requestClientInfo(): Result<ApiClientInfoResponse>
+}
 
+public interface StationsService {
     public suspend fun getStations(request: ApiStationsRequest): Result<List<ApiStationResponse>>
+}
 
+public interface VenuesService {
     public suspend fun getVenues(): Result<List<ApiVenueResponse>>
 }
 
