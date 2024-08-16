@@ -105,6 +105,7 @@ public interface IokiService :
     CurrentRideService,
     RideService,
     RideSeriesService,
+    TipService,
     GetPaymentService,
     RedeemService,
     LogPayService,
@@ -208,8 +209,6 @@ public interface RideService {
 
     public suspend fun submitRating(rideId: String, request: ApiRatingRequest): Result<ApiRatingResponse>
 
-    public suspend fun sendTip(rideId: String, request: ApiCreateTipRequest): Result<ApiTipResponse>
-
     public suspend fun inquireRide(request: ApiRideInquiryRequest): Result<ApiRideInquiryResponse>
 }
 
@@ -219,6 +218,10 @@ public interface RideSeriesService {
     public suspend fun getRideSeriesList(page: Int): Result<List<ApiRideSeriesResponse>>
 
     public suspend fun createRideSeries(rideId: String, request: ApiRideSeriesRequest): Result<ApiRideSeriesResponse>
+}
+
+public interface TipService {
+    public suspend fun sendTip(rideId: String, request: ApiCreateTipRequest): Result<ApiTipResponse>
 }
 
 public interface GetPaymentService {
