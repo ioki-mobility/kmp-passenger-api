@@ -108,6 +108,7 @@ public interface IokiService :
     GetPaymentService,
     RedeemService,
     StripeService,
+    PayPalService,
     PaymentService,
     PublicTransportService,
     CommonService
@@ -244,6 +245,15 @@ public interface StripeService {
     ): Result<ApiPaymentMethodResponse>
 }
 
+public interface PayPalService {
+    public suspend fun createPaymentMethodForPaypal(
+        braintreeNonce: String,
+        paypalSecureElement: String,
+    ): Result<ApiPaymentMethodResponse>
+
+    public suspend fun createPaypalClientToken(): Result<ApiPaypalClientTokenResponse>
+}
+
 public interface PaymentService {
     public suspend fun detachPaymentMethod(paymentMethodId: String): Result<Unit>
 
@@ -254,13 +264,6 @@ public interface PaymentService {
     public suspend fun purchasePersonalDiscount(
         purchaseRequest: ApiPersonalDiscountPurchaseRequest,
     ): Result<ApiPersonalDiscountResponse>
-
-    public suspend fun createPaymentMethodForPaypal(
-        braintreeNonce: String,
-        paypalSecureElement: String,
-    ): Result<ApiPaymentMethodResponse>
-
-    public suspend fun createPaypalClientToken(): Result<ApiPaypalClientTokenResponse>
 
     public suspend fun payFailedPayments(request: ApiFailedPaymentRequest): Result<ApiFailedPaymentResponse>
 }
