@@ -112,6 +112,7 @@ public interface IokiService :
     PayPalService,
     PaymentService,
     PublicTransportService,
+    TicketingService,
     CommonService
 
 public interface PhoneVerificationService {
@@ -278,6 +279,9 @@ public interface RedeemService {
 }
 
 public interface PublicTransportService {
+}
+
+public interface TicketingService {
     public suspend fun getActiveUserTicketingVouchers(page: Int): Result<List<ApiTicketingVoucherResponse>>
 
     public suspend fun getInactiveUserTicketingVouchers(page: Int): Result<List<ApiTicketingVoucherResponse>>
