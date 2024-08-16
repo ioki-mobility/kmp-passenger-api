@@ -151,6 +151,8 @@ public interface UserService {
     public suspend fun updatePhoneNumber(request: ApiUpdatePhoneNumberRequest): Result<ApiAuthenticatedUserResponse>
 
     public suspend fun updateUserFlags(request: ApiUserFlagsRequest): Result<ApiAuthenticatedUserResponse>
+
+    public suspend fun updateLanguage(): Result<Unit>
 }
 
 public interface MarketingService {
@@ -309,8 +311,6 @@ public interface TicketingService {
 
 public interface CommonService {
     public suspend fun getBootstrap(): Result<ApiBootstrapResponse>
-
-    public suspend fun updateLanguage(): Result<Unit>
 
     public suspend fun requestClientInfo(): Result<ApiClientInfoResponse>
 
