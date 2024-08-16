@@ -208,8 +208,6 @@ public interface RideService {
 
     public suspend fun submitRating(rideId: String, request: ApiRatingRequest): Result<ApiRatingResponse>
 
-    public suspend fun getPublicTransportSchedules(url: String, time: Instant): Result<List<ApiScheduleResponse>>
-
     public suspend fun sendTip(rideId: String, request: ApiCreateTipRequest): Result<ApiTipResponse>
 
     public suspend fun inquireRide(request: ApiRideInquiryRequest): Result<ApiRideInquiryResponse>
@@ -279,6 +277,7 @@ public interface RedeemService {
 }
 
 public interface PublicTransportService {
+    public suspend fun getPublicTransportSchedules(url: String, time: Instant): Result<List<ApiScheduleResponse>>
 }
 
 public interface TicketingService {
