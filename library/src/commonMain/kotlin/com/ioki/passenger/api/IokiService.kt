@@ -105,6 +105,7 @@ public interface IokiService :
     CurrentRideService,
     RideService,
     RideSeriesService,
+    GetPaymentService,
     PaymentService,
     PublicTransportService,
     CommonService
@@ -221,20 +222,24 @@ public interface RideSeriesService {
     public suspend fun createRideSeries(rideId: String, request: ApiRideSeriesRequest): Result<ApiRideSeriesResponse>
 }
 
-public interface PaymentService {
+public interface GetPaymentService {
+    public suspend fun getPaymentMethods(): Result<List<ApiPaymentMethodResponse>>
+    
     public suspend fun getServiceCreditPackages(): Result<List<ApiPurchasedCreditPackageResponse>>
-
-    public suspend fun detachPaymentMethod(paymentMethodId: String): Result<Unit>
-
-    public suspend fun getRedeemedPromoCodes(): Result<List<ApiRedeemedPromoCodeResponse>>
-
-    public suspend fun purchaseCreditPackage(
-        purchasingPackage: ApiPurchasingCreditPackageRequest,
-    ): Result<ApiPurchasedCreditPackageResponse>
 
     public suspend fun getAvailablePersonalDiscountTypes(): Result<List<ApiPersonalDiscountTypeResponse>>
 
     public suspend fun getMyPersonalDiscounts(): Result<List<ApiPersonalDiscountResponse>>
+
+    public suspend fun getRedeemedPromoCodes(): Result<List<ApiRedeemedPromoCodeResponse>>
+}
+
+public interface PaymentService {
+    public suspend fun detachPaymentMethod(paymentMethodId: String): Result<Unit>
+
+    public suspend fun purchaseCreditPackage(
+        purchasingPackage: ApiPurchasingCreditPackageRequest,
+    ): Result<ApiPurchasedCreditPackageResponse>
 
     public suspend fun purchasePersonalDiscount(
         purchaseRequest: ApiPersonalDiscountPurchaseRequest,
@@ -252,8 +257,6 @@ public interface PaymentService {
         braintreeNonce: String,
         paypalSecureElement: String,
     ): Result<ApiPaymentMethodResponse>
-
-    public suspend fun getPaymentMethods(): Result<List<ApiPaymentMethodResponse>>
 
     public suspend fun redeemReferralCode(code: String): Result<Unit>
 
