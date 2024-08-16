@@ -101,6 +101,7 @@ public interface IokiService :
     FirebaseService,
     UserService,
     MarketingService,
+    NotificationService,
     RideService,
     PaymentService,
     PublicTransportService,
@@ -151,6 +152,19 @@ public interface MarketingService {
     public suspend fun marketingApproval(): Result<ApiMarketingResponse>
 
     public suspend fun marketingRejection(): Result<ApiMarketingResponse>
+}
+
+public interface NotificationService {
+    public suspend fun getUserNotificationSettings(): Result<List<ApiUserNotificationSettingsResponse>?>
+
+    public suspend fun getAvailableProviderNotificationSettings(): Result<List<ApiProviderNotificationSettingsResponse>>
+
+    public suspend fun getDefaultProviderNotificationSettings(): Result<List<ApiProviderNotificationSettingsResponse>>
+
+    public suspend fun updateUserNotificationSettings(
+        request: ApiUpdateUserNotificationSettingsRequest,
+        userId: String,
+    ): Result<ApiUserNotificationSettingsResponse>
 }
 
 public interface RideService {
@@ -276,17 +290,6 @@ public interface CommonService {
     public suspend fun getStations(request: ApiStationsRequest): Result<List<ApiStationResponse>>
 
     public suspend fun getVenues(): Result<List<ApiVenueResponse>>
-
-    public suspend fun getUserNotificationSettings(): Result<List<ApiUserNotificationSettingsResponse>?>
-
-    public suspend fun getAvailableProviderNotificationSettings(): Result<List<ApiProviderNotificationSettingsResponse>>
-
-    public suspend fun getDefaultProviderNotificationSettings(): Result<List<ApiProviderNotificationSettingsResponse>>
-
-    public suspend fun updateUserNotificationSettings(
-        request: ApiUpdateUserNotificationSettingsRequest,
-        userId: String,
-    ): Result<ApiUserNotificationSettingsResponse>
 }
 
 private class DefaultIokiService(
