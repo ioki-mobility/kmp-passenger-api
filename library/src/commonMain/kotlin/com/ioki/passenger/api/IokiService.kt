@@ -107,6 +107,7 @@ public interface IokiService :
     RideSeriesService,
     GetPaymentService,
     RedeemService,
+    StripeService,
     PaymentService,
     PublicTransportService,
     CommonService
@@ -235,6 +236,14 @@ public interface GetPaymentService {
     public suspend fun getRedeemedPromoCodes(): Result<List<ApiRedeemedPromoCodeResponse>>
 }
 
+public interface StripeService {
+    public suspend fun requestStripeSetupIntent(): Result<ApiStripeSetupIntentResponse>
+
+    public suspend fun createPaymentMethodFromStripePaymentMethod(
+        stripePaymentMethodId: String,
+    ): Result<ApiPaymentMethodResponse>
+}
+
 public interface PaymentService {
     public suspend fun detachPaymentMethod(paymentMethodId: String): Result<Unit>
 
@@ -245,12 +254,6 @@ public interface PaymentService {
     public suspend fun purchasePersonalDiscount(
         purchaseRequest: ApiPersonalDiscountPurchaseRequest,
     ): Result<ApiPersonalDiscountResponse>
-
-    public suspend fun requestStripeSetupIntent(): Result<ApiStripeSetupIntentResponse>
-
-    public suspend fun createPaymentMethodFromStripePaymentMethod(
-        stripePaymentMethodId: String,
-    ): Result<ApiPaymentMethodResponse>
 
     public suspend fun createPaymentMethodForPaypal(
         braintreeNonce: String,
