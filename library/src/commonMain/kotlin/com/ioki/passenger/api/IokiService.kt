@@ -106,6 +106,7 @@ public interface IokiService :
     RideService,
     RideSeriesService,
     GetPaymentService,
+    RedeemService,
     PaymentService,
     PublicTransportService,
     CommonService
@@ -224,7 +225,7 @@ public interface RideSeriesService {
 
 public interface GetPaymentService {
     public suspend fun getPaymentMethods(): Result<List<ApiPaymentMethodResponse>>
-    
+
     public suspend fun getServiceCreditPackages(): Result<List<ApiPurchasedCreditPackageResponse>>
 
     public suspend fun getAvailablePersonalDiscountTypes(): Result<List<ApiPersonalDiscountTypeResponse>>
@@ -245,8 +246,6 @@ public interface PaymentService {
         purchaseRequest: ApiPersonalDiscountPurchaseRequest,
     ): Result<ApiPersonalDiscountResponse>
 
-    public suspend fun redeemPromoCode(request: ApiRedeemPromoCodeRequest): Result<ApiRedeemedPromoCodeResponse>
-
     public suspend fun requestStripeSetupIntent(): Result<ApiStripeSetupIntentResponse>
 
     public suspend fun createPaymentMethodFromStripePaymentMethod(
@@ -258,11 +257,15 @@ public interface PaymentService {
         paypalSecureElement: String,
     ): Result<ApiPaymentMethodResponse>
 
-    public suspend fun redeemReferralCode(code: String): Result<Unit>
-
     public suspend fun createPaypalClientToken(): Result<ApiPaypalClientTokenResponse>
 
     public suspend fun payFailedPayments(request: ApiFailedPaymentRequest): Result<ApiFailedPaymentResponse>
+}
+
+public interface RedeemService {
+    public suspend fun redeemPromoCode(request: ApiRedeemPromoCodeRequest): Result<ApiRedeemedPromoCodeResponse>
+
+    public suspend fun redeemReferralCode(code: String): Result<Unit>
 }
 
 public interface PublicTransportService {
