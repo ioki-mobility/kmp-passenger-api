@@ -97,21 +97,24 @@ public fun IokiService(
 }
 
 public interface IokiService :
+    PhoneVerificationService,
     UserService,
     RideService,
     PaymentService,
     PublicTransportService,
     CommonService
 
-public interface UserService {
-    public suspend fun requestPhoneVerification(
-        verification: ApiPhoneVerificationRequest,
-    ): Result<ApiPhoneVerificationResponse>
-
+public interface PhoneVerificationService {
     public suspend fun solveCaptcha(captchaId: String, captchaRequest: ApiCaptchaRequest): Result<Unit>
 
     public suspend fun solveClientChallenge(id: String, request: ApiClientChallengeRequest): Result<Unit>
 
+    public suspend fun requestPhoneVerification(
+        verification: ApiPhoneVerificationRequest,
+    ): Result<ApiPhoneVerificationResponse>
+}
+
+public interface UserService {
     public suspend fun requestApiToken(request: ApiRequestTokenRequest): Result<ApiRequestTokenResponse>
 
     public suspend fun signUp(request: ApiSignUpRequest): Result<ApiAuthenticatedUserResponse>
