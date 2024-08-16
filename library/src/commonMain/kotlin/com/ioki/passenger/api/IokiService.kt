@@ -107,6 +107,7 @@ public interface IokiService :
     RideSeriesService,
     GetPaymentService,
     RedeemService,
+    LogPayService,
     StripeService,
     PayPalService,
     PaymentService,
@@ -146,10 +147,6 @@ public interface UserService {
     public suspend fun deleteUser(): Result<Unit>
 
     public suspend fun updatePhoneNumber(request: ApiUpdatePhoneNumberRequest): Result<ApiAuthenticatedUserResponse>
-
-    public suspend fun createLogPayCustomer(request: ApiLogPayAccountRequest): Result<ApiLogPayUrlResponse>
-
-    public suspend fun getLogPayUrl(paymentMethodType: ApiLogPayType): Result<ApiLogPayUrlResponse>
 
     public suspend fun updateUserFlags(request: ApiUserFlagsRequest): Result<ApiAuthenticatedUserResponse>
 }
@@ -235,6 +232,12 @@ public interface GetPaymentService {
     public suspend fun getMyPersonalDiscounts(): Result<List<ApiPersonalDiscountResponse>>
 
     public suspend fun getRedeemedPromoCodes(): Result<List<ApiRedeemedPromoCodeResponse>>
+}
+
+public interface LogPayService {
+    public suspend fun createLogPayCustomer(request: ApiLogPayAccountRequest): Result<ApiLogPayUrlResponse>
+
+    public suspend fun getLogPayUrl(paymentMethodType: ApiLogPayType): Result<ApiLogPayUrlResponse>
 }
 
 public interface StripeService {
