@@ -100,6 +100,7 @@ public interface IokiService :
     PhoneVerificationService,
     FirebaseService,
     UserService,
+    MarketingService,
     RideService,
     PaymentService,
     PublicTransportService,
@@ -135,10 +136,6 @@ public interface UserService {
 
     public suspend fun updateUser(request: ApiUpdateUserRequest): Result<ApiAuthenticatedUserResponse>
 
-    public suspend fun marketingApproval(): Result<ApiMarketingResponse>
-
-    public suspend fun marketingRejection(): Result<ApiMarketingResponse>
-
     public suspend fun deleteUser(): Result<Unit>
 
     public suspend fun updatePhoneNumber(request: ApiUpdatePhoneNumberRequest): Result<ApiAuthenticatedUserResponse>
@@ -148,6 +145,12 @@ public interface UserService {
     public suspend fun getLogPayUrl(paymentMethodType: ApiLogPayType): Result<ApiLogPayUrlResponse>
 
     public suspend fun updateUserFlags(request: ApiUserFlagsRequest): Result<ApiAuthenticatedUserResponse>
+}
+
+public interface MarketingService {
+    public suspend fun marketingApproval(): Result<ApiMarketingResponse>
+
+    public suspend fun marketingRejection(): Result<ApiMarketingResponse>
 }
 
 public interface RideService {
