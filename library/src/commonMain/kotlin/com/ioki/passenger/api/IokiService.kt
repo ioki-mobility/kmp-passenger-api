@@ -102,6 +102,7 @@ public interface IokiService :
     UserService,
     MarketingService,
     NotificationService,
+    CurrentRideService,
     RideService,
     PaymentService,
     PublicTransportService,
@@ -167,6 +168,25 @@ public interface NotificationService {
     ): Result<ApiUserNotificationSettingsResponse>
 }
 
+public interface CurrentRideService {
+    public suspend fun getCurrentRide(): Result<ApiRideResponse>
+
+    public suspend fun requestPhoneCall(rideId: String): Result<Unit>
+
+    public suspend fun calculateNewFareForRide(
+        rideId: String,
+        passengers: List<ApiPassengerSelectionRequest>,
+    ): Result<ApiFareResponse>
+
+    public suspend fun updatePassengersForRide(
+        rideId: String,
+        passengers: List<ApiPassengerSelectionRequest>,
+        rideVersion: Int,
+        fareVersion: Int,
+        paypalSecureElement: String?,
+    ): Result<ApiRideResponse>
+}
+
 public interface RideService {
     public suspend fun createRide(request: ApiRideRequest): Result<ApiRideResponse>
 
@@ -181,10 +201,6 @@ public interface RideService {
 
     public suspend fun getRide(rideId: String): Result<ApiRideResponse>
 
-    public suspend fun getCurrentRide(): Result<ApiRideResponse>
-
-    public suspend fun requestPhoneCall(rideId: String): Result<Unit>
-
     public suspend fun getRides(type: ApiRideFilterType, page: Int): Result<List<ApiRideResponse>>
 
     public suspend fun getRideSeries(rideSeriesId: String): Result<ApiRideSeriesResponse>
@@ -196,19 +212,6 @@ public interface RideService {
     public suspend fun submitRating(rideId: String, request: ApiRatingRequest): Result<ApiRatingResponse>
 
     public suspend fun getPublicTransportSchedules(url: String, time: Instant): Result<List<ApiScheduleResponse>>
-
-    public suspend fun calculateNewFareForRide(
-        rideId: String,
-        passengers: List<ApiPassengerSelectionRequest>,
-    ): Result<ApiFareResponse>
-
-    public suspend fun updatePassengersForRide(
-        rideId: String,
-        passengers: List<ApiPassengerSelectionRequest>,
-        rideVersion: Int,
-        fareVersion: Int,
-        paypalSecureElement: String?,
-    ): Result<ApiRideResponse>
 
     public suspend fun sendTip(rideId: String, request: ApiCreateTipRequest): Result<ApiTipResponse>
 
