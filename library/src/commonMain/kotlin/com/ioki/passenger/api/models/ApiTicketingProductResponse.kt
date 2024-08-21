@@ -66,6 +66,9 @@ public data class ApiTicketingProductResponse(
 
         @SerialName(value = "string")
         STRING,
+
+        @SerialName(value = "object")
+        OBJECT,
         UNSUPPORTED,
     }
 
@@ -79,6 +82,9 @@ public data class ApiTicketingProductResponse(
 
         @SerialName(value = "datetime")
         DATETIME,
+
+        @SerialName(value = "geolocation")
+        GEOLOCATION,
         UNSUPPORTED,
     }
 }
