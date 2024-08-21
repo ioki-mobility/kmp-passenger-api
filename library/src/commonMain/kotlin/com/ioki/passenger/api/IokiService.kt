@@ -97,21 +97,50 @@ public fun IokiService(
 }
 
 public interface IokiService :
+    BootstrapService,
+    ClientService,
+    PhoneVerificationService,
+    FirebaseService,
     UserService,
+    MarketingService,
+    NotificationService,
+    CurrentRideService,
     RideService,
+    RideSeriesService,
+    TipService,
+    GetPaymentService,
+    RedeemService,
+    LogPayService,
+    StripeService,
+    PayPalService,
     PaymentService,
     PublicTransportService,
-    CommonService
+    TicketingService,
+    StationsService,
+    VenuesService
 
-public interface UserService {
-    public suspend fun requestPhoneVerification(
-        verification: ApiPhoneVerificationRequest,
-    ): Result<ApiPhoneVerificationResponse>
-
+public interface PhoneVerificationService {
     public suspend fun solveCaptcha(captchaId: String, captchaRequest: ApiCaptchaRequest): Result<Unit>
 
     public suspend fun solveClientChallenge(id: String, request: ApiClientChallengeRequest): Result<Unit>
 
+    public suspend fun requestPhoneVerification(
+        verification: ApiPhoneVerificationRequest,
+    ): Result<ApiPhoneVerificationResponse>
+}
+
+public interface FirebaseService {
+    public suspend fun createDevice(deviceRequest: ApiDeviceRequest): Result<ApiDeviceResponse>
+
+    public suspend fun getFirebaseToken(): Result<ApiFirebaseTokenResponse>
+
+    public suspend fun sendFirebaseDebugRecord(
+        debugId: String,
+        firebaseDebugRecord: ApiFirebaseDebugRecordRequest,
+    ): Result<Unit>
+}
+
+public interface UserService {
     public suspend fun requestApiToken(request: ApiRequestTokenRequest): Result<ApiRequestTokenResponse>
 
     public suspend fun signUp(request: ApiSignUpRequest): Result<ApiAuthenticatedUserResponse>
@@ -120,23 +149,51 @@ public interface UserService {
 
     public suspend fun updateUser(request: ApiUpdateUserRequest): Result<ApiAuthenticatedUserResponse>
 
-    public suspend fun createDevice(deviceRequest: ApiDeviceRequest): Result<ApiDeviceResponse>
-
-    public suspend fun getFirebaseToken(): Result<ApiFirebaseTokenResponse>
-
-    public suspend fun marketingApproval(): Result<ApiMarketingResponse>
-
-    public suspend fun marketingRejection(): Result<ApiMarketingResponse>
-
     public suspend fun deleteUser(): Result<Unit>
 
     public suspend fun updatePhoneNumber(request: ApiUpdatePhoneNumberRequest): Result<ApiAuthenticatedUserResponse>
 
-    public suspend fun createLogPayCustomer(request: ApiLogPayAccountRequest): Result<ApiLogPayUrlResponse>
-
-    public suspend fun getLogPayUrl(paymentMethodType: ApiLogPayType): Result<ApiLogPayUrlResponse>
-
     public suspend fun updateUserFlags(request: ApiUserFlagsRequest): Result<ApiAuthenticatedUserResponse>
+
+    public suspend fun updateLanguage(): Result<Unit>
+}
+
+public interface MarketingService {
+    public suspend fun marketingApproval(): Result<ApiMarketingResponse>
+
+    public suspend fun marketingRejection(): Result<ApiMarketingResponse>
+}
+
+public interface NotificationService {
+    public suspend fun getUserNotificationSettings(): Result<List<ApiUserNotificationSettingsResponse>?>
+
+    public suspend fun getAvailableProviderNotificationSettings(): Result<List<ApiProviderNotificationSettingsResponse>>
+
+    public suspend fun getDefaultProviderNotificationSettings(): Result<List<ApiProviderNotificationSettingsResponse>>
+
+    public suspend fun updateUserNotificationSettings(
+        request: ApiUpdateUserNotificationSettingsRequest,
+        userId: String,
+    ): Result<ApiUserNotificationSettingsResponse>
+}
+
+public interface CurrentRideService {
+    public suspend fun getCurrentRide(): Result<ApiRideResponse>
+
+    public suspend fun requestPhoneCall(rideId: String): Result<Unit>
+
+    public suspend fun calculateNewFareForRide(
+        rideId: String,
+        passengers: List<ApiPassengerSelectionRequest>,
+    ): Result<ApiFareResponse>
+
+    public suspend fun updatePassengersForRide(
+        rideId: String,
+        passengers: List<ApiPassengerSelectionRequest>,
+        rideVersion: Int,
+        fareVersion: Int,
+        paypalSecureElement: String?,
+    ): Result<ApiRideResponse>
 }
 
 public interface RideService {
@@ -153,82 +210,85 @@ public interface RideService {
 
     public suspend fun getRide(rideId: String): Result<ApiRideResponse>
 
-    public suspend fun getCurrentRide(): Result<ApiRideResponse>
-
-    public suspend fun requestPhoneCall(rideId: String): Result<Unit>
-
     public suspend fun getRides(type: ApiRideFilterType, page: Int): Result<List<ApiRideResponse>>
 
+    public suspend fun submitRating(rideId: String, request: ApiRatingRequest): Result<ApiRatingResponse>
+
+    public suspend fun inquireRide(request: ApiRideInquiryRequest): Result<ApiRideInquiryResponse>
+}
+
+public interface RideSeriesService {
     public suspend fun getRideSeries(rideSeriesId: String): Result<ApiRideSeriesResponse>
 
     public suspend fun getRideSeriesList(page: Int): Result<List<ApiRideSeriesResponse>>
 
     public suspend fun createRideSeries(rideId: String, request: ApiRideSeriesRequest): Result<ApiRideSeriesResponse>
-
-    public suspend fun submitRating(rideId: String, request: ApiRatingRequest): Result<ApiRatingResponse>
-
-    public suspend fun getPublicTransportSchedules(url: String, time: Instant): Result<List<ApiScheduleResponse>>
-
-    public suspend fun calculateNewFareForRide(
-        rideId: String,
-        passengers: List<ApiPassengerSelectionRequest>,
-    ): Result<ApiFareResponse>
-
-    public suspend fun updatePassengersForRide(
-        rideId: String,
-        passengers: List<ApiPassengerSelectionRequest>,
-        rideVersion: Int,
-        fareVersion: Int,
-        paypalSecureElement: String?,
-    ): Result<ApiRideResponse>
-
-    public suspend fun sendTip(rideId: String, request: ApiCreateTipRequest): Result<ApiTipResponse>
-
-    public suspend fun inquireRide(request: ApiRideInquiryRequest): Result<ApiRideInquiryResponse>
 }
 
-public interface PaymentService {
+public interface TipService {
+    public suspend fun sendTip(rideId: String, request: ApiCreateTipRequest): Result<ApiTipResponse>
+}
+
+public interface GetPaymentService {
+    public suspend fun getPaymentMethods(): Result<List<ApiPaymentMethodResponse>>
+
     public suspend fun getServiceCreditPackages(): Result<List<ApiPurchasedCreditPackageResponse>>
-
-    public suspend fun detachPaymentMethod(paymentMethodId: String): Result<Unit>
-
-    public suspend fun getRedeemedPromoCodes(): Result<List<ApiRedeemedPromoCodeResponse>>
-
-    public suspend fun purchaseCreditPackage(
-        purchasingPackage: ApiPurchasingCreditPackageRequest,
-    ): Result<ApiPurchasedCreditPackageResponse>
 
     public suspend fun getAvailablePersonalDiscountTypes(): Result<List<ApiPersonalDiscountTypeResponse>>
 
     public suspend fun getMyPersonalDiscounts(): Result<List<ApiPersonalDiscountResponse>>
 
-    public suspend fun purchasePersonalDiscount(
-        purchaseRequest: ApiPersonalDiscountPurchaseRequest,
-    ): Result<ApiPersonalDiscountResponse>
+    public suspend fun getRedeemedPromoCodes(): Result<List<ApiRedeemedPromoCodeResponse>>
+}
 
-    public suspend fun redeemPromoCode(request: ApiRedeemPromoCodeRequest): Result<ApiRedeemedPromoCodeResponse>
+public interface LogPayService {
+    public suspend fun createLogPayCustomer(request: ApiLogPayAccountRequest): Result<ApiLogPayUrlResponse>
 
+    public suspend fun getLogPayUrl(paymentMethodType: ApiLogPayType): Result<ApiLogPayUrlResponse>
+}
+
+public interface StripeService {
     public suspend fun requestStripeSetupIntent(): Result<ApiStripeSetupIntentResponse>
 
     public suspend fun createPaymentMethodFromStripePaymentMethod(
         stripePaymentMethodId: String,
     ): Result<ApiPaymentMethodResponse>
+}
 
+public interface PayPalService {
     public suspend fun createPaymentMethodForPaypal(
         braintreeNonce: String,
         paypalSecureElement: String,
     ): Result<ApiPaymentMethodResponse>
 
-    public suspend fun getPaymentMethods(): Result<List<ApiPaymentMethodResponse>>
-
-    public suspend fun redeemReferralCode(code: String): Result<Unit>
-
     public suspend fun createPaypalClientToken(): Result<ApiPaypalClientTokenResponse>
+}
+
+public interface PaymentService {
+    public suspend fun detachPaymentMethod(paymentMethodId: String): Result<Unit>
+
+    public suspend fun purchaseCreditPackage(
+        purchasingPackage: ApiPurchasingCreditPackageRequest,
+    ): Result<ApiPurchasedCreditPackageResponse>
+
+    public suspend fun purchasePersonalDiscount(
+        purchaseRequest: ApiPersonalDiscountPurchaseRequest,
+    ): Result<ApiPersonalDiscountResponse>
 
     public suspend fun payFailedPayments(request: ApiFailedPaymentRequest): Result<ApiFailedPaymentResponse>
 }
 
+public interface RedeemService {
+    public suspend fun redeemPromoCode(request: ApiRedeemPromoCodeRequest): Result<ApiRedeemedPromoCodeResponse>
+
+    public suspend fun redeemReferralCode(code: String): Result<Unit>
+}
+
 public interface PublicTransportService {
+    public suspend fun getPublicTransportSchedules(url: String, time: Instant): Result<List<ApiScheduleResponse>>
+}
+
+public interface TicketingService {
     public suspend fun getActiveUserTicketingVouchers(page: Int): Result<List<ApiTicketingVoucherResponse>>
 
     public suspend fun getInactiveUserTicketingVouchers(page: Int): Result<List<ApiTicketingVoucherResponse>>
@@ -252,32 +312,20 @@ public interface PublicTransportService {
     ): Result<ApiTicketingVoucherResponse>
 }
 
-public interface CommonService {
+public interface BootstrapService {
     public suspend fun getBootstrap(): Result<ApiBootstrapResponse>
+}
 
-    public suspend fun updateLanguage(): Result<Unit>
-
+public interface ClientService {
     public suspend fun requestClientInfo(): Result<ApiClientInfoResponse>
+}
 
+public interface StationsService {
     public suspend fun getStations(request: ApiStationsRequest): Result<List<ApiStationResponse>>
+}
 
+public interface VenuesService {
     public suspend fun getVenues(): Result<List<ApiVenueResponse>>
-
-    public suspend fun sendFirebaseDebugRecord(
-        debugId: String,
-        firebaseDebugRecord: ApiFirebaseDebugRecordRequest,
-    ): Result<Unit>
-
-    public suspend fun getUserNotificationSettings(): Result<List<ApiUserNotificationSettingsResponse>?>
-
-    public suspend fun getAvailableProviderNotificationSettings(): Result<List<ApiProviderNotificationSettingsResponse>>
-
-    public suspend fun getDefaultProviderNotificationSettings(): Result<List<ApiProviderNotificationSettingsResponse>>
-
-    public suspend fun updateUserNotificationSettings(
-        request: ApiUpdateUserNotificationSettingsRequest,
-        userId: String,
-    ): Result<ApiUserNotificationSettingsResponse>
 }
 
 private class DefaultIokiService(
