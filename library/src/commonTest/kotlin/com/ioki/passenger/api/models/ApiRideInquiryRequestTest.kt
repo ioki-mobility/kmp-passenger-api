@@ -22,7 +22,19 @@ internal class ApiRideInquiryRequestTest : IokiApiModelTest() {
                     time = Instant.parse("1970-01-01T00:00:00Z"),
                     stationId = "station id",
                 ),
-                destination = defaultApiLocation(),
+                destination = ApiRideInquiryRequest.Location(
+                    lat = null,
+                    lng = null,
+                    locationName = null,
+                    streetName = null,
+                    streetNumber = null,
+                    postalCode = null,
+                    city = null,
+                    county = null,
+                    country = null,
+                    time = null,
+                    stationId = null,
+                ),
                 passengers = listOf(
                     ApiPassengerSelectionRequest(
                         type = "adult",
@@ -102,27 +114,25 @@ internal class ApiRideInquiryRequestTest : IokiApiModelTest() {
                     time = Instant.parse("1970-01-01T00:00:00Z"),
                     stationId = "station id",
                 ),
-                destination = defaultApiLocation(),
+                destination = ApiRideInquiryRequest.Location(
+                    lat = null,
+                    lng = null,
+                    locationName = null,
+                    streetName = null,
+                    streetNumber = null,
+                    postalCode = null,
+                    city = null,
+                    county = null,
+                    country = null,
+                    time = null,
+                    stationId = null,
+                ),
                 passengers = null,
             ),
             rideInquiryMinimalJson,
         )
     }
 }
-
-private fun defaultApiLocation(): ApiRideInquiryRequest.Location = ApiRideInquiryRequest.Location(
-    lat = null,
-    lng = null,
-    locationName = null,
-    streetName = null,
-    streetNumber = null,
-    postalCode = null,
-    city = null,
-    county = null,
-    country = null,
-    time = null,
-    stationId = null,
-)
 
 private val rideInquiryMinimalJson =
     """
