@@ -9,6 +9,7 @@ public data class ApiRideInquiryRequest(
     @SerialName(value = "product_id") val productId: String,
     val origin: Location,
     val destination: Location,
+    val passengers: List<ApiPassengerSelectionRequest>?,
 ) {
     @Serializable
     public data class Location(
@@ -22,5 +23,6 @@ public data class ApiRideInquiryRequest(
         val county: String?,
         val country: String?,
         val time: Instant?,
+        @SerialName(value = "station_id") val stationId: String?,
     )
 }
