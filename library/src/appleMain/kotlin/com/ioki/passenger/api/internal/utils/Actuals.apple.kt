@@ -8,7 +8,6 @@ import kotlinx.datetime.toLocalDateTime
 import platform.Foundation.NSDateFormatter
 import platform.Foundation.NSLocale
 import platform.Foundation.NSTimeZone
-import platform.Foundation.NSUUID
 import platform.Foundation.localeWithLocaleIdentifier
 import platform.Foundation.timeIntervalSince1970
 import platform.Foundation.timeZoneForSecondsFromGMT
@@ -33,5 +32,3 @@ internal actual fun parseRfc1123DateTime(dateTimeString: String): LocalDateTime 
 
     return instant.toLocalDateTime(TimeZone.UTC)
 }
-
-internal actual fun randomUUID(): String = NSUUID().UUIDString

@@ -8,7 +8,6 @@ import java.net.UnknownHostException
 import java.nio.channels.ClosedChannelException
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
-import java.util.UUID
 
 internal actual val Throwable.isConnectivityError: Boolean
     get() =
@@ -30,5 +29,3 @@ internal actual fun parseRfc1123DateTime(dateTimeString: String): LocalDateTime 
         zonedDateTime.nano,
     )
 }
-
-internal actual fun randomUUID(): String = UUID.randomUUID().toString()
