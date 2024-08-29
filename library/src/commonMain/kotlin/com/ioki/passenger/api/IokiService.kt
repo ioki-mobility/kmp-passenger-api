@@ -882,25 +882,21 @@ private suspend fun mapApiError(
     failedResponse: HttpResponse,
     interceptors: Collection<ApiErrorInterceptor>,
 ): Result.Error.Api {
-    return try {
-        val apiErrorBody = failedResponse.body<ApiErrorBody>()
-        val code = failedResponse.status.value
-        // 502 happens when Google runs internal tests. Catching it here prevents it from being reported as an error
-        val apiErrors =
-            if (code == com.ioki.passenger.api.result.HttpStatusCode.BAD_GATEWAY_502) {
-                emptyList()
-            } else {
-                apiErrorBody.apiErrors
-            }
-
-        interceptors.forEach { interceptor ->
-            if (interceptor.intercept(apiErrors, code)) {
-                return Result.Error.Api.Intercepted(apiErrors, code)
-            }
+    val apiErrorBody = runCatching { failedResponse.body<ApiErrorBody>() }.getOrNull() ?: ApiErrorBody()
+    val code = failedResponse.status.value
+    // 502 happens when Google runs internal tests. Catching it here prevents it from being reported as an error
+    val apiErrors =
+        if (code == com.ioki.passenger.api.result.HttpStatusCode.BAD_GATEWAY_502) {
+            emptyList()
+        } else {
+            apiErrorBody.apiErrors
         }
 
-        Result.Error.Api.Generic(apiErrors, code)
-    } catch (e: Throwable) {
-        Result.Error.Api.Generic(emptyList(), failedResponse.status.value)
+    interceptors.forEach { interceptor ->
+        if (interceptor.intercept(apiErrors, code)) {
+            return Result.Error.Api.Intercepted(apiErrors, code)
+        }
     }
+
+    return Result.Error.Api.Generic(apiErrors, code)
 }
