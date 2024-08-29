@@ -78,7 +78,10 @@ import com.ioki.passenger.api.models.ApiVenueResponse
 import com.ioki.passenger.api.result.Result
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
+import io.ktor.client.statement.bodyAsText
+import io.ktor.client.statement.readBytes
 import io.ktor.http.isSuccess
+import io.ktor.utils.io.charsets.Charset
 import kotlinx.datetime.Instant
 import kotlin.coroutines.cancellation.CancellationException
 
@@ -882,25 +885,21 @@ private suspend fun mapApiError(
     failedResponse: HttpResponse,
     interceptors: Collection<ApiErrorInterceptor>,
 ): Result.Error.Api {
-    return try {
-        val apiErrorBody = failedResponse.body<ApiErrorBody>()
-        val code = failedResponse.status.value
-        // 502 happens when Google runs internal tests. Catching it here prevents it from being reported as an error
-        val apiErrors =
-            if (code == com.ioki.passenger.api.result.HttpStatusCode.BAD_GATEWAY_502) {
-                emptyList()
-            } else {
-                apiErrorBody.apiErrors
-            }
-
-        interceptors.forEach { interceptor ->
-            if (interceptor.intercept(apiErrors, code)) {
-                return Result.Error.Api.Intercepted(apiErrors, code)
-            }
+    val apiErrorBody = runCatching { failedResponse.body<ApiErrorBody>() }.getOrNull() ?: ApiErrorBody()
+    val code = failedResponse.status.value
+    // 502 happens when Google runs internal tests. Catching it here prevents it from being reported as an error
+    val apiErrors =
+        if (code == com.ioki.passenger.api.result.HttpStatusCode.BAD_GATEWAY_502) {
+            emptyList()
+        } else {
+            apiErrorBody.apiErrors
         }
 
-        Result.Error.Api.Generic(apiErrors, code)
-    } catch (e: Throwable) {
-        Result.Error.Api.Generic(emptyList(), failedResponse.status.value)
+    interceptors.forEach { interceptor ->
+        if (interceptor.intercept(apiErrors, code)) {
+            return Result.Error.Api.Intercepted(apiErrors, code)
+        }
     }
+
+    return Result.Error.Api.Generic(apiErrors, code)
 }
