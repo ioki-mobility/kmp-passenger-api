@@ -78,10 +78,7 @@ import com.ioki.passenger.api.models.ApiVenueResponse
 import com.ioki.passenger.api.result.Result
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
-import io.ktor.client.statement.bodyAsText
-import io.ktor.client.statement.readBytes
 import io.ktor.http.isSuccess
-import io.ktor.utils.io.charsets.Charset
 import kotlinx.datetime.Instant
 import kotlin.coroutines.cancellation.CancellationException
 
