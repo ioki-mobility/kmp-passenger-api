@@ -859,48 +859,43 @@ private class DefaultIokiService(
 }
 
 @Suppress("UNCHECKED_CAST")
-private suspend inline fun <reified R, reified T> mapSuccess(successfulResponse: HttpResponse): Result.Success<T> {
+internal suspend inline fun <reified R, reified T> mapSuccess(successfulResponse: HttpResponse): Result.Success<T> {
     val body = successfulResponse.body<R>()
     val meta = (body as? ApiBody<*>)?.meta
-    val data =
-        when (body) {
-            null -> Unit as? T // For Void (no content) body
-            is T -> body
-            is ApiBody<*> ->
-                when {
-                    body.data is T -> body.data
-                    T::class == String::class -> body.data.toString()
-                    else -> null
-                }
+    val data = when (body) {
+        null -> Unit as? T // For Void (no content) body
+        is T -> body
+        is ApiBody<*> ->
+            when {
+                body.data is T -> body.data
+                T::class == String::class -> body.data.toString()
+                else -> null
+            }
 
-            else -> null
-        } ?: throw IllegalArgumentException("Failed to convert body '$body' to type ${T::class}")
+        else -> null
+    } ?: throw IllegalArgumentException("Failed to convert body '$body' to type ${T::class}")
     return Result.Success(data, meta) as Result.Success<T>
 }
 
-private suspend fun mapApiError(
+internal suspend fun mapApiError(
     failedResponse: HttpResponse,
     interceptors: Collection<ApiErrorInterceptor>,
 ): Result.Error.Api {
-    return try {
-        val apiErrorBody = failedResponse.body<ApiErrorBody>()
-        val code = failedResponse.status.value
-        // 502 happens when Google runs internal tests. Catching it here prevents it from being reported as an error
-        val apiErrors =
-            if (code == com.ioki.passenger.api.result.HttpStatusCode.BAD_GATEWAY_502) {
-                emptyList()
-            } else {
-                apiErrorBody.apiErrors
-            }
-
-        interceptors.forEach { interceptor ->
-            if (interceptor.intercept(apiErrors, code)) {
-                return Result.Error.Api.Intercepted(apiErrors, code)
-            }
+    val apiErrorBody = failedResponse.body<ApiErrorBody?>()
+    val code = failedResponse.status.value
+    // 502 happens when Google runs internal tests. Catching it here prevents it from being reported as an error
+    val apiErrors =
+        if (code == com.ioki.passenger.api.result.HttpStatusCode.BAD_GATEWAY_502) {
+            emptyList()
+        } else {
+            apiErrorBody?.apiErrors ?: emptyList()
         }
 
-        Result.Error.Api.Generic(apiErrors, code)
-    } catch (e: Throwable) {
-        Result.Error.Api.Generic(emptyList(), failedResponse.status.value)
+    interceptors.forEach { interceptor ->
+        if (interceptor.intercept(apiErrors, code)) {
+            return Result.Error.Api.Intercepted(apiErrors, code)
+        }
     }
+
+    return Result.Error.Api.Generic(apiErrors, code)
 }
