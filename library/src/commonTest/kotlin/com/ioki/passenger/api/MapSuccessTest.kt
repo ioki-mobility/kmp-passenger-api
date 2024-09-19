@@ -50,13 +50,12 @@ class MapSuccessTest {
             """.trimIndent(),
         )
 
-        val fakeHttpClient = createHttpClient(HttpStatusCode.OK, content)
+        val fakeHttpClient = createHttpMockClient(HttpStatusCode.OK, content)
         val response = fakeHttpClient.get("https://127.0.0.1")
 
-        mapSuccess<ApiBody<ApiClientInfoResponse>, ApiClientInfoResponse>(response).let { result ->
-            assertIs<Result.Success<ApiClientInfoResponse>>(result)
-            assertEquals(result.data, apiClientInfoResponse)
-        }
+        val result = mapSuccess<ApiBody<ApiClientInfoResponse>, ApiClientInfoResponse>(response)
+        assertIs<Result.Success<ApiClientInfoResponse>>(result)
+        assertEquals(result.data, apiClientInfoResponse)
     }
 
     @Test
@@ -77,13 +76,12 @@ class MapSuccessTest {
             """.trimIndent(),
         )
 
-        val fakeHttpClient = createHttpClient(HttpStatusCode.OK, content)
+        val fakeHttpClient = createHttpMockClient(HttpStatusCode.OK, content)
         val response = fakeHttpClient.get("https://127.0.0.1")
 
-        mapSuccess<ApiClientInfoResponse, ApiClientInfoResponse>(response).let { result ->
-            assertIs<Result.Success<ApiClientInfoResponse>>(result)
-            assertEquals(result.data, apiClientInfoResponse)
-        }
+        val result = mapSuccess<ApiClientInfoResponse, ApiClientInfoResponse>(response)
+        assertIs<Result.Success<ApiClientInfoResponse>>(result)
+        assertEquals(result.data, apiClientInfoResponse)
     }
 
     @Test
@@ -100,7 +98,7 @@ class MapSuccessTest {
             """.trimIndent(),
         )
 
-        val fakeHttpClient = createHttpClient(HttpStatusCode.OK, content)
+        val fakeHttpClient = createHttpMockClient(HttpStatusCode.OK, content)
         val response = fakeHttpClient.get("https://127.0.0.1")
 
         assertFailsWith<IllegalArgumentException> {

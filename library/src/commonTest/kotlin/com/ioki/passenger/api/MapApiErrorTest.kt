@@ -10,7 +10,6 @@ import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
-import kotlin.test.expect
 
 @InternalAPI
 internal class MapApiErrorTest {
@@ -27,7 +26,7 @@ internal class MapApiErrorTest {
                 """,
         )
 
-        val fakeHttpClient = createHttpClient(HttpStatusCode.NotAcceptable, content)
+        val fakeHttpClient = createHttpMockClient(HttpStatusCode.NotAcceptable, content)
         val fakeResponse = fakeHttpClient.get("https://127.0.0.1")
 
         val fakeApiErrorInterceptor = object : ApiErrorInterceptor {
@@ -38,17 +37,16 @@ internal class MapApiErrorTest {
             }
         }
 
-        mapApiError(fakeResponse, listOf(fakeApiErrorInterceptor)).let { result ->
-            assertTrue { result is Result.Error.Api.Intercepted }
-            assertEquals(HttpStatusCode.NotAcceptable.value, result.httpStatusCode)
-        }
+        val result = mapApiError(fakeResponse, listOf(fakeApiErrorInterceptor))
+        assertTrue { result is Result.Error.Api.Intercepted }
+        assertEquals(HttpStatusCode.NotAcceptable.value, result.httpStatusCode)
     }
 
     @Test
     fun `mapApiError returns unauthorized error`() = runTest {
         val content = ByteReadChannel.Empty
 
-        val fakeHttpClient = createHttpClient(HttpStatusCode.Unauthorized, content)
+        val fakeHttpClient = createHttpMockClient(HttpStatusCode.Unauthorized, content)
         val fakeResponse = fakeHttpClient.get("https://127.0.0.1")
 
         val fakeApiErrorInterceptor = object : ApiErrorInterceptor {
@@ -57,17 +55,16 @@ internal class MapApiErrorTest {
             }
         }
 
-        mapApiError(fakeResponse, listOf(fakeApiErrorInterceptor)).let { result ->
-            assertTrue { result is Result.Error.Api.Intercepted }
-            assertEquals(HttpStatusCode.Unauthorized.value, result.httpStatusCode)
-        }
+        val result = mapApiError(fakeResponse, listOf(fakeApiErrorInterceptor))
+        assertTrue { result is Result.Error.Api.Intercepted }
+        assertEquals(HttpStatusCode.Unauthorized.value, result.httpStatusCode)
     }
 
     @Test
     fun `mapApiError returns generic error`() = runTest {
         val content = ByteReadChannel.Empty
 
-        val fakeHttpClient = createHttpClient(HttpStatusCode.BadGateway, content)
+        val fakeHttpClient = createHttpMockClient(HttpStatusCode.BadGateway, content)
         val fakeResponse = fakeHttpClient.get("https://127.0.0.1")
 
         val fakeApiErrorInterceptor = object : ApiErrorInterceptor {
@@ -76,10 +73,9 @@ internal class MapApiErrorTest {
             }
         }
 
-        mapApiError(fakeResponse, listOf(fakeApiErrorInterceptor)).let { result ->
-            assertTrue { result is Result.Error.Api.Generic }
-            assertEquals(HttpStatusCode.BadGateway.value, result.httpStatusCode)
-        }
+        val result = mapApiError(fakeResponse, listOf(fakeApiErrorInterceptor))
+        assertTrue { result is Result.Error.Api.Generic }
+        assertEquals(HttpStatusCode.BadGateway.value, result.httpStatusCode)
     }
 
     @Test
@@ -94,12 +90,11 @@ internal class MapApiErrorTest {
                 """,
         )
 
-        val fakeHttpClient = createHttpClient(HttpStatusCode.NotAcceptable, content)
+        val fakeHttpClient = createHttpMockClient(HttpStatusCode.NotAcceptable, content)
         val fakeResponse = fakeHttpClient.get("https://127.0.0.1")
 
-        mapApiError(fakeResponse, listOf()).let { result ->
-            assertTrue { result is Result.Error.Api.Generic }
-            assertEquals(HttpStatusCode.NotAcceptable.value, result.httpStatusCode)
-        }
+        val result = mapApiError(fakeResponse, listOf())
+        assertTrue { result is Result.Error.Api.Generic }
+        assertEquals(HttpStatusCode.NotAcceptable.value, result.httpStatusCode)
     }
 }

@@ -11,7 +11,7 @@ import io.ktor.http.headers
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.utils.io.ByteReadChannel
 
-internal fun createHttpClient(
+internal fun createHttpMockClient(
     statusCode: HttpStatusCode,
     content: ByteReadChannel,
 ): HttpClient {
