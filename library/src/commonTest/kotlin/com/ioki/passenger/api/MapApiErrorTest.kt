@@ -24,7 +24,7 @@ internal class MapApiErrorTest {
                 """,
         )
 
-        val fakeHttpClient = createHttpMockClient(HttpStatusCode.NotAcceptable, content)
+        val fakeHttpClient = FakeHttpClient(HttpStatusCode.NotAcceptable, content)
         val fakeResponse = fakeHttpClient.get("https://127.0.0.1")
 
         val fakeApiErrorInterceptor = object : ApiErrorInterceptor {
@@ -44,7 +44,7 @@ internal class MapApiErrorTest {
     fun `mapApiError returns unauthorized error`() = runTest {
         val content = ByteReadChannel.Empty
 
-        val fakeHttpClient = createHttpMockClient(HttpStatusCode.Unauthorized, content)
+        val fakeHttpClient = FakeHttpClient(HttpStatusCode.Unauthorized, content)
         val fakeResponse = fakeHttpClient.get("https://127.0.0.1")
 
         val fakeApiErrorInterceptor = object : ApiErrorInterceptor {
@@ -62,7 +62,7 @@ internal class MapApiErrorTest {
     fun `mapApiError returns generic error`() = runTest {
         val content = ByteReadChannel.Empty
 
-        val fakeHttpClient = createHttpMockClient(HttpStatusCode.BadGateway, content)
+        val fakeHttpClient = FakeHttpClient(HttpStatusCode.BadGateway, content)
         val fakeResponse = fakeHttpClient.get("https://127.0.0.1")
 
         val fakeApiErrorInterceptor = object : ApiErrorInterceptor {
@@ -88,7 +88,7 @@ internal class MapApiErrorTest {
                 """,
         )
 
-        val fakeHttpClient = createHttpMockClient(HttpStatusCode.NotAcceptable, content)
+        val fakeHttpClient = FakeHttpClient(HttpStatusCode.NotAcceptable, content)
         val fakeResponse = fakeHttpClient.get("https://127.0.0.1")
 
         val result = mapApiError(fakeResponse, listOf())
