@@ -153,7 +153,7 @@ fun createPassengerApiArea(
 
 fun createApiStation(
     id: String = "",
-    lat: Double =Double.MIN_VALUE,
+    lat: Double = Double.MIN_VALUE,
     lng: Double = Double.MIN_VALUE,
     locationName: String = "",
     visibleOnMap: Boolean = false,
@@ -315,4 +315,3 @@ fun createApiPaymentMethodRequest(
     id: String? = null,
     summary: ApiPaymentMethodRequest.Summary? = null,
 ): ApiPaymentMethodRequest = ApiPaymentMethodRequest(paymentMethodType, id, summary)
-

@@ -47,6 +47,8 @@ jobs:
             os: ubuntu-latest
           - task: ktlintCommonMainSourceSetCheck
             os: ubuntu-latest
+          - task: ktlintCommonTestSourceSetCheck
+            os: ubuntu-latest
 
     runs-on: ${{ matrix.os }}
 
