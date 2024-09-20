@@ -4,14 +4,12 @@ import com.ioki.passenger.api.models.ApiErrorBody
 import com.ioki.passenger.api.result.Result
 import io.ktor.client.request.get
 import io.ktor.http.HttpStatusCode
-import io.ktor.util.InternalAPI
 import io.ktor.utils.io.ByteReadChannel
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-@InternalAPI
 internal class MapApiErrorTest {
 
     @Test
