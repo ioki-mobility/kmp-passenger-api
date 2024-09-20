@@ -75,6 +75,7 @@ import com.ioki.passenger.api.models.ApiUpdateUserRequest
 import com.ioki.passenger.api.models.ApiUserFlagsRequest
 import com.ioki.passenger.api.models.ApiUserNotificationSettingsResponse
 import com.ioki.passenger.api.models.ApiVenueResponse
+import com.ioki.passenger.api.result.HttpStatusCode
 import com.ioki.passenger.api.result.Result
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
@@ -884,12 +885,7 @@ internal suspend fun mapApiError(
     val apiErrorBody = failedResponse.body<ApiErrorBody?>()
     val code = failedResponse.status.value
     // 502 happens when Google runs internal tests. Catching it here prevents it from being reported as an error
-    val apiErrors =
-        if (code == com.ioki.passenger.api.result.HttpStatusCode.BAD_GATEWAY_502) {
-            emptyList()
-        } else {
-            apiErrorBody?.apiErrors ?: emptyList()
-        }
+    val apiErrors = if (code == HttpStatusCode.BAD_GATEWAY_502) emptyList() else apiErrorBody?.apiErrors ?: emptyList()
 
     interceptors.forEach { interceptor ->
         if (interceptor.intercept(apiErrors, code)) {
