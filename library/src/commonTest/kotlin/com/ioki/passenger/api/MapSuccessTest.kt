@@ -49,11 +49,11 @@ class MapSuccessTest {
                 }
             """.trimIndent(),
         )
-
         val fakeHttpClient = FakeHttpClient(HttpStatusCode.OK, content)
         val response = fakeHttpClient.get("https://127.0.0.1")
 
         val result = mapSuccess<ApiBody<ApiClientInfoResponse>, ApiClientInfoResponse>(response)
+
         assertIs<Result.Success<ApiClientInfoResponse>>(result)
         assertEquals(result.data, apiClientInfoResponse)
     }
@@ -75,11 +75,11 @@ class MapSuccessTest {
                 }
             """.trimIndent(),
         )
-
         val fakeHttpClient = FakeHttpClient(HttpStatusCode.OK, content)
         val response = fakeHttpClient.get("https://127.0.0.1")
 
         val result = mapSuccess<ApiClientInfoResponse, ApiClientInfoResponse>(response)
+
         assertIs<Result.Success<ApiClientInfoResponse>>(result)
         assertEquals(result.data, apiClientInfoResponse)
     }
@@ -97,7 +97,6 @@ class MapSuccessTest {
                 }
             """.trimIndent(),
         )
-
         val fakeHttpClient = FakeHttpClient(HttpStatusCode.OK, content)
         val response = fakeHttpClient.get("https://127.0.0.1")
 

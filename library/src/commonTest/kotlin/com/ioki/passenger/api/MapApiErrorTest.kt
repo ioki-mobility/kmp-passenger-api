@@ -23,10 +23,8 @@ internal class MapApiErrorTest {
                     }
                 """,
         )
-
         val fakeHttpClient = FakeHttpClient(HttpStatusCode.NotAcceptable, content)
         val fakeResponse = fakeHttpClient.get("https://127.0.0.1")
-
         val fakeApiErrorInterceptor = object : ApiErrorInterceptor {
             override fun intercept(apiErrors: List<ApiErrorBody.ApiError>, httpResponseCode: Int): Boolean {
                 val isAppVersionOutdated = apiErrors.any { it.code == "version_outdated" }
@@ -36,6 +34,7 @@ internal class MapApiErrorTest {
         }
 
         val result = mapApiError(fakeResponse, listOf(fakeApiErrorInterceptor))
+
         assertTrue { result is Result.Error.Api.Intercepted }
         assertEquals(HttpStatusCode.NotAcceptable.value, result.httpStatusCode)
     }
@@ -43,10 +42,8 @@ internal class MapApiErrorTest {
     @Test
     fun `mapApiError returns unauthorized error`() = runTest {
         val content = ByteReadChannel.Empty
-
         val fakeHttpClient = FakeHttpClient(HttpStatusCode.Unauthorized, content)
         val fakeResponse = fakeHttpClient.get("https://127.0.0.1")
-
         val fakeApiErrorInterceptor = object : ApiErrorInterceptor {
             override fun intercept(apiErrors: List<ApiErrorBody.ApiError>, httpResponseCode: Int): Boolean {
                 return httpResponseCode == HttpStatusCode.Unauthorized.value
@@ -54,6 +51,7 @@ internal class MapApiErrorTest {
         }
 
         val result = mapApiError(fakeResponse, listOf(fakeApiErrorInterceptor))
+
         assertTrue { result is Result.Error.Api.Intercepted }
         assertEquals(HttpStatusCode.Unauthorized.value, result.httpStatusCode)
     }
@@ -61,10 +59,8 @@ internal class MapApiErrorTest {
     @Test
     fun `mapApiError returns generic error`() = runTest {
         val content = ByteReadChannel.Empty
-
         val fakeHttpClient = FakeHttpClient(HttpStatusCode.BadGateway, content)
         val fakeResponse = fakeHttpClient.get("https://127.0.0.1")
-
         val fakeApiErrorInterceptor = object : ApiErrorInterceptor {
             override fun intercept(apiErrors: List<ApiErrorBody.ApiError>, httpResponseCode: Int): Boolean {
                 return httpResponseCode == HttpStatusCode.Unauthorized.value
@@ -72,6 +68,7 @@ internal class MapApiErrorTest {
         }
 
         val result = mapApiError(fakeResponse, listOf(fakeApiErrorInterceptor))
+
         assertTrue { result is Result.Error.Api.Generic }
         assertEquals(HttpStatusCode.BadGateway.value, result.httpStatusCode)
     }
@@ -87,11 +84,11 @@ internal class MapApiErrorTest {
                     }
                 """,
         )
-
         val fakeHttpClient = FakeHttpClient(HttpStatusCode.NotAcceptable, content)
         val fakeResponse = fakeHttpClient.get("https://127.0.0.1")
 
         val result = mapApiError(fakeResponse, listOf())
+
         assertTrue { result is Result.Error.Api.Generic }
         assertEquals(HttpStatusCode.NotAcceptable.value, result.httpStatusCode)
     }
