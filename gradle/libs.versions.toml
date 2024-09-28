@@ -2,7 +2,7 @@
 agp = "8.6.1"
 kotlin = "2.0.20"
 nexus-publish = "2.0.0"
-kotlinx-serialization = "1.7.2"
+kotlinx-serialization = "1.7.3"
 kotlinx-datetime = "0.6.1"
 ktor = "2.3.12"
 ktlintVersion = "12.1.1"
