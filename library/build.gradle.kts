@@ -71,7 +71,7 @@ android {
         buildConfig = true
     }
     defaultConfig {
-        val consumerFile = file("src/androidMani/consumer-rules.pro")
+        val consumerFile = file("consumer-rules.pro")
         consumerProguardFiles(consumerFile)
     }
 }
