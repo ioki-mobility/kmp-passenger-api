@@ -70,8 +70,9 @@ android {
     buildFeatures {
         buildConfig = true
     }
-    buildTypes.configureEach {
-        proguardFile = getDefaultProguardFile('proguard-files.pro')
+    defaultConfig {
+        val consumerFile = file("consumer-rules.pro")
+        if (consumerFile.exists()) consumerProguardFiles(consumerFile)
     }
 }
 
