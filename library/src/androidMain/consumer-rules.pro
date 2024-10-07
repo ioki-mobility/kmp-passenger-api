@@ -1,1 +1,1 @@
--dontwarn org.slf4j.StaticLoggerBinder
+-dontwarn org.slf4j.impl.StaticLoggerBinder
