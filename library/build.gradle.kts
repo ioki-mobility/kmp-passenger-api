@@ -70,6 +70,13 @@ android {
     buildFeatures {
         buildConfig = true
     }
+    buildTypes {
+        minifyEnabled = true
+        proguardFiles(
+            getDefaultProguardFile("proguard-android.txt"),
+            "proguard-rules.pro"
+        )
+    }
 }
 
 group = "com.ioki"
