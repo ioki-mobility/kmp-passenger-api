@@ -70,7 +70,10 @@ android {
     buildFeatures {
         buildConfig = true
     }
-    consumerProguardFiles("consumer-rules.pro")
+    buildTypes.configureEach {
+        val consumerFile = file("consumer-rules.pro")
+        if (consumerFile.exists()) it.consumerProguardFiles(consumerFile)
+    }
 }
 
 group = "com.ioki"
