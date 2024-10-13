@@ -80,38 +80,41 @@ group = "com.ioki"
 version = "0.0.1-SNAPSHOT"
 
 publishing {
-    publications {
+    // Workaround for the Android target
+    // withType<MavenPublication> does not work for Android target
+    afterEvaluate {
         publications.withType<MavenPublication> {
             artifactId = artifactId.replace("library", "passenger-api")
+        }
+    }
+    publications.withType<MavenPublication> {
+        pom {
+            name.set("KMP ioki Passenger API")
+            description.set("Kotlin Multiplatform ioki Passenger API")
+            url.set("https://github.com/ioki-mobility/kmp-passenger-api")
 
-            pom {
-                name.set("KMP ioki Passenger API")
-                description.set("Kotlin Multiplatform ioki Passenger API")
+            licenses {
+                license {
+                    name.set("MIT")
+                    url.set("https://opensource.org/licenses/MIT")
+                }
+            }
+            organization {
+                name.set("ioki")
+                url.set("https://ioki.com")
+            }
+            developers {
+                developer {
+                    id.set("ioki")
+                    name.set("ioki Android Team")
+                    organization.set("ioki")
+                    organizationUrl.set("https://www.ioki.com")
+                }
+            }
+            scm {
                 url.set("https://github.com/ioki-mobility/kmp-passenger-api")
-
-                licenses {
-                    license {
-                        name.set("MIT")
-                        url.set("https://opensource.org/licenses/MIT")
-                    }
-                }
-                organization {
-                    name.set("ioki")
-                    url.set("https://ioki.com")
-                }
-                developers {
-                    developer {
-                        id.set("ioki")
-                        name.set("ioki Android Team")
-                        organization.set("ioki")
-                        organizationUrl.set("https://www.ioki.com")
-                    }
-                }
-                scm {
-                    url.set("https://github.com/ioki-mobility/kmp-passenger-api")
-                    connection.set("scm:git:git://github.com/ioki-mobility/kmp-passenger-api.git")
-                    developerConnection.set("scm:git:ssh://git@github.com/ioki-mobility/kmp-passenger-api.git")
-                }
+                connection.set("scm:git:git://github.com/ioki-mobility/kmp-passenger-api.git")
+                developerConnection.set("scm:git:ssh://git@github.com/ioki-mobility/kmp-passenger-api.git")
             }
         }
     }
