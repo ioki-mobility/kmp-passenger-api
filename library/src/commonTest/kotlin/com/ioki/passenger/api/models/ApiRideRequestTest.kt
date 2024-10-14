@@ -80,6 +80,7 @@ internal class ApiRideRequestTest : IokiApiModelTest() {
                     lng = 8.678996,
                     locationName = "Hauptwache",
                 ),
+                driverNote = null,
             ),
             jsonString = rideRequest,
         )
