@@ -71,6 +71,8 @@ public data class ApiProduct(
         @SerialName(value = "update_passengers_after_booking")
         val updatePassengersAfterBooking: Boolean,
         val venues: Boolean,
+        @SerialName(value = "show_autonomous_onboarding")
+        val showAutonomousOnboarding: Boolean,
     )
 
     @Serializable

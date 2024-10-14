@@ -95,6 +95,7 @@ internal class ApiProductTest : IokiApiModelTest() {
                     stationSearch = true,
                     updatePassengersAfterBooking = false,
                     venues = true,
+                    showAutonomousOnboarding = false,
                 ),
                 productRideOptions = listOf(
                     ApiProduct.RideOptions(
@@ -232,6 +233,7 @@ internal class ApiProductTest : IokiApiModelTest() {
                     stationSearch = false,
                     updatePassengersAfterBooking = false,
                     venues = false,
+                    showAutonomousOnboarding = false,
                 ),
                 productRideOptions =
                 listOf(
@@ -352,7 +354,8 @@ private val productMinimal =
     "prebooking_ui_assistance": false,
     "station_search": false,
     "update_passengers_after_booking": false,
-    "venues": false
+    "venues": false,
+    "show_autonomous_onboarding": false
   },
   "passenger_options": [
     {
@@ -523,7 +526,8 @@ private val product =
     "prebooking_ui_assistance": true,
     "station_search": true,
     "update_passengers_after_booking": false,
-    "venues": true
+    "venues": true,
+    "show_autonomous_onboarding": false
   },
   "help_url": "https://example.com/help.html",
   "support_email": "support@example.com",
