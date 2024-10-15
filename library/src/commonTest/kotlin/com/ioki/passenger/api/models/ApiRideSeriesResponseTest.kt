@@ -90,6 +90,7 @@ private val rideResponse =
         offeredSolutions = listOf(),
         options = emptyList(),
         bookedSolution = null,
+        passengerNoteToDriver = "",
     )
 
 private val rideSeriesResponseMinimal =
@@ -144,7 +145,8 @@ private val rideSeriesResponse =
       },
       "receipts": [],
       "offered_solutions": [],
-      "options": []
+      "options": [],
+      "passenger_note_to_driver": ""
     }
   ],
   "results": [

@@ -10,4 +10,5 @@ public data class ApiRideRequest(
     @SerialName(value = "options") val options: List<ApiOption>,
     val origin: ApiLocation,
     val destination: ApiLocation,
+    @SerialName(value = "passenger_note_to_driver") val driverNote: String?,
 )

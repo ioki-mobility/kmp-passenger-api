@@ -211,6 +211,7 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                         ),
                     ),
                 ),
+                passengerNoteToDriver = "This is a note to the driver",
             ),
             jsonString = rideResponse,
         )
@@ -257,6 +258,7 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                 offeredSolutions = listOf(),
                 options = emptyList(),
                 bookedSolution = null,
+                passengerNoteToDriver = "",
             ),
             jsonString = rideResponseMinimal,
         )
@@ -540,7 +542,8 @@ private val rideResponse =
           }
         }
       ]
-    }
+    },
+    "passenger_note_to_driver": "This is a note to the driver"
 }
 """
 
@@ -575,41 +578,7 @@ private val rideResponseMinimal =
   },
   "receipts": [],
   "offered_solutions": [],
-  "options": []
-}
-"""
-
-private val rideResponseCancellationReasonMinimal =
-    """
-{
-  "id": "rid_c7394eb7-2af1-4d0c-9e8e-56c2c69f0495",
-  "product_id": "product-id",
-  "version": 1,
-  "created_at":"2017-05-15T12:23:41Z",
-  "state": "searching",
-  "passengers": [],
-  "vehicle_reached_pickup": true,
-  "vehicle_reached_dropoff": true,
-  "rateable": true,
-  "tippable": true,
-  "cancellable": false,
-  "needs_cancellation_code": true,
-  "prebooked": true,
-  "driver_can_be_called": false,
-  "origin": {
-    "location_name": "Galluswarte",
-    "lat": 50.104692,
-    "lng": 8.644062,
-    "display_times": []
-  },
-  "destination": {
-    "location_name": "Hauptwache",
-    "lat": 50.113695,
-    "lng": 8.678996,
-    "display_times": []
-  },
-  "receipts": [],
-  "offered_solutions": [],
-  "options": []
+  "options": [],
+  "passenger_note_to_driver": ""
 }
 """

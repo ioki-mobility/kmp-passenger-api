@@ -51,6 +51,7 @@ public data class ApiRideResponse(
     @SerialName(value = "support_uri") val supportUri: String?,
     @SerialName(value = "offered_solutions") val offeredSolutions: List<ApiOfferedSolution>,
     @SerialName(value = "booked_solution") val bookedSolution: ApiBookedSolution?,
+    @SerialName(value = "passenger_note_to_driver") val passengerNoteToDriver: String,
 ) : Entity {
     @Serializable
     public data class PassengerSelection(

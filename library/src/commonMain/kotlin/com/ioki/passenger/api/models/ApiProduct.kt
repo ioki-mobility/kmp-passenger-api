@@ -73,6 +73,8 @@ public data class ApiProduct(
         val venues: Boolean,
         @SerialName(value = "show_autonomous_onboarding")
         val showAutonomousOnboarding: Boolean,
+        @SerialName(value = "passenger_note_to_driver")
+        val passengerNoteToDriver: Boolean,
     )
 
     @Serializable

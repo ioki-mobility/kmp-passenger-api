@@ -301,6 +301,7 @@ fun createApiProductFeatures(
     updatePassengersAfterBooking: Boolean = false,
     venues: Boolean = false,
     showAutonomousOnboarding: Boolean = false,
+    passengerNoteToDriver: Boolean = false,
 ): ApiProduct.Features = ApiProduct.Features(
     multipleBookingSolutions = multipleBookingSolutions,
     serialBooking = serialBooking,
@@ -310,6 +311,7 @@ fun createApiProductFeatures(
     updatePassengersAfterBooking = updatePassengersAfterBooking,
     venues = venues,
     showAutonomousOnboarding = showAutonomousOnboarding,
+    passengerNoteToDriver = passengerNoteToDriver,
 )
 
 fun createApiPaymentMethodRequest(
