@@ -10,9 +10,11 @@ import io.ktor.client.statement.HttpReceivePipeline
 import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.request
 import io.ktor.client.utils.EmptyContent
-import io.ktor.util.InternalAPI
 import io.ktor.util.pipeline.PipelineContext
 import io.ktor.util.split
+import io.ktor.utils.io.InternalAPI
+import io.ktor.utils.io.readRemaining
+import io.ktor.utils.io.readText
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -39,7 +41,7 @@ internal val HttpLoggingPlugin: ClientPlugin<HttpLoggingConfig> =
                     logging?.invoke("$key: $value")
                 }
             }
-            val (loggingContent, responseContent) = response.content.split(response)
+            val (loggingContent, responseContent) = response.rawContent.split(response)
             this@createClientPlugin.pluginConfig.coroutineScope.launch {
                 val text = loggingContent.readRemaining().readText()
                 if (text.isNotBlank()) logging?.invoke(text)
