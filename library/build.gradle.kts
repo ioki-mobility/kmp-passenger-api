@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.ktlint)
+    alias(libs.plugins.dokka)
     `maven-publish`
     signing
 }
@@ -76,6 +77,12 @@ android {
     }
 }
 
+val dokkaJar = tasks.register<Jar>("dokkaJar") {
+    dependsOn(tasks.dokkaHtml)
+    from(tasks.dokkaHtml.flatMap { it.outputDirectory })
+    archiveClassifier.set("javadoc")
+}
+
 group = "com.ioki"
 version = "0.0.1-SNAPSHOT"
 
@@ -88,6 +95,7 @@ publishing {
         }
     }
     publications.withType<MavenPublication> {
+        artifact(dokkaJar)
         pom {
             name.set("KMP ioki Passenger API")
             description.set("Kotlin Multiplatform ioki Passenger API")
