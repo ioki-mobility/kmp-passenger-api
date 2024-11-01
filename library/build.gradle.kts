@@ -84,7 +84,7 @@ val dokkaJar = tasks.register<Jar>("dokkaJar") {
 }
 
 group = "com.ioki"
-version = "0.0.1-SNAPSHOT"
+version = "0.1.0"
 
 publishing {
     // Workaround for the Android target
