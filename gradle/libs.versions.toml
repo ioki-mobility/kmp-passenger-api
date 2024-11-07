@@ -4,7 +4,7 @@ kotlin = "2.0.21"
 kotlinx-serialization = "1.7.3"
 kotlinx-datetime = "0.6.1"
 dokka = "1.9.20"
-ktor = "3.0.0"
+ktor = "3.0.1"
 ktlintVersion = "12.1.1"
 kotlinCoroutines = "1.9.0"
 
