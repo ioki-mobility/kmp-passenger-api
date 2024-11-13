@@ -14,24 +14,6 @@ internal class ApiRideInquiryResponseTest : IokiApiModelTest() {
                 ),
                 constraints = ApiRideInquiryResponse.Constraints(
                     area = ApiArea("MultiPolygon", emptyList()),
-                    drtArea = PassengerApiArea(
-                        type = "",
-                        id = "",
-                        name = "",
-                        slug = "",
-                        areaType = "",
-                        color = "",
-                        opacity = 0.5f,
-                        strokeWeight = 1,
-                        fillColor = "",
-                        fillOpacity = 0.5f,
-                        invert = false,
-                        zIndex = 0,
-                        legendIndex = 0,
-                        legendTitle = null,
-                        legendDescription = null,
-                        area = ApiArea("", emptyList()),
-                    ),
                     maxPassengers = 1,
                 ),
                 errors = listOf("service_not_available"),
@@ -65,25 +47,6 @@ private val rideInquiryResponse =
     "area": {
       "type": "MultiPolygon",
       "coordinates": []
-    },
-    "drt_area": {
-      "type": "",
-      "id": "",
-      "name": "",
-      "slug": "",
-      "area_type": "",
-      "color": "",
-      "opacity": 0.5,
-      "stroke_weight": 1,
-      "fill_color": "",
-      "fill_opacity": 0.5,
-      "invert": false,
-      "z_index": 0,
-      "legend_index": 0,
-      "area": {
-        "type": "",
-        "coordinates": []
-      }
     }
   },
   "errors": [
