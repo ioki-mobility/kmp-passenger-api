@@ -20,7 +20,6 @@ public data class ApiRideInquiryResponse(
     @Serializable
     public data class Constraints(
         val area: ApiArea?,
-        @SerialName(value = "max_passengers") val maxPassengers: Int?,
     )
 
     @Serializable
