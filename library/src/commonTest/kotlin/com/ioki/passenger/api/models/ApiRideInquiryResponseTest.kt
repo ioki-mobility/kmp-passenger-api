@@ -14,7 +14,6 @@ internal class ApiRideInquiryResponseTest : IokiApiModelTest() {
                 ),
                 constraints = ApiRideInquiryResponse.Constraints(
                     area = ApiArea("MultiPolygon", emptyList()),
-                    maxPassengers = 1,
                 ),
                 errors = listOf("service_not_available"),
                 assistances = listOf(
@@ -43,7 +42,6 @@ private val rideInquiryResponse =
     "next_availability": "1970-01-01T00:00:00Z"
   },
   "constraints": {
-    "max_passengers": 1,
     "area": {
       "type": "MultiPolygon",
       "coordinates": []
