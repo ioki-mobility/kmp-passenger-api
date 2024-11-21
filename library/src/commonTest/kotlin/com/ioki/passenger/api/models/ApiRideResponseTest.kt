@@ -51,6 +51,7 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                 ),
                 cancellationReason = ApiCancellationReason.NO_VEHICLE_AVAILABLE,
                 cancellationReasonTranslated = "reason",
+                vehicleApproachedPickup = true,
                 vehicleReachedPickup = true,
                 vehicleReachedDropoff = true,
                 validForPassengerUntil = Instant.parse("2017-05-15T12:23:41Z"),
@@ -228,6 +229,7 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                 passengers = listOf(),
                 cancellationReason = null,
                 cancellationReasonTranslated = null,
+                vehicleApproachedPickup = true,
                 vehicleReachedPickup = true,
                 vehicleReachedDropoff = true,
                 validForPassengerUntil = null,
@@ -344,6 +346,7 @@ private val rideResponse =
       "value": "true"
     }
   ],
+  "vehicle_approached_pickup": true,
   "vehicle_reached_pickup": true,
   "vehicle_reached_dropoff": true,
   "valid_for_passenger_until": "2017-05-15T12:23:41Z",
@@ -555,7 +558,8 @@ private val rideResponseMinimal =
   "version": 1,
   "created_at":"2017-05-15T12:23:41Z",
   "state": "searching",
-  "passengers": [],
+  "passengers": [],  
+  "vehicle_approached_pickup": true,
   "vehicle_reached_pickup": true,
   "vehicle_reached_dropoff": true,
   "rateable": true,
