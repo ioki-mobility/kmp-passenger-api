@@ -21,6 +21,7 @@ public data class ApiRideResponse(
     @SerialName(value = "cancellation_reason")
     @Serializable(with = ApiCancellationReasonSerializer::class)
     val cancellationReason: ApiCancellationReason?,
+    @SerialName(value = "vehicle_approached_pickup") val vehicleApproachedPickup: Boolean,
     @SerialName(value = "vehicle_reached_pickup") val vehicleReachedPickup: Boolean,
     @SerialName(value = "vehicle_reached_dropoff") val vehicleReachedDropoff: Boolean,
     @SerialName(value = "valid_for_passenger_until") val validForPassengerUntil: Instant?,
