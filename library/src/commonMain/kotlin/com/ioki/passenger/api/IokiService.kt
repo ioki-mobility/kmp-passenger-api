@@ -75,8 +75,11 @@ import com.ioki.passenger.api.models.ApiUpdateUserRequest
 import com.ioki.passenger.api.models.ApiUserFlagsRequest
 import com.ioki.passenger.api.models.ApiUserNotificationSettingsResponse
 import com.ioki.passenger.api.models.ApiVenueResponse
+import com.ioki.passenger.api.result.Error
 import com.ioki.passenger.api.result.HttpStatusCode
-import com.ioki.passenger.api.result.Result
+import com.ioki.passenger.api.result.SuccessData
+import com.ioki.result.Result
+import com.ioki.result.map
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.isSuccess
@@ -121,72 +124,72 @@ public interface IokiService :
     VenuesService
 
 public interface PhoneVerificationService {
-    public suspend fun solveCaptcha(captchaId: String, captchaRequest: ApiCaptchaRequest): Result<Unit>
+    public suspend fun solveCaptcha(captchaId: String, captchaRequest: ApiCaptchaRequest): Result<Unit, Error>
 
-    public suspend fun solveClientChallenge(id: String, request: ApiClientChallengeRequest): Result<Unit>
+    public suspend fun solveClientChallenge(id: String, request: ApiClientChallengeRequest): Result<Unit, Error>
 
     public suspend fun requestPhoneVerification(
         verification: ApiPhoneVerificationRequest,
-    ): Result<ApiPhoneVerificationResponse>
+    ): Result<ApiPhoneVerificationResponse, Error>
 }
 
 public interface FirebaseService {
-    public suspend fun createDevice(deviceRequest: ApiDeviceRequest): Result<ApiDeviceResponse>
+    public suspend fun createDevice(deviceRequest: ApiDeviceRequest): Result<ApiDeviceResponse, Error>
 
-    public suspend fun getFirebaseToken(): Result<ApiFirebaseTokenResponse>
+    public suspend fun getFirebaseToken(): Result<ApiFirebaseTokenResponse, Error>
 
     public suspend fun sendFirebaseDebugRecord(
         debugId: String,
         firebaseDebugRecord: ApiFirebaseDebugRecordRequest,
-    ): Result<Unit>
+    ): Result<Unit, Error>
 }
 
 public interface UserService {
-    public suspend fun requestApiToken(request: ApiRequestTokenRequest): Result<ApiRequestTokenResponse>
+    public suspend fun requestApiToken(request: ApiRequestTokenRequest): Result<ApiRequestTokenResponse, Error>
 
-    public suspend fun signUp(request: ApiSignUpRequest): Result<ApiAuthenticatedUserResponse>
+    public suspend fun signUp(request: ApiSignUpRequest): Result<ApiAuthenticatedUserResponse, Error>
 
-    public suspend fun getUser(): Result<ApiAuthenticatedUserResponse>
+    public suspend fun getUser(): Result<ApiAuthenticatedUserResponse, Error>
 
-    public suspend fun updateUser(request: ApiUpdateUserRequest): Result<ApiAuthenticatedUserResponse>
+    public suspend fun updateUser(request: ApiUpdateUserRequest): Result<ApiAuthenticatedUserResponse, Error>
 
-    public suspend fun deleteUser(): Result<Unit>
+    public suspend fun deleteUser(): Result<Unit, Error>
 
-    public suspend fun updatePhoneNumber(request: ApiUpdatePhoneNumberRequest): Result<ApiAuthenticatedUserResponse>
+    public suspend fun updatePhoneNumber(request: ApiUpdatePhoneNumberRequest): Result<ApiAuthenticatedUserResponse, Error>
 
-    public suspend fun updateUserFlags(request: ApiUserFlagsRequest): Result<ApiAuthenticatedUserResponse>
+    public suspend fun updateUserFlags(request: ApiUserFlagsRequest): Result<ApiAuthenticatedUserResponse, Error>
 
-    public suspend fun updateLanguage(): Result<Unit>
+    public suspend fun updateLanguage(): Result<Unit, Error>
 }
 
 public interface MarketingService {
-    public suspend fun marketingApproval(): Result<ApiMarketingResponse>
+    public suspend fun marketingApproval(): Result<ApiMarketingResponse, Error>
 
-    public suspend fun marketingRejection(): Result<ApiMarketingResponse>
+    public suspend fun marketingRejection(): Result<ApiMarketingResponse, Error>
 }
 
 public interface NotificationService {
-    public suspend fun getUserNotificationSettings(): Result<List<ApiUserNotificationSettingsResponse>?>
+    public suspend fun getUserNotificationSettings(): Result<List<ApiUserNotificationSettingsResponse>?, Error>
 
-    public suspend fun getAvailableProviderNotificationSettings(): Result<List<ApiProviderNotificationSettingsResponse>>
+    public suspend fun getAvailableProviderNotificationSettings(): Result<List<ApiProviderNotificationSettingsResponse>, Error>
 
-    public suspend fun getDefaultProviderNotificationSettings(): Result<List<ApiProviderNotificationSettingsResponse>>
+    public suspend fun getDefaultProviderNotificationSettings(): Result<List<ApiProviderNotificationSettingsResponse>, Error>
 
     public suspend fun updateUserNotificationSettings(
         request: ApiUpdateUserNotificationSettingsRequest,
         userId: String,
-    ): Result<ApiUserNotificationSettingsResponse>
+    ): Result<ApiUserNotificationSettingsResponse, Error>
 }
 
 public interface CurrentRideService {
-    public suspend fun getCurrentRide(): Result<ApiRideResponse>
+    public suspend fun getCurrentRide(): Result<ApiRideResponse, Error>
 
-    public suspend fun requestPhoneCall(rideId: String): Result<Unit>
+    public suspend fun requestPhoneCall(rideId: String): Result<Unit, Error>
 
     public suspend fun calculateNewFareForRide(
         rideId: String,
         passengers: List<ApiPassengerSelectionRequest>,
-    ): Result<ApiFareResponse>
+    ): Result<ApiFareResponse, Error>
 
     public suspend fun updatePassengersForRide(
         rideId: String,
@@ -194,139 +197,145 @@ public interface CurrentRideService {
         rideVersion: Int,
         fareVersion: Int,
         paypalSecureElement: String?,
-    ): Result<ApiRideResponse>
+    ): Result<ApiRideResponse, Error>
 }
 
 public interface RideService {
-    public suspend fun createRide(request: ApiRideRequest): Result<ApiRideResponse>
+    public suspend fun createRide(request: ApiRideRequest): Result<ApiRideResponse, Error>
 
-    public suspend fun createBooking(rideId: String, request: ApiBookingRequest): Result<Unit>
+    public suspend fun createBooking(rideId: String, request: ApiBookingRequest): Result<Unit, Error>
 
-    public suspend fun cancelRide(rideId: String, cancellationRequest: ApiCancellationRequest): Result<ApiRideResponse>
+    public suspend fun cancelRide(
+        rideId: String,
+        cancellationRequest: ApiCancellationRequest,
+    ): Result<ApiRideResponse, Error>
 
     public suspend fun getCancellationVoucher(
         rideId: String,
         request: ApiCancellationVoucherRequest,
-    ): Result<ApiCancellationVoucherResponse>
+    ): Result<ApiCancellationVoucherResponse, Error>
 
-    public suspend fun getRide(rideId: String): Result<ApiRideResponse>
+    public suspend fun getRide(rideId: String): Result<ApiRideResponse, Error>
 
-    public suspend fun getRides(type: ApiRideFilterType, page: Int): Result<List<ApiRideResponse>>
+    public suspend fun getRides(type: ApiRideFilterType, page: Int): Result<List<ApiRideResponse>, Error>
 
-    public suspend fun submitRating(rideId: String, request: ApiRatingRequest): Result<ApiRatingResponse>
+    public suspend fun submitRating(rideId: String, request: ApiRatingRequest): Result<ApiRatingResponse, Error>
 
-    public suspend fun inquireRide(request: ApiRideInquiryRequest): Result<ApiRideInquiryResponse>
+    public suspend fun inquireRide(request: ApiRideInquiryRequest): Result<ApiRideInquiryResponse, Error>
 }
 
 public interface RideSeriesService {
-    public suspend fun getRideSeries(rideSeriesId: String): Result<ApiRideSeriesResponse>
+    public suspend fun getRideSeries(rideSeriesId: String): Result<ApiRideSeriesResponse, Error>
 
-    public suspend fun getRideSeriesList(page: Int): Result<List<ApiRideSeriesResponse>>
+    public suspend fun getRideSeriesList(page: Int): Result<List<ApiRideSeriesResponse>, Error>
 
-    public suspend fun createRideSeries(rideId: String, request: ApiRideSeriesRequest): Result<ApiRideSeriesResponse>
+    public suspend fun createRideSeries(
+        rideId: String,
+        request: ApiRideSeriesRequest,
+    ): Result<ApiRideSeriesResponse, Error>
 }
 
 public interface TipService {
-    public suspend fun sendTip(rideId: String, request: ApiCreateTipRequest): Result<ApiTipResponse>
+    public suspend fun sendTip(rideId: String, request: ApiCreateTipRequest): Result<ApiTipResponse, Error>
 }
 
 public interface GetPaymentService {
-    public suspend fun getPaymentMethods(): Result<List<ApiPaymentMethodResponse>>
+    public suspend fun getPaymentMethods(): Result<List<ApiPaymentMethodResponse>, Error>
 
-    public suspend fun getServiceCreditPackages(): Result<List<ApiPurchasedCreditPackageResponse>>
+    public suspend fun getServiceCreditPackages(): Result<List<ApiPurchasedCreditPackageResponse>, Error>
 
-    public suspend fun getAvailablePersonalDiscountTypes(): Result<List<ApiPersonalDiscountTypeResponse>>
+    public suspend fun getAvailablePersonalDiscountTypes(): Result<List<ApiPersonalDiscountTypeResponse>, Error>
 
-    public suspend fun getMyPersonalDiscounts(): Result<List<ApiPersonalDiscountResponse>>
+    public suspend fun getMyPersonalDiscounts(): Result<List<ApiPersonalDiscountResponse>, Error>
 
-    public suspend fun getRedeemedPromoCodes(): Result<List<ApiRedeemedPromoCodeResponse>>
+    public suspend fun getRedeemedPromoCodes(): Result<List<ApiRedeemedPromoCodeResponse>, Error>
 }
 
 public interface LogPayService {
-    public suspend fun createLogPayCustomer(request: ApiLogPayAccountRequest): Result<ApiLogPayUrlResponse>
+    public suspend fun createLogPayCustomer(request: ApiLogPayAccountRequest): Result<ApiLogPayUrlResponse, Error>
 
-    public suspend fun getLogPayUrl(paymentMethodType: ApiLogPayType): Result<ApiLogPayUrlResponse>
+    public suspend fun getLogPayUrl(paymentMethodType: ApiLogPayType): Result<ApiLogPayUrlResponse, Error>
 }
 
 public interface StripeService {
-    public suspend fun requestStripeSetupIntent(): Result<ApiStripeSetupIntentResponse>
+    public suspend fun requestStripeSetupIntent(): Result<ApiStripeSetupIntentResponse, Error>
 
     public suspend fun createPaymentMethodFromStripePaymentMethod(
         stripePaymentMethodId: String,
-    ): Result<ApiPaymentMethodResponse>
+    ): Result<ApiPaymentMethodResponse, Error>
 }
 
 public interface PayPalService {
     public suspend fun createPaymentMethodForPaypal(
         braintreeNonce: String,
         paypalSecureElement: String,
-    ): Result<ApiPaymentMethodResponse>
+    ): Result<ApiPaymentMethodResponse, Error>
 
-    public suspend fun createPaypalClientToken(): Result<ApiPaypalClientTokenResponse>
+    public suspend fun createPaypalClientToken(): Result<ApiPaypalClientTokenResponse, Error>
 }
 
 public interface PaymentService {
-    public suspend fun detachPaymentMethod(paymentMethodId: String): Result<Unit>
+    public suspend fun detachPaymentMethod(paymentMethodId: String): Result<Unit, Error>
 
     public suspend fun purchaseCreditPackage(
         purchasingPackage: ApiPurchasingCreditPackageRequest,
-    ): Result<ApiPurchasedCreditPackageResponse>
+    ): Result<ApiPurchasedCreditPackageResponse, Error>
 
     public suspend fun purchasePersonalDiscount(
         purchaseRequest: ApiPersonalDiscountPurchaseRequest,
-    ): Result<ApiPersonalDiscountResponse>
+    ): Result<ApiPersonalDiscountResponse, Error>
 
-    public suspend fun payFailedPayments(request: ApiFailedPaymentRequest): Result<ApiFailedPaymentResponse>
+    public suspend fun payFailedPayments(request: ApiFailedPaymentRequest): Result<ApiFailedPaymentResponse, Error>
 }
 
 public interface RedeemService {
-    public suspend fun redeemPromoCode(request: ApiRedeemPromoCodeRequest): Result<ApiRedeemedPromoCodeResponse>
+    public suspend fun redeemPromoCode(request: ApiRedeemPromoCodeRequest): Result<ApiRedeemedPromoCodeResponse, Error>
 
-    public suspend fun redeemReferralCode(code: String): Result<Unit>
+    public suspend fun redeemReferralCode(code: String): Result<Unit, Error>
 }
 
 public interface PublicTransportService {
-    public suspend fun getPublicTransportSchedules(url: String, time: Instant): Result<List<ApiScheduleResponse>>
+    public suspend fun getPublicTransportSchedules(url: String, time: Instant): Result<List<ApiScheduleResponse>, Error>
 }
 
 public interface TicketingService {
-    public suspend fun getActiveUserTicketingVouchers(page: Int): Result<List<ApiTicketingVoucherResponse>>
+    public suspend fun getActiveUserTicketingVouchers(page: Int): Result<List<ApiTicketingVoucherResponse>, Error>
 
-    public suspend fun getInactiveUserTicketingVouchers(page: Int): Result<List<ApiTicketingVoucherResponse>>
+    public suspend fun getInactiveUserTicketingVouchers(page: Int): Result<List<ApiTicketingVoucherResponse>, Error>
 
-    public suspend fun getUserTicketingVoucher(ticketVoucherId: String): Result<ApiTicketingVoucherResponse>
+    public suspend fun getUserTicketingVoucher(ticketVoucherId: String): Result<ApiTicketingVoucherResponse, Error>
 
     public suspend fun getAllTicketingProducts(
         type: ApiTicketingProductFilterType,
         rideId: String?,
         page: Int,
-    ): Result<List<ApiTicketingProductResponse>>
+    ): Result<List<ApiTicketingProductResponse>, Error>
 
     public suspend fun purchaseTicketingProduct(
         id: String,
         request: ApiPurchaseTicketingProductRequest,
-    ): Result<ApiTicketingVoucherResponse>
+    ): Result<ApiTicketingVoucherResponse, Error>
 
     public suspend fun renewTicketingVoucher(
         id: String,
         request: ApiRenewTicketingVoucherRequest,
-    ): Result<ApiTicketingVoucherResponse>
+    ): Result<ApiTicketingVoucherResponse, Error>
 }
 
 public interface BootstrapService {
-    public suspend fun getBootstrap(): Result<ApiBootstrapResponse>
+    public suspend fun getBootstrap(): Result<ApiBootstrapResponse, Error>
 }
 
 public interface ClientService {
-    public suspend fun requestClientInfo(): Result<ApiClientInfoResponse>
+    public suspend fun requestClientInfo(): Result<ApiClientInfoResponse, Error>
 }
 
 public interface StationsService {
-    public suspend fun getStations(request: ApiStationsRequest): Result<List<ApiStationResponse>>
+    public suspend fun getStations(request: ApiStationsRequest): Result<List<ApiStationResponse>, Error>
 }
 
 public interface VenuesService {
-    public suspend fun getVenues(): Result<List<ApiVenueResponse>>
+    public suspend fun getVenues(): Result<List<ApiVenueResponse>, Error>
 }
 
 private class DefaultIokiService(
@@ -338,12 +347,12 @@ private class DefaultIokiService(
 
     override suspend fun requestPhoneVerification(
         verification: ApiPhoneVerificationRequest,
-    ): Result<ApiPhoneVerificationResponse> =
+    ): Result<ApiPhoneVerificationResponse, Error> =
         apiCall<ApiBody<ApiPhoneVerificationResponse>, ApiPhoneVerificationResponse> {
             requestPhoneVerification(ApiBody(verification))
         }
 
-    override suspend fun requestApiToken(request: ApiRequestTokenRequest): Result<ApiRequestTokenResponse> =
+    override suspend fun requestApiToken(request: ApiRequestTokenRequest): Result<ApiRequestTokenResponse, Error> =
         apiCall<ApiBody<ApiRequestTokenResponse>, ApiRequestTokenResponse> {
             requestApiToken(
                 ApiBody(
@@ -352,7 +361,7 @@ private class DefaultIokiService(
             )
         }
 
-    override suspend fun signUp(request: ApiSignUpRequest): Result<ApiAuthenticatedUserResponse> =
+    override suspend fun signUp(request: ApiSignUpRequest): Result<ApiAuthenticatedUserResponse, Error> =
         apiCall<ApiBody<ApiAuthenticatedUserResponse>, ApiAuthenticatedUserResponse> {
             signUp(
                 accessToken,
@@ -360,7 +369,7 @@ private class DefaultIokiService(
             )
         }
 
-    override suspend fun createRide(request: ApiRideRequest): Result<ApiRideResponse> =
+    override suspend fun createRide(request: ApiRideRequest): Result<ApiRideResponse, Error> =
         apiCall<ApiBody<ApiRideResponse>, ApiRideResponse> {
             createRide(
                 accessToken,
@@ -371,7 +380,7 @@ private class DefaultIokiService(
     override suspend fun cancelRide(
         rideId: String,
         cancellationRequest: ApiCancellationRequest,
-    ): Result<ApiRideResponse> = apiCall<ApiBody<ApiRideResponse>, ApiRideResponse> {
+    ): Result<ApiRideResponse, Error> = apiCall<ApiBody<ApiRideResponse>, ApiRideResponse> {
         cancelRide(
             accessToken,
             rideId,
@@ -382,7 +391,7 @@ private class DefaultIokiService(
     override suspend fun getCancellationVoucher(
         rideId: String,
         request: ApiCancellationVoucherRequest,
-    ): Result<ApiCancellationVoucherResponse> =
+    ): Result<ApiCancellationVoucherResponse, Error> =
         apiCall<ApiBody<ApiCancellationVoucherResponse>, ApiCancellationVoucherResponse> {
             getCancellationVoucher(
                 accessToken,
@@ -391,17 +400,17 @@ private class DefaultIokiService(
             )
         }
 
-    override suspend fun getRide(rideId: String): Result<ApiRideResponse> =
+    override suspend fun getRide(rideId: String): Result<ApiRideResponse, Error> =
         apiCall<ApiBody<ApiRideResponse>, ApiRideResponse> { getRide(accessToken, rideId) }
 
-    override suspend fun getCurrentRide(): Result<ApiRideResponse> =
+    override suspend fun getCurrentRide(): Result<ApiRideResponse, Error> =
         apiCall<ApiBody<ApiRideResponse>, ApiRideResponse> { getCurrentRide(accessToken) }
 
-    override suspend fun requestPhoneCall(rideId: String): Result<Unit> = apiCall<Unit, Unit> {
+    override suspend fun requestPhoneCall(rideId: String): Result<Unit, Error> = apiCall<Unit, Unit> {
         requestPhoneCall(accessToken, rideId)
     }
 
-    override suspend fun getRides(type: ApiRideFilterType, page: Int): Result<List<ApiRideResponse>> =
+    override suspend fun getRides(type: ApiRideFilterType, page: Int): Result<List<ApiRideResponse>, Error> =
         apiCall<ApiBody<List<ApiRideResponse>>, List<ApiRideResponse>> {
             getRides(
                 accessToken,
@@ -410,7 +419,7 @@ private class DefaultIokiService(
             )
         }
 
-    override suspend fun getRideSeries(rideSeriesId: String): Result<ApiRideSeriesResponse> =
+    override suspend fun getRideSeries(rideSeriesId: String): Result<ApiRideSeriesResponse, Error> =
         apiCall<ApiBody<ApiRideSeriesResponse>, ApiRideSeriesResponse> {
             getRideSeries(
                 accessToken,
@@ -418,7 +427,7 @@ private class DefaultIokiService(
             )
         }
 
-    override suspend fun getRideSeriesList(page: Int): Result<List<ApiRideSeriesResponse>> =
+    override suspend fun getRideSeriesList(page: Int): Result<List<ApiRideSeriesResponse>, Error> =
         apiCall<ApiBody<List<ApiRideSeriesResponse>>, List<ApiRideSeriesResponse>> {
             getRideSeriesList(
                 accessToken,
@@ -429,7 +438,7 @@ private class DefaultIokiService(
     override suspend fun createRideSeries(
         rideId: String,
         request: ApiRideSeriesRequest,
-    ): Result<ApiRideSeriesResponse> = apiCall<ApiBody<ApiRideSeriesResponse>, ApiRideSeriesResponse> {
+    ): Result<ApiRideSeriesResponse, Error> = apiCall<ApiBody<ApiRideSeriesResponse>, ApiRideSeriesResponse> {
         createRideSeries(
             accessToken,
             rideId,
@@ -437,7 +446,7 @@ private class DefaultIokiService(
         )
     }
 
-    override suspend fun submitRating(rideId: String, request: ApiRatingRequest): Result<ApiRatingResponse> =
+    override suspend fun submitRating(rideId: String, request: ApiRatingRequest): Result<ApiRatingResponse, Error> =
         apiCall<ApiBody<ApiRatingResponse>, ApiRatingResponse> {
             submitRating(
                 accessToken,
@@ -446,7 +455,10 @@ private class DefaultIokiService(
             )
         }
 
-    override suspend fun getPublicTransportSchedules(url: String, time: Instant): Result<List<ApiScheduleResponse>> =
+    override suspend fun getPublicTransportSchedules(
+        url: String,
+        time: Instant,
+    ): Result<List<ApiScheduleResponse>, Error> =
         apiCall<ApiBody<List<ApiScheduleResponse>>, List<ApiScheduleResponse>> {
             requestPublicTransportSchedules(
                 accessToken,
@@ -458,7 +470,7 @@ private class DefaultIokiService(
     override suspend fun calculateNewFareForRide(
         rideId: String,
         passengers: List<ApiPassengerSelectionRequest>,
-    ): Result<ApiFareResponse> = apiCall<ApiBody<ApiFareResponse>, ApiFareResponse> {
+    ): Result<ApiFareResponse, Error> = apiCall<ApiBody<ApiFareResponse>, ApiFareResponse> {
         calculateNewFareForRide(
             rideId,
             accessToken,
@@ -472,7 +484,7 @@ private class DefaultIokiService(
         rideVersion: Int,
         fareVersion: Int,
         paypalSecureElement: String?,
-    ): Result<ApiRideResponse> = apiCall<ApiBody<ApiRideResponse>, ApiRideResponse> {
+    ): Result<ApiRideResponse, Error> = apiCall<ApiBody<ApiRideResponse>, ApiRideResponse> {
         val body =
             ApiBody(
                 ApiUpdatePassengersForRideRequest(
@@ -485,7 +497,7 @@ private class DefaultIokiService(
         updatePassengersForRide(rideId, accessToken, body)
     }
 
-    override suspend fun sendTip(rideId: String, request: ApiCreateTipRequest): Result<ApiTipResponse> =
+    override suspend fun sendTip(rideId: String, request: ApiCreateTipRequest): Result<ApiTipResponse, Error> =
         apiCall<ApiBody<ApiTipResponse>, ApiTipResponse> {
             sendTip(
                 accessToken,
@@ -494,7 +506,7 @@ private class DefaultIokiService(
             )
         }
 
-    override suspend fun inquireRide(request: ApiRideInquiryRequest): Result<ApiRideInquiryResponse> =
+    override suspend fun inquireRide(request: ApiRideInquiryRequest): Result<ApiRideInquiryResponse, Error> =
         apiCall<ApiBody<ApiRideInquiryResponse>, ApiRideInquiryResponse> {
             inquireRide(
                 accessToken,
@@ -502,17 +514,17 @@ private class DefaultIokiService(
             )
         }
 
-    override suspend fun getServiceCreditPackages(): Result<List<ApiPurchasedCreditPackageResponse>> =
+    override suspend fun getServiceCreditPackages(): Result<List<ApiPurchasedCreditPackageResponse>, Error> =
         apiCall<ApiBody<List<ApiPurchasedCreditPackageResponse>>, List<ApiPurchasedCreditPackageResponse>> {
             getServiceCreditPackages(
                 accessToken,
             )
         }
 
-    override suspend fun getVenues(): Result<List<ApiVenueResponse>> =
+    override suspend fun getVenues(): Result<List<ApiVenueResponse>, Error> =
         apiCall<ApiBody<List<ApiVenueResponse>>, List<ApiVenueResponse>> { getVenues(accessToken) }
 
-    override suspend fun getUserNotificationSettings(): Result<List<ApiUserNotificationSettingsResponse>?> =
+    override suspend fun getUserNotificationSettings(): Result<List<ApiUserNotificationSettingsResponse>?, Error> =
         apiCall<ApiBody<List<ApiUserNotificationSettingsResponse>?>, List<ApiUserNotificationSettingsResponse>?> {
             getUserNotificationSettings(
                 accessToken,
@@ -520,13 +532,13 @@ private class DefaultIokiService(
         }
 
     @Suppress("ktlint:standard:max-line-length")
-    override suspend fun getAvailableProviderNotificationSettings(): Result<List<ApiProviderNotificationSettingsResponse>> =
+    override suspend fun getAvailableProviderNotificationSettings(): Result<List<ApiProviderNotificationSettingsResponse>, Error> =
         apiCall<ApiBody<List<ApiProviderNotificationSettingsResponse>>, List<ApiProviderNotificationSettingsResponse>> {
             getAvailableProviderNotificationSettings(accessToken)
         }
 
     @Suppress("ktlint:standard:max-line-length")
-    override suspend fun getDefaultProviderNotificationSettings(): Result<List<ApiProviderNotificationSettingsResponse>> =
+    override suspend fun getDefaultProviderNotificationSettings(): Result<List<ApiProviderNotificationSettingsResponse>, Error> =
         apiCall<ApiBody<List<ApiProviderNotificationSettingsResponse>>, List<ApiProviderNotificationSettingsResponse>> {
             getDefaultProviderNotificationSettings(accessToken)
         }
@@ -534,7 +546,7 @@ private class DefaultIokiService(
     override suspend fun updateUserNotificationSettings(
         request: ApiUpdateUserNotificationSettingsRequest,
         userId: String,
-    ): Result<ApiUserNotificationSettingsResponse> =
+    ): Result<ApiUserNotificationSettingsResponse, Error> =
         apiCall<ApiBody<ApiUserNotificationSettingsResponse>, ApiUserNotificationSettingsResponse> {
             updateUserNotificationSettings(
                 accessToken,
@@ -546,7 +558,7 @@ private class DefaultIokiService(
     override suspend fun sendFirebaseDebugRecord(
         debugId: String,
         firebaseDebugRecord: ApiFirebaseDebugRecordRequest,
-    ): Result<Unit> = apiCall<Unit, Unit> {
+    ): Result<Unit, Error> = apiCall<Unit, Unit> {
         sendFirebaseDebugRecord(
             accessToken,
             debugId,
@@ -554,17 +566,17 @@ private class DefaultIokiService(
         )
     }
 
-    override suspend fun getBootstrap(): Result<ApiBootstrapResponse> =
+    override suspend fun getBootstrap(): Result<ApiBootstrapResponse, Error> =
         apiCall<ApiBody<ApiBootstrapResponse>, ApiBootstrapResponse> { getBootstrap(accessToken) }
 
-    override suspend fun getUser(): Result<ApiAuthenticatedUserResponse> =
+    override suspend fun getUser(): Result<ApiAuthenticatedUserResponse, Error> =
         apiCall<ApiBody<ApiAuthenticatedUserResponse>, ApiAuthenticatedUserResponse> {
             getUser(
                 accessToken,
             )
         }
 
-    override suspend fun updateUser(request: ApiUpdateUserRequest): Result<ApiAuthenticatedUserResponse> =
+    override suspend fun updateUser(request: ApiUpdateUserRequest): Result<ApiAuthenticatedUserResponse, Error> =
         apiCall<ApiBody<ApiAuthenticatedUserResponse>, ApiAuthenticatedUserResponse> {
             updateUser(
                 accessToken,
@@ -572,7 +584,7 @@ private class DefaultIokiService(
             )
         }
 
-    override suspend fun createDevice(deviceRequest: ApiDeviceRequest): Result<ApiDeviceResponse> =
+    override suspend fun createDevice(deviceRequest: ApiDeviceRequest): Result<ApiDeviceResponse, Error> =
         apiCall<ApiBody<ApiDeviceResponse>, ApiDeviceResponse> {
             createDevice(
                 accessToken,
@@ -580,26 +592,26 @@ private class DefaultIokiService(
             )
         }
 
-    override suspend fun getFirebaseToken(): Result<ApiFirebaseTokenResponse> =
+    override suspend fun getFirebaseToken(): Result<ApiFirebaseTokenResponse, Error> =
         apiCall<ApiBody<ApiFirebaseTokenResponse>, ApiFirebaseTokenResponse> {
             getFirebaseToken(
                 accessToken,
             )
         }
 
-    override suspend fun marketingApproval(): Result<ApiMarketingResponse> =
+    override suspend fun marketingApproval(): Result<ApiMarketingResponse, Error> =
         apiCall<ApiBody<ApiMarketingResponse>, ApiMarketingResponse> { marketingApproval(accessToken) }
 
-    override suspend fun marketingRejection(): Result<ApiMarketingResponse> =
+    override suspend fun marketingRejection(): Result<ApiMarketingResponse, Error> =
         apiCall<ApiBody<ApiMarketingResponse>, ApiMarketingResponse> {
             marketingRejection(
                 accessToken,
             )
         }
 
-    override suspend fun deleteUser(): Result<Unit> = apiCall<Unit, Unit> { deleteUser(accessToken) }
+    override suspend fun deleteUser(): Result<Unit, Error> = apiCall<Unit, Unit> { deleteUser(accessToken) }
 
-    override suspend fun updatePhoneNumber(request: ApiUpdatePhoneNumberRequest): Result<ApiAuthenticatedUserResponse> =
+    override suspend fun updatePhoneNumber(request: ApiUpdatePhoneNumberRequest): Result<ApiAuthenticatedUserResponse, Error> =
         apiCall<ApiBody<ApiAuthenticatedUserResponse>, ApiAuthenticatedUserResponse> {
             updatePhoneNumber(
                 accessToken,
@@ -607,7 +619,7 @@ private class DefaultIokiService(
             )
         }
 
-    override suspend fun createLogPayCustomer(request: ApiLogPayAccountRequest): Result<ApiLogPayUrlResponse> =
+    override suspend fun createLogPayCustomer(request: ApiLogPayAccountRequest): Result<ApiLogPayUrlResponse, Error> =
         apiCall<ApiBody<ApiLogPayUrlResponse>, ApiLogPayUrlResponse> {
             createLogPayCustomer(
                 accessToken,
@@ -615,7 +627,7 @@ private class DefaultIokiService(
             )
         }
 
-    override suspend fun getLogPayUrl(paymentMethodType: ApiLogPayType): Result<ApiLogPayUrlResponse> =
+    override suspend fun getLogPayUrl(paymentMethodType: ApiLogPayType): Result<ApiLogPayUrlResponse, Error> =
         apiCall<ApiBody<ApiLogPayUrlResponse>, ApiLogPayUrlResponse> {
             getLogPayUrl(
                 accessToken,
@@ -625,7 +637,7 @@ private class DefaultIokiService(
             )
         }
 
-    override suspend fun updateUserFlags(request: ApiUserFlagsRequest): Result<ApiAuthenticatedUserResponse> =
+    override suspend fun updateUserFlags(request: ApiUserFlagsRequest): Result<ApiAuthenticatedUserResponse, Error> =
         apiCall<ApiBody<ApiAuthenticatedUserResponse>, ApiAuthenticatedUserResponse> {
             updateUserFlags(
                 accessToken,
@@ -633,21 +645,21 @@ private class DefaultIokiService(
             )
         }
 
-    override suspend fun solveCaptcha(captchaId: String, captchaRequest: ApiCaptchaRequest): Result<Unit> =
+    override suspend fun solveCaptcha(captchaId: String, captchaRequest: ApiCaptchaRequest): Result<Unit, Error> =
         apiCall<Unit, Unit> { solveCaptcha(captchaId, ApiBody(captchaRequest)) }
 
-    override suspend fun solveClientChallenge(id: String, request: ApiClientChallengeRequest): Result<Unit> =
+    override suspend fun solveClientChallenge(id: String, request: ApiClientChallengeRequest): Result<Unit, Error> =
         apiCall<Unit, Unit> { solveClientChallenge(id, ApiBody(request)) }
 
-    override suspend fun createBooking(rideId: String, request: ApiBookingRequest): Result<Unit> =
+    override suspend fun createBooking(rideId: String, request: ApiBookingRequest): Result<Unit, Error> =
         apiCall<Unit, Unit> { createBooking(accessToken, rideId, ApiBody(request)) }
 
-    override suspend fun updateLanguage(): Result<Unit> = apiCall<Unit, Unit> { updateLanguage(accessToken) }
+    override suspend fun updateLanguage(): Result<Unit, Error> = apiCall<Unit, Unit> { updateLanguage(accessToken) }
 
-    override suspend fun requestClientInfo(): Result<ApiClientInfoResponse> =
+    override suspend fun requestClientInfo(): Result<ApiClientInfoResponse, Error> =
         apiCall<ApiBody<ApiClientInfoResponse>, ApiClientInfoResponse> { getClient() }
 
-    override suspend fun getStations(request: ApiStationsRequest): Result<List<ApiStationResponse>> =
+    override suspend fun getStations(request: ApiStationsRequest): Result<List<ApiStationResponse>, Error> =
         apiCall<ApiBody<List<ApiStationResponse>>, List<ApiStationResponse>> {
             getStations(
                 accessToken,
@@ -660,10 +672,10 @@ private class DefaultIokiService(
             )
         }
 
-    override suspend fun detachPaymentMethod(paymentMethodId: String): Result<Unit> =
+    override suspend fun detachPaymentMethod(paymentMethodId: String): Result<Unit, Error> =
         apiCall<Unit, Unit> { detachPaymentMethod(accessToken, paymentMethodId) }
 
-    override suspend fun getRedeemedPromoCodes(): Result<List<ApiRedeemedPromoCodeResponse>> =
+    override suspend fun getRedeemedPromoCodes(): Result<List<ApiRedeemedPromoCodeResponse>, Error> =
         apiCall<ApiBody<List<ApiRedeemedPromoCodeResponse>>, List<ApiRedeemedPromoCodeResponse>> {
             getRedeemedPromoCodes(
                 accessToken,
@@ -672,7 +684,7 @@ private class DefaultIokiService(
 
     override suspend fun purchaseCreditPackage(
         purchasingPackage: ApiPurchasingCreditPackageRequest,
-    ): Result<ApiPurchasedCreditPackageResponse> =
+    ): Result<ApiPurchasedCreditPackageResponse, Error> =
         apiCall<ApiBody<ApiPurchasedCreditPackageResponse>, ApiPurchasedCreditPackageResponse> {
             purchaseCreditPackage(
                 accessToken,
@@ -680,14 +692,14 @@ private class DefaultIokiService(
             )
         }
 
-    override suspend fun getAvailablePersonalDiscountTypes(): Result<List<ApiPersonalDiscountTypeResponse>> =
+    override suspend fun getAvailablePersonalDiscountTypes(): Result<List<ApiPersonalDiscountTypeResponse>, Error> =
         apiCall<ApiBody<List<ApiPersonalDiscountTypeResponse>>, List<ApiPersonalDiscountTypeResponse>> {
             getAvailablePersonalDiscountTypes(
                 accessToken,
             )
         }
 
-    override suspend fun getMyPersonalDiscounts(): Result<List<ApiPersonalDiscountResponse>> =
+    override suspend fun getMyPersonalDiscounts(): Result<List<ApiPersonalDiscountResponse>, Error> =
         apiCall<ApiBody<List<ApiPersonalDiscountResponse>>, List<ApiPersonalDiscountResponse>> {
             getMyPersonalDiscounts(
                 accessToken,
@@ -696,7 +708,7 @@ private class DefaultIokiService(
 
     override suspend fun purchasePersonalDiscount(
         purchaseRequest: ApiPersonalDiscountPurchaseRequest,
-    ): Result<ApiPersonalDiscountResponse> =
+    ): Result<ApiPersonalDiscountResponse, Error> =
         apiCall<ApiBody<ApiPersonalDiscountResponse>, ApiPersonalDiscountResponse> {
             purchasePersonalDiscount(
                 accessToken,
@@ -704,7 +716,7 @@ private class DefaultIokiService(
             )
         }
 
-    override suspend fun redeemPromoCode(request: ApiRedeemPromoCodeRequest): Result<ApiRedeemedPromoCodeResponse> =
+    override suspend fun redeemPromoCode(request: ApiRedeemPromoCodeRequest): Result<ApiRedeemedPromoCodeResponse, Error> =
         apiCall<ApiBody<ApiRedeemedPromoCodeResponse>, ApiRedeemedPromoCodeResponse> {
             redeemPromoCode(
                 accessToken,
@@ -712,7 +724,7 @@ private class DefaultIokiService(
             )
         }
 
-    override suspend fun requestStripeSetupIntent(): Result<ApiStripeSetupIntentResponse> =
+    override suspend fun requestStripeSetupIntent(): Result<ApiStripeSetupIntentResponse, Error> =
         apiCall<ApiBody<ApiStripeSetupIntentResponse>, ApiStripeSetupIntentResponse> {
             requestStripeSetupIntent(
                 accessToken,
@@ -721,7 +733,7 @@ private class DefaultIokiService(
 
     override suspend fun createPaymentMethodFromStripePaymentMethod(
         stripePaymentMethodId: String,
-    ): Result<ApiPaymentMethodResponse> = apiCall<ApiBody<ApiPaymentMethodResponse>, ApiPaymentMethodResponse> {
+    ): Result<ApiPaymentMethodResponse, Error> = apiCall<ApiBody<ApiPaymentMethodResponse>, ApiPaymentMethodResponse> {
         val data =
             ApiPaymentMethodCreationRequest(
                 "stripe",
@@ -737,7 +749,7 @@ private class DefaultIokiService(
     override suspend fun createPaymentMethodForPaypal(
         braintreeNonce: String,
         paypalSecureElement: String,
-    ): Result<ApiPaymentMethodResponse> = apiCall<ApiBody<ApiPaymentMethodResponse>, ApiPaymentMethodResponse> {
+    ): Result<ApiPaymentMethodResponse, Error> = apiCall<ApiBody<ApiPaymentMethodResponse>, ApiPaymentMethodResponse> {
         val data =
             ApiPaymentMethodCreationRequest(
                 "logpay",
@@ -750,26 +762,26 @@ private class DefaultIokiService(
         createPaymentMethod(accessToken, ApiBody(data))
     }
 
-    override suspend fun getPaymentMethods(): Result<List<ApiPaymentMethodResponse>> =
+    override suspend fun getPaymentMethods(): Result<List<ApiPaymentMethodResponse>, Error> =
         apiCall<ApiBody<List<ApiPaymentMethodResponse>>, List<ApiPaymentMethodResponse>> {
             getPaymentMethods(
                 accessToken,
             )
         }
 
-    override suspend fun redeemReferralCode(code: String): Result<Unit> = apiCall<Unit, Unit> {
+    override suspend fun redeemReferralCode(code: String): Result<Unit, Error> = apiCall<Unit, Unit> {
         val data = ApiBody(ApiRedeemReferralCodeRequest(code))
         redeemReferralCode(accessToken, data)
     }
 
-    override suspend fun createPaypalClientToken(): Result<ApiPaypalClientTokenResponse> =
+    override suspend fun createPaypalClientToken(): Result<ApiPaypalClientTokenResponse, Error> =
         apiCall<ApiBody<ApiPaypalClientTokenResponse>, ApiPaypalClientTokenResponse> {
             createPaypalClientToken(
                 accessToken,
             )
         }
 
-    override suspend fun payFailedPayments(request: ApiFailedPaymentRequest): Result<ApiFailedPaymentResponse> =
+    override suspend fun payFailedPayments(request: ApiFailedPaymentRequest): Result<ApiFailedPaymentResponse, Error> =
         apiCall<ApiBody<ApiFailedPaymentResponse>, ApiFailedPaymentResponse> {
             payFailedPayments(
                 accessToken,
@@ -781,7 +793,7 @@ private class DefaultIokiService(
         type: ApiTicketingProductFilterType,
         rideId: String?,
         page: Int,
-    ): Result<List<ApiTicketingProductResponse>> =
+    ): Result<List<ApiTicketingProductResponse>, Error> =
         apiCall<ApiBody<List<ApiTicketingProductResponse>>, List<ApiTicketingProductResponse>> {
             getAllTicketingProducts(
                 accessToken,
@@ -794,7 +806,7 @@ private class DefaultIokiService(
     override suspend fun purchaseTicketingProduct(
         id: String,
         request: ApiPurchaseTicketingProductRequest,
-    ): Result<ApiTicketingVoucherResponse> =
+    ): Result<ApiTicketingVoucherResponse, Error> =
         apiCall<ApiBody<ApiTicketingVoucherResponse>, ApiTicketingVoucherResponse> {
             purchaseTicketingProduct(
                 accessToken,
@@ -806,7 +818,7 @@ private class DefaultIokiService(
     override suspend fun renewTicketingVoucher(
         id: String,
         request: ApiRenewTicketingVoucherRequest,
-    ): Result<ApiTicketingVoucherResponse> =
+    ): Result<ApiTicketingVoucherResponse, Error> =
         apiCall<ApiBody<ApiTicketingVoucherResponse>, ApiTicketingVoucherResponse> {
             renewUserTicketingVoucher(
                 accessToken,
@@ -815,7 +827,7 @@ private class DefaultIokiService(
             )
         }
 
-    override suspend fun getActiveUserTicketingVouchers(page: Int): Result<List<ApiTicketingVoucherResponse>> =
+    override suspend fun getActiveUserTicketingVouchers(page: Int): Result<List<ApiTicketingVoucherResponse>, Error> =
         apiCall<ApiBody<List<ApiTicketingVoucherResponse>>, List<ApiTicketingVoucherResponse>> {
             getActiveUserTicketingVouchers(
                 accessToken,
@@ -823,7 +835,7 @@ private class DefaultIokiService(
             )
         }
 
-    override suspend fun getInactiveUserTicketingVouchers(page: Int): Result<List<ApiTicketingVoucherResponse>> =
+    override suspend fun getInactiveUserTicketingVouchers(page: Int): Result<List<ApiTicketingVoucherResponse>, Error> =
         apiCall<ApiBody<List<ApiTicketingVoucherResponse>>, List<ApiTicketingVoucherResponse>> {
             getInactiveUserTicketingVouchers(
                 accessToken,
@@ -831,7 +843,7 @@ private class DefaultIokiService(
             )
         }
 
-    override suspend fun getUserTicketingVoucher(ticketVoucherId: String): Result<ApiTicketingVoucherResponse> =
+    override suspend fun getUserTicketingVoucher(ticketVoucherId: String): Result<ApiTicketingVoucherResponse, Error> =
         apiCall<ApiBody<ApiTicketingVoucherResponse>, ApiTicketingVoucherResponse> {
             getUserTicketingVoucher(
                 accessToken,
@@ -841,7 +853,7 @@ private class DefaultIokiService(
 
     private suspend inline fun <reified R, reified T> apiCall(
         crossinline block: suspend IokiApi.() -> HttpResponse,
-    ): Result<T> {
+    ): Result<T, Error> {
         return try {
             val response = iokiApi.block()
             if (response.status.isSuccess()) {
@@ -852,8 +864,8 @@ private class DefaultIokiService(
         } catch (e: Exception) {
             when {
                 e is CancellationException -> throw e
-                e.isConnectivityError -> Result.Error.Connectivity(e)
-                else -> Result.Error.Generic(e)
+                e.isConnectivityError -> Result.Failure(Error.Connectivity(e))
+                else -> Result.Failure(Error.Generic(e))
             }
         }
     }
@@ -870,18 +882,19 @@ internal suspend inline fun <reified R, reified T> mapSuccess(successfulResponse
             when {
                 body.data is T -> body.data
                 T::class == String::class -> body.data.toString()
+                T::class == SuccessData::class -> SuccessData(body.data, meta)
                 else -> null
             }
 
         else -> null
     } ?: throw IllegalArgumentException("Failed to convert body '$body' to type ${T::class}")
-    return Result.Success(data, meta) as Result.Success<T>
+    return Result.Success(data) as Result.Success<T>
 }
 
 internal suspend fun mapApiError(
     failedResponse: HttpResponse,
     interceptors: Collection<ApiErrorInterceptor>,
-): Result.Error.Api {
+): Result.Failure<Error.Api> {
     val apiErrorBody = failedResponse.body<ApiErrorBody?>()
     val code = failedResponse.status.value
     // 502 happens when Google runs internal tests. Catching it here prevents it from being reported as an error
@@ -889,9 +902,9 @@ internal suspend fun mapApiError(
 
     interceptors.forEach { interceptor ->
         if (interceptor.intercept(apiErrors, code)) {
-            return Result.Error.Api.Intercepted(apiErrors, code)
+            return Result.Failure(Error.Api.Intercepted(apiErrors, code))
         }
     }
 
-    return Result.Error.Api.Generic(apiErrors, code)
+    return Result.Failure(Error.Api.Generic(apiErrors, code))
 }

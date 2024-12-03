@@ -30,6 +30,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation(libs.result)
                 implementation(libs.kotlinx.serialization)
                 implementation(libs.ktor.core)
                 implementation(libs.ktor.serialization)
