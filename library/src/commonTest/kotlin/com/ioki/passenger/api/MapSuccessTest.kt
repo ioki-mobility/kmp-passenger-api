@@ -2,7 +2,8 @@ package com.ioki.passenger.api
 
 import com.ioki.passenger.api.models.ApiBody
 import com.ioki.passenger.api.models.ApiClientInfoResponse
-import com.ioki.passenger.api.result.Result
+import com.ioki.passenger.api.result.SuccessData
+import com.ioki.result.Result
 import io.ktor.client.request.get
 import io.ktor.http.HttpStatusCode
 import io.ktor.utils.io.ByteReadChannel
@@ -82,6 +83,39 @@ class MapSuccessTest {
 
         assertIs<Result.Success<ApiClientInfoResponse>>(result)
         assertEquals(result.data, apiClientInfoResponse)
+    }
+
+    @Test
+    fun `mapSuccess returns Result with SuccessData`() = runTest {
+        val content = ByteReadChannel(
+            text = """
+                {
+                  "data": {
+                    "distribution_url": "https://example.com/distribution",
+                    "terms_of_service_url": "https://example.com/terms",
+                    "privacy_policy_url": "https://example.com/privacy",
+                    "imprint_url": "https://example.com/imprint",
+                    "help_url": "https://example.com/help",
+                    "support_email": "support@example.com",
+                    "support_website_url": "https://example.com/support",
+                    "support_phone_number": "+1234567890",
+                    "sms_support_number": "+0987654321"
+                  },
+                  "meta": {
+                    "page": 1,
+                    "last_page": true
+                  }
+                }
+            """.trimIndent(),
+        )
+        val fakeHttpClient = FakeHttpClient(HttpStatusCode.OK, content)
+        val response = fakeHttpClient.get("https://127.0.0.1")
+
+        val result = mapSuccess<ApiBody<ApiClientInfoResponse>, SuccessData<ApiClientInfoResponse>>(response)
+
+        assertIs<Result.Success<SuccessData<ApiClientInfoResponse>>>(result)
+        assertEquals(result.data.data, apiClientInfoResponse)
+        assertEquals(result.data.meta, ApiBody.Meta(1, true))
     }
 
     @Test

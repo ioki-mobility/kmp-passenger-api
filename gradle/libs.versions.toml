@@ -7,6 +7,7 @@ dokka = "1.9.20"
 ktor = "3.0.1"
 ktlintVersion = "12.1.1"
 kotlinCoroutines = "1.9.0"
+result = "0.2.0"
 
 [libraries]
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
@@ -20,6 +21,8 @@ ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", versi
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
+
+result = { module = "com.ioki.result:result", version.ref = "result" }
 
 [plugins]
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
