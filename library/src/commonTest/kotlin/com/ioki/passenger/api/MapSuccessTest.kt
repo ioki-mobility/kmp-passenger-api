@@ -2,7 +2,8 @@ package com.ioki.passenger.api
 
 import com.ioki.passenger.api.models.ApiBody
 import com.ioki.passenger.api.models.ApiClientInfoResponse
-import com.ioki.passenger.api.result.Result
+import com.ioki.passenger.api.result.SuccessData
+import com.ioki.result.Result
 import io.ktor.client.request.get
 import io.ktor.http.HttpStatusCode
 import io.ktor.utils.io.ByteReadChannel
@@ -54,8 +55,9 @@ class MapSuccessTest {
 
         val result = mapSuccess<ApiBody<ApiClientInfoResponse>, ApiClientInfoResponse>(response)
 
-        assertIs<Result.Success<ApiClientInfoResponse>>(result)
-        assertEquals(result.data, apiClientInfoResponse)
+        assertIs<Result.Success<SuccessData<ApiClientInfoResponse>>>(result)
+        assertEquals(result.data.value, apiClientInfoResponse)
+        assertEquals(result.data.meta, ApiBody.Meta(1, true))
     }
 
     @Test
@@ -80,8 +82,9 @@ class MapSuccessTest {
 
         val result = mapSuccess<ApiClientInfoResponse, ApiClientInfoResponse>(response)
 
-        assertIs<Result.Success<ApiClientInfoResponse>>(result)
-        assertEquals(result.data, apiClientInfoResponse)
+        assertIs<Result.Success<SuccessData<ApiClientInfoResponse>>>(result)
+        assertEquals(result.data.value, apiClientInfoResponse)
+        assertEquals(result.data.meta, null)
     }
 
     @Test
