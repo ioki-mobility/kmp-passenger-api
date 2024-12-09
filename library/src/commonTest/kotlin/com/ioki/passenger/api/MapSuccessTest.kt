@@ -55,8 +55,9 @@ class MapSuccessTest {
 
         val result = mapSuccess<ApiBody<ApiClientInfoResponse>, ApiClientInfoResponse>(response)
 
-        assertIs<Result.Success<ApiClientInfoResponse>>(result)
+        assertIs<Result.Success<SuccessData<ApiClientInfoResponse>>>(result)
         assertEquals(result.data.value, apiClientInfoResponse)
+        assertEquals(result.data.meta, ApiBody.Meta(1, true))
     }
 
     @Test
@@ -81,41 +82,9 @@ class MapSuccessTest {
 
         val result = mapSuccess<ApiClientInfoResponse, ApiClientInfoResponse>(response)
 
-        assertIs<Result.Success<ApiClientInfoResponse>>(result)
-        assertEquals(result.data.value, apiClientInfoResponse)
-    }
-
-    @Test
-    fun `mapSuccess returns Result with SuccessData`() = runTest {
-        val content = ByteReadChannel(
-            text = """
-                {
-                  "data": {
-                    "distribution_url": "https://example.com/distribution",
-                    "terms_of_service_url": "https://example.com/terms",
-                    "privacy_policy_url": "https://example.com/privacy",
-                    "imprint_url": "https://example.com/imprint",
-                    "help_url": "https://example.com/help",
-                    "support_email": "support@example.com",
-                    "support_website_url": "https://example.com/support",
-                    "support_phone_number": "+1234567890",
-                    "sms_support_number": "+0987654321"
-                  },
-                  "meta": {
-                    "page": 1,
-                    "last_page": true
-                  }
-                }
-            """.trimIndent(),
-        )
-        val fakeHttpClient = FakeHttpClient(HttpStatusCode.OK, content)
-        val response = fakeHttpClient.get("https://127.0.0.1")
-
-        val result = mapSuccess<ApiBody<ApiClientInfoResponse>, ApiClientInfoResponse>(response)
-
         assertIs<Result.Success<SuccessData<ApiClientInfoResponse>>>(result)
         assertEquals(result.data.value, apiClientInfoResponse)
-        assertEquals(result.data.meta, ApiBody.Meta(1, true))
+        assertEquals(result.data.meta, null)
     }
 
     @Test
