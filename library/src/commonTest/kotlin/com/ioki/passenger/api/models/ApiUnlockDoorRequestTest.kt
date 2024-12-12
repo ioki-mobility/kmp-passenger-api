@@ -7,7 +7,7 @@ internal class ApiUnlockDoorRequestTest : IokiApiModelTest() {
     fun serialization() {
         testSerializationWithJsonString(
             ApiUnlockDoorRequest(
-                desiredState = "unlocked"
+                desiredState = "unlocked",
             ),
             unlockDoorRequest,
         )
@@ -17,7 +17,7 @@ internal class ApiUnlockDoorRequestTest : IokiApiModelTest() {
     fun serializationMinimal() {
         testSerializationWithJsonString(
             ApiUnlockDoorRequest(
-                desiredState = "locked"
+                desiredState = "locked",
             ),
             unlockDoorRequestMinimal,
         )
