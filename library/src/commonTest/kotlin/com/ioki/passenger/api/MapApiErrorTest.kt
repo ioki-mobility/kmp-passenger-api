@@ -1,7 +1,7 @@
 package com.ioki.passenger.api
 
 import com.ioki.passenger.api.models.ApiErrorBody
-import com.ioki.passenger.api.result.Result
+import com.ioki.passenger.api.result.Error
 import io.ktor.client.request.get
 import io.ktor.http.HttpStatusCode
 import io.ktor.utils.io.ByteReadChannel
@@ -35,8 +35,8 @@ internal class MapApiErrorTest {
 
         val result = mapApiError(fakeResponse, listOf(fakeApiErrorInterceptor))
 
-        assertTrue { result is Result.Error.Api.Intercepted }
-        assertEquals(HttpStatusCode.NotAcceptable.value, result.httpStatusCode)
+        assertTrue { result.error is Error.Api.Intercepted }
+        assertEquals(HttpStatusCode.NotAcceptable.value, result.error.httpStatusCode)
     }
 
     @Test
@@ -52,8 +52,8 @@ internal class MapApiErrorTest {
 
         val result = mapApiError(fakeResponse, listOf(fakeApiErrorInterceptor))
 
-        assertTrue { result is Result.Error.Api.Intercepted }
-        assertEquals(HttpStatusCode.Unauthorized.value, result.httpStatusCode)
+        assertTrue { result.error is Error.Api.Intercepted }
+        assertEquals(HttpStatusCode.Unauthorized.value, result.error.httpStatusCode)
     }
 
     @Test
@@ -69,8 +69,8 @@ internal class MapApiErrorTest {
 
         val result = mapApiError(fakeResponse, listOf(fakeApiErrorInterceptor))
 
-        assertTrue { result is Result.Error.Api.Generic }
-        assertEquals(HttpStatusCode.BadGateway.value, result.httpStatusCode)
+        assertTrue { result.error is Error.Api.Generic }
+        assertEquals(HttpStatusCode.BadGateway.value, result.error.httpStatusCode)
     }
 
     @Test
@@ -89,7 +89,7 @@ internal class MapApiErrorTest {
 
         val result = mapApiError(fakeResponse, listOf())
 
-        assertTrue { result is Result.Error.Api.Generic }
-        assertEquals(HttpStatusCode.NotAcceptable.value, result.httpStatusCode)
+        assertTrue { result.error is Error.Api.Generic }
+        assertEquals(HttpStatusCode.NotAcceptable.value, result.error.httpStatusCode)
     }
 }

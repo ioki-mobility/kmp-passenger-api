@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
@@ -15,12 +13,11 @@ kotlin {
 
     applyDefaultHierarchyTemplate()
 
+    jvmToolchain(17)
+
     jvm()
     androidTarget {
         publishLibraryVariants("release")
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_1_8)
-        }
     }
     iosX64()
     iosArm64()
@@ -30,6 +27,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation(libs.result)
                 implementation(libs.kotlinx.serialization)
                 implementation(libs.ktor.core)
                 implementation(libs.ktor.serialization)
