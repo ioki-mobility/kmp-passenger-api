@@ -240,7 +240,7 @@ public interface RideService {
 
     public suspend fun submitRating(rideId: String, request: ApiRatingRequest): ApiResult<ApiRatingResponse>
 
-    public suspend fun inquireRide(request: ApiRideInquiryRequest): Result<ApiRideInquiryResponse>
+    public suspend fun inquireRide(request: ApiRideInquiryRequest): ApiResult<ApiRideInquiryResponse>
 
     public suspend fun unlockDoor(rideId: String, request: ApiUnlockDoorRequest): Result<Unit>
 }
