@@ -242,7 +242,7 @@ public interface RideService {
 
     public suspend fun inquireRide(request: ApiRideInquiryRequest): ApiResult<ApiRideInquiryResponse>
 
-    public suspend fun unlockDoor(rideId: String, request: ApiUnlockDoorRequest): Result<Unit>
+    public suspend fun unlockDoor(rideId: String, request: ApiUnlockDoorRequest): ApiResult<Unit>
 }
 
 public interface RideSeriesService {
@@ -526,7 +526,7 @@ private class DefaultIokiService(
             )
         }
 
-    override suspend fun unlockDoor(rideId: String, request: ApiUnlockDoorRequest): Result<Unit> =
+    override suspend fun unlockDoor(rideId: String, request: ApiUnlockDoorRequest): ApiResult<Unit> =
         apiCall<Unit, Unit> { unlockDoor(accessToken, rideId, ApiBody(request)) }
 
     override suspend fun inquireRide(request: ApiRideInquiryRequest): ApiResult<ApiRideInquiryResponse> =
