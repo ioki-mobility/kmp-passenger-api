@@ -24,6 +24,8 @@ internal class ApiVehicleTest : IokiApiModelTest() {
                 seats = 5,
                 storageSpaces = 3,
                 autonomous = false,
+                supportsDoorOpenRequests = false,
+                doorControlAvailable = false,
             ),
             vehicle,
         )
@@ -43,6 +45,8 @@ internal class ApiVehicleTest : IokiApiModelTest() {
                 seats = 5,
                 storageSpaces = 3,
                 autonomous = true,
+                supportsDoorOpenRequests = true,
+                doorControlAvailable = true,
             ),
             vehicleMinimal,
         )
@@ -84,7 +88,9 @@ private val vehicle =
   },
   "seats": 5,
   "storage_spaces": 3,
-  "autonomous": false
+  "autonomous": false,
+  "supports_door_open_requests": false,
+  "door_control_available": false
 }
 """
 
@@ -98,6 +104,8 @@ private val vehicleMinimal =
   "fuel_type":"Diesel",
   "seats": 5,
   "storage_spaces": 3,
-  "autonomous": true
+  "autonomous": true,
+  "supports_door_open_requests": true,
+  "door_control_available": true
 }
 """
