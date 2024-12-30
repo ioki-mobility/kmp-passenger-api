@@ -28,8 +28,15 @@ public data class ApiProvider(
     val avatar: ApiAvatar?,
     @SerialName(value = "avatar_darkmode")
     val avatarDarkmode: ApiAvatar?,
-    @SerialName(value = "other_url") val otherUrl: String?,
+    @SerialName(value = "custom_urls") val customUrls: List<CustomUrl>,
 ) {
+    @Serializable
+    public data class CustomUrl(
+        val name: String,
+        val url: String,
+        @SerialName(value = "sort_key") val sortKey: Int,
+    )
+
     @Serializable
     public data class CreditOptions(
         val packages: List<ApiOfferedCreditPackage>,
