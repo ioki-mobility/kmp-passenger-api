@@ -29,7 +29,7 @@ internal object DesiredStateSerializer : KSerializer<ApiUnlockDoorRequest.Desire
             when (value) {
                 ApiUnlockDoorRequest.DesiredState.UNLOCKED -> "unlocked"
                 ApiUnlockDoorRequest.DesiredState.UNSUPPORTED -> "unsupported"
-            }
+            },
         )
     }
 
@@ -40,4 +40,3 @@ internal object DesiredStateSerializer : KSerializer<ApiUnlockDoorRequest.Desire
         }
     }
 }
-
