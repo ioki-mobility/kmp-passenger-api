@@ -280,7 +280,7 @@ fun createApiVehicle(
     storageSpace: Int = 0,
     autonomous: Boolean = false,
     supportsDoorOpenRequests: Boolean? = null,
-    doorControlAvailable: Boolean? = null,
+    doorControlAvailable: Boolean = false,
 ): ApiVehicle = ApiVehicle(
     licensePlate = licensePlate,
     nickname = nickname,

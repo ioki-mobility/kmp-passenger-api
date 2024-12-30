@@ -395,7 +395,8 @@ private val rideResponse =
     "operator_information":"Operated by Ioki",
     "seats": 5,
     "storage_spaces": 3,
-    "autonomous": false
+    "autonomous": false,
+    "door_control_available": false
   },
   "driver": {
     "display_name": "John Doe",
