@@ -19,5 +19,5 @@ public data class ApiVehicle(
     @SerialName(value = "storage_spaces") val storageSpaces: Int,
     val autonomous: Boolean,
     @SerialName(value = "supports_door_open_requests") val supportsDoorOpenRequests: Boolean?,
-    @SerialName(value = "door_control_available") val doorControlAvailable: Boolean?,
+    @SerialName(value = "door_control_available") val doorControlAvailable: Boolean,
 )
