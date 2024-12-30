@@ -40,7 +40,7 @@ internal class ApiProviderTest : IokiApiModelTest() {
                         url = "otherUrl",
                         sortKey = 0,
                     ),
-                )
+                ),
             ),
             provider,
         )
