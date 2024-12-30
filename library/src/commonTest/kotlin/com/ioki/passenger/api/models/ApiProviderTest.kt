@@ -34,7 +34,13 @@ internal class ApiProviderTest : IokiApiModelTest() {
                 features = ApiProvider.Features.NONE,
                 avatar = null,
                 avatarDarkmode = null,
-                otherUrl = "otherUrl",
+                customUrls = listOf(
+                    ApiProvider.CustomUrl(
+                        name = "other",
+                        url = "otherUrl",
+                        sortKey = 0,
+                    ),
+                )
             ),
             provider,
         )
@@ -92,7 +98,13 @@ private val provider =
     ]
   },
   "stripe_account_id": "AccountId",
-  "other_url": "otherUrl",
+  "custom_urls": [
+    {
+      "name": "other",
+      "url": "otherUrl",
+      "sort_key": 0
+    }
+  ],
   "features": {
     "non_purchasable_personal_discounts": false,
     "payment": false,
@@ -120,6 +132,7 @@ private val providerMinimal =
   "service_credit_payment_method_types": [],
   "personal_discount_payment_method_types": [],
   "tip_payment_method_types": [],
+  "custom_urls": [],
   "features": {
     "non_purchasable_personal_discounts": false,
     "payment": false,
@@ -148,6 +161,7 @@ private val providerStripeTypesWithWrongTypeMinimal =
   "personal_discount_payment_method_types": [],
   "tip_payment_method_types": [],
   "stripe_payment_method_types": ["undefined", "card", "sepa_debit"],
+  "custom_urls": [],
   "features": {
     "non_purchasable_personal_discounts": false,
     "payment": false,
