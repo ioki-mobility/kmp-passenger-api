@@ -7,4 +7,3 @@ import kotlinx.serialization.Serializable
 public data class ApiTicketingShopConfigurationResponse(
     @SerialName(value = "purchase_options") val purchaseOptions: List<ApiTicketingProductOption>,
 )
-

@@ -35,7 +35,7 @@ internal class ApiTicketingShopConfigurationResponseTest : IokiApiModelTest() {
     }
 }
 
-private const val ticketingShopConfigurationResponse =
+private val ticketingShopConfigurationResponse =
     """
 {
     "purchase_options": [
