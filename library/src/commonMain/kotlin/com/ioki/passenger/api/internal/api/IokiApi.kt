@@ -460,4 +460,9 @@ internal class IokiApi(private val client: IokiHttpClient) {
         header("Authorization", accessToken)
         setBody(body)
     }
+
+    suspend fun getTicketShopConfiguration(accessToken: String): HttpResponse =
+        client.get("/api/passenger/ticketing/shop_config") {
+            header("Authorization", accessToken)
+        }
 }
