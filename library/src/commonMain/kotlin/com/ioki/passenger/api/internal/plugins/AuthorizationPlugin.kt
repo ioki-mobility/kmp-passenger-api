@@ -3,7 +3,7 @@ package com.ioki.passenger.api.internal.plugins
 import com.ioki.passenger.api.internal.authorisation.UNAUTHORIZED
 import io.ktor.client.plugins.api.ClientPlugin
 import io.ktor.client.plugins.api.createClientPlugin
-import io.ktor.utils.io.errors.IOException
+import kotlinx.io.IOException
 
 internal val AuthorizationPlugin: ClientPlugin<Unit> = createClientPlugin("AuthorizationPlugin") {
     onRequest { request, _ ->
