@@ -21,6 +21,7 @@ import com.ioki.passenger.api.models.ApiCreateLogPayPaymentMethodRequest
 import com.ioki.passenger.api.models.ApiCreateTipRequest
 import com.ioki.passenger.api.models.ApiDeviceRequest
 import com.ioki.passenger.api.models.ApiDeviceResponse
+import com.ioki.passenger.api.models.ApiDoorRequest
 import com.ioki.passenger.api.models.ApiErrorBody
 import com.ioki.passenger.api.models.ApiFailedPaymentRequest
 import com.ioki.passenger.api.models.ApiFailedPaymentResponse
@@ -68,7 +69,6 @@ import com.ioki.passenger.api.models.ApiTicketingProductFilterType
 import com.ioki.passenger.api.models.ApiTicketingProductResponse
 import com.ioki.passenger.api.models.ApiTicketingVoucherResponse
 import com.ioki.passenger.api.models.ApiTipResponse
-import com.ioki.passenger.api.models.ApiDoorRequest
 import com.ioki.passenger.api.models.ApiUpdatePassengersForRideRequest
 import com.ioki.passenger.api.models.ApiUpdatePhoneNumberRequest
 import com.ioki.passenger.api.models.ApiUpdateUserNotificationSettingsRequest
@@ -80,6 +80,7 @@ import com.ioki.passenger.api.result.ApiResult
 import com.ioki.passenger.api.result.Error
 import com.ioki.passenger.api.result.HttpStatusCode
 import com.ioki.passenger.api.result.SuccessData
+import com.ioki.result.Result
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.isSuccess
