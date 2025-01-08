@@ -23,3 +23,8 @@ jobs:
 
       - name: Publish to Sonatype Staging
         run: ./gradlew publishAllPublicationsToSonatypeStagingRepository -PGPG_SIGNING_REQUIRED --no-configuration-cache
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          draft: true

@@ -87,6 +87,9 @@ Please provide the path to your Android SDK in the `local.properties` file in th
 sdk.dir=/Users/***/Library/Android/sdk
 ```
 
+## Release
+Checkout the [`RELEASE.md`](RELEASE.md) file to see how to create a new release.
+
 ## License
 
 This project is licensed under the MIT License - see the [`LICENSE` file](LICENSE) for details.
