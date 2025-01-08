@@ -505,7 +505,7 @@ private val rideResponse =
             "storage_spaces": 3,
             "autonomous": false,
             "supports_open_door_requests": false,
-            "door_control_available": false,
+            "door_control_available": false
           }
         }
       ]
