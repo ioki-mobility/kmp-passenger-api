@@ -396,7 +396,8 @@ private val rideResponse =
     "seats": 5,
     "storage_spaces": 3,
     "autonomous": false,
-    "door_control_available": false
+    "door_control_available": false,
+    "supports_open_door_requests": false
   },
   "driver": {
     "display_name": "John Doe",
@@ -504,7 +505,7 @@ private val rideResponse =
             "storage_spaces": 3,
             "autonomous": false,
             "supports_open_door_requests": false,
-            "door_control_available": false
+            "door_control_available": false,
           }
         }
       ]
