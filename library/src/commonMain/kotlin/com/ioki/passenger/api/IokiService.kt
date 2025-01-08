@@ -68,7 +68,7 @@ import com.ioki.passenger.api.models.ApiTicketingProductFilterType
 import com.ioki.passenger.api.models.ApiTicketingProductResponse
 import com.ioki.passenger.api.models.ApiTicketingVoucherResponse
 import com.ioki.passenger.api.models.ApiTipResponse
-import com.ioki.passenger.api.models.ApiUnlockDoorRequest
+import com.ioki.passenger.api.models.ApiDoorRequest
 import com.ioki.passenger.api.models.ApiUpdatePassengersForRideRequest
 import com.ioki.passenger.api.models.ApiUpdatePhoneNumberRequest
 import com.ioki.passenger.api.models.ApiUpdateUserNotificationSettingsRequest
@@ -80,7 +80,6 @@ import com.ioki.passenger.api.result.ApiResult
 import com.ioki.passenger.api.result.Error
 import com.ioki.passenger.api.result.HttpStatusCode
 import com.ioki.passenger.api.result.SuccessData
-import com.ioki.result.Result
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.isSuccess
@@ -242,7 +241,7 @@ public interface RideService {
 
     public suspend fun inquireRide(request: ApiRideInquiryRequest): ApiResult<ApiRideInquiryResponse>
 
-    public suspend fun unlockDoor(rideId: String, request: ApiUnlockDoorRequest): ApiResult<Unit>
+    public suspend fun unlockDoor(rideId: String, request: ApiDoorRequest): ApiResult<Unit>
 }
 
 public interface RideSeriesService {
@@ -526,7 +525,7 @@ private class DefaultIokiService(
             )
         }
 
-    override suspend fun unlockDoor(rideId: String, request: ApiUnlockDoorRequest): ApiResult<Unit> =
+    override suspend fun unlockDoor(rideId: String, request: ApiDoorRequest): ApiResult<Unit> =
         apiCall<Unit, Unit> { unlockDoor(accessToken, rideId, ApiBody(request)) }
 
     override suspend fun inquireRide(request: ApiRideInquiryRequest): ApiResult<ApiRideInquiryResponse> =

@@ -10,7 +10,7 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 
 @Serializable
-public data class ApiUnlockDoorRequest(
+public data class ApiDoorRequest(
     @SerialName(value = "desired_state") val desiredState: DesiredState,
 ) {
     @Serializable(with = DesiredStateSerializer::class)
@@ -21,22 +21,22 @@ public data class ApiUnlockDoorRequest(
     }
 }
 
-internal object DesiredStateSerializer : KSerializer<ApiUnlockDoorRequest.DesiredState> {
+internal object DesiredStateSerializer : KSerializer<ApiDoorRequest.DesiredState> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("DesiredState", PrimitiveKind.STRING)
 
-    override fun serialize(encoder: Encoder, value: ApiUnlockDoorRequest.DesiredState) {
+    override fun serialize(encoder: Encoder, value: ApiDoorRequest.DesiredState) {
         encoder.encodeString(
             when (value) {
-                ApiUnlockDoorRequest.DesiredState.UNLOCKED -> "unlocked"
-                ApiUnlockDoorRequest.DesiredState.UNSUPPORTED -> "unsupported"
+                ApiDoorRequest.DesiredState.UNLOCKED -> "unlocked"
+                ApiDoorRequest.DesiredState.UNSUPPORTED -> "unsupported"
             },
         )
     }
 
-    override fun deserialize(decoder: Decoder): ApiUnlockDoorRequest.DesiredState {
+    override fun deserialize(decoder: Decoder): ApiDoorRequest.DesiredState {
         return when (decoder.decodeString()) {
-            "unlocked" -> ApiUnlockDoorRequest.DesiredState.UNLOCKED
-            else -> ApiUnlockDoorRequest.DesiredState.UNSUPPORTED
+            "unlocked" -> ApiDoorRequest.DesiredState.UNLOCKED
+            else -> ApiDoorRequest.DesiredState.UNSUPPORTED
         }
     }
 }

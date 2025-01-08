@@ -28,7 +28,7 @@ import com.ioki.passenger.api.models.ApiRideInquiryRequest
 import com.ioki.passenger.api.models.ApiRideRequest
 import com.ioki.passenger.api.models.ApiRideSeriesRequest
 import com.ioki.passenger.api.models.ApiSignUpRequest
-import com.ioki.passenger.api.models.ApiUnlockDoorRequest
+import com.ioki.passenger.api.models.ApiDoorRequest
 import com.ioki.passenger.api.models.ApiUpdatePassengersForRideRequest
 import com.ioki.passenger.api.models.ApiUpdatePhoneNumberRequest
 import com.ioki.passenger.api.models.ApiUpdateUserNotificationSettingsRequest
@@ -311,7 +311,7 @@ internal class IokiApi(private val client: IokiHttpClient) {
             setBody(body)
         }
 
-    suspend fun unlockDoor(accessToken: String, rideId: String, body: ApiBody<ApiUnlockDoorRequest>): HttpResponse =
+    suspend fun unlockDoor(accessToken: String, rideId: String, body: ApiBody<ApiDoorRequest>): HttpResponse =
         client.post("/api/passenger/rides/$rideId/vehicle/hardware/door_state_change_request") {
             header("Authorization", accessToken)
             setBody(body)
