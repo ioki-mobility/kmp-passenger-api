@@ -39,6 +39,7 @@ private val bootstrap =
     "service_credit_payment_method_types": [],
     "personal_discount_payment_method_types": [],
     "tip_payment_method_types": [],
+    "custom_urls": [],
     "features": {
       "non_purchasable_personal_discounts" : false,
       "payment":false,

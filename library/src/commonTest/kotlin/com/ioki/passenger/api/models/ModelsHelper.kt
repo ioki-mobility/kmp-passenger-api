@@ -19,7 +19,7 @@ fun createApiProvider(
     stripeAccountId: String? = null,
     avatar: ApiAvatar? = null,
     avatarDarkmode: ApiAvatar? = null,
-    otherUrl: String? = null,
+    customUrls: List<ApiProvider.CustomUrl> = emptyList(),
 ): ApiProvider = ApiProvider(
     name = name,
     paymentServiceProvider = paymentServiceProvider,
@@ -35,7 +35,7 @@ fun createApiProvider(
     stripeAccountId = stripeAccountId,
     avatar = avatar,
     avatarDarkmode = avatarDarkmode,
-    otherUrl = otherUrl,
+    customUrls = customUrls,
 )
 
 fun createApiClientInfo(
