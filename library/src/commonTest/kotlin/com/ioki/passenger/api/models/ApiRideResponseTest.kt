@@ -160,7 +160,7 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                                     seats = 5,
                                     storageSpaces = 3,
                                     autonomous = false,
-                                    supportsDoorOpenRequests = false,
+                                    supportsOpenDoorRequests = false,
                                     doorControlAvailable = false,
                                 ),
                                 from = createApiLocation(
@@ -201,7 +201,7 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                                 seats = 5,
                                 storageSpaces = 3,
                                 autonomous = false,
-                                supportsDoorOpenRequests = false,
+                                supportsOpenDoorRequests = false,
                                 doorControlAvailable = false,
                             ),
                             from = createApiLocation(
@@ -395,7 +395,9 @@ private val rideResponse =
     "operator_information":"Operated by Ioki",
     "seats": 5,
     "storage_spaces": 3,
-    "autonomous": false
+    "autonomous": false,
+    "door_control_available": false,
+    "supports_open_door_requests": false
   },
   "driver": {
     "display_name": "John Doe",
@@ -502,7 +504,7 @@ private val rideResponse =
             "seats": 5,
             "storage_spaces": 3,
             "autonomous": false,
-            "supports_door_open_requests": false,
+            "supports_open_door_requests": false,
             "door_control_available": false
           }
         }
@@ -548,7 +550,7 @@ private val rideResponse =
             "seats": 5,
             "storage_spaces": 3,
             "autonomous": false,
-            "supports_door_open_requests": false,
+            "supports_open_door_requests": false,
             "door_control_available": false
           }
         }

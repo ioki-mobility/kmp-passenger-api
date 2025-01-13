@@ -21,6 +21,7 @@ import com.ioki.passenger.api.models.ApiCreateLogPayPaymentMethodRequest
 import com.ioki.passenger.api.models.ApiCreateTipRequest
 import com.ioki.passenger.api.models.ApiDeviceRequest
 import com.ioki.passenger.api.models.ApiDeviceResponse
+import com.ioki.passenger.api.models.ApiDoorStateChangeRequest
 import com.ioki.passenger.api.models.ApiErrorBody
 import com.ioki.passenger.api.models.ApiFailedPaymentRequest
 import com.ioki.passenger.api.models.ApiFailedPaymentResponse
@@ -68,7 +69,6 @@ import com.ioki.passenger.api.models.ApiTicketingProductFilterType
 import com.ioki.passenger.api.models.ApiTicketingProductResponse
 import com.ioki.passenger.api.models.ApiTicketingVoucherResponse
 import com.ioki.passenger.api.models.ApiTipResponse
-import com.ioki.passenger.api.models.ApiUnlockDoorRequest
 import com.ioki.passenger.api.models.ApiUpdatePassengersForRideRequest
 import com.ioki.passenger.api.models.ApiUpdatePhoneNumberRequest
 import com.ioki.passenger.api.models.ApiUpdateUserNotificationSettingsRequest
@@ -242,7 +242,7 @@ public interface RideService {
 
     public suspend fun inquireRide(request: ApiRideInquiryRequest): ApiResult<ApiRideInquiryResponse>
 
-    public suspend fun unlockDoor(rideId: String, request: ApiUnlockDoorRequest): ApiResult<Unit>
+    public suspend fun changeDoorState(rideId: String, request: ApiDoorStateChangeRequest): ApiResult<Unit>
 }
 
 public interface RideSeriesService {
@@ -526,8 +526,8 @@ private class DefaultIokiService(
             )
         }
 
-    override suspend fun unlockDoor(rideId: String, request: ApiUnlockDoorRequest): ApiResult<Unit> =
-        apiCall<Unit, Unit> { unlockDoor(accessToken, rideId, ApiBody(request)) }
+    override suspend fun changeDoorState(rideId: String, request: ApiDoorStateChangeRequest): ApiResult<Unit> =
+        apiCall<Unit, Unit> { changeDoorState(accessToken, rideId, ApiBody(request)) }
 
     override suspend fun inquireRide(request: ApiRideInquiryRequest): ApiResult<ApiRideInquiryResponse> =
         apiCall<ApiBody<ApiRideInquiryResponse>, ApiRideInquiryResponse> {

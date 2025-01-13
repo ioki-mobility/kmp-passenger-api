@@ -11,6 +11,7 @@ import com.ioki.passenger.api.models.ApiClientChallengeRequest
 import com.ioki.passenger.api.models.ApiCreateLogPayPaymentMethodRequest
 import com.ioki.passenger.api.models.ApiCreateTipRequest
 import com.ioki.passenger.api.models.ApiDeviceRequest
+import com.ioki.passenger.api.models.ApiDoorStateChangeRequest
 import com.ioki.passenger.api.models.ApiFailedPaymentRequest
 import com.ioki.passenger.api.models.ApiFirebaseDebugRecordRequest
 import com.ioki.passenger.api.models.ApiLogPayAccountRequest
@@ -28,7 +29,6 @@ import com.ioki.passenger.api.models.ApiRideInquiryRequest
 import com.ioki.passenger.api.models.ApiRideRequest
 import com.ioki.passenger.api.models.ApiRideSeriesRequest
 import com.ioki.passenger.api.models.ApiSignUpRequest
-import com.ioki.passenger.api.models.ApiUnlockDoorRequest
 import com.ioki.passenger.api.models.ApiUpdatePassengersForRideRequest
 import com.ioki.passenger.api.models.ApiUpdatePhoneNumberRequest
 import com.ioki.passenger.api.models.ApiUpdateUserNotificationSettingsRequest
@@ -311,11 +311,14 @@ internal class IokiApi(private val client: IokiHttpClient) {
             setBody(body)
         }
 
-    suspend fun unlockDoor(accessToken: String, rideId: String, body: ApiBody<ApiUnlockDoorRequest>): HttpResponse =
-        client.post("/api/passenger/rides/$rideId/vehicle/hardware/door_state_change_request") {
-            header("Authorization", accessToken)
-            setBody(body)
-        }
+    suspend fun changeDoorState(
+        accessToken: String,
+        rideId: String,
+        body: ApiBody<ApiDoorStateChangeRequest>,
+    ): HttpResponse = client.post("/api/passenger/rides/$rideId/vehicle/hardware/door_state_change_request") {
+        header("Authorization", accessToken)
+        setBody(body)
+    }
 
     suspend fun payFailedPayments(accessToken: String, body: ApiBody<ApiFailedPaymentRequest>): HttpResponse =
         client.post("/api/passenger/rides/retry_payment") {
