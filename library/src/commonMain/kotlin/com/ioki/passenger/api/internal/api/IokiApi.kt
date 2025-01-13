@@ -315,11 +315,10 @@ internal class IokiApi(private val client: IokiHttpClient) {
         accessToken: String,
         rideId: String,
         body: ApiBody<ApiDoorStateChangeRequest>,
-    ): HttpResponse =
-        client.post("/api/passenger/rides/$rideId/vehicle/hardware/door_state_change_request") {
-            header("Authorization", accessToken)
-            setBody(body)
-        }
+    ): HttpResponse = client.post("/api/passenger/rides/$rideId/vehicle/hardware/door_state_change_request") {
+        header("Authorization", accessToken)
+        setBody(body)
+    }
 
     suspend fun payFailedPayments(accessToken: String, body: ApiBody<ApiFailedPaymentRequest>): HttpResponse =
         client.post("/api/passenger/rides/retry_payment") {
