@@ -67,6 +67,7 @@ import com.ioki.passenger.api.models.ApiStationsRequest
 import com.ioki.passenger.api.models.ApiStripeSetupIntentResponse
 import com.ioki.passenger.api.models.ApiTicketingProductFilterType
 import com.ioki.passenger.api.models.ApiTicketingProductResponse
+import com.ioki.passenger.api.models.ApiTicketingShopConfigurationResponse
 import com.ioki.passenger.api.models.ApiTicketingVoucherResponse
 import com.ioki.passenger.api.models.ApiTipResponse
 import com.ioki.passenger.api.models.ApiUpdatePassengersForRideRequest
@@ -320,6 +321,8 @@ public interface PublicTransportService {
 }
 
 public interface TicketingService {
+    public suspend fun getShopConfiguration(): ApiResult<ApiTicketingShopConfigurationResponse>
+
     public suspend fun getActiveUserTicketingVouchers(page: Int): ApiResult<List<ApiTicketingVoucherResponse>>
 
     public suspend fun getInactiveUserTicketingVouchers(page: Int): ApiResult<List<ApiTicketingVoucherResponse>>
@@ -486,6 +489,11 @@ private class DefaultIokiService(
             time,
         )
     }
+
+    override suspend fun getShopConfiguration(): ApiResult<ApiTicketingShopConfigurationResponse> =
+        apiCall<ApiBody<ApiTicketingShopConfigurationResponse>, ApiTicketingShopConfigurationResponse> {
+            getTicketShopConfiguration(accessToken)
+        }
 
     override suspend fun calculateNewFareForRide(
         rideId: String,
