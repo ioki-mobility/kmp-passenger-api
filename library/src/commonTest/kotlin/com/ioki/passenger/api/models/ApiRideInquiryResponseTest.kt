@@ -15,17 +15,24 @@ internal class ApiRideInquiryResponseTest : IokiApiModelTest() {
                 constraints = ApiRideInquiryResponse.Constraints(
                     area = ApiArea("MultiPolygon", emptyList()),
                 ),
-                errors = listOf("service_not_available"),
                 assistances = listOf(
                     ApiRideInquiryResponse.Assistance(
                         title = "title",
                         text = "text",
                         href = "http://url",
+                        errorCode = ApiRideInquiryResponse.Assistance.ErrorCode.SERVICE_NOT_AVAILABLE,
                     ),
                     ApiRideInquiryResponse.Assistance(
                         title = "title2",
                         text = "text2",
                         href = null,
+                        errorCode = null,
+                    ),
+                    ApiRideInquiryResponse.Assistance(
+                        title = "title3",
+                        text = "text3",
+                        href = null,
+                        errorCode = ApiRideInquiryResponse.Assistance.ErrorCode.UNSUPPORTED,
                     ),
                 ),
             ),
@@ -55,10 +62,16 @@ private val rideInquiryResponse =
       "title": "title",
       "text": "text",
       "href": "http://url"
+      "error_code": "service_not_available"
     },
     {
       "title": "title2",
       "text": "text2"
+    },
+    {
+      "title": "title3",
+      "text": "text3"
+      "error_code": "unknown"
     }
   ]
 }
