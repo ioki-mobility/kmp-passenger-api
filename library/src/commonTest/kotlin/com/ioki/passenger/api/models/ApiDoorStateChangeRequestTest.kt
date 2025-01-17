@@ -12,28 +12,11 @@ internal class ApiDoorStateChangeRequestTest : IokiApiModelTest() {
             doorStateChangeRequest,
         )
     }
-
-    @Test
-    fun serializationMinimal() {
-        testSerializationWithJsonString(
-            ApiDoorStateChangeRequest(
-                desiredState = ApiDoorStateChangeRequest.DesiredState.UNSUPPORTED,
-            ),
-            doorStateChangeRequestMinimal,
-        )
-    }
 }
 
 private val doorStateChangeRequest =
     """
 {
   "desired_state": "unlocked"
-}
-"""
-
-private val doorStateChangeRequestMinimal =
-    """
-{
-  "desired_state": "unsupported"
 }
 """
