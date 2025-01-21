@@ -130,7 +130,7 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                     ApiRideResponse.Receipt(ApiRideResponse.Receipt.Type.RIDE_REFUND, null),
                     ApiRideResponse.Receipt(ApiRideResponse.Receipt.Type.BOOKING_REFUND, null),
                     ApiRideResponse.Receipt(ApiRideResponse.Receipt.Type.BOOKING, null),
-ApiRideResponse.Receipt(ApiRideResponse.Receipt.Type.UNSUPPORTED, null),
+                    ApiRideResponse.Receipt(ApiRideResponse.Receipt.Type.UNSUPPORTED, null),
                 ),
                 route = null,
                 tip = null,
@@ -463,7 +463,9 @@ private val rideResponse =
     {
       "receipt_type": "BookingReceipt"
     },
-    { "receipt_type" : "Not known" } 
+    {
+      "receipt_type" : "Not known"
+    } 
   ],
   "support_uri": "https://ioki.com/en/ioki-devs",
   "offered_solutions": [
