@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "kmp-passenger-api"
 include(":library")
+include(":test")
