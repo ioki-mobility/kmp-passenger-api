@@ -70,6 +70,52 @@ when(phoneVerificationResult) {
 }
 ```
 
+## Test artifact
+
+This project includes provides a test artifact that can be used as a test dependency in your project.
+The test artifacts provides default implementation for the `Services` to create easy fakes for your tests.
+```kotlin
+val fakeUserService = object : UserServiceFake() {
+    // Only override what you need
+    override suspend fun deleteUser(): ApiResult<Unit> = Result.Success(SuccessData(Unit))
+}
+```
+
+Additionally, it provides helper functions to create APIObjects easily.
+```kotlin
+val rideResponse = createApiRideResponse()
+```
+
+Those play well together for your tests:
+```kotlin
+val fakeCurrentRideService = object : CurrentRideServiceFake() {
+    override suspend fun getCurrentRide(): ApiResult<ApiRideResponse> = Result.Success(SuccessData(
+        createApiRideResponse(
+            version = 1,
+            pickup = createApiLocation(
+                latitude = 50.1174225,
+                longitude = 8.668939,
+            ),
+            dropoff = createApiLocation(
+                latitude = 50.109694,
+                longitude = 8.6666095,
+            ),
+        )
+    ))
+}
+
+ClassUnderTest(fakeCurrentRideService)
+```
+
+To include it in your project, add the following dependency to your `build.gradle.kts` file:
+```kotlin
+val commonTest by getting {
+    dependencies {
+        implementation("com.ioki:passenger-api-test:$currentVersion")
+    }
+}
+```
+
 ## Contribute
 ### Don't forget about local.properties
 
