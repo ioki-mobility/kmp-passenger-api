@@ -50,9 +50,6 @@ val dokkaJar = tasks.register<Jar>("dokkaJar") {
     archiveClassifier.set("javadoc")
 }
 
-group = "com.ioki"
-version = "0.3.0-SNAPSHOT"
-
 publishing {
     // Workaround for the Android target
     // withType<MavenPublication> does not work for Android target

@@ -1,4 +1,4 @@
-## 📦 How to Release 
+## 📦 How to Release
 
 ### 1. Check out the `main` Branch
 
@@ -8,9 +8,9 @@
      git pull origin main
      ```
 
-### 2. Update the Version in `library/build.gradle.kts`
+### 2. Update the Version in `build.gradle.kts`
 
-   - Remove `-SNAPSHOT` from the `version` in [`library/build.gradle.kts`](library/build.gradle.kts).
+   - Remove `-SNAPSHOT` from the `version` in [`build.gradle.kts`](build.gradle.kts).
    - Commit the change:
      ```bash
      git commit -m "Prepare next release" .
@@ -41,7 +41,7 @@
 
 ### 7. Bump the Version for Development
 
-   - Increment the **minor** (Major.Minor.Patch) version in [`library/build.gradle.kts`](library/build.gradle.kts) and add `-SNAPSHOT` to indicate the next development version.
+   - Increment the **minor** (Major.Minor.Patch) version in [`build.gradle.kts`](build.gradle.kts) and add `-SNAPSHOT` to indicate the next development version.
    - Commit this change:
      ```bash
      git commit -m "Next development version" .
