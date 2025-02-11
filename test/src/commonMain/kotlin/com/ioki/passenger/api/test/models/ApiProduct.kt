@@ -4,7 +4,7 @@ import com.ioki.passenger.api.models.ApiAnnouncement
 import com.ioki.passenger.api.models.ApiAvatar
 import com.ioki.passenger.api.models.ApiBoundingBox
 import com.ioki.passenger.api.models.ApiCancellationStatement
-import com.ioki.passenger.api.models.PassengerApiArea
+import com.ioki.passenger.api.models.ApiPassengerArea
 import com.ioki.passenger.api.models.ApiProduct
 import com.ioki.passenger.api.models.ApiRideOptions
 import com.ioki.passenger.api.models.ApiRideRatingCriteria
@@ -18,8 +18,8 @@ public fun createApiProduct(
     name: String = "",
     description: String? = null,
     timezone: ApiTimezone = createApiTimezone(),
-    drtArea: PassengerApiArea = createApiPassengerArea(),
-    intermodalArea: PassengerApiArea? = null,
+    drtArea: ApiPassengerArea = createApiPassengerArea(),
+    intermodalArea: ApiPassengerArea? = null,
     boundingBox: ApiBoundingBox? = null,
     defaultMapBoundingBox: ApiBoundingBox? = null,
     rideOptions: ApiRideOptions = createApiRideOptions(),
