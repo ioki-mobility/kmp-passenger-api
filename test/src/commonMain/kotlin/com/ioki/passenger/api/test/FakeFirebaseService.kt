@@ -7,7 +7,7 @@ import com.ioki.passenger.api.models.ApiFirebaseDebugRecordRequest
 import com.ioki.passenger.api.models.ApiFirebaseTokenResponse
 import com.ioki.passenger.api.result.ApiResult
 
-public open class FirebaseServiceFake : FirebaseService {
+public open class FakeFirebaseService : FirebaseService {
     override suspend fun createDevice(deviceRequest: ApiDeviceRequest): ApiResult<ApiDeviceResponse> =
         error("Not overridden")
 

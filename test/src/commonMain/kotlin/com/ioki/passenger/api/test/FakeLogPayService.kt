@@ -6,7 +6,7 @@ import com.ioki.passenger.api.models.ApiLogPayType
 import com.ioki.passenger.api.models.ApiLogPayUrlResponse
 import com.ioki.passenger.api.result.ApiResult
 
-public open class LogPayServiceFake : LogPayService {
+public open class FakeLogPayService : LogPayService {
     override suspend fun createLogPayCustomer(request: ApiLogPayAccountRequest): ApiResult<ApiLogPayUrlResponse> =
         error("Not overridden")
 

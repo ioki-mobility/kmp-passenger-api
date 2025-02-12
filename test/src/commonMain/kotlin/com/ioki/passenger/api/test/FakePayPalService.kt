@@ -5,7 +5,7 @@ import com.ioki.passenger.api.models.ApiPaymentMethodResponse
 import com.ioki.passenger.api.models.ApiPaypalClientTokenResponse
 import com.ioki.passenger.api.result.ApiResult
 
-public open class PayPalServiceFake : PayPalService {
+public open class FakePayPalService : PayPalService {
     override suspend fun createPaymentMethodForPaypal(
         braintreeNonce: String,
         paypalSecureElement: String,

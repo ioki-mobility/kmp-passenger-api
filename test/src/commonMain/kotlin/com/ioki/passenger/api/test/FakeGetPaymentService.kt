@@ -8,7 +8,7 @@ import com.ioki.passenger.api.models.ApiPurchasedCreditPackageResponse
 import com.ioki.passenger.api.models.ApiRedeemedPromoCodeResponse
 import com.ioki.passenger.api.result.ApiResult
 
-public open class GetPaymentServiceFake : GetPaymentService {
+public open class FakeGetPaymentService : GetPaymentService {
     override suspend fun getPaymentMethods(): ApiResult<List<ApiPaymentMethodResponse>> = error("Not overridden")
 
     override suspend fun getServiceCreditPackages(): ApiResult<List<ApiPurchasedCreditPackageResponse>> =

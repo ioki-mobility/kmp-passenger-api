@@ -5,7 +5,7 @@ import com.ioki.passenger.api.models.ApiScheduleResponse
 import com.ioki.passenger.api.result.ApiResult
 import kotlinx.datetime.Instant
 
-public open class PublicTransportServiceFake : PublicTransportService {
+public open class FakePublicTransportService : PublicTransportService {
     override suspend fun getPublicTransportSchedules(url: String, time: Instant): ApiResult<List<ApiScheduleResponse>> =
         error("Not overridden")
 }

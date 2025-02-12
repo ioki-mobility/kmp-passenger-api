@@ -9,7 +9,7 @@ import com.ioki.passenger.api.models.ApiTicketingShopConfigurationResponse
 import com.ioki.passenger.api.models.ApiTicketingVoucherResponse
 import com.ioki.passenger.api.result.ApiResult
 
-public open class TicketingServiceFake : TicketingService {
+public open class FakeTicketingService : TicketingService {
     override suspend fun getActiveUserTicketingVouchers(page: Int): ApiResult<List<ApiTicketingVoucherResponse>> =
         error("Not overridden")
 

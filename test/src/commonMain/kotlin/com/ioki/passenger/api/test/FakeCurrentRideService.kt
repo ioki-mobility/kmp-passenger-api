@@ -6,7 +6,7 @@ import com.ioki.passenger.api.models.ApiPassengerSelectionRequest
 import com.ioki.passenger.api.models.ApiRideResponse
 import com.ioki.passenger.api.result.ApiResult
 
-public open class CurrentRideServiceFake : CurrentRideService {
+public open class FakeCurrentRideService : CurrentRideService {
     override suspend fun getCurrentRide(): ApiResult<ApiRideResponse> = error("Not overridden")
 
     override suspend fun requestPhoneCall(rideId: String): ApiResult<Unit> = error("Not overridden")

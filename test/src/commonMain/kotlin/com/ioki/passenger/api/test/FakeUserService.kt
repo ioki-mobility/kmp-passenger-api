@@ -10,7 +10,7 @@ import com.ioki.passenger.api.models.ApiUpdateUserRequest
 import com.ioki.passenger.api.models.ApiUserFlagsRequest
 import com.ioki.passenger.api.result.ApiResult
 
-public open class UserServiceFake : UserService {
+public open class FakeUserService : UserService {
     override suspend fun requestApiToken(request: ApiRequestTokenRequest): ApiResult<ApiRequestTokenResponse> =
         error("Not overridden")
 

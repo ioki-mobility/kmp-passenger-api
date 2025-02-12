@@ -15,7 +15,7 @@ import com.ioki.passenger.api.models.ApiRideRequest
 import com.ioki.passenger.api.models.ApiRideResponse
 import com.ioki.passenger.api.result.ApiResult
 
-public open class RideServiceFake : RideService {
+public open class FakeRideService : RideService {
     override suspend fun createRide(request: ApiRideRequest): ApiResult<ApiRideResponse> = error("Not overridden")
 
     override suspend fun createBooking(rideId: String, request: ApiBookingRequest): ApiResult<Unit> =

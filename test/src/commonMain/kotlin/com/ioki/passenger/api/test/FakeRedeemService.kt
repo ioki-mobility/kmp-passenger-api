@@ -5,7 +5,7 @@ import com.ioki.passenger.api.models.ApiRedeemPromoCodeRequest
 import com.ioki.passenger.api.models.ApiRedeemedPromoCodeResponse
 import com.ioki.passenger.api.result.ApiResult
 
-public open class RedeemServiceFake : RedeemService {
+public open class FakeRedeemService : RedeemService {
     override suspend fun redeemPromoCode(request: ApiRedeemPromoCodeRequest): ApiResult<ApiRedeemedPromoCodeResponse> =
         error("Not overridden")
 

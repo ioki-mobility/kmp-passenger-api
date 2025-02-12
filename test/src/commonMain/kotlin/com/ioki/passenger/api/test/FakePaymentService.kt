@@ -9,7 +9,7 @@ import com.ioki.passenger.api.models.ApiPurchasedCreditPackageResponse
 import com.ioki.passenger.api.models.ApiPurchasingCreditPackageRequest
 import com.ioki.passenger.api.result.ApiResult
 
-public open class PaymentServiceFake : PaymentService {
+public open class FakePaymentService : PaymentService {
     override suspend fun detachPaymentMethod(paymentMethodId: String): ApiResult<Unit> = error("Not overridden")
 
     override suspend fun purchaseCreditPackage(

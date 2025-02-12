@@ -7,7 +7,7 @@ import com.ioki.passenger.api.models.ApiPhoneVerificationRequest
 import com.ioki.passenger.api.models.ApiPhoneVerificationResponse
 import com.ioki.passenger.api.result.ApiResult
 
-public open class PhoneVerificationServiceFake : PhoneVerificationService {
+public open class FakePhoneVerificationService : PhoneVerificationService {
     override suspend fun solveCaptcha(captchaId: String, captchaRequest: ApiCaptchaRequest): ApiResult<Unit> =
         error("Not overridden")
 
