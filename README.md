@@ -20,7 +20,6 @@ Currenly supported platforms:
 ## Getting Started
 
 To include the KMP Passenger API Library in your project, add the following dependency to your `build.gradle.kts` file:
-
 ```kotlin
 val commonMain by getting {
     dependencies {
@@ -40,7 +39,6 @@ plugins {
 ## Usage
 
 After including the library in your project, you first have to create an instance of the `IokiService` like the following:
-
 ```kotlin
 val iokiService: IokiService = IokiService(
     baseUrl: String = "https://**.io.ki"
@@ -53,22 +51,27 @@ val iokiService: IokiService = IokiService(
 ```
 
 After that, you can communicate with it to make API calls:
-
 ```kotlin
 val phoneNumber = ""
 val request = ApiPhoneVerificationRequest(phoneNumber, null)
 val phoneVerificationResult = iokiService.requestPhoneVerification(request)
 ```
 
-The results of the API calls are wrapped into an `com.ioki.passenger.api.result.Result` class.
-You can check if it was an `Sucess` or `Error` on it.
-
+The results of the API calls are wrapped into an [`ApiResult`](library/src/commonMain/kotlin/com/ioki/passenger/api/result/Result.kt) class.
+Which is just a small wrapper around [`ioki-mobility/Result`](https://github.com/ioki-mobility/Result).
+A basic usage could look like this:
 ```kotlin
 when(phoneVerificationResult) {
-    is Result.Success -> { /* Do somehing with the success */ }
-    is Result.Error -> { /* Do somehing with the error. Can also be an sub type of it like `Api`, `Generic`, and so on */ }
+    is Result.Success -> { /* Do somehing with the success ${phoneVerificationResult.value} */ }
+    is Result.Error -> {
+        // Do somehing with the error ${phoneVerificationResult.error}.
+        // This error is one of the sub types `Api`, `Generic`, and `Connectivity`
+    }
 }
 ```
+
+However, there are more functions on `Result` like `map`, `successOrHandle`, `mapFailure`, etc.
+Checkout the [`ioki-mobility/Result`](https://github.com/ioki-mobility/Result) documentation to find out more.
 
 ## Contribute
 ### Don't forget about local.properties
