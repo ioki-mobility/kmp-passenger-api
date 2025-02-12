@@ -490,15 +490,13 @@ private class DefaultIokiService(
 
     override suspend fun sendTip(rideId: String, request: ApiCreateTipRequest): ApiResult<ApiTipResponse> =
         apiCall<ApiBody<ApiTipResponse>, ApiTipResponse> {
-            sendTip(
-                accessToken,
-                rideId,
-                ApiBody(request),
-            )
+            sendTip(accessToken = accessToken, rideId = rideId, body = ApiBody(request))
         }
 
     override suspend fun changeDoorState(rideId: String, request: ApiDoorStateChangeRequest): ApiResult<Unit> =
-        apiCall<Unit, Unit> { changeDoorState(accessToken = accessToken, rideId = rideId, body = ApiBody(request)) }
+        apiCall<Unit, Unit> {
+            changeDoorState(accessToken = accessToken, rideId = rideId, body = ApiBody(request))
+        }
 
     override suspend fun inquireRide(request: ApiRideInquiryRequest): ApiResult<ApiRideInquiryResponse> =
         apiCall<ApiBody<ApiRideInquiryResponse>, ApiRideInquiryResponse> {
