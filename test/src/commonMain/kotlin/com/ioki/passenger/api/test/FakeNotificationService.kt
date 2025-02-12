@@ -10,10 +10,12 @@ public open class FakeNotificationService : NotificationService {
     override suspend fun getUserNotificationSettings(): ApiResult<List<ApiUserNotificationSettingsResponse>?> =
         error("Not overridden")
 
-    override suspend fun getAvailableProviderNotificationSettings(): //
+    @Suppress("ktlint:standard:function-signature")
+    override suspend fun getAvailableProviderNotificationSettings():
         ApiResult<List<ApiProviderNotificationSettingsResponse>> = error("Not overridden")
 
-    override suspend fun getDefaultProviderNotificationSettings(): //
+    @Suppress("ktlint:standard:function-signature")
+    override suspend fun getDefaultProviderNotificationSettings():
         ApiResult<List<ApiProviderNotificationSettingsResponse>> = error("Not overridden")
 
     override suspend fun updateUserNotificationSettings(
