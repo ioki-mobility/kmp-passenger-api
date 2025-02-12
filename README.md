@@ -91,7 +91,7 @@ val rideResponse = createApiRideResponse()
 
 Those play well together for your tests:
 ```kotlin
-val fakeCurrentRideService = object : CurrentRideServiceFake() {
+val fakeCurrentRideService = object : FakeCurrentRideService() {
     override suspend fun getCurrentRide(): ApiResult<ApiRideResponse> = Result.Success(SuccessData(
         createApiRideResponse(
             version = 1,
