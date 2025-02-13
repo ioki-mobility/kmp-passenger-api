@@ -75,8 +75,8 @@ Checkout the [`ioki-mobility/Result`](https://github.com/ioki-mobility/Result) d
 
 ## Test artifact
 
-This project includes provides a test artifact that can be used as a test dependency in your project.
-The test artifacts provides default implementation for the `Services` to create easy fakes for your tests.
+This project provides a test artifact that can be used as a test dependency in your project.
+The test artifacts provide default implementations for the `Services` to easily create fakes for your tests. You can simply override the functions relevant for you and ignore the rest.
 ```kotlin
 val fakeUserService = object : UserServiceFake() {
     // Only override what you need
@@ -89,7 +89,7 @@ Additionally, it provides helper functions to create APIObjects easily.
 val rideResponse = createApiRideResponse()
 ```
 
-Those play well together for your tests:
+Those match well with your tests:
 ```kotlin
 val fakeCurrentRideService = object : FakeCurrentRideService() {
     override suspend fun getCurrentRide(): ApiResult<ApiRideResponse> = Result.Success(SuccessData(
