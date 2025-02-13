@@ -16,7 +16,7 @@ import kotlinx.serialization.json.doubleOrNull
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.intOrNull
 
-@Serializable(with = ValueSerializer::class)
+@Serializable(with = AnyValueSerializer::class)
 public sealed class AnyValue {
     @Serializable
     public data class StringValue(val value: String) : AnyValue()
@@ -31,8 +31,8 @@ public sealed class AnyValue {
     public data class DoubleValue(val value: Double) : AnyValue()
 }
 
-internal object ValueSerializer : KSerializer<AnyValue> {
-    override val descriptor: SerialDescriptor = buildClassSerialDescriptor("Value")
+internal object AnyValueSerializer : KSerializer<AnyValue> {
+    override val descriptor: SerialDescriptor = buildClassSerialDescriptor("AnyValue")
 
     override fun serialize(encoder: Encoder, value: AnyValue) {
         when (value) {

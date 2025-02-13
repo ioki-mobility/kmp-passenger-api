@@ -8,29 +8,28 @@ internal class ApiPassengerSelectionRequestTest : IokiApiModelTest() {
         testSerializationWithJsonString(
             ApiPassengerSelectionRequest(
                 type = "adult",
-                options =
-                    listOf(
-                        ApiOption(
-                            slug = "wheelchair",
-                            value = AnyValue.BooleanValue(false),
-                        ),
-                        ApiOption(
-                            slug = "bahncard",
-                            value = AnyValue.BooleanValue(false),
-                        ),
-                        ApiOption(
-                            slug = "walker",
-                            value = AnyValue.BooleanValue(true),
-                        ),
-                        ApiOption(
-                            slug = "public_transport_ticket",
-                            value = AnyValue.BooleanValue(true),
-                        ),
-                        ApiOption(
-                            slug = "blue_badge",
-                            value = AnyValue.BooleanValue(false),
-                        ),
+                options = listOf(
+                    ApiOption(
+                        slug = "wheelchair",
+                        value = AnyValue.BooleanValue(false),
                     ),
+                    ApiOption(
+                        slug = "bahncard",
+                        value = AnyValue.BooleanValue(false),
+                    ),
+                    ApiOption(
+                        slug = "walker",
+                        value = AnyValue.BooleanValue(true),
+                    ),
+                    ApiOption(
+                        slug = "public_transport_ticket",
+                        value = AnyValue.BooleanValue(true),
+                    ),
+                    ApiOption(
+                        slug = "blue_badge",
+                        value = AnyValue.BooleanValue(false),
+                    ),
+                ),
                 firstName = "Spider",
                 lastName = "Man",
             ),
