@@ -1,5 +1,8 @@
 package com.ioki.passenger.api.models
 
+import com.ioki.passenger.api.test.models.createApiFareResponse
+import com.ioki.passenger.api.test.models.createApiLocation
+import com.ioki.passenger.api.test.models.createApiVehicle
 import kotlinx.datetime.Instant
 import kotlin.test.Test
 
@@ -78,14 +81,15 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                     operatorInfo = "Operated by Ioki",
                     avatar = null,
                     seats = 5,
-                    storageSpace = 3,
+                    storageSpaces = 3,
                     autonomous = false,
                 ),
                 driver = ApiDriver(
                     connectedVehicleId = "veh_9948bf20-7984-44ce-85f1-3610daa8db3d",
                     displayName = "John Doe",
                 ),
-                fare = createApiFare(
+                fare = createApiFareResponse(
+                    bookingPriceType = ApiFareResponse.BookingPriceType.FIXED,
                     id = "far_123",
                     bookingPrice = ApiMoney(amount = 1000, currency = "EUR"),
                     showCustomMessage = false,
@@ -140,7 +144,8 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                         type = "offered_solution",
                         id = "pcm_fffb2f8f-2aa9-4893-9eed-504e25112563",
                         bookable = true,
-                        fare = createApiFare(
+                        fare = createApiFareResponse(
+                            bookingPriceType = ApiFareResponse.BookingPriceType.FIXED,
                             id = "far_123",
                             bookingPrice = ApiMoney(1000, "EUR"),
                             showCustomMessage = false,
@@ -181,7 +186,8 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                     type = "booked_solution",
                     id = "pcm_fffb2f8f-2aa9-4893-9eed-504e25112563",
                     bookable = true,
-                    fare = createApiFare(
+                    fare = createApiFareResponse(
+                        bookingPriceType = ApiFareResponse.BookingPriceType.FIXED,
                         id = "far_123",
                         bookingPrice = ApiMoney(1000, "EUR"),
                         showCustomMessage = false,
@@ -228,7 +234,7 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
         testSerializationWithJsonString(
             model = ApiRideResponse(
                 id = "rid_c7394eb7-2af1-4d0c-9e8e-56c2c69f0495",
-                productId = createApiProduct().id,
+                productId = "product-id",
                 state = ApiBookingState.SEARCHING,
                 version = 1,
                 passengers = listOf(),
@@ -465,7 +471,7 @@ private val rideResponse =
     },
     {
       "receipt_type" : "Not known"
-    } 
+    }
   ],
   "support_uri": "https://ioki.com/en/ioki-devs",
   "offered_solutions": [

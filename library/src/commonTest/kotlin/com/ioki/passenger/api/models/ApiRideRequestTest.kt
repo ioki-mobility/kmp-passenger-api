@@ -1,5 +1,6 @@
 package com.ioki.passenger.api.models
 
+import com.ioki.passenger.api.test.models.createApiLocation
 import kotlin.test.Test
 
 internal class ApiRideRequestTest : IokiApiModelTest() {

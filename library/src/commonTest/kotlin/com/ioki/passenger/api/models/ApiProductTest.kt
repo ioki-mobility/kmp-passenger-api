@@ -1,5 +1,7 @@
 package com.ioki.passenger.api.models
 
+import com.ioki.passenger.api.test.models.createApiAnnouncement
+import com.ioki.passenger.api.test.models.createApiStationResponse
 import kotlinx.datetime.Instant
 import kotlin.test.Test
 
@@ -12,7 +14,7 @@ internal class ApiProductTest : IokiApiModelTest() {
                 version = 1,
                 name = "Magic Bus Frankfurt",
                 description = "This is such a magic product",
-                timezone = createApiTimezone(),
+                timezone = ApiTimezone(identifier = "Europe/Berlin"),
                 boundingBox = ApiBoundingBox(ApiPoint(1.0, 2.0), ApiPoint(3.0, 4.0)),
                 defaultMapBoundingBox = ApiBoundingBox(ApiPoint(0.0, 0.0), ApiPoint(0.0, 0.0)),
                 rideOptions = ApiRideOptions(
@@ -34,7 +36,7 @@ internal class ApiProductTest : IokiApiModelTest() {
                         updatedAt = Instant.parse("2023-07-19T13:17:42Z"),
                         severity = ApiAnnouncement.Severity.INFO,
                         showOnEveryAppStart = true,
-                        additionalDetailsUrl = "https://ioki.com/impressum/",
+                        additionalInformationUrl = "https://ioki.com/impressum/",
                     ),
                     createApiAnnouncement(
                         id = "ann_18fac1f0-4651-481d-9b20-2b70a2aa405d",
@@ -46,20 +48,20 @@ internal class ApiProductTest : IokiApiModelTest() {
                         updatedAt = Instant.parse("2023-07-19T13:17:42Z"),
                         severity = ApiAnnouncement.Severity.WARNING,
                         showOnEveryAppStart = true,
-                        additionalDetailsUrl = "https://ioki.com/impressum/",
+                        additionalInformationUrl = "https://ioki.com/impressum/",
                     ),
                 ),
                 prebookable = true,
                 adHocBookable = true,
                 requiresFixedStation = true,
                 fixedStations = listOf(
-                    createApiStation(
+                    createApiStationResponse(
                         id = "s1",
                         lat = 50.104558,
                         lng = 8.649113,
                         locationName = "station-1",
                     ),
-                    createApiStation(
+                    createApiStationResponse(
                         id = "s2",
                         lat = 8.649113,
                         lng = 50.104558,
@@ -197,7 +199,7 @@ internal class ApiProductTest : IokiApiModelTest() {
                 id = "abc-123",
                 version = 1,
                 name = "Magic Bus Frankfurt",
-                timezone = createApiTimezone(),
+                timezone = ApiTimezone(identifier = "Europe/Berlin"),
                 boundingBox = ApiBoundingBox(ApiPoint(1.0, 2.0), ApiPoint(3.0, 4.0)),
                 defaultMapBoundingBox = null,
                 rideOptions =
