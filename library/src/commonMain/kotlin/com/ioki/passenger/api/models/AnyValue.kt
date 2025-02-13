@@ -36,10 +36,10 @@ internal object ValueSerializer : KSerializer<AnyValue> {
 
     override fun serialize(encoder: Encoder, value: AnyValue) {
         when (value) {
-            is AnyValue.StringValue -> encoder.encodeSerializableValue(AnyValue.StringValue.serializer(), value)
-            is AnyValue.IntValue -> encoder.encodeSerializableValue(AnyValue.IntValue.serializer(), value)
-            is AnyValue.BooleanValue -> encoder.encodeSerializableValue(AnyValue.BooleanValue.serializer(), value)
-            is AnyValue.DoubleValue -> encoder.encodeSerializableValue(AnyValue.DoubleValue.serializer(), value)
+            is AnyValue.StringValue -> encoder.encodeString(value.value)
+            is AnyValue.IntValue -> encoder.encodeInt(value.value)
+            is AnyValue.BooleanValue -> encoder.encodeBoolean(value.value)
+            is AnyValue.DoubleValue -> encoder.encodeDouble(value.value)
             // Handle other types as needed
         }
     }

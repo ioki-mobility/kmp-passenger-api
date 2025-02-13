@@ -9,28 +9,28 @@ internal class ApiPassengerSelectionRequestTest : IokiApiModelTest() {
             ApiPassengerSelectionRequest(
                 type = "adult",
                 options =
-                listOf(
-                    ApiOption(
-                        slug = "wheelchair",
-                        value = AnyValue.BooleanValue(false),
+                    listOf(
+                        ApiOption(
+                            slug = "wheelchair",
+                            value = AnyValue.BooleanValue(false),
+                        ),
+                        ApiOption(
+                            slug = "bahncard",
+                            value = AnyValue.BooleanValue(false),
+                        ),
+                        ApiOption(
+                            slug = "walker",
+                            value = AnyValue.BooleanValue(true),
+                        ),
+                        ApiOption(
+                            slug = "public_transport_ticket",
+                            value = AnyValue.BooleanValue(true),
+                        ),
+                        ApiOption(
+                            slug = "blue_badge",
+                            value = AnyValue.BooleanValue(false),
+                        ),
                     ),
-                    ApiOption(
-                        slug = "bahncard",
-                        value = AnyValue.BooleanValue(false),
-                    ),
-                    ApiOption(
-                        slug = "walker",
-                        value = AnyValue.BooleanValue(true),
-                    ),
-                    ApiOption(
-                        slug = "public_transport_ticket",
-                        value = AnyValue.BooleanValue(true),
-                    ),
-                    ApiOption(
-                        slug = "blue_badge",
-                        value = AnyValue.BooleanValue(false),
-                    ),
-                ),
                 firstName = "Spider",
                 lastName = "Man",
             ),
@@ -69,6 +69,40 @@ internal class ApiPassengerSelectionRequestTest : IokiApiModelTest() {
                 lastName = null,
             ),
             passengerSelectionRequestMinimal,
+        )
+    }
+
+    @Test
+    fun deserializationMinimal() {
+        testDeserializationWithJsonString(
+            passengerSelectionRequestMinimal,
+            ApiPassengerSelectionRequest(
+                type = "child",
+                options = listOf(
+                    ApiOption(
+                        slug = "wheelchair",
+                        value = AnyValue.BooleanValue(false),
+                    ),
+                    ApiOption(
+                        slug = "bahncard",
+                        value = AnyValue.BooleanValue(false),
+                    ),
+                    ApiOption(
+                        slug = "walker",
+                        value = AnyValue.BooleanValue(true),
+                    ),
+                    ApiOption(
+                        slug = "public_transport_ticket",
+                        value = AnyValue.BooleanValue(true),
+                    ),
+                    ApiOption(
+                        slug = "blue_badge",
+                        value = AnyValue.BooleanValue(false),
+                    ),
+                ),
+                firstName = null,
+                lastName = null,
+            ),
         )
     }
 }
