@@ -1,5 +1,6 @@
 package com.ioki.passenger.api.models
 
+import com.ioki.passenger.api.test.models.createApiPaymentMethodRequest
 import kotlin.test.Test
 
 internal class ApiPersonalDiscountPurchaseRequestTest : IokiApiModelTest() {

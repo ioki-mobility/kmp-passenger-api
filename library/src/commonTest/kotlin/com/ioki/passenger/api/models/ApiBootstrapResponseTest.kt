@@ -1,5 +1,7 @@
 package com.ioki.passenger.api.models
 
+import com.ioki.passenger.api.test.models.createApiClientInfoResponse
+import com.ioki.passenger.api.test.models.createApiProvider
 import kotlin.test.Test
 
 internal class ApiBootstrapResponseTest : IokiApiModelTest() {
@@ -12,7 +14,7 @@ internal class ApiBootstrapResponseTest : IokiApiModelTest() {
                     paymentServiceProvider = ApiProvider.PaymentServiceProvider.NONE,
                     features = ApiProvider.Features.NONE,
                 ),
-                client = createApiClientInfo(
+                client = createApiClientInfoResponse(
                     distributionUrl = "url",
                     termsOfServiceUrl = "https://example.com/terms_of_service.html",
                     privacyPolicyUrl = "https://example.com/privacy_policy.html",
