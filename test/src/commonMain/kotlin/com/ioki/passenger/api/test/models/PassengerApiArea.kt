@@ -1,9 +1,9 @@
 package com.ioki.passenger.api.test.models
 
 import com.ioki.passenger.api.models.ApiArea
-import com.ioki.passenger.api.models.ApiPassengerArea
+import com.ioki.passenger.api.models.PassengerApiArea
 
-public fun createApiPassengerArea(
+public fun createPassengerApiArea(
     type: String = "Feature",
     id: String? = null,
     name: String = "name",
@@ -20,7 +20,7 @@ public fun createApiPassengerArea(
     legendTitle: String? = null,
     legendDescription: String? = null,
     area: ApiArea = createApiArea(),
-): ApiPassengerArea = ApiPassengerArea(
+): PassengerApiArea = PassengerApiArea(
     type = type,
     id = id,
     name = name,

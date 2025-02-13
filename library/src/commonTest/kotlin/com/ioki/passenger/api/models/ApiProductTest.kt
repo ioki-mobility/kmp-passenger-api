@@ -148,7 +148,7 @@ internal class ApiProductTest : IokiApiModelTest() {
                     ),
                 ),
                 paymentMethodRequiredOnBooking = false,
-                drtArea = ApiPassengerArea(
+                drtArea = PassengerApiArea(
                     type = "area",
                     id = "area-1",
                     name = "drtArea",
@@ -166,7 +166,7 @@ internal class ApiProductTest : IokiApiModelTest() {
                     legendDescription = "description",
                     area = ApiArea("MultiPolygon", emptyList()),
                 ),
-                intermodalArea = ApiPassengerArea(
+                intermodalArea = PassengerApiArea(
                     type = "area",
                     id = "area-2",
                     name = "intermodalArea",
@@ -291,7 +291,7 @@ internal class ApiProductTest : IokiApiModelTest() {
                 ),
                 paymentMethodRequiredOnBooking = false,
                 drtArea =
-                ApiPassengerArea(
+                PassengerApiArea(
                     type = "",
                     id = "",
                     name = "",

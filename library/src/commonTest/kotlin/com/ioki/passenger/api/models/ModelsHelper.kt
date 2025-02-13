@@ -89,8 +89,8 @@ fun createApiProduct(
     productRideOptions: List<ApiProduct.RideOptions> = emptyList(),
     paymentMethodRequiredOnBooking: Boolean = false,
     tipping: ApiTipping? = null,
-    drtArea: ApiPassengerArea = createPassengerApiArea(),
-    intermodalArea: ApiPassengerArea? = null,
+    drtArea: PassengerApiArea = createPassengerApiArea(),
+    intermodalArea: PassengerApiArea? = null,
 ): ApiProduct = ApiProduct(
     id = id,
     version = version,
@@ -132,7 +132,7 @@ fun createPassengerApiArea(
     fillOpacity: Float = Float.MIN_VALUE,
     invert: Boolean = false,
     area: ApiArea = ApiArea("MultiPolygon", emptyList()),
-): ApiPassengerArea = ApiPassengerArea(
+): PassengerApiArea = PassengerApiArea(
     type = "",
     id = "",
     name = "",

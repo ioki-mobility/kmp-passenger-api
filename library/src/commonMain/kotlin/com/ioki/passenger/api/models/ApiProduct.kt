@@ -10,8 +10,8 @@ public data class ApiProduct(
     val name: String,
     val description: String?,
     @SerialName(value = "timezone") val timezone: ApiTimezone,
-    @SerialName(value = "drt_area") val drtArea: ApiPassengerArea,
-    @SerialName(value = "intermodal_area") val intermodalArea: ApiPassengerArea?,
+    @SerialName(value = "drt_area") val drtArea: PassengerApiArea,
+    @SerialName(value = "intermodal_area") val intermodalArea: PassengerApiArea?,
     @SerialName(value = "bounding_box")
     val boundingBox: ApiBoundingBox?,
     @SerialName(value = "default_map_bounding_box")

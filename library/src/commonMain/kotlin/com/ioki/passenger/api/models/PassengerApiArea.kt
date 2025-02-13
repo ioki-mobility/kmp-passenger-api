@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class ApiPassengerArea(
+public data class PassengerApiArea(
     val type: String,
     val id: String?,
     val name: String,
