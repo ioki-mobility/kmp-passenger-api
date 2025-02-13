@@ -27,52 +27,20 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(libs.kotlinx.serialization)
-                implementation(libs.ktor.core)
-                implementation(libs.ktor.serialization)
-                implementation(libs.ktor.client.negotiation)
-
-                api(libs.kotlinx.datetime)
-                api(libs.result)
-            }
-        }
-        val commonTest by getting {
-            dependencies {
-                implementation(libs.kotlin.test)
-                implementation(libs.kotlin.coroutines.test)
-                implementation(libs.ktor.client.mock)
-            }
-        }
-        val appleMain by getting {
-            dependencies {
-                implementation(libs.ktor.client.darwin)
-            }
-        }
-        val jvmMain by getting {
-            dependencies {
-                implementation(libs.ktor.client.okhttp)
-            }
-        }
-        val androidMain by getting {
-            dependencies {
-                implementation(libs.ktor.client.okhttp)
+                implementation(project(":library"))
             }
         }
     }
 }
 
 android {
-    namespace = "com.ioki.passenger.api"
+    namespace = "com.ioki.passenger.api.test"
     compileSdk = 34
     defaultConfig {
         minSdk = 26
     }
     buildFeatures {
         buildConfig = true
-    }
-    defaultConfig {
-        val consumerFile = file("consumer-rules.pro")
-        consumerProguardFiles(consumerFile)
     }
 }
 
@@ -87,7 +55,7 @@ publishing {
     // withType<MavenPublication> does not work for Android target
     afterEvaluate {
         publications.withType<MavenPublication> {
-            artifactId = artifactId.replace("library", "passenger-api")
+            artifactId = artifactId.replace("test", "passenger-api-test")
         }
     }
     publications.withType<MavenPublication> {
