@@ -4,6 +4,7 @@ import com.ioki.passenger.api.CurrentRideService
 import com.ioki.passenger.api.models.ApiFareResponse
 import com.ioki.passenger.api.models.ApiPassengerSelectionRequest
 import com.ioki.passenger.api.models.ApiRideResponse
+import com.ioki.passenger.api.models.ApiUpdatePaymentMethodForRideRequest
 import com.ioki.passenger.api.result.ApiResult
 
 public open class FakeCurrentRideService : CurrentRideService {
@@ -23,5 +24,10 @@ public open class FakeCurrentRideService : CurrentRideService {
         fareVersion: Int,
         paypalSecureElement: String?,
         requirePaymentMethodForPaidChange: Boolean,
+    ): ApiResult<ApiRideResponse> = error("Not overridden")
+
+    override suspend fun updatePaymentMethodForRide(
+        rideId: String,
+        body: ApiUpdatePaymentMethodForRideRequest,
     ): ApiResult<ApiRideResponse> = error("Not overridden")
 }
