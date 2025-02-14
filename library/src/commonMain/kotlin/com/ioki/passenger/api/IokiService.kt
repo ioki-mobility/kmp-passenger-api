@@ -215,6 +215,7 @@ public interface CurrentRideService {
         rideVersion: Int,
         fareVersion: Int,
         paypalSecureElement: String?,
+        requirePaymentMethodForPaidChange: Boolean,
     ): ApiResult<ApiRideResponse>
 }
 
@@ -467,6 +468,7 @@ private class DefaultIokiService(
         rideVersion: Int,
         fareVersion: Int,
         paypalSecureElement: String?,
+        requirePaymentMethodForPaidChange: Boolean,
     ): ApiResult<ApiRideResponse> = apiCall<ApiBody<ApiRideResponse>, ApiRideResponse> {
         val body = ApiBody(
             ApiUpdatePassengersForRideRequest(
@@ -474,6 +476,7 @@ private class DefaultIokiService(
                 rideVersion,
                 fareVersion,
                 paypalSecureElement,
+                requirePaymentMethodForPaidChange,
             ),
         )
         updatePassengersForRide(rideId = rideId, body = body)
