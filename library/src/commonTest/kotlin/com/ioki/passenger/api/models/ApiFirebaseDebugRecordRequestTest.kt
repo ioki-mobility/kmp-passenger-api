@@ -5,7 +5,7 @@ import kotlin.test.Test
 internal class ApiFirebaseDebugRecordRequestTest : IokiApiModelTest() {
     @Test
     fun serialization_RidePayload() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiFirebaseDebugRecordRequest(
                 path = "user/<user_id>/rides/<ride_id>",
                 payload = ApiFirebaseDebugRecordRequest.Payload.RidePayload(
@@ -20,7 +20,7 @@ internal class ApiFirebaseDebugRecordRequestTest : IokiApiModelTest() {
 
     @Test
     fun serialization_VehiclePayload() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiFirebaseDebugRecordRequest(
                 path = "user/<user_id>/rides/<ride_id>",
                 payload = ApiFirebaseDebugRecordRequest.Payload.VehiclePositionPayload(

@@ -5,7 +5,7 @@ import kotlin.test.Test
 internal class ApiFirebaseTokenResponseTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiFirebaseTokenResponse("jwt", "encryptionKey"),
             firebaseToken,
         )

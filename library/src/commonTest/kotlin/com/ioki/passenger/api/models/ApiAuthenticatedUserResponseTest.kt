@@ -11,8 +11,8 @@ internal class ApiAuthenticatedUserResponseTest : IokiApiModelTest() {
             receipt = true,
             confirmed = true,
         )
-        testSerializationWithJsonString(
-            model = ApiAuthenticatedUserResponse(
+        testJsonStringCanBeConvertedToModel(
+            expectedModel = ApiAuthenticatedUserResponse(
                 id = "abc123",
                 firstName = "John",
                 lastName = "Doe",

@@ -5,7 +5,7 @@ import kotlin.test.Test
 internal class ApiCancellationRequestTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiCancellationRequest(2, "Code", "statement_id"),
             cancellation,
         )
@@ -13,7 +13,7 @@ internal class ApiCancellationRequestTest : IokiApiModelTest() {
 
     @Test
     fun serializationMinimal() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiCancellationRequest(2, null, null),
             minimalCancellation,
         )

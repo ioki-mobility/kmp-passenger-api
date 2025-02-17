@@ -6,8 +6,8 @@ import kotlin.test.Test
 internal class ApiPersonalDiscountPurchaseRequestTest : IokiApiModelTest() {
     @Test
     fun serializationMinimal() {
-        testSerializationWithJsonString(
-            model = ApiPersonalDiscountPurchaseRequest(
+        testJsonStringCanBeConvertedToModel(
+            expectedModel = ApiPersonalDiscountPurchaseRequest(
                 personalDiscountTypeId = "id",
                 paymentMethod = createApiPaymentMethodRequest(ApiPaymentMethodType.SERVICE_CREDITS),
                 paypalSecureElement = null,
@@ -19,7 +19,7 @@ internal class ApiPersonalDiscountPurchaseRequestTest : IokiApiModelTest() {
 
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiPersonalDiscountPurchaseRequest(
                 personalDiscountTypeId = "id",
                 paymentMethod = createApiPaymentMethodRequest(ApiPaymentMethodType.SERVICE_CREDITS),

@@ -11,7 +11,7 @@ internal class ApiSignUpRequestTest : IokiApiModelTest() {
             receipt = true,
             confirmed = null,
         )
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiSignUpRequest(
                 firstName = "John",
                 lastName = "Doe",

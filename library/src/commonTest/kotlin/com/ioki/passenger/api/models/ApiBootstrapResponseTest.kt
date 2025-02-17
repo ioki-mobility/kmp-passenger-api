@@ -7,7 +7,7 @@ import kotlin.test.Test
 internal class ApiBootstrapResponseTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiBootstrapResponse(
                 provider = createApiProvider(
                     name = "Some Company Inc.",

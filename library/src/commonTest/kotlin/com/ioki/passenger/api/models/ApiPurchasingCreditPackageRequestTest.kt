@@ -5,7 +5,7 @@ import kotlin.test.Test
 internal class ApiPurchasingCreditPackageRequestTest : IokiApiModelTest() {
     @Test
     fun serializationMinimal() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiPurchasingCreditPackageRequest(
                 cost = 800,
                 value = 1000,
@@ -22,7 +22,7 @@ internal class ApiPurchasingCreditPackageRequestTest : IokiApiModelTest() {
 
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiPurchasingCreditPackageRequest(
                 cost = 800,
                 value = 1000,

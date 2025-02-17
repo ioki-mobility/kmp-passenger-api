@@ -5,7 +5,7 @@ import kotlin.test.Test
 internal class ApiPaymentMethodCreationRequestTest : IokiApiModelTest() {
     @Test
     fun serializationMinimal() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiPaymentMethodCreationRequest(
                 paymentMethodType = "stripe",
                 details = ApiPaymentMethodCreationRequest.Details(
@@ -20,7 +20,7 @@ internal class ApiPaymentMethodCreationRequestTest : IokiApiModelTest() {
 
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiPaymentMethodCreationRequest(
                 paymentMethodType = "stripe",
                 details = ApiPaymentMethodCreationRequest.Details(

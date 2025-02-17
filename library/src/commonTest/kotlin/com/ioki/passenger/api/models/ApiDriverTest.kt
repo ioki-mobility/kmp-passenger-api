@@ -14,12 +14,12 @@ internal class ApiDriverTest : IokiApiModelTest() {
 
     @Test
     fun serialization() {
-        testSerializationWithJsonString(driver, driverJson)
+        testJsonStringCanBeConvertedToModel(driver, driverJson)
     }
 
     @Test
     fun serializationNoName() {
-        testSerializationWithJsonString(noNameDriver, noNameDriverJson)
+        testJsonStringCanBeConvertedToModel(noNameDriver, noNameDriverJson)
     }
 }
 

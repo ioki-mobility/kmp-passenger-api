@@ -5,7 +5,7 @@ import kotlin.test.Test
 internal class ApiStripeSetupIntentResponseTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiStripeSetupIntentResponse("secret"),
             stripeSetupIntent,
         )

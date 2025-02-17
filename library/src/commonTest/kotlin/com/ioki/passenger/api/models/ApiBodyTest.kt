@@ -5,7 +5,7 @@ import kotlin.test.Test
 internal class ApiBodyTest : IokiApiModelTest() {
     @Test
     fun serializationString() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiBody("foobar"),
             apiBodyString,
         )
@@ -13,7 +13,7 @@ internal class ApiBodyTest : IokiApiModelTest() {
 
     @Test
     fun serializationMetaData() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiBody("foobar", ApiBody.Meta(1, true)),
             apiBodyMeta,
         )
@@ -21,7 +21,7 @@ internal class ApiBodyTest : IokiApiModelTest() {
 
     @Test
     fun serializationList() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiBody(listOf("foo", "bar")),
             apiBodyList,
         )
@@ -29,7 +29,7 @@ internal class ApiBodyTest : IokiApiModelTest() {
 
     @Test
     fun serializationNestedLists() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiBody(listOf(listOf("foo", "bar"), listOf("biz", "baz"))),
             apiBodyNestedList,
         )

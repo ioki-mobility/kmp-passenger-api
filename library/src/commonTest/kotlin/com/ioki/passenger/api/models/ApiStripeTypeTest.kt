@@ -17,7 +17,7 @@ internal class ApiStripeTypeTest {
             data().forEach {
                 val type = it[0] as ApiStripeType
                 val json = it[1] as String
-                testSerializationWithJsonString(type, json)
+                testJsonStringCanBeConvertedToModel(type, json)
             }
         }
 

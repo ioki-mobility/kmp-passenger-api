@@ -5,8 +5,8 @@ import kotlin.test.Test
 internal class ApiUpdateUserNotificationSettingsRequestTest : IokiApiModelTest() {
     @Test
     fun serializationNoChannels() {
-        testSerializationWithJsonString(
-            model = ApiUpdateUserNotificationSettingsRequest(
+        testJsonStringCanBeConvertedToModel(
+            expectedModel = ApiUpdateUserNotificationSettingsRequest(
                 name = "ride_notifications",
                 channels = emptyList(),
             ),
@@ -16,8 +16,8 @@ internal class ApiUpdateUserNotificationSettingsRequestTest : IokiApiModelTest()
 
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
-            model = ApiUpdateUserNotificationSettingsRequest(
+        testJsonStringCanBeConvertedToModel(
+            expectedModel = ApiUpdateUserNotificationSettingsRequest(
                 name = "ride_notifications",
                 channels = listOf(ApiNotificationChannelType.SMS),
             ),

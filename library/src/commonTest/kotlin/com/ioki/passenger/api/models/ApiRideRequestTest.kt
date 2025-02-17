@@ -6,8 +6,8 @@ import kotlin.test.Test
 internal class ApiRideRequestTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
-            model = ApiRideRequest(
+        testJsonStringCanBeConvertedToModel(
+            expectedModel = ApiRideRequest(
                 productId = "abc-123",
                 passengers = listOf(
                     ApiPassengerSelectionRequest(

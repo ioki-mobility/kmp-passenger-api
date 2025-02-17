@@ -6,7 +6,7 @@ import kotlin.test.Test
 internal class ApiRideInquiryResponseTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiRideInquiryResponse(
                 availability = ApiRideInquiryResponse.Availability(
                     available = true,

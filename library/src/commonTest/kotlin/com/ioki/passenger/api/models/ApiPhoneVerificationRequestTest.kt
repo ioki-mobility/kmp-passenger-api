@@ -5,7 +5,7 @@ import kotlin.test.Test
 internal class ApiPhoneVerificationRequestTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiPhoneVerificationRequest("+491601234567", null),
             verification,
         )

@@ -8,8 +8,8 @@ import kotlin.test.Test
 internal class ApiProductTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
-            model = ApiProduct(
+        testJsonStringCanBeConvertedToModel(
+            expectedModel = ApiProduct(
                 id = "abc-123",
                 version = 1,
                 name = "Magic Bus Frankfurt",
@@ -193,8 +193,8 @@ internal class ApiProductTest : IokiApiModelTest() {
 
     @Test
     fun serializationMinimal() {
-        testSerializationWithJsonString(
-            model =
+        testJsonStringCanBeConvertedToModel(
+            expectedModel =
             ApiProduct(
                 id = "abc-123",
                 version = 1,

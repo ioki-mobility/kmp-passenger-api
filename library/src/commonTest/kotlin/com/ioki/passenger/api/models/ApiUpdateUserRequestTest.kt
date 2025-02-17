@@ -11,7 +11,7 @@ internal class ApiUpdateUserRequestTest : IokiApiModelTest() {
             receipt = true,
             confirmed = null,
         )
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiUpdateUserRequest(
                 version = 2,
                 firstName = "John",
@@ -30,7 +30,7 @@ internal class ApiUpdateUserRequestTest : IokiApiModelTest() {
 
     @Test
     fun serializationMinimal() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiUpdateUserRequest(2, null, null, null, null, null, null),
             updateUserRequestMinimal,
         )

@@ -5,7 +5,7 @@ import kotlin.test.Test
 internal class ApiClientInfoResponseTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiClientInfoResponse(
                 distributionUrl = "https://play.google.com/our-app",
                 termsOfServiceUrl = "https://example.com/terms_of_service.html",
@@ -23,7 +23,7 @@ internal class ApiClientInfoResponseTest : IokiApiModelTest() {
 
     @Test
     fun serializationMinimal() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiClientInfoResponse(
                 distributionUrl = "https://play.google.com/our-app",
                 termsOfServiceUrl = "https://example.com/terms_of_service.html",

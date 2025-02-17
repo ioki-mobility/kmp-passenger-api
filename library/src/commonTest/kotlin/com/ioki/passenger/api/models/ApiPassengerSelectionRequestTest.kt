@@ -5,11 +5,10 @@ import kotlin.test.Test
 internal class ApiPassengerSelectionRequestTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiPassengerSelectionRequest(
                 type = "adult",
-                options =
-                listOf(
+                options = listOf(
                     ApiOption(
                         slug = "wheelchair",
                         value = AnyValue.BooleanValue(false),
@@ -40,7 +39,7 @@ internal class ApiPassengerSelectionRequestTest : IokiApiModelTest() {
 
     @Test
     fun serializationMinimal() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiPassengerSelectionRequest(
                 type = "child",
                 options = listOf(
@@ -69,6 +68,40 @@ internal class ApiPassengerSelectionRequestTest : IokiApiModelTest() {
                 lastName = null,
             ),
             passengerSelectionRequestMinimal,
+        )
+    }
+
+    @Test
+    fun deserializationMinimal() {
+        testModelCanBeConvertedToJsonString(
+            passengerSelectionRequestMinimal,
+            ApiPassengerSelectionRequest(
+                type = "child",
+                options = listOf(
+                    ApiOption(
+                        slug = "wheelchair",
+                        value = AnyValue.BooleanValue(false),
+                    ),
+                    ApiOption(
+                        slug = "bahncard",
+                        value = AnyValue.BooleanValue(false),
+                    ),
+                    ApiOption(
+                        slug = "walker",
+                        value = AnyValue.BooleanValue(true),
+                    ),
+                    ApiOption(
+                        slug = "public_transport_ticket",
+                        value = AnyValue.BooleanValue(true),
+                    ),
+                    ApiOption(
+                        slug = "blue_badge",
+                        value = AnyValue.BooleanValue(false),
+                    ),
+                ),
+                firstName = null,
+                lastName = null,
+            ),
         )
     }
 }

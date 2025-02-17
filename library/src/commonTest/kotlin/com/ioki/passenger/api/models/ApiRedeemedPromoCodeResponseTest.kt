@@ -6,7 +6,7 @@ import kotlin.test.Test
 internal class ApiRedeemedPromoCodeResponseTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiRedeemedPromoCodeResponse(
                 id = "abc123",
                 createdAt = Instant.parse("1970-01-01T00:00:00Z"),
@@ -20,7 +20,7 @@ internal class ApiRedeemedPromoCodeResponseTest : IokiApiModelTest() {
 
     @Test
     fun serializationMinimal() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiRedeemedPromoCodeResponse(
                 id = "abc123",
                 createdAt = Instant.parse("1970-01-01T00:00:00Z"),

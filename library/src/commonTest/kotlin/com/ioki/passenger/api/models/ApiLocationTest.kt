@@ -8,8 +8,8 @@ import kotlin.test.expect
 internal class ApiLocationTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
-            model = ApiLocation(
+        testJsonStringCanBeConvertedToModel(
+            expectedModel = ApiLocation(
                 lat = 50.104558,
                 lng = 8.649113,
                 locationName = "DB Office Center",
@@ -37,7 +37,7 @@ internal class ApiLocationTest : IokiApiModelTest() {
 
     @Test
     fun serializationMinimal() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             createApiLocation(
                 lat = 50.104558,
                 lng = 8.649113,
