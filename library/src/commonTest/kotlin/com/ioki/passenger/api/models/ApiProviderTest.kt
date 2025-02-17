@@ -6,7 +6,7 @@ import kotlin.test.Test
 internal class ApiProviderTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiProvider(
                 name = "Ioki GmbH",
                 paymentServiceProvider = ApiProvider.PaymentServiceProvider.STRIPE,
@@ -49,7 +49,7 @@ internal class ApiProviderTest : IokiApiModelTest() {
 
     @Test
     fun serializationMinimal() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             createApiProvider(name = "Ioki GmbH", features = ApiProvider.Features.NONE),
             providerMinimal,
         )
@@ -57,7 +57,7 @@ internal class ApiProviderTest : IokiApiModelTest() {
 
     @Test
     fun serializationStipeTypeWithWrongTypeMinimal() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             createApiProvider(
                 name = "Ioki GmbH",
                 features = ApiProvider.Features.NONE,

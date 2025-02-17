@@ -5,7 +5,7 @@ import kotlin.test.Test
 internal class ApiPaymentMethodResponseTest : IokiApiModelTest() {
     @Test
     fun serializationMinimal() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiPaymentMethodResponse(ApiPaymentMethodType.CASH, null, null),
             paymentMethodMinimal,
         )
@@ -13,8 +13,8 @@ internal class ApiPaymentMethodResponseTest : IokiApiModelTest() {
 
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
-            model = ApiPaymentMethodResponse(
+        testJsonStringCanBeConvertedToModel(
+            expectedModel = ApiPaymentMethodResponse(
                 paymentMethodType = ApiPaymentMethodType.STRIPE,
                 id = "someId",
                 summary = ApiPaymentMethodResponse.Summary(

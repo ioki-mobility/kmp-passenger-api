@@ -19,7 +19,7 @@ internal class ApiCancellationReasonTest {
             data().forEach {
                 val reason = it[0] as ApiCancellationReason
                 val json = it[1] as String
-                testSerializationWithJsonString(reason, json)
+                testJsonStringCanBeConvertedToModel(reason, json)
             }
         }
 

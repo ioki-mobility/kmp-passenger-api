@@ -6,7 +6,7 @@ import kotlin.test.Test
 internal class ApiCreateTipRequestTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiCreateTipRequest(
                 amount = 150,
                 paymentMethod = createApiPaymentMethodRequest(ApiPaymentMethodType.SERVICE_CREDITS),

@@ -19,7 +19,7 @@ internal class ApiPaymentMethodResponseTypeTest {
             data().forEach {
                 val type = it[0] as ApiPaymentMethodType
                 val json = it[1] as String
-                testSerializationWithJsonString(type, json)
+                testJsonStringCanBeConvertedToModel(type, json)
             }
         }
 

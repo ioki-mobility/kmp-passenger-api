@@ -5,7 +5,7 @@ import kotlin.test.Test
 internal class ApiDoorStateChangeRequestTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiDoorStateChangeRequest(
                 desiredState = ApiDoorStateChangeRequest.DesiredState.UNLOCKED,
             ),

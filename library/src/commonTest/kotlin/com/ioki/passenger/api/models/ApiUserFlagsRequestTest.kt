@@ -5,7 +5,7 @@ import kotlin.test.Test
 internal class ApiUserFlagsRequestTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiUserFlagsRequest(
                 version = 0,
                 termsAccepted = true,
@@ -18,7 +18,7 @@ internal class ApiUserFlagsRequestTest : IokiApiModelTest() {
 
     @Test
     fun serializationMinimal() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiUserFlagsRequest(
                 version = 0,
                 termsAccepted = true,

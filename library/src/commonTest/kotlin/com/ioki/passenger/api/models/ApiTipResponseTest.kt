@@ -5,8 +5,8 @@ import kotlin.test.Test
 internal class ApiTipResponseTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
-            model = ApiTipResponse(
+        testJsonStringCanBeConvertedToModel(
+            expectedModel = ApiTipResponse(
                 ApiMoney(
                     amount = 150,
                     currency = "EUR",

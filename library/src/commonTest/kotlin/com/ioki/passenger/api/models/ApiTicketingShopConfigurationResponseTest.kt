@@ -5,7 +5,7 @@ import kotlin.test.Test
 internal class ApiTicketingShopConfigurationResponseTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiTicketingShopConfigurationResponse(
                 purchaseOptions = listOf(
                     ApiTicketingProductOption(

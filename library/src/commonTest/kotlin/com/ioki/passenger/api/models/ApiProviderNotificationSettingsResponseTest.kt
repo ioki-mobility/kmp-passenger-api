@@ -5,8 +5,8 @@ import kotlin.test.Test
 internal class ApiProviderNotificationSettingsResponseTest : IokiApiModelTest() {
     @Test
     fun serializationNoChannels() {
-        testSerializationWithJsonString(
-            model = ApiProviderNotificationSettingsResponse(
+        testJsonStringCanBeConvertedToModel(
+            expectedModel = ApiProviderNotificationSettingsResponse(
                 id = "ride_notifications",
                 type = "notification_settings",
                 name = "ride_notifications",
@@ -18,8 +18,8 @@ internal class ApiProviderNotificationSettingsResponseTest : IokiApiModelTest() 
 
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
-            model = ApiProviderNotificationSettingsResponse(
+        testJsonStringCanBeConvertedToModel(
+            expectedModel = ApiProviderNotificationSettingsResponse(
                 id = "ride_notifications",
                 type = "notification_settings",
                 name = "ride_notifications",

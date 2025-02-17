@@ -6,7 +6,7 @@ import kotlin.test.Test
 internal class ApiPersonalDiscountTypeResponseTest : IokiApiModelTest() {
     @Test
     fun `personal discount serialization absolute`() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             stubPersonalDiscountTypeCount,
             purchaseablePersonalDiscountTypeAbsoluteJson,
         )
@@ -14,7 +14,7 @@ internal class ApiPersonalDiscountTypeResponseTest : IokiApiModelTest() {
 
     @Test
     fun `personal discount serialization relative`() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             stubPersonalDiscountTypeTime,
             purchaseablePersonalDiscountTypeRelativeJson,
         )
@@ -22,7 +22,7 @@ internal class ApiPersonalDiscountTypeResponseTest : IokiApiModelTest() {
 
     @Test
     fun `personal discount serialization absolute AND relative`() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             stubPersonalDiscountTypeTimeAndCount,
             purchaseablePersonalDiscountTypeAbsoluteRelativeJson,
         )
@@ -30,7 +30,7 @@ internal class ApiPersonalDiscountTypeResponseTest : IokiApiModelTest() {
 
     @Test
     fun `personal discount type serialization with LocalDate`() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             stubPersonalDiscountTypeLocalDate,
             purchaseablePersonalDiscountTypeLocalDateJson,
         )

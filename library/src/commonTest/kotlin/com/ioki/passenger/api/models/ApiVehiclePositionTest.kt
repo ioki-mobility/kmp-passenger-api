@@ -5,7 +5,7 @@ import kotlin.test.Test
 internal class ApiVehiclePositionTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiVehiclePosition(lat = 49.012, lng = 8.245, heading = 123.0f),
             vehiclePosition,
         )

@@ -5,7 +5,7 @@ import kotlin.test.Test
 internal class ApiVehicleTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiVehicle(
                 licensePlate = "AB CD 123",
                 nickname = "Bob the Vehicle 2",
@@ -33,7 +33,7 @@ internal class ApiVehicleTest : IokiApiModelTest() {
 
     @Test
     fun serializationMinimal() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiVehicle(
                 "AB CD 123",
                 "Bob the Vehicle 2",

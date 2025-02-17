@@ -6,7 +6,7 @@ import kotlin.test.Test
 internal class ApiRideInquiryRequestTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiRideInquiryRequest(
                 productId = "prd_123",
                 origin = ApiRideInquiryRequest.Location(
@@ -98,7 +98,7 @@ internal class ApiRideInquiryRequestTest : IokiApiModelTest() {
 
     @Test
     fun serializationMinimal() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiRideInquiryRequest(
                 productId = "prd_123",
                 origin = ApiRideInquiryRequest.Location(

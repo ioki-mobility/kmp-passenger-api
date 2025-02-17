@@ -5,7 +5,7 @@ import kotlin.test.Test
 internal class ApiLogPayAccountRequestTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiLogPayAccountRequest(
                 emailAddress = "john.doe@gmail.com",
                 person = ApiLogPayAccountRequest.Person(
@@ -29,7 +29,7 @@ internal class ApiLogPayAccountRequestTest : IokiApiModelTest() {
 
     @Test
     fun serializationPaymentMethodTypeUndefined() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiLogPayAccountRequest(
                 emailAddress = "john.doe@gmail.com",
                 person = ApiLogPayAccountRequest.Person(
@@ -53,7 +53,7 @@ internal class ApiLogPayAccountRequestTest : IokiApiModelTest() {
 
     @Test
     fun serializationMinimal() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiLogPayAccountRequest(
                 emailAddress = "john.doe@gmail.com",
                 person = ApiLogPayAccountRequest.Person(

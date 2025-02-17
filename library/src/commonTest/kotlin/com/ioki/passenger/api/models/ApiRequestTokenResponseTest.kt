@@ -5,7 +5,7 @@ import kotlin.test.Test
 internal class ApiRequestTokenResponseTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiRequestTokenResponse(
                 id = "tok_6b083e2b-5c5b-4a58-b3a1-46442928989c",
                 type = "request_token",

@@ -5,8 +5,8 @@ import kotlin.test.Test
 internal class ApiDeviceRequestTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
-            model = ApiDeviceRequest(token = "abc123"),
+        testJsonStringCanBeConvertedToModel(
+            expectedModel = ApiDeviceRequest(token = "abc123"),
             jsonString = deviceRequest,
         )
     }

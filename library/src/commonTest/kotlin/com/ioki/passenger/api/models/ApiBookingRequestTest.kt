@@ -5,7 +5,7 @@ import kotlin.test.Test
 internal class ApiBookingRequestTest : IokiApiModelTest() {
     @Test
     fun serializationMinimal() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiBookingRequest(
                 rideVersion = 2,
                 solutionId = null,
@@ -18,7 +18,7 @@ internal class ApiBookingRequestTest : IokiApiModelTest() {
 
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiBookingRequest(
                 rideVersion = 2,
                 solutionId = "solutionId",

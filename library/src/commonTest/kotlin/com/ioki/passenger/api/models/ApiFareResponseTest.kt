@@ -5,7 +5,7 @@ import kotlin.test.Test
 internal class ApiFareResponseTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiFareResponse(
                 id = "far_123",
                 version = 0,
@@ -20,7 +20,7 @@ internal class ApiFareResponseTest : IokiApiModelTest() {
 
     @Test
     fun serializationMinimal() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiFareResponse(
                 id = "far_123",
                 version = 0,

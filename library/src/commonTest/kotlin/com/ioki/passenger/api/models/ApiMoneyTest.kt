@@ -5,7 +5,7 @@ import kotlin.test.Test
 internal class ApiMoneyTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiMoney(
                 amount = 100,
                 currency = "EUR",

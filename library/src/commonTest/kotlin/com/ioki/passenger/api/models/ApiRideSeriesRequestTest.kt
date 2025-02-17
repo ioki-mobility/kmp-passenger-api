@@ -6,7 +6,7 @@ import kotlin.test.Test
 internal class ApiRideSeriesRequestTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiRideSeriesRequest(
                 additionalDates = listOf(
                     LocalDate.parse("2019-06-18"),

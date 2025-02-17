@@ -5,7 +5,7 @@ import kotlin.test.Test
 internal class ApiPassengerSelectionRequestTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiPassengerSelectionRequest(
                 type = "adult",
                 options = listOf(
@@ -39,7 +39,7 @@ internal class ApiPassengerSelectionRequestTest : IokiApiModelTest() {
 
     @Test
     fun serializationMinimal() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiPassengerSelectionRequest(
                 type = "child",
                 options = listOf(
@@ -73,7 +73,7 @@ internal class ApiPassengerSelectionRequestTest : IokiApiModelTest() {
 
     @Test
     fun deserializationMinimal() {
-        testDeserializationWithJsonString(
+        testModelCanBeConvertedToJsonString(
             passengerSelectionRequestMinimal,
             ApiPassengerSelectionRequest(
                 type = "child",

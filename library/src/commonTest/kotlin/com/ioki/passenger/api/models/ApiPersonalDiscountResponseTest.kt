@@ -6,7 +6,7 @@ import kotlin.test.Test
 internal class ApiPersonalDiscountResponseTest : IokiApiModelTest() {
     @Test
     fun `personal discount serialization validity usage`() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             stubPersonalDiscountCount,
             purchasedDiscountsUsageJson,
         )
@@ -14,7 +14,7 @@ internal class ApiPersonalDiscountResponseTest : IokiApiModelTest() {
 
     @Test
     fun `personal discount serialization validity time`() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             stubPersonalDiscountTime,
             purchasedDiscountsRelativeJson,
         )
@@ -22,7 +22,7 @@ internal class ApiPersonalDiscountResponseTest : IokiApiModelTest() {
 
     @Test
     fun `personal discount serialization validity usage usage AND time`() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             stubPersonalDiscountTimeAndCount,
             purchasedDiscountsUsageAndTimeJson,
         )

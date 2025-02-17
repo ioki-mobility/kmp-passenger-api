@@ -5,7 +5,7 @@ import kotlin.test.Test
 internal class ApiPaypalClientTokenResponseTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiPaypalClientTokenResponse("token"),
             paypalClientToken,
         )

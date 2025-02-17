@@ -17,7 +17,7 @@ internal class ApiNotificationChannelTypeTest {
             data().forEach {
                 val type = it[0] as ApiNotificationChannelType
                 val json = it[1] as String
-                testSerializationWithJsonString(type, json)
+                testJsonStringCanBeConvertedToModel(type, json)
             }
         }
 

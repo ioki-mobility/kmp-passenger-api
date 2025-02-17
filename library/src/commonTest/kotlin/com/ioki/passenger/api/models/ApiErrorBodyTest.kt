@@ -5,7 +5,7 @@ import kotlin.test.Test
 internal class ApiErrorBodyTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiErrorBody(
                 listOf(
                     ApiErrorBody.ApiError(
@@ -24,7 +24,7 @@ internal class ApiErrorBodyTest : IokiApiModelTest() {
 
     @Test
     fun serializationMinimal() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiErrorBody(),
             errorBodyMinimal,
         )

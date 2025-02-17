@@ -17,7 +17,7 @@ internal class ApiBookingStateTest {
             data().forEach {
                 val bookingState = it[0] as ApiBookingState
                 val json = it[1] as String
-                testSerializationWithJsonString(bookingState, json)
+                testJsonStringCanBeConvertedToModel(bookingState, json)
             }
         }
 

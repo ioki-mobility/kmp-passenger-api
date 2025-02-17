@@ -9,8 +9,8 @@ import kotlin.test.Test
 internal class ApiRideResponseTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
-            model = ApiRideResponse(
+        testJsonStringCanBeConvertedToModel(
+            expectedModel = ApiRideResponse(
                 id = "rid_c7394eb7-2af1-4d0c-9e8e-56c2c69f0495",
                 productId = "product-id",
                 state = ApiBookingState.SEARCHING,
@@ -231,8 +231,8 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
 
     @Test
     fun serializationMinimal() {
-        testSerializationWithJsonString(
-            model = ApiRideResponse(
+        testJsonStringCanBeConvertedToModel(
+            expectedModel = ApiRideResponse(
                 id = "rid_c7394eb7-2af1-4d0c-9e8e-56c2c69f0495",
                 productId = "product-id",
                 state = ApiBookingState.SEARCHING,

@@ -5,8 +5,8 @@ import kotlin.test.Test
 internal class ApiVenueResponseTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
-            model = ApiVenueResponse(
+        testJsonStringCanBeConvertedToModel(
+            expectedModel = ApiVenueResponse(
                 id = "venue-id",
                 city = "city",
                 county = "county",
@@ -27,8 +27,8 @@ internal class ApiVenueResponseTest : IokiApiModelTest() {
 
     @Test
     fun serializationMinimal() {
-        testSerializationWithJsonString(
-            model =
+        testJsonStringCanBeConvertedToModel(
+            expectedModel =
             ApiVenueResponse(
                 id = "venue-id",
                 city = "city",

@@ -5,7 +5,7 @@ import kotlin.test.Test
 internal class ApiRedeemPromoCodeRequestTest : IokiApiModelTest() {
     @Test
     fun `serialization of promo type`() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiRedeemPromoCodeRequest("summer_special"),
             redeemPromoCodeRequest,
         )
@@ -13,7 +13,7 @@ internal class ApiRedeemPromoCodeRequestTest : IokiApiModelTest() {
 
     @Test
     fun `serialization of service credit type`() {
-        testSerializationWithJsonString(
+        testJsonStringCanBeConvertedToModel(
             ApiRedeemPromoCodeRequest("summer_special"),
             redeemPromoCodeCreditRequest,
         )
