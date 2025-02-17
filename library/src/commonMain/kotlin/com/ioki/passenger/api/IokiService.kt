@@ -70,6 +70,7 @@ import com.ioki.passenger.api.models.ApiTicketingShopConfigurationResponse
 import com.ioki.passenger.api.models.ApiTicketingVoucherResponse
 import com.ioki.passenger.api.models.ApiTipResponse
 import com.ioki.passenger.api.models.ApiUpdatePassengersForRideRequest
+import com.ioki.passenger.api.models.ApiUpdatePaymentMethodForRideRequest
 import com.ioki.passenger.api.models.ApiUpdatePhoneNumberRequest
 import com.ioki.passenger.api.models.ApiUpdateUserNotificationSettingsRequest
 import com.ioki.passenger.api.models.ApiUpdateUserRequest
@@ -215,6 +216,12 @@ public interface CurrentRideService {
         rideVersion: Int,
         fareVersion: Int,
         paypalSecureElement: String?,
+        requirePaymentMethodForPaidChange: Boolean,
+    ): ApiResult<ApiRideResponse>
+
+    public suspend fun updatePaymentMethodForRide(
+        rideId: String,
+        body: ApiUpdatePaymentMethodForRideRequest,
     ): ApiResult<ApiRideResponse>
 }
 
@@ -467,6 +474,7 @@ private class DefaultIokiService(
         rideVersion: Int,
         fareVersion: Int,
         paypalSecureElement: String?,
+        requirePaymentMethodForPaidChange: Boolean,
     ): ApiResult<ApiRideResponse> = apiCall<ApiBody<ApiRideResponse>, ApiRideResponse> {
         val body = ApiBody(
             ApiUpdatePassengersForRideRequest(
@@ -474,9 +482,17 @@ private class DefaultIokiService(
                 rideVersion,
                 fareVersion,
                 paypalSecureElement,
+                requirePaymentMethodForPaidChange,
             ),
         )
         updatePassengersForRide(rideId = rideId, body = body)
+    }
+
+    override suspend fun updatePaymentMethodForRide(
+        rideId: String,
+        request: ApiUpdatePaymentMethodForRideRequest,
+    ): ApiResult<ApiRideResponse> = apiCall<ApiBody<ApiRideResponse>, ApiRideResponse> {
+        updatePaymentMethodForRide(rideId = rideId, body = ApiBody(request))
     }
 
     override suspend fun sendTip(rideId: String, request: ApiCreateTipRequest): ApiResult<ApiTipResponse> =

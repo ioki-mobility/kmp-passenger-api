@@ -8,9 +8,11 @@ public fun createApiUpdatePassengersForRideRequest(
     rideVersion: Int = 0,
     fareVersion: Int = 0,
     paypalSecureElement: String? = null,
+    requirePaymentMethodForPaidChange: Boolean = false,
 ): ApiUpdatePassengersForRideRequest = ApiUpdatePassengersForRideRequest(
     passengers = passengers,
     rideVersion = rideVersion,
     fareVersion = fareVersion,
     paypalSecureElement = paypalSecureElement,
+    requirePaymentMethodForPaidChange = requirePaymentMethodForPaidChange,
 )

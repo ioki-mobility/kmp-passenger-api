@@ -31,6 +31,7 @@ import com.ioki.passenger.api.models.ApiRideRequest
 import com.ioki.passenger.api.models.ApiRideSeriesRequest
 import com.ioki.passenger.api.models.ApiSignUpRequest
 import com.ioki.passenger.api.models.ApiUpdatePassengersForRideRequest
+import com.ioki.passenger.api.models.ApiUpdatePaymentMethodForRideRequest
 import com.ioki.passenger.api.models.ApiUpdatePhoneNumberRequest
 import com.ioki.passenger.api.models.ApiUpdateUserNotificationSettingsRequest
 import com.ioki.passenger.api.models.ApiUpdateUserRequest
@@ -278,6 +279,14 @@ internal class IokiApi(
         rideId: String,
         body: ApiBody<ApiUpdatePassengersForRideRequest>,
     ): HttpResponse = client.post("/api/passenger/rides/$rideId/passengers") {
+        header("Authorization", accessToken)
+        setBody(body)
+    }
+
+    suspend fun updatePaymentMethodForRide(
+        rideId: String,
+        body: ApiBody<ApiUpdatePaymentMethodForRideRequest>,
+    ): HttpResponse = client.post("/api/passenger/rides/$rideId/payment_method") {
         header("Authorization", accessToken)
         setBody(body)
     }
