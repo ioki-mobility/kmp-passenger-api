@@ -5,8 +5,8 @@ import kotlin.test.Test
 internal class ApiUpdatePaymentMethodForRideRequestTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        testSerializationWithJsonString(
-            model = ApiUpdatePaymentMethodForRideRequest(
+        testJsonStringCanBeConvertedToModel(
+            expectedModel = ApiUpdatePaymentMethodForRideRequest(
                 paymentMethod = ApiPaymentMethodRequest(
                     paymentMethodType = ApiPaymentMethodType.STRIPE,
                     id = "pam_123",
