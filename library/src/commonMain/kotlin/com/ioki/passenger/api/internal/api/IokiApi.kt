@@ -437,4 +437,8 @@ internal class IokiApi(
     suspend fun getTicketShopConfiguration(): HttpResponse = client.get("/api/passenger/ticketing/shop_config") {
         header("Authorization", accessToken)
     }
+
+    suspend fun getRatingCriteria(): HttpResponse = client.get("/api/passenger/rating_criteria") {
+        header("Authorization", accessToken)
+    }
 }

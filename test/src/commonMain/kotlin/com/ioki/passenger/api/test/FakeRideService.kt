@@ -6,6 +6,7 @@ import com.ioki.passenger.api.models.ApiCancellationRequest
 import com.ioki.passenger.api.models.ApiCancellationVoucherRequest
 import com.ioki.passenger.api.models.ApiCancellationVoucherResponse
 import com.ioki.passenger.api.models.ApiDoorStateChangeRequest
+import com.ioki.passenger.api.models.ApiRatingCriteriaResponse
 import com.ioki.passenger.api.models.ApiRatingRequest
 import com.ioki.passenger.api.models.ApiRatingResponse
 import com.ioki.passenger.api.models.ApiRideFilterType
@@ -44,4 +45,6 @@ public open class FakeRideService : RideService {
 
     override suspend fun inquireRide(request: ApiRideInquiryRequest): ApiResult<ApiRideInquiryResponse> =
         error("Not overridden")
+
+    override suspend fun getRatingCriteria(): ApiResult<List<ApiRatingCriteriaResponse>> = error("Not overridden")
 }

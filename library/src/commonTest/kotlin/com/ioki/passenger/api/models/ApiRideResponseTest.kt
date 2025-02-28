@@ -97,12 +97,11 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                 booking = ApiBooking(verificationCode = "ABC123"),
                 rating = ApiRatingResponse(
                     id = "abc123",
-                    rideRating = 1,
-                    waitingTimeRating = 2,
-                    punctualityRating = 3,
-                    driverRating = 3,
-                    vehicleRating = 3,
-                    serviceRating = 3,
+                    ratingLineItems = listOf(
+                        ApiRatingLineItem(criterionSlug = "driver", value = 5),
+                        ApiRatingLineItem(criterionSlug = "ride", value = 4),
+                    ),
+                    comment = "Nice comment",
                 ),
                 paymentMethod = ApiPaymentMethodResponse(
                     paymentMethodType = ApiPaymentMethodType.STRIPE,
@@ -425,12 +424,17 @@ private val rideResponse =
   },
   "rating": {
     "id": "abc123",
-    "ride_rating": 1,
-    "waiting_time_rating": 2,
-    "punctuality_rating": 3,
-    "driver_rating": 3,
-    "vehicle_rating": 3,
-    "service_rating": 3
+    "rating_line_items": [
+      {
+        "criterion_slug": "driver",
+        "value": 5
+      },
+      {
+        "criterion_slug": "ride",
+        "value": 4
+      }
+    ],
+    "comment": "Nice comment"
   },
   "payment_method": {
     "payment_method_type": "stripe"
