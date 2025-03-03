@@ -44,6 +44,7 @@ import com.ioki.passenger.api.models.ApiProviderNotificationSettingsResponse
 import com.ioki.passenger.api.models.ApiPurchaseTicketingProductRequest
 import com.ioki.passenger.api.models.ApiPurchasedCreditPackageResponse
 import com.ioki.passenger.api.models.ApiPurchasingCreditPackageRequest
+import com.ioki.passenger.api.models.ApiRatingCriteriaResponse
 import com.ioki.passenger.api.models.ApiRatingRequest
 import com.ioki.passenger.api.models.ApiRatingResponse
 import com.ioki.passenger.api.models.ApiRedeemPromoCodeRequest
@@ -249,6 +250,8 @@ public interface RideService {
     public suspend fun inquireRide(request: ApiRideInquiryRequest): ApiResult<ApiRideInquiryResponse>
 
     public suspend fun changeDoorState(rideId: String, request: ApiDoorStateChangeRequest): ApiResult<Unit>
+
+    public suspend fun getRatingCriteria(): ApiResult<List<ApiRatingCriteriaResponse>>
 }
 
 public interface RideSeriesService {
@@ -776,6 +779,11 @@ private class DefaultIokiService(
     override suspend fun getUserTicketingVoucher(ticketVoucherId: String): ApiResult<ApiTicketingVoucherResponse> =
         apiCall<ApiBody<ApiTicketingVoucherResponse>, ApiTicketingVoucherResponse> {
             getUserTicketingVoucher(id = ticketVoucherId)
+        }
+
+    override suspend fun getRatingCriteria(): ApiResult<List<ApiRatingCriteriaResponse>> =
+        apiCall<ApiBody<List<ApiRatingCriteriaResponse>>, List<ApiRatingCriteriaResponse>> {
+            getRatingCriteria()
         }
 
     private suspend inline fun <reified R, reified T> apiCall(
