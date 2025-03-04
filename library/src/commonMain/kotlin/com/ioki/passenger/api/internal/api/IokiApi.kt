@@ -438,7 +438,8 @@ internal class IokiApi(
         header("Authorization", accessToken)
     }
 
-    suspend fun getRatingCriteria(): HttpResponse = client.get("/api/passenger/rating_criteria") {
-        header("Authorization", accessToken)
-    }
+    suspend fun getRatingCriteria(rideId: String): HttpResponse =
+        client.get("/api/passenger/rides/$rideId/rating_criteria") {
+            header("Authorization", accessToken)
+        }
 }
