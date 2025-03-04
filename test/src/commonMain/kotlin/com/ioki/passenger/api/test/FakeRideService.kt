@@ -46,5 +46,6 @@ public open class FakeRideService : RideService {
     override suspend fun inquireRide(request: ApiRideInquiryRequest): ApiResult<ApiRideInquiryResponse> =
         error("Not overridden")
 
-    override suspend fun getRatingCriteria(): ApiResult<List<ApiRatingCriteriaResponse>> = error("Not overridden")
+    override suspend fun getRatingCriteria(rideId: String): ApiResult<List<ApiRatingCriteriaResponse>> =
+        error("Not overridden")
 }
