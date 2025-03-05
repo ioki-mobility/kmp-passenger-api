@@ -251,7 +251,7 @@ public interface RideService {
 
     public suspend fun changeDoorState(rideId: String, request: ApiDoorStateChangeRequest): ApiResult<Unit>
 
-    public suspend fun getRatingCriteria(): ApiResult<List<ApiRatingCriteriaResponse>>
+    public suspend fun getRatingCriteria(rideId: String): ApiResult<List<ApiRatingCriteriaResponse>>
 }
 
 public interface RideSeriesService {
@@ -781,9 +781,9 @@ private class DefaultIokiService(
             getUserTicketingVoucher(id = ticketVoucherId)
         }
 
-    override suspend fun getRatingCriteria(): ApiResult<List<ApiRatingCriteriaResponse>> =
+    override suspend fun getRatingCriteria(rideId: String): ApiResult<List<ApiRatingCriteriaResponse>> =
         apiCall<ApiBody<List<ApiRatingCriteriaResponse>>, List<ApiRatingCriteriaResponse>> {
-            getRatingCriteria()
+            getRatingCriteria(rideId = rideId)
         }
 
     private suspend inline fun <reified R, reified T> apiCall(
