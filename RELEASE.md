@@ -11,7 +11,7 @@
 ### 2. Update the Version in `build.gradle.kts`
 
    - Remove `-SNAPSHOT` from the `version` in [`build.gradle.kts`](build.gradle.kts).
-   - Commit the change:
+   - Commit the change (Note that it should not be pushed):
      ```bash
      git commit -m "Prepare next release" .
      ```
@@ -33,7 +33,7 @@
 
    - Head to [Sonatype](https://s01.oss.sonatype.org/) and sign in (credentials are in the Bitwarden Open Source Collection).
    - Search for the staged repo, click **Close**.
-   - After it's successfully **Closed**, click **Release** and check "Drop after release".
+   - After it's successfully **Closed**, click **Release** and check "Automatically drop".
 
 ### 6. Edit the Release on GitHub
 
