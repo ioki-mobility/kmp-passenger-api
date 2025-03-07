@@ -19,10 +19,18 @@ kotlin {
     androidTarget {
         publishLibraryVariants("release")
     }
-    iosX64()
-    iosArm64()
-    macosX64()
-    macosArm64()
+
+    listOf(
+        iosX64(),
+        iosArm64(),
+        macosX64(),
+        macosArm64(),
+    ).forEach { nativeTarget ->
+        nativeTarget.binaries.framework {
+            baseName = "PassengerApi"
+            isStatic = true
+        }
+    }
 
     sourceSets {
         val commonMain by getting {
