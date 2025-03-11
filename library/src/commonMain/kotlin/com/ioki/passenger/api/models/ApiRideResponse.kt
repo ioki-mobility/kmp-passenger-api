@@ -154,6 +154,7 @@ private object ApiCancellationReasonSerializer : KSerializer<ApiCancellationReas
                 ApiCancellationReason.APPLY_FAILED -> "apply_failed"
                 ApiCancellationReason.NO_TASK_LIST_FOUND -> "no_task_list_found"
                 ApiCancellationReason.PROHIBIT_PARALLEL_FILTER -> "prohibit_parallel_filter"
+                ApiCancellationReason.OPERATOR_CANCELLED -> "operator_cancelled"
                 ApiCancellationReason.UNSUPPORTED -> "UNSUPPORTED"
             },
         )
@@ -182,6 +183,7 @@ private object ApiCancellationReasonSerializer : KSerializer<ApiCancellationReas
             "apply_failed" -> ApiCancellationReason.APPLY_FAILED
             "no_task_list_found" -> ApiCancellationReason.NO_TASK_LIST_FOUND
             "prohibit_parallel_filter" -> ApiCancellationReason.PROHIBIT_PARALLEL_FILTER
+            "operator_cancelled" -> ApiCancellationReason.OPERATOR_CANCELLED
             else -> ApiCancellationReason.UNSUPPORTED
         }
     }

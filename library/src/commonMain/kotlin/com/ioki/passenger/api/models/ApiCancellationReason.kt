@@ -55,5 +55,8 @@ public enum class ApiCancellationReason {
 
     @SerialName(value = "prohibit_parallel_filter")
     PROHIBIT_PARALLEL_FILTER,
+
+    @SerialName(value = "operator_cancelled")
+    OPERATOR_CANCELLED,
     UNSUPPORTED,
 }

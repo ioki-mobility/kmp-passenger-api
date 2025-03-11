@@ -95,6 +95,10 @@ internal class ApiCancellationReasonTest {
                         "\"prohibit_parallel_filter\"",
                     ),
                     arrayOf(
+                        ApiCancellationReason.OPERATOR_CANCELLED,
+                        "\"operator_cancelled\"",
+                    ),
+                    arrayOf(
                         ApiCancellationReason.UNSUPPORTED,
                         "\"UNSUPPORTED\"",
                     ),
