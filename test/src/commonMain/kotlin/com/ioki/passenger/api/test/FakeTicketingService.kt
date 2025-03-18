@@ -37,4 +37,7 @@ public open class FakeTicketingService : TicketingService {
         id: String,
         request: ApiRenewTicketingVoucherRequest,
     ): ApiResult<ApiTicketingVoucherResponse> = error("Not overridden")
+
+    override suspend fun cancelTicketingVoucher(voucherId: String): ApiResult<ApiTicketingVoucherResponse> =
+        error("Not overridden")
 }
