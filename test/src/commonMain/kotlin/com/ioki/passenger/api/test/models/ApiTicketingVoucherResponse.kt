@@ -27,12 +27,28 @@ public fun createApiTicketingVoucherTicket(
     validityInformation: String = "",
     validFrom: Instant? = null,
     validUntil: Instant? = null,
+    vendorTicketDetails: ApiTicketingVoucherResponse.Ticket.VendorTicketDetails? = null,
 ): ApiTicketingVoucherResponse.Ticket = ApiTicketingVoucherResponse.Ticket(
     id = id,
     webviewUrl = webviewUrl,
     validityInformation = validityInformation,
     validFrom = validFrom,
     validUntil = validUntil,
+    vendorTicketDetails = vendorTicketDetails,
+)
+
+public fun createApiTicketingVoucherTicketVendorTicketDetails(
+    customerCode: String = "",
+    fullName: String = "",
+    host: String = "",
+    issuer: String = "",
+    purchaseId: String = "",
+): ApiTicketingVoucherResponse.Ticket.VendorTicketDetails = ApiTicketingVoucherResponse.Ticket.VendorTicketDetails(
+    customerCode = customerCode,
+    fullName = fullName,
+    host = host,
+    issuer = issuer,
+    purchaseId = purchaseId,
 )
 
 public fun createApiTicketingVoucherRenewalInformation(
