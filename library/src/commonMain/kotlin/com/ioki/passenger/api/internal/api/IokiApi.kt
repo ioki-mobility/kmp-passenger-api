@@ -434,6 +434,11 @@ internal class IokiApi(
             setBody(body)
         }
 
+    suspend fun cancelUserTicketingVoucher(id: String): HttpResponse =
+        client.post("/api/passenger/ticketing/vouchers/$id/subscription_cancellation") {
+            header("Authorization", accessToken)
+        }
+
     suspend fun getTicketShopConfiguration(): HttpResponse = client.get("/api/passenger/ticketing/shop_config") {
         header("Authorization", accessToken)
     }

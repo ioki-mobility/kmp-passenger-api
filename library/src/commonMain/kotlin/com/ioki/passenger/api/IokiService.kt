@@ -352,6 +352,8 @@ public interface TicketingService {
         id: String,
         request: ApiRenewTicketingVoucherRequest,
     ): ApiResult<ApiTicketingVoucherResponse>
+
+    public suspend fun cancelTicketingVoucher(voucherId: String): ApiResult<ApiTicketingVoucherResponse>
 }
 
 public interface BootstrapService {
@@ -764,6 +766,11 @@ private class DefaultIokiService(
     ): ApiResult<ApiTicketingVoucherResponse> =
         apiCall<ApiBody<ApiTicketingVoucherResponse>, ApiTicketingVoucherResponse> {
             renewUserTicketingVoucher(id = id, body = ApiBody(request))
+        }
+
+    override suspend fun cancelTicketingVoucher(voucherId: String): ApiResult<ApiTicketingVoucherResponse> =
+        apiCall<ApiBody<ApiTicketingVoucherResponse>, ApiTicketingVoucherResponse> {
+            cancelUserTicketingVoucher(id = voucherId)
         }
 
     override suspend fun getActiveUserTicketingVouchers(page: Int): ApiResult<List<ApiTicketingVoucherResponse>> =

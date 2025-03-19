@@ -1,13 +1,20 @@
 package com.ioki.passenger.api.models
 
 import kotlinx.datetime.Instant
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.descriptors.buildClassSerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 @Serializable
 public data class ApiTicketingVoucherResponse(
     val id: String,
-    val state: State = State.UNSUPPORTED,
+    @Serializable(with = ApiTicketingVoucherResponseStateSerializer::class)
+    val state: State,
     val price: ApiMoney,
     @SerialName(value = "product")
     val product: ApiTicketingProductResponse?,
@@ -37,7 +44,17 @@ public data class ApiTicketingVoucherResponse(
         @SerialName(value = "validity_information") val validityInformation: String,
         @SerialName(value = "valid_from") val validFrom: Instant?,
         @SerialName(value = "valid_until") val validUntil: Instant?,
-    )
+        @SerialName(value = "vendor_ticket_details") val vendorTicketDetails: VendorTicketDetails?,
+    ) {
+        @Serializable
+        public data class VendorTicketDetails(
+            @SerialName(value = "customer_code") val customerCode: String,
+            @SerialName(value = "full_name") val fullName: String,
+            val host: String,
+            val issuer: String,
+            @SerialName(value = "purchase_id") val purchaseId: String,
+        )
+    }
 
     @Serializable
     public data class RenewalInformation(
@@ -45,4 +62,29 @@ public data class ApiTicketingVoucherResponse(
         @SerialName(value = "valid_from") val validFrom: Instant?,
         @SerialName(value = "valid_until") val validUntil: Instant?,
     )
+}
+
+internal object ApiTicketingVoucherResponseStateSerializer : KSerializer<ApiTicketingVoucherResponse.State> {
+    override val descriptor: SerialDescriptor = buildClassSerialDescriptor("ApiTicketingVoucherResponseState")
+
+    override fun serialize(encoder: Encoder, value: ApiTicketingVoucherResponse.State) {
+        when (value) {
+            ApiTicketingVoucherResponse.State.INITIATED -> encoder.encodeString("initiated")
+            ApiTicketingVoucherResponse.State.CANCELLED -> encoder.encodeString("cancelled")
+            ApiTicketingVoucherResponse.State.ISSUED -> encoder.encodeString("issued")
+            ApiTicketingVoucherResponse.State.REDEEMED -> encoder.encodeString("redeemed")
+            ApiTicketingVoucherResponse.State.UNSUPPORTED -> encoder.encodeString("unsupported")
+        }
+    }
+
+    override fun deserialize(decoder: Decoder): ApiTicketingVoucherResponse.State {
+        val stringValue = decoder.decodeSerializableValue(String.serializer())
+        return when (stringValue) {
+            "initiated" -> ApiTicketingVoucherResponse.State.INITIATED
+            "cancelled" -> ApiTicketingVoucherResponse.State.CANCELLED
+            "issued" -> ApiTicketingVoucherResponse.State.ISSUED
+            "redeemed" -> ApiTicketingVoucherResponse.State.REDEEMED
+            else -> ApiTicketingVoucherResponse.State.UNSUPPORTED
+        }
+    }
 }
