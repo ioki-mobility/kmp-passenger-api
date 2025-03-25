@@ -1,5 +1,6 @@
 package com.ioki.passenger.api.internal.plugins
 
+import io.kotest.matchers.shouldBe
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
@@ -13,7 +14,6 @@ import io.ktor.utils.io.ByteReadChannel
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
-import kotlin.test.expect
 
 internal class HttpLoggingPluginTest {
 
@@ -47,7 +47,7 @@ internal class HttpLoggingPluginTest {
             "Date: Sun, 06 Nov 1994 08:49:37 GMT",
             "{\"ip\":\"127.0.0.1\"}",
         )
-        expect(expected) { logText }
+        logText shouldBe expected
     }
 
     @Test
@@ -83,6 +83,6 @@ internal class HttpLoggingPluginTest {
             "Date: Sun, 06 Nov 1994 08:49:37 GMT",
             "{\"ip\":\"127.0.0.1\"}",
         )
-        expect(expected) { logText }
+        logText shouldBe expected
     }
 }

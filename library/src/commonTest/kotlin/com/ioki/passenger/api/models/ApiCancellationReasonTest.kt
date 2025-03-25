@@ -1,15 +1,13 @@
 package com.ioki.passenger.api.models
 
+import io.kotest.matchers.shouldBe
 import kotlin.test.Test
-import kotlin.test.expect
 
 internal class ApiCancellationReasonTest {
     internal class ApiCancellationReasonTestExtra {
         @Test
         fun allCasesAreTested() {
-            expect(ApiCancellationReason.entries.size) {
-                ApiCancellationReasonSerializationTest.data().size
-            }
+            ApiCancellationReason.entries.size shouldBe ApiCancellationReasonSerializationTest.data().size
         }
     }
 

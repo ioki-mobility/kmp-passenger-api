@@ -2,6 +2,8 @@ package com.ioki.passenger.api.internal.plugins
 
 import com.ioki.passenger.api.AccessTokenProvider
 import com.ioki.passenger.api.internal.authorisation.createAuthHeaderProvider
+import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.matchers.shouldBe
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
@@ -13,9 +15,6 @@ import io.ktor.http.headers
 import io.ktor.utils.io.ByteReadChannel
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
-import kotlin.test.assertFailsWith
-import kotlin.test.assertIs
-import kotlin.test.expect
 
 internal class AuthorizationPluginTest {
 
@@ -39,12 +38,11 @@ internal class AuthorizationPluginTest {
         val apiClient = HttpClient(mockEngine) {
             install(AuthorizationPlugin)
         }
-        val exception = assertFailsWith<AccessTokenUnavailableException> {
+        shouldThrow<AccessTokenUnavailableException> {
             apiClient.get("http://localhost:8080") {
                 header(HttpHeaders.Authorization, fakeAuthProvider.provide())
             }
         }
-        assertIs<AccessTokenUnavailableException>(exception)
     }
 
     @Test
@@ -71,6 +69,6 @@ internal class AuthorizationPluginTest {
         val result = apiClient.get("http://localhost:8080") {
             header(HttpHeaders.Authorization, fakeAuthProvider.provide())
         }
-        expect(HttpStatusCode.OK) { result.status }
+        result.status shouldBe HttpStatusCode.OK
     }
 }
