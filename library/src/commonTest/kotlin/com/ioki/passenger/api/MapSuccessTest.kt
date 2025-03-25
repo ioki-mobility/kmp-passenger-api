@@ -4,14 +4,14 @@ import com.ioki.passenger.api.models.ApiBody
 import com.ioki.passenger.api.models.ApiClientInfoResponse
 import com.ioki.passenger.api.result.SuccessData
 import com.ioki.result.Result
+import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.types.shouldBeInstanceOf
 import io.ktor.client.request.get
 import io.ktor.http.HttpStatusCode
 import io.ktor.utils.io.ByteReadChannel
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import kotlin.test.assertIs
 
 class MapSuccessTest {
 
@@ -55,9 +55,9 @@ class MapSuccessTest {
 
         val result = mapSuccess<ApiBody<ApiClientInfoResponse>, ApiClientInfoResponse>(response)
 
-        assertIs<Result.Success<SuccessData<ApiClientInfoResponse>>>(result)
-        assertEquals(result.data.value, apiClientInfoResponse)
-        assertEquals(result.data.meta, ApiBody.Meta(1, true))
+        result.shouldBeInstanceOf<Result.Success<SuccessData<ApiClientInfoResponse>>>()
+        result.data.value shouldBe apiClientInfoResponse
+        result.data.meta shouldBe ApiBody.Meta(1, true)
     }
 
     @Test
@@ -82,9 +82,9 @@ class MapSuccessTest {
 
         val result = mapSuccess<ApiClientInfoResponse, ApiClientInfoResponse>(response)
 
-        assertIs<Result.Success<SuccessData<ApiClientInfoResponse>>>(result)
-        assertEquals(result.data.value, apiClientInfoResponse)
-        assertEquals(result.data.meta, null)
+        result.shouldBeInstanceOf<Result.Success<SuccessData<ApiClientInfoResponse>>>()
+        result.data.value shouldBe apiClientInfoResponse
+        result.data.meta shouldBe null
     }
 
     @Test
@@ -103,7 +103,7 @@ class MapSuccessTest {
         val fakeHttpClient = FakeHttpClient(HttpStatusCode.OK, content)
         val response = fakeHttpClient.get("https://127.0.0.1")
 
-        assertFailsWith<IllegalArgumentException> {
+        shouldThrow<IllegalArgumentException> {
             mapSuccess<ApiBody<ApiClientInfoResponse?>, ApiClientInfoResponse>(response)
         }
     }
