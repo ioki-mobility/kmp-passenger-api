@@ -43,6 +43,7 @@ import io.ktor.client.request.patch
 import io.ktor.client.request.post
 import io.ktor.client.request.put
 import io.ktor.client.request.setBody
+import io.ktor.client.request.url
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.parameters
 import kotlinx.datetime.Instant
@@ -103,20 +104,24 @@ internal class IokiApi(
     suspend fun getRides(type: String, page: Int = 1, perPage: Int = 10): HttpResponse =
         client.get("/api/passenger/rides") {
             header("Authorization", accessToken)
-            parameters {
-                append("filter", type)
-                append("page", page.toString())
-                append("per_page", perPage.toString())
-            }
+            url.parameters.appendAll(
+                parameters {
+                    append("filter", type)
+                    append("page", page.toString())
+                    append("per_page", perPage.toString())
+                },
+            )
         }
 
     suspend fun getRideSeriesList(page: Int = 1, perPage: Int = 10): HttpResponse =
         client.get("/api/passenger/ride_series") {
             header("Authorization", accessToken)
-            parameters {
-                append("page", page.toString())
-                append("per_page", perPage.toString())
-            }
+            url.parameters.appendAll(
+                parameters {
+                    append("page", page.toString())
+                    append("per_page", perPage.toString())
+                },
+            )
         }
 
     suspend fun getRideSeries(rideSeriesId: String): HttpResponse =
@@ -205,8 +210,13 @@ internal class IokiApi(
 
     suspend fun requestPublicTransportSchedules(url: String, time: Instant): HttpResponse = client.get(url) {
         header("Authorization", accessToken)
-        parameters {
-            append("time", time.toString())
+        url {
+            url(url)
+            parameters.appendAll(
+                parameters {
+                    append("time", time.toString())
+                },
+            )
         }
     }
 
@@ -330,14 +340,16 @@ internal class IokiApi(
         ymax: Float?,
     ): HttpResponse = client.get("/api/passenger/stations") {
         header("Authorization", accessToken)
-        parameters {
-            append("query", query)
-            append("product_id", productId)
-            append("xmin", xmin.toString())
-            append("xmax", xmax.toString())
-            append("ymin", ymin.toString())
-            append("ymax", ymax.toString())
-        }
+        url.parameters.appendAll(
+            parameters {
+                append("query", query)
+                append("product_id", productId)
+                xmin?.let { append("xmin", it.toString()) }
+                xmax?.let { append("xmax", it.toString()) }
+                ymin?.let { append("ymin", it.toString()) }
+                ymax?.let { append("ymax", it.toString()) }
+            },
+        )
     }
 
     suspend fun getVenues(): HttpResponse = client.get("/api/passenger/venues") {
@@ -389,12 +401,14 @@ internal class IokiApi(
         perPage: Int = 10,
     ): HttpResponse = client.get("/api/passenger/ticketing/products") {
         header("Authorization", accessToken)
-        parameters {
-            append("filter", filter)
-            append("ride_id", rideId.toString())
-            append("page", page.toString())
-            append("per_page", perPage.toString())
-        }
+        url.parameters.appendAll(
+            parameters {
+                append("filter", filter)
+                rideId?.let { append("ride_id", it.toString()) }
+                append("page", page.toString())
+                append("per_page", perPage.toString())
+            },
+        )
     }
 
     suspend fun purchaseTicketingProduct(id: String, body: ApiBody<ApiPurchaseTicketingProductRequest>): HttpResponse =
@@ -406,21 +420,25 @@ internal class IokiApi(
     suspend fun getActiveUserTicketingVouchers(page: Int, perPage: Int = 10): HttpResponse =
         client.get("/api/passenger/ticketing/vouchers") {
             header("Authorization", accessToken)
-            parameters {
-                append("page", page.toString())
-                append("filter", "active")
-                append("per_page", perPage.toString())
-            }
+            url.parameters.appendAll(
+                parameters {
+                    append("page", page.toString())
+                    append("filter", "active")
+                    append("per_page", perPage.toString())
+                },
+            )
         }
 
     suspend fun getInactiveUserTicketingVouchers(page: Int, perPage: Int = 10): HttpResponse =
         client.get("/api/passenger/ticketing/vouchers") {
             header("Authorization", accessToken)
-            parameters {
-                append("page", page.toString())
-                append("filter", "inactive")
-                append("per_page", perPage.toString())
-            }
+            url.parameters.appendAll(
+                parameters {
+                    append("page", page.toString())
+                    append("filter", "inactive")
+                    append("per_page", perPage.toString())
+                },
+            )
         }
 
     suspend fun getUserTicketingVoucher(id: String): HttpResponse =
