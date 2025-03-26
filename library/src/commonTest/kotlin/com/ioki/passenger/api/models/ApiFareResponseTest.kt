@@ -12,7 +12,7 @@ internal class ApiFareResponseTest : IokiApiModelTest() {
                 bookingPrice = ApiMoney(100, "EUR"),
                 bookingPriceType = ApiFareResponse.BookingPriceType.MAX,
                 finalPrice = ApiMoney(95, "EUR"),
-                showCustomMessage = false,
+                externalPricingCustomMessage = "custom_message",
             ),
             fare,
         )
@@ -27,7 +27,7 @@ internal class ApiFareResponseTest : IokiApiModelTest() {
                 bookingPrice = ApiMoney(100, "EUR"),
                 bookingPriceType = ApiFareResponse.BookingPriceType.ESTIMATE,
                 finalPrice = null,
-                showCustomMessage = false,
+                externalPricingCustomMessage = null,
             ),
             fareMinimal,
         )
@@ -48,7 +48,7 @@ private val fare =
     "amount": 95,
     "currency": "EUR"
   },
-  "show_custom_message": false
+  "custom_message_for_external_pricing": "custom_message"
 }
 """
 
@@ -61,7 +61,6 @@ private val fareMinimal =
     "amount": 100,
     "currency": "EUR"
   },
-  "booking_price_type": "estimate",
-  "show_custom_message": false
+  "booking_price_type": "estimate"
 }
 """

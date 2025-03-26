@@ -92,7 +92,6 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                     bookingPriceType = ApiFareResponse.BookingPriceType.FIXED,
                     id = "far_123",
                     bookingPrice = ApiMoney(amount = 1000, currency = "EUR"),
-                    showCustomMessage = false,
                 ),
                 booking = ApiBooking(verificationCode = "ABC123"),
                 rating = ApiRatingResponse(
@@ -147,7 +146,6 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                             bookingPriceType = ApiFareResponse.BookingPriceType.FIXED,
                             id = "far_123",
                             bookingPrice = ApiMoney(1000, "EUR"),
-                            showCustomMessage = false,
                         ),
                         hops = listOf(
                             ApiOfferedSolution.Hop(
@@ -189,7 +187,6 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                         bookingPriceType = ApiFareResponse.BookingPriceType.FIXED,
                         id = "far_123",
                         bookingPrice = ApiMoney(1000, "EUR"),
-                        showCustomMessage = false,
                     ),
                     hops = listOf(
                         ApiOfferedSolution.Hop(
