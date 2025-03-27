@@ -12,7 +12,7 @@ internal class ApiFareResponseTest : IokiApiModelTest() {
                 bookingPrice = ApiMoney(100, "EUR"),
                 bookingPriceType = ApiFareResponse.BookingPriceType.MAX,
                 finalPrice = ApiMoney(95, "EUR"),
-                externalPricingCustomMessage = "custom_message",
+                customMessageForExternalPricing = "custom_message",
             ),
             fare,
         )
@@ -27,7 +27,7 @@ internal class ApiFareResponseTest : IokiApiModelTest() {
                 bookingPrice = ApiMoney(100, "EUR"),
                 bookingPriceType = ApiFareResponse.BookingPriceType.ESTIMATE,
                 finalPrice = null,
-                externalPricingCustomMessage = null,
+                customMessageForExternalPricing = null,
             ),
             fareMinimal,
         )

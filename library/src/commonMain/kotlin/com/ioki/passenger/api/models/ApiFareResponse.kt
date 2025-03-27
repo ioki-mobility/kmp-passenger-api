@@ -11,7 +11,7 @@ public data class ApiFareResponse(
     @SerialName(value = "booking_price_type")
     val bookingPriceType: BookingPriceType = BookingPriceType.UNSUPPORTED,
     @SerialName(value = "final_price") val finalPrice: ApiMoney?,
-    @SerialName(value = "custom_message_for_external_pricing") val externalPricingCustomMessage: String?,
+    @SerialName(value = "custom_message_for_external_pricing") val customMessageForExternalPricing: String?,
 ) : Entity {
     @Serializable
     public enum class BookingPriceType {

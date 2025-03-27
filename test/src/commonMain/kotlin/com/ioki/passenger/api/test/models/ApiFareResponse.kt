@@ -16,5 +16,5 @@ public fun createApiFareResponse(
     bookingPrice = bookingPrice,
     bookingPriceType = bookingPriceType,
     finalPrice = finalPrice,
-    externalPricingCustomMessage = externalPricingCustomMessage,
+    customMessageForExternalPricing = externalPricingCustomMessage,
 )
