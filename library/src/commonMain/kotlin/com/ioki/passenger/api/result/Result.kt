@@ -3,17 +3,23 @@ package com.ioki.passenger.api.result
 import com.ioki.passenger.api.models.ApiBody
 import com.ioki.passenger.api.models.ApiErrorBody
 import com.ioki.result.Result
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
 public typealias ApiResult<T> = Result<SuccessData<T>, Error>
 
 public data class SuccessData<out T>(val value: T, val meta: ApiBody.Meta? = null)
 
+@OptIn(ExperimentalObjCName::class)
+@ObjCName("valueExt")
 public val <T> Result.Success<SuccessData<T>>.value: T
     get() = this.data.value
 
 public val <T> Result.Success<SuccessData<T>>.meta: ApiBody.Meta?
     get() = this.data.meta
 
+@OptIn(ExperimentalObjCName::class)
+@ObjCName("ApiError")
 public sealed class Error {
     public sealed class Api : Error() {
         public abstract val errors: List<ApiErrorBody.ApiError>
