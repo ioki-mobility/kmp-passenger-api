@@ -9,12 +9,12 @@ public fun createApiFareResponse(
     bookingPrice: ApiMoney = createApiMoney(),
     bookingPriceType: ApiFareResponse.BookingPriceType = ApiFareResponse.BookingPriceType.UNSUPPORTED,
     finalPrice: ApiMoney? = null,
-    showCustomMessage: Boolean = false,
+    externalPricingCustomMessage: String? = null,
 ): ApiFareResponse = ApiFareResponse(
     id = id,
     version = version,
     bookingPrice = bookingPrice,
     bookingPriceType = bookingPriceType,
     finalPrice = finalPrice,
-    showCustomMessage = showCustomMessage,
+    customMessageForExternalPricing = externalPricingCustomMessage,
 )
