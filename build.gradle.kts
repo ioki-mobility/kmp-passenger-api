@@ -5,6 +5,6 @@ plugins {
 
 subprojects.forEach {
     it.group = "com.ioki"
-    it.version = "0.5.0-SNAPSHOT"
+    it.version = "0.5.0"
 }
 
