@@ -2,13 +2,13 @@ package com.ioki.passenger.api
 
 import com.ioki.passenger.api.models.ApiErrorBody
 import com.ioki.passenger.api.result.Error
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.types.shouldBeInstanceOf
 import io.ktor.client.request.get
 import io.ktor.http.HttpStatusCode
 import io.ktor.utils.io.ByteReadChannel
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 internal class MapApiErrorTest {
 
@@ -35,8 +35,8 @@ internal class MapApiErrorTest {
 
         val result = mapApiError(fakeResponse, listOf(fakeApiErrorInterceptor))
 
-        assertTrue { result.error is Error.Api.Intercepted }
-        assertEquals(HttpStatusCode.NotAcceptable.value, result.error.httpStatusCode)
+        result.error.shouldBeInstanceOf<Error.Api.Intercepted>()
+        result.error.httpStatusCode shouldBe HttpStatusCode.NotAcceptable.value
     }
 
     @Test
@@ -52,8 +52,8 @@ internal class MapApiErrorTest {
 
         val result = mapApiError(fakeResponse, listOf(fakeApiErrorInterceptor))
 
-        assertTrue { result.error is Error.Api.Intercepted }
-        assertEquals(HttpStatusCode.Unauthorized.value, result.error.httpStatusCode)
+        result.error.shouldBeInstanceOf<Error.Api.Intercepted>()
+        result.error.httpStatusCode shouldBe HttpStatusCode.Unauthorized.value
     }
 
     @Test
@@ -69,8 +69,8 @@ internal class MapApiErrorTest {
 
         val result = mapApiError(fakeResponse, listOf(fakeApiErrorInterceptor))
 
-        assertTrue { result.error is Error.Api.Generic }
-        assertEquals(HttpStatusCode.BadGateway.value, result.error.httpStatusCode)
+        result.error.shouldBeInstanceOf<Error.Api.Generic>()
+        result.error.httpStatusCode shouldBe HttpStatusCode.BadGateway.value
     }
 
     @Test
@@ -89,7 +89,7 @@ internal class MapApiErrorTest {
 
         val result = mapApiError(fakeResponse, listOf())
 
-        assertTrue { result.error is Error.Api.Generic }
-        assertEquals(HttpStatusCode.NotAcceptable.value, result.error.httpStatusCode)
+        result.error.shouldBeInstanceOf<Error.Api.Generic>()
+        result.error.httpStatusCode shouldBe HttpStatusCode.NotAcceptable.value
     }
 }
