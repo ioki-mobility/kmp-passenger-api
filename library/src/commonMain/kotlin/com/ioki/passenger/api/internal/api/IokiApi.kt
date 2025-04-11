@@ -26,9 +26,11 @@ import com.ioki.passenger.api.models.ApiRedeemPromoCodeRequest
 import com.ioki.passenger.api.models.ApiRedeemReferralCodeRequest
 import com.ioki.passenger.api.models.ApiRenewTicketingVoucherRequest
 import com.ioki.passenger.api.models.ApiRequestTokenRequest
+import com.ioki.passenger.api.models.ApiResettleDebitsRequest
 import com.ioki.passenger.api.models.ApiRideInquiryRequest
 import com.ioki.passenger.api.models.ApiRideRequest
 import com.ioki.passenger.api.models.ApiRideSeriesRequest
+import com.ioki.passenger.api.models.ApiSettleDebitRequest
 import com.ioki.passenger.api.models.ApiSignUpRequest
 import com.ioki.passenger.api.models.ApiUpdatePassengersForRideRequest
 import com.ioki.passenger.api.models.ApiUpdatePaymentMethodForRideRequest
@@ -46,6 +48,7 @@ import io.ktor.client.request.setBody
 import io.ktor.client.request.url
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.parameters
+import io.ktor.util.StringValues
 import kotlinx.datetime.Instant
 
 internal class IokiApi(
@@ -464,5 +467,26 @@ internal class IokiApi(
     suspend fun getRatingCriteria(rideId: String): HttpResponse =
         client.get("/api/passenger/rides/$rideId/rating_criteria") {
             header("Authorization", accessToken)
+        }
+
+    suspend fun getPurchases(filters: StringValues): HttpResponse = client.get(urlString = "/api/passenger/purchases") {
+        header("Authorization", accessToken)
+        url.parameters.appendAll(filters)
+    }
+
+    suspend fun getPurchase(id: String): HttpResponse = client.get(urlString = "/api/passenger/purchases/$id") {
+        header("Authorization", accessToken)
+    }
+
+    suspend fun settleDebit(purchaseId: String, body: ApiBody<ApiSettleDebitRequest>): HttpResponse =
+        client.patch(urlString = "/api/passenger/purchases/$purchaseId/settle_debit") {
+            header("Authorization", accessToken)
+            setBody(body)
+        }
+
+    suspend fun resettleDebits(body: ApiBody<ApiResettleDebitsRequest>): HttpResponse =
+        client.patch(urlString = "/api/passenger/purchases/resettle_debits") {
+            header("Authorization", accessToken)
+            setBody(body)
         }
 }

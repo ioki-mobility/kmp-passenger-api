@@ -41,6 +41,8 @@ import com.ioki.passenger.api.models.ApiPersonalDiscountTypeResponse
 import com.ioki.passenger.api.models.ApiPhoneVerificationRequest
 import com.ioki.passenger.api.models.ApiPhoneVerificationResponse
 import com.ioki.passenger.api.models.ApiProviderNotificationSettingsResponse
+import com.ioki.passenger.api.models.ApiPurchaseFilter
+import com.ioki.passenger.api.models.ApiPurchaseResponse
 import com.ioki.passenger.api.models.ApiPurchaseTicketingProductRequest
 import com.ioki.passenger.api.models.ApiPurchasedCreditPackageResponse
 import com.ioki.passenger.api.models.ApiPurchasingCreditPackageRequest
@@ -53,6 +55,7 @@ import com.ioki.passenger.api.models.ApiRedeemedPromoCodeResponse
 import com.ioki.passenger.api.models.ApiRenewTicketingVoucherRequest
 import com.ioki.passenger.api.models.ApiRequestTokenRequest
 import com.ioki.passenger.api.models.ApiRequestTokenResponse
+import com.ioki.passenger.api.models.ApiResettleDebitsRequest
 import com.ioki.passenger.api.models.ApiRideFilterType
 import com.ioki.passenger.api.models.ApiRideInquiryRequest
 import com.ioki.passenger.api.models.ApiRideInquiryResponse
@@ -61,6 +64,7 @@ import com.ioki.passenger.api.models.ApiRideResponse
 import com.ioki.passenger.api.models.ApiRideSeriesRequest
 import com.ioki.passenger.api.models.ApiRideSeriesResponse
 import com.ioki.passenger.api.models.ApiScheduleResponse
+import com.ioki.passenger.api.models.ApiSettleDebitRequest
 import com.ioki.passenger.api.models.ApiSignUpRequest
 import com.ioki.passenger.api.models.ApiStationResponse
 import com.ioki.passenger.api.models.ApiStationsRequest
@@ -78,6 +82,7 @@ import com.ioki.passenger.api.models.ApiUpdateUserRequest
 import com.ioki.passenger.api.models.ApiUserFlagsRequest
 import com.ioki.passenger.api.models.ApiUserNotificationSettingsResponse
 import com.ioki.passenger.api.models.ApiVenueResponse
+import com.ioki.passenger.api.models.toStringValues
 import com.ioki.passenger.api.result.ApiResult
 import com.ioki.passenger.api.result.Error
 import com.ioki.passenger.api.result.HttpStatusCode
@@ -86,8 +91,8 @@ import com.ioki.result.Result
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.isSuccess
-import kotlinx.datetime.Instant
 import kotlin.coroutines.cancellation.CancellationException
+import kotlinx.datetime.Instant
 
 public fun IokiService(
     baseUrl: String,
@@ -136,6 +141,7 @@ public interface IokiService :
     StripeService,
     PayPalService,
     PaymentService,
+    PurchaseService,
     PublicTransportService,
     TicketingService,
     StationsService,
@@ -370,6 +376,13 @@ public interface StationsService {
 
 public interface VenuesService {
     public suspend fun getVenues(): ApiResult<List<ApiVenueResponse>>
+}
+
+public interface PurchaseService {
+    public suspend fun getPurchases(filter: ApiPurchaseFilter): ApiResult<List<ApiPurchaseResponse>>
+    public suspend fun getPurchase(purchaseId: String): ApiResult<ApiPurchaseResponse>
+    public suspend fun settleDebit(purchaseId: String, request: ApiSettleDebitRequest): ApiResult<ApiPurchaseResponse>
+    public suspend fun resettleDebits(request: ApiResettleDebitsRequest): ApiResult<List<ApiPurchaseResponse>>
 }
 
 private class DefaultIokiService(
@@ -741,6 +754,24 @@ private class DefaultIokiService(
     override suspend fun payFailedPayments(request: ApiFailedPaymentRequest): ApiResult<ApiFailedPaymentResponse> =
         apiCall<ApiBody<ApiFailedPaymentResponse>, ApiFailedPaymentResponse> {
             payFailedPayments(body = ApiBody(request))
+        }
+
+    override suspend fun getPurchases(filter: ApiPurchaseFilter): ApiResult<List<ApiPurchaseResponse>> =
+        apiCall<ApiBody<List<ApiPurchaseResponse>>, List<ApiPurchaseResponse>> { getPurchases(filter.toStringValues()) }
+
+    override suspend fun getPurchase(purchaseId: String): ApiResult<ApiPurchaseResponse> =
+        apiCall<ApiBody<ApiPurchaseResponse>, ApiPurchaseResponse> { getPurchase(id = purchaseId) }
+
+    override suspend fun settleDebit(
+        purchaseId: String,
+        request: ApiSettleDebitRequest,
+    ): ApiResult<ApiPurchaseResponse> = apiCall<ApiBody<ApiPurchaseResponse>, ApiPurchaseResponse> {
+        settleDebit(purchaseId = purchaseId, body = ApiBody(request))
+    }
+
+    override suspend fun resettleDebits(request: ApiResettleDebitsRequest): ApiResult<List<ApiPurchaseResponse>> =
+        apiCall<ApiBody<List<ApiPurchaseResponse>>, List<ApiPurchaseResponse>> {
+            resettleDebits(body = ApiBody(request))
         }
 
     override suspend fun getAllTicketingProducts(
