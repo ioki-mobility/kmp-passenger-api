@@ -3,7 +3,6 @@ package com.ioki.passenger.api.models
 import com.ioki.passenger.api.test.models.createPaymentMethod
 import kotlin.test.Test
 
-
 internal class ApiResettleDebitsRequestTest : IokiApiModelTest() {
     @Test
     fun serialization() {

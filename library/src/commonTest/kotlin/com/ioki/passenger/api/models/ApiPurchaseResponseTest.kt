@@ -53,7 +53,7 @@ internal class ApiPurchaseResponseTest : IokiApiModelTest() {
                         createdAt = Instant.parse("2023-07-19T13:17:42Z"),
                         updatedAt = Instant.parse("2023-07-20T13:17:42Z"),
                     ),
-                )
+                ),
             ),
             purchaseResponse,
         )
@@ -69,7 +69,7 @@ internal class ApiPurchaseResponseTest : IokiApiModelTest() {
                 createdAt = Instant.parse("2023-07-19T13:17:42Z"),
                 chargeSplits = emptyList(),
                 state = ApiPurchaseState.PENDING,
-                amount = ApiMoney(amount = 25, currency ="USD"),
+                amount = ApiMoney(amount = 25, currency = "USD"),
                 invoices = emptyList(),
                 reason = null,
                 debitPurchaseId = null,
