@@ -13,6 +13,16 @@ internal class ApiFareResponseTest : IokiApiModelTest() {
                 bookingPriceType = ApiFareResponse.BookingPriceType.MAX,
                 finalPrice = ApiMoney(95, "EUR"),
                 customMessageForExternalPricing = "custom_message",
+                lineItems = listOf(
+                    ApiLineItem(
+                        position = 0,
+                        quantity = 2,
+                        description = "descriptionA",
+                        title = "titleA",
+                        amountGross = ApiMoney(amount = 20, currency = "EUR"),
+                        amountNet = ApiMoney(amount = 16, currency = "EUR"),
+                    ),
+                ),
             ),
             fare,
         )
@@ -28,6 +38,7 @@ internal class ApiFareResponseTest : IokiApiModelTest() {
                 bookingPriceType = ApiFareResponse.BookingPriceType.ESTIMATE,
                 finalPrice = null,
                 customMessageForExternalPricing = null,
+                lineItems = emptyList(),
             ),
             fareMinimal,
         )
@@ -48,7 +59,23 @@ private val fare =
     "amount": 95,
     "currency": "EUR"
   },
-  "custom_message_for_external_pricing": "custom_message"
+  "custom_message_for_external_pricing": "custom_message",
+    "line_items": [
+        {
+        "position": 0,
+        "quantity": 2,
+        "description": "descriptionA",
+        "title": "titleA",
+        "amount_gross": {
+            "amount": 20,
+            "currency": "EUR"
+        },
+        "amount_net": {
+            "amount": 16,
+            "currency": "EUR"
+        }
+        }
+    ]
 }
 """
 
@@ -61,6 +88,7 @@ private val fareMinimal =
     "amount": 100,
     "currency": "EUR"
   },
-  "booking_price_type": "estimate"
+  "booking_price_type": "estimate",
+  "line_items": []
 }
 """

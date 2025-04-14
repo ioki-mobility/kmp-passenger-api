@@ -414,7 +414,8 @@ private val rideResponse =
       "currency": "EUR"
     },
     "booking_price_type": "fixed",
-    "show_custom_message": false
+    "show_custom_message": false,
+    "line_items": []
   },
   "booking": {
     "verification_code": "ABC123"
@@ -488,7 +489,8 @@ private val rideResponse =
           "currency": "EUR"
         },
         "booking_price_type": "fixed",
-        "show_custom_message": false
+        "show_custom_message": false,
+        "line_items": []
       },
       "hops": [
         {
@@ -534,7 +536,8 @@ private val rideResponse =
           "currency": "EUR"
         },
         "booking_price_type": "fixed",
-        "show_custom_message": false
+        "show_custom_message": false,
+        "line_items": []
       },
       "hops": [
         {

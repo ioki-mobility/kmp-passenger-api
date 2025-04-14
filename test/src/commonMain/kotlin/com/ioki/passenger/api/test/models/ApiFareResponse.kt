@@ -1,6 +1,7 @@
 package com.ioki.passenger.api.test.models
 
 import com.ioki.passenger.api.models.ApiFareResponse
+import com.ioki.passenger.api.models.ApiLineItem
 import com.ioki.passenger.api.models.ApiMoney
 
 public fun createApiFareResponse(
@@ -10,11 +11,13 @@ public fun createApiFareResponse(
     bookingPriceType: ApiFareResponse.BookingPriceType = ApiFareResponse.BookingPriceType.UNSUPPORTED,
     finalPrice: ApiMoney? = null,
     externalPricingCustomMessage: String? = null,
+    lineItems: List<ApiLineItem> = emptyList(),
 ): ApiFareResponse = ApiFareResponse(
     id = id,
     version = version,
     bookingPrice = bookingPrice,
     bookingPriceType = bookingPriceType,
     finalPrice = finalPrice,
+    lineItems = lineItems,
     customMessageForExternalPricing = externalPricingCustomMessage,
 )
