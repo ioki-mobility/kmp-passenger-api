@@ -17,19 +17,13 @@ public data class ApiPurchaseResponse(
     @SerialName(value = "updated_at") val updatedAt: Instant?,
     @SerialName(value = "forfeited_at") val forfeitedAt: Instant?,
     @SerialName(value = "succeeded_at") val succeededAt: Instant?,
-    @SerialName(value = "payment_method") val paymentMethod: PaymentMethod?,
+    @SerialName(value = "payment_method") val paymentMethod: ApiPaymentMethodResponse?,
     @SerialName(value = "charge_splits") val chargeSplits: List<ChargeSplits>,
     val state: ApiPurchaseState,
     val amount: ApiMoney,
     val reason: String?,
     val invoices: List<Invoice>,
 ) {
-    @Serializable
-    public data class PaymentMethod(
-        @SerialName(value = "payment_method_type") val paymentMethodType: ApiPaymentMethodType,
-        val id: String?,
-    )
-
     @Serializable
     public data class ChargeSplits(
         @SerialName(value = "purchase_id") val purchaseId: String,
@@ -42,7 +36,7 @@ public data class ApiPurchaseResponse(
         @SerialName(value = "charge_type") val chargeType: ChargeType,
         @SerialName(value = "user_id") val userId: String,
         @SerialName(value = "payment_charge_id") val paymentChargeId: String?,
-        @SerialName(value = "payment_method") val paymentMethod: PaymentMethod?,
+        @SerialName(value = "payment_method") val paymentMethod: ApiPaymentMethodResponse?,
         @SerialName(value = "purchase_ids") val purchaseIds: List<String>,
         val reservation: Boolean,
         val state: State,

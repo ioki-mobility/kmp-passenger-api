@@ -1,10 +1,10 @@
 package com.ioki.passenger.api.test.models
 
 import com.ioki.passenger.api.models.ApiMoney
+import com.ioki.passenger.api.models.ApiPaymentMethodResponse
 import com.ioki.passenger.api.models.ApiPurchaseResponse
 import com.ioki.passenger.api.models.ApiPurchaseResponse.ChargeSplits
 import com.ioki.passenger.api.models.ApiPurchaseResponse.Invoice
-import com.ioki.passenger.api.models.ApiPurchaseResponse.PaymentMethod
 import com.ioki.passenger.api.models.ApiPurchaseResponse.CreatorType
 import com.ioki.passenger.api.models.ApiPurchasableType
 import com.ioki.passenger.api.models.ApiPurchaseState
@@ -25,7 +25,7 @@ public fun createApiPurchaseResponse(
     forfeitedAt: Instant? = null,
     succeededAt: Instant? = null,
     reason: String? = null,
-    paymentMethod: PaymentMethod? = null,
+    paymentMethod: ApiPaymentMethodResponse? = null,
     chargeSplits: List<ChargeSplits> = emptyList(),
     amount: ApiMoney = createApiMoney(),
     invoices: List<Invoice> = emptyList(),

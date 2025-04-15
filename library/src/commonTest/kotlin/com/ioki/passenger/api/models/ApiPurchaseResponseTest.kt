@@ -1,6 +1,7 @@
 package com.ioki.passenger.api.models
 
 import com.ioki.passenger.api.test.models.createApiMoney
+import com.ioki.passenger.api.test.models.createApiPaymentMethodResponseSummary
 import kotlin.test.Test
 import kotlinx.datetime.Instant
 
@@ -20,9 +21,13 @@ internal class ApiPurchaseResponseTest : IokiApiModelTest() {
                 updatedAt = Instant.parse("2023-07-20T13:17:42Z"),
                 forfeitedAt = Instant.parse("2023-07-20T11:17:42Z"),
                 succeededAt = Instant.parse("2023-07-20T13:17:42Z"),
-                paymentMethod = ApiPurchaseResponse.PaymentMethod(
+                paymentMethod = ApiPaymentMethodResponse(
                     paymentMethodType = ApiPaymentMethodType.SERVICE_CREDITS,
                     id = "paymentMethodId",
+                    summary = createApiPaymentMethodResponseSummary(
+                        kind = ApiPaymentMethodResponse.Summary.Kind.PAYPAL,
+                        title = "paypalTitle",
+                    ),
                 ),
                 chargeSplits = listOf(
                     ApiPurchaseResponse.ChargeSplits(
@@ -102,7 +107,11 @@ private val purchaseResponse =
     "succeeded_at": "2023-07-20T13:17:42Z",
     "payment_method": {
         "payment_method_type": "service_credits",
-        "id": "paymentMethodId"
+        "id": "paymentMethodId",
+        "summary": {
+            "kind": "paypal",
+            "title": "paypalTitle"
+        }
     },
     "charge_splits": [
         {
