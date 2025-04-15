@@ -1,6 +1,6 @@
 package com.ioki.passenger.api.models
 
-import com.ioki.passenger.api.test.models.createPaymentMethod
+import com.ioki.passenger.api.test.models.createApiPaymentMethodRequest
 import kotlin.test.Test
 
 internal class ApiSettleDebitRequestTest : IokiApiModelTest() {
@@ -8,7 +8,7 @@ internal class ApiSettleDebitRequestTest : IokiApiModelTest() {
     fun serialization() {
         testJsonStringCanBeConvertedToModel(
             ApiSettleDebitRequest(
-                paymentMethod = createPaymentMethod(
+                paymentMethod = createApiPaymentMethodRequest(
                     paymentMethodType = ApiPaymentMethodType.STRIPE,
                     id = "paymentMethodId",
                 ),
@@ -22,7 +22,7 @@ internal class ApiSettleDebitRequestTest : IokiApiModelTest() {
     fun serializationMinimal() {
         testJsonStringCanBeConvertedToModel(
             ApiSettleDebitRequest(
-                paymentMethod = createPaymentMethod(
+                paymentMethod = createApiPaymentMethodRequest(
                     paymentMethodType = ApiPaymentMethodType.LOGPAY,
                     id = "paymentMethodId",
                 ),

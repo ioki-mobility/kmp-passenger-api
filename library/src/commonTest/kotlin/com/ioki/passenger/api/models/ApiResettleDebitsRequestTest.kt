@@ -1,6 +1,6 @@
 package com.ioki.passenger.api.models
 
-import com.ioki.passenger.api.test.models.createPaymentMethod
+import com.ioki.passenger.api.test.models.createApiPaymentMethodRequest
 import kotlin.test.Test
 
 internal class ApiResettleDebitsRequestTest : IokiApiModelTest() {
@@ -9,7 +9,7 @@ internal class ApiResettleDebitsRequestTest : IokiApiModelTest() {
         testJsonStringCanBeConvertedToModel(
             ApiResettleDebitsRequest(
                 purchaseIds = listOf("purchaseId1", "purchaseId2"),
-                paymentMethod = createPaymentMethod(
+                paymentMethod = createApiPaymentMethodRequest(
                     paymentMethodType = ApiPaymentMethodType.POS_PAYMENT,
                     id = "paymentMethodId",
                 ),
@@ -25,7 +25,7 @@ internal class ApiResettleDebitsRequestTest : IokiApiModelTest() {
         testJsonStringCanBeConvertedToModel(
             ApiResettleDebitsRequest(
                 purchaseIds = emptyList(),
-                paymentMethod = createPaymentMethod(
+                paymentMethod = createApiPaymentMethodRequest(
                     paymentMethodType = ApiPaymentMethodType.LOGPAY,
                     id = "paymentMethodId",
                 ),
