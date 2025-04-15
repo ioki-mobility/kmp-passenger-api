@@ -19,6 +19,7 @@ import com.ioki.passenger.api.models.ApiLogPayAccountRequest
 import com.ioki.passenger.api.models.ApiPaymentMethodCreationRequest
 import com.ioki.passenger.api.models.ApiPersonalDiscountPurchaseRequest
 import com.ioki.passenger.api.models.ApiPhoneVerificationRequest
+import com.ioki.passenger.api.models.ApiPurchaseFilter
 import com.ioki.passenger.api.models.ApiPurchaseTicketingProductRequest
 import com.ioki.passenger.api.models.ApiPurchasingCreditPackageRequest
 import com.ioki.passenger.api.models.ApiRatingRequest
@@ -50,6 +51,7 @@ import io.ktor.client.statement.HttpResponse
 import io.ktor.http.parameters
 import io.ktor.util.StringValues
 import kotlinx.datetime.Instant
+import kotlinx.serialization.json.Json
 
 internal class IokiApi(
     private val client: IokiHttpClient,
@@ -469,9 +471,11 @@ internal class IokiApi(
             header("Authorization", accessToken)
         }
 
-    suspend fun getPurchases(filters: StringValues): HttpResponse = client.get(urlString = "/api/passenger/purchases") {
+    suspend fun getPurchases(filter: ApiPurchaseFilter): HttpResponse = client.get(
+        urlString = "/api/passenger/purchases",
+    ) {
         header("Authorization", accessToken)
-        url.parameters.appendAll(filters)
+        url.parameters.appendAll(filter.toStringValues())
     }
 
     suspend fun getPurchase(id: String): HttpResponse = client.get(urlString = "/api/passenger/purchases/$id") {
@@ -489,4 +493,17 @@ internal class IokiApi(
             header("Authorization", accessToken)
             setBody(body)
         }
+}
+
+private fun ApiPurchaseFilter.toStringValues(): StringValues = StringValues.build {
+    append("page", page)
+    perPage?.let { append("per_page", it) }
+    since?.let { append("since", it.toString()) }
+    until?.let { append("until", it.toString()) }
+    purchasableId?.let { append("purchasable_id", it) }
+    purchasableType?.let { append("purchasable_type", Json.encodeToString(it).removeSurrounding("\"")) }
+    state?.let { append("state", Json.encodeToString(it).removeSurrounding("\"")) }
+    filter?.let { append("filter", Json.encodeToString(it).removeSurrounding("\"")) }
+    order?.let { append("order", Json.encodeToString(it).removeSurrounding("\"")) }
+    orderBy?.let { append("order_by", Json.encodeToString(it).removeSurrounding("\"")) }
 }

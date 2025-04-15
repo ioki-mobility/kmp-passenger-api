@@ -1,6 +1,5 @@
 package com.ioki.passenger.api.models
 
-import io.ktor.util.StringValues
 import kotlinx.datetime.Instant
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
@@ -8,7 +7,6 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotlinx.serialization.json.Json
 
 @Serializable
 public data class ApiPurchaseFilter(
@@ -64,19 +62,6 @@ internal object ApiPurchaseFilterOrderSerializer :
             else -> ApiPurchaseFilter.Order.ASCENDING
         }
     }
-}
-
-internal fun ApiPurchaseFilter.toStringValues(): StringValues = StringValues.build {
-    append("page", page)
-    perPage?.let { append("per_page", it) }
-    since?.let { append("since", it.toString()) }
-    until?.let { append("until", it.toString()) }
-    purchasableId?.let { append("purchasable_id", it) }
-    purchasableType?.let { append("purchasable_type", Json.encodeToString(it).removeSurrounding("\"")) }
-    state?.let { append("state", Json.encodeToString(it).removeSurrounding("\"")) }
-    filter?.let { append("filter", Json.encodeToString(it).removeSurrounding("\"")) }
-    order?.let { append("order", Json.encodeToString(it).removeSurrounding("\"")) }
-    orderBy?.let { append("order_by", Json.encodeToString(it).removeSurrounding("\"")) }
 }
 
 private object ApiPurchaseFilterOrderBySerializer :

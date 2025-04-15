@@ -6,7 +6,6 @@ import com.ioki.passenger.api.models.ApiPurchasableType
 import com.ioki.passenger.api.models.ApiPurchaseFilter
 import com.ioki.passenger.api.models.ApiPurchaseState
 import com.ioki.passenger.api.models.ApiPurchaseType
-import com.ioki.passenger.api.models.toStringValues
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpStatusCode
@@ -140,7 +139,7 @@ class IokiApiParameters {
         val untilTime = Clock.System.now()
         val parameters = setupParameterTest {
             it.getPurchases(
-                filters = ApiPurchaseFilter(
+                filter = ApiPurchaseFilter(
                     purchasableId = "purchasableId",
                     purchasableType = ApiPurchasableType.BOOKING,
                     state = ApiPurchaseState.FAILED,
@@ -151,7 +150,7 @@ class IokiApiParameters {
                     order = ApiPurchaseFilter.Order.DESCENDING,
                     orderBy = ApiPurchaseFilter.OrderBy.UPDATED_AT,
                     perPage = "100",
-                ).toStringValues(),
+                ),
             )
         }
 

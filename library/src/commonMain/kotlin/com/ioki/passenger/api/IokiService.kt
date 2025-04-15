@@ -82,7 +82,6 @@ import com.ioki.passenger.api.models.ApiUpdateUserRequest
 import com.ioki.passenger.api.models.ApiUserFlagsRequest
 import com.ioki.passenger.api.models.ApiUserNotificationSettingsResponse
 import com.ioki.passenger.api.models.ApiVenueResponse
-import com.ioki.passenger.api.models.toStringValues
 import com.ioki.passenger.api.result.ApiResult
 import com.ioki.passenger.api.result.Error
 import com.ioki.passenger.api.result.HttpStatusCode
@@ -757,7 +756,7 @@ private class DefaultIokiService(
         }
 
     override suspend fun getPurchases(filter: ApiPurchaseFilter): ApiResult<List<ApiPurchaseResponse>> =
-        apiCall<ApiBody<List<ApiPurchaseResponse>>, List<ApiPurchaseResponse>> { getPurchases(filter.toStringValues()) }
+        apiCall<ApiBody<List<ApiPurchaseResponse>>, List<ApiPurchaseResponse>> { getPurchases(filter) }
 
     override suspend fun getPurchase(purchaseId: String): ApiResult<ApiPurchaseResponse> =
         apiCall<ApiBody<ApiPurchaseResponse>, ApiPurchaseResponse> { getPurchase(id = purchaseId) }
