@@ -1,5 +1,6 @@
 package com.ioki.passenger.api.models
 
+import com.ioki.passenger.api.models.ApiFareResponse.LineItem
 import kotlin.test.Test
 
 internal class ApiFareResponseTest : IokiApiModelTest() {
@@ -14,7 +15,7 @@ internal class ApiFareResponseTest : IokiApiModelTest() {
                 finalPrice = ApiMoney(95, "EUR"),
                 customMessageForExternalPricing = "custom_message",
                 lineItems = listOf(
-                    ApiLineItem(
+                    LineItem(
                         position = 0,
                         quantity = 2,
                         description = "descriptionA",
