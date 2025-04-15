@@ -155,8 +155,6 @@ class IokiApiParameters {
             )
         }
 
-        println(parameters)
-
         assertTrue(parameters.contains(name = "page", value = "2"))
         assertTrue(parameters.contains(name = "per_page", value = "100"))
         assertTrue(parameters.contains(name = "purchasable_id", value = "purchasableId"))
