@@ -2,6 +2,10 @@ package com.ioki.passenger.api.internal.api
 
 import com.ioki.passenger.api.FakeHttpClient
 import com.ioki.passenger.api.internal.authorisation.AuthHeaderProvider
+import com.ioki.passenger.api.models.ApiPurchasableType
+import com.ioki.passenger.api.models.ApiPurchaseFilter
+import com.ioki.passenger.api.models.ApiPurchaseState
+import com.ioki.passenger.api.models.ApiPurchaseType
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpStatusCode
@@ -11,6 +15,7 @@ import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Instant
 import kotlin.test.Test
 import kotlin.test.assertTrue
+import kotlinx.datetime.Clock
 
 class IokiApiParameters {
 
@@ -127,6 +132,38 @@ class IokiApiParameters {
 
         assertTrue(parameters.contains("page", "2"))
         assertTrue(parameters.contains("per_page", "100"))
+    }
+
+    @Test
+    fun `test getPurchases parameters`() = runTest {
+        val untilTime = Clock.System.now()
+        val parameters = setupParameterTest {
+            it.getPurchases(
+                filter = ApiPurchaseFilter(
+                    purchasableId = "purchasableId",
+                    purchasableType = ApiPurchasableType.BOOKING,
+                    state = ApiPurchaseState.FAILED,
+                    page = "2",
+                    since = Instant.fromEpochSeconds(671371675),
+                    until = untilTime,
+                    filter = ApiPurchaseType.DEBIT,
+                    order = ApiPurchaseFilter.Order.DESCENDING,
+                    orderBy = ApiPurchaseFilter.OrderBy.UPDATED_AT,
+                    perPage = "100",
+                ),
+            )
+        }
+
+        assertTrue(parameters.contains(name = "page", value = "2"))
+        assertTrue(parameters.contains(name = "per_page", value = "100"))
+        assertTrue(parameters.contains(name = "purchasable_id", value = "purchasableId"))
+        assertTrue(parameters.contains(name = "purchasable_type", value = "Booking"))
+        assertTrue(parameters.contains(name = "state", value = "failed"))
+        assertTrue(parameters.contains(name = "since", value = "1991-04-11T12:07:55Z"))
+        assertTrue(parameters.contains(name = "until", value = untilTime.toString()))
+        assertTrue(parameters.contains(name = "filter", value = "debit"))
+        assertTrue(parameters.contains(name = "order", value = "desc"))
+        assertTrue(parameters.contains(name = "order_by", value = "updated_at"))
     }
 
     private suspend fun setupParameterTest(apiCallToTest: suspend (IokiApi) -> HttpResponse): Parameters {
