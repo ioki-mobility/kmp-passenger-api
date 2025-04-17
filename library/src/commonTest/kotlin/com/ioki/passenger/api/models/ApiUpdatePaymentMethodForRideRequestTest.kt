@@ -10,7 +10,6 @@ internal class ApiUpdatePaymentMethodForRideRequestTest : IokiApiModelTest() {
                 paymentMethod = ApiPaymentMethodRequest(
                     paymentMethodType = ApiPaymentMethodType.STRIPE,
                     id = "pam_123",
-                    summary = null,
                 ),
                 rideVersion = 42,
                 paypalSecureElement = "1234",
