@@ -39,6 +39,7 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(libs.kotlin.test)
+                implementation(libs.kotest.assertions.core)
                 implementation(libs.kotlin.coroutines.test)
                 implementation(libs.ktor.client.mock)
                 implementation(project(":test"))

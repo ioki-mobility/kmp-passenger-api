@@ -1,6 +1,7 @@
 package com.ioki.passenger.api.internal.plugins
 
 import com.ioki.passenger.api.TimeOffsetProvider
+import io.kotest.matchers.shouldBe
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
@@ -15,7 +16,6 @@ import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import kotlin.test.Test
-import kotlin.test.expect
 
 internal class DateHeaderPluginTest {
 
@@ -46,6 +46,6 @@ internal class DateHeaderPluginTest {
         apiClient.get("http://localhost:8080")
 
         val expectedLocalDateTime = LocalDateTime(1994, 11, 6, 8, 49, 37)
-        expect(expectedLocalDateTime) { receivedTime }
+        receivedTime shouldBe expectedLocalDateTime
     }
 }

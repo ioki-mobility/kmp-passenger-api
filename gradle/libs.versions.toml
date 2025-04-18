@@ -8,6 +8,7 @@ ktor = "3.1.2"
 ktlintVersion = "12.2.0"
 kotlinCoroutines = "1.10.2"
 result = "0.3.0"
+kotest = "5.9.1"
 
 [libraries]
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
@@ -23,6 +24,8 @@ ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "kto
 ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
 
 result = { module = "com.ioki.result:result", version.ref = "result" }
+
+kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
 
 [plugins]
 androidLibrary = { id = "com.android.library", version.ref = "agp" }

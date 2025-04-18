@@ -1,13 +1,13 @@
 package com.ioki.passenger.api.models
 
+import io.kotest.matchers.shouldBe
 import kotlin.test.Test
-import kotlin.test.expect
 
 internal class ApiStripeTypeTest {
     internal class ApiStripeTypeTestExtra {
         @Test
         fun allCasesAreTested() {
-            expect(ApiStripeType.entries.size) { ApiStripeTypeSerializationTest.data().size }
+            ApiStripeType.entries.size shouldBe ApiStripeTypeSerializationTest.data().size
         }
     }
 

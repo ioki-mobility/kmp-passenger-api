@@ -1,13 +1,13 @@
 package com.ioki.passenger.api.models
 
+import io.kotest.matchers.shouldBe
 import kotlin.test.Test
-import kotlin.test.expect
 
 internal class ApiNotificationChannelTypeTest {
     internal class ApiNotificationChannelTypeTestExtra {
         @Test
         fun allCasesAreTested() {
-            expect(ApiNotificationChannelType.entries.size) { ApiNotificationChannelTypeSerializationTest.data().size }
+            ApiNotificationChannelType.entries.size shouldBe ApiNotificationChannelTypeSerializationTest.data().size
         }
     }
 
