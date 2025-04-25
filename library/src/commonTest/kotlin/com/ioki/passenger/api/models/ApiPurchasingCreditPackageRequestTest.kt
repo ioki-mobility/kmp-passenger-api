@@ -12,7 +12,6 @@ internal class ApiPurchasingCreditPackageRequestTest : IokiApiModelTest() {
                 paymentMethod = ApiPaymentMethodRequest(
                     paymentMethodType = ApiPaymentMethodType.STRIPE,
                     id = null,
-                    summary = null,
                 ),
                 paypalSecureElement = null,
             ),
@@ -29,7 +28,6 @@ internal class ApiPurchasingCreditPackageRequestTest : IokiApiModelTest() {
                 paymentMethod = ApiPaymentMethodRequest(
                     paymentMethodType = ApiPaymentMethodType.STRIPE,
                     id = null,
-                    summary = null,
                 ),
                 paypalSecureElement = "secure_element",
             ),

@@ -9,7 +9,7 @@ internal class ApiBookingRequestTest : IokiApiModelTest() {
             ApiBookingRequest(
                 rideVersion = 2,
                 solutionId = null,
-                paymentMethod = ApiPaymentMethodRequest(ApiPaymentMethodType.CASH, null, null),
+                paymentMethod = ApiPaymentMethodRequest(paymentMethodType = ApiPaymentMethodType.CASH, id = null),
                 paypalSecureElement = null,
             ),
             bookingRequestMinimal,
@@ -22,7 +22,7 @@ internal class ApiBookingRequestTest : IokiApiModelTest() {
             ApiBookingRequest(
                 rideVersion = 2,
                 solutionId = "solutionId",
-                paymentMethod = ApiPaymentMethodRequest(ApiPaymentMethodType.CASH, null, null),
+                paymentMethod = ApiPaymentMethodRequest(paymentMethodType = ApiPaymentMethodType.CASH, id = "abc123"),
                 paypalSecureElement = "secure_element",
             ),
             bookingRequest,
@@ -46,7 +46,8 @@ private val bookingRequest =
   "ride_version": 2,
   "solution_id": "solutionId",
   "payment_method": {
-    "payment_method_type": "cash"
+    "payment_method_type": "cash",
+    "id": "abc123"
   },
   "paypal_secure_element": "secure_element"
 }
