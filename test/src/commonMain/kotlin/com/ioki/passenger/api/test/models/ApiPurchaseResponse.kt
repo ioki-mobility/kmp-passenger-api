@@ -12,6 +12,7 @@ import com.ioki.passenger.api.models.ApiPurchaseType
 import kotlinx.datetime.Instant
 
 public fun createApiPurchaseResponse(
+    id: String = "",
     purchasableType: ApiPurchasableType = ApiPurchasableType.UNSUPPORTED,
     purchaseType: ApiPurchaseType = ApiPurchaseType.UNSUPPORTED,
     state: ApiPurchaseState = ApiPurchaseState.UNSUPPORTED,
@@ -30,6 +31,7 @@ public fun createApiPurchaseResponse(
     amount: ApiMoney = createApiMoney(),
     invoices: List<Invoice> = emptyList(),
 ): ApiPurchaseResponse = ApiPurchaseResponse(
+    id = id,
     purchasableId = purchasableId,
     debitPurchaseId = debitPurchaseId,
     creatorId = creatorId,
