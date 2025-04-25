@@ -1,9 +1,9 @@
 package com.ioki.passenger.api.models
 
 import com.ioki.passenger.api.test.models.createApiLocation
+import io.kotest.matchers.shouldBe
 import kotlinx.datetime.Instant
 import kotlin.test.Test
-import kotlin.test.expect
 
 internal class ApiLocationTest : IokiApiModelTest() {
     @Test
@@ -51,7 +51,7 @@ internal class ApiLocationTest : IokiApiModelTest() {
     fun `location hasDifferentPoint with stationId returns true`() {
         val location = createApiLocation(stationId = "stationId")
 
-        expect(location.hasDifferentPoint) { true }
+        location.hasDifferentPoint shouldBe true
     }
 
     @Test
@@ -61,7 +61,7 @@ internal class ApiLocationTest : IokiApiModelTest() {
             walkingDuration = null,
         )
 
-        expect(location.hasDifferentPoint) { false }
+        location.hasDifferentPoint shouldBe false
     }
 
     @Test
@@ -71,7 +71,7 @@ internal class ApiLocationTest : IokiApiModelTest() {
             walkingDuration = 0,
         )
 
-        expect(location.hasDifferentPoint) { false }
+        location.hasDifferentPoint shouldBe false
     }
 
     @Test
@@ -81,7 +81,7 @@ internal class ApiLocationTest : IokiApiModelTest() {
             walkingDuration = 500,
         )
 
-        expect(location.hasDifferentPoint) { true }
+        location.hasDifferentPoint shouldBe true
     }
 }
 

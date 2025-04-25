@@ -9,11 +9,12 @@ import com.ioki.result.failureOrNull
 import com.ioki.result.map
 import com.ioki.result.mapFailure
 import com.ioki.result.successOrNull
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.types.shouldBeInstanceOf
 import io.ktor.http.HttpStatusCode
 import io.ktor.utils.io.ByteReadChannel
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
-import kotlin.test.assertTrue
 
 class IokiServiceTest {
 
@@ -27,7 +28,7 @@ class IokiServiceTest {
 
         val user = iokiService.getUser()
 
-        assertTrue(user is Result.Success<SuccessData<ApiAuthenticatedUserResponse>>)
+        user.shouldBeInstanceOf<Result.Success<SuccessData<ApiAuthenticatedUserResponse>>>()
     }
 
     @Test
@@ -49,7 +50,7 @@ class IokiServiceTest {
                 }
             }
 
-        assertTrue(user.successOrNull() == "John")
+        user.successOrNull() shouldBe "John"
     }
 
     @Test
@@ -65,7 +66,7 @@ class IokiServiceTest {
         when (user) {
             is Result.Failure<Error> -> error("Shouldn't be an error!")
             is Result.Success<SuccessData<ApiAuthenticatedUserResponse>> -> {
-                assertTrue(user.value.firstName == "John")
+                user.value.firstName shouldBe "John"
             }
         }
     }
@@ -89,7 +90,7 @@ class IokiServiceTest {
                 }
             }
 
-        assertTrue(user.failureOrNull() == "Api error. We might got an error? []")
+        user.failureOrNull() shouldBe "Api error. We might got an error? []"
     }
 }
 

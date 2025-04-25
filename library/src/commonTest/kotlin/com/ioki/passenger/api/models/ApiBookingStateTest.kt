@@ -1,13 +1,13 @@
 package com.ioki.passenger.api.models
 
+import io.kotest.matchers.shouldBe
 import kotlin.test.Test
-import kotlin.test.expect
 
 internal class ApiBookingStateTest {
     internal class ApiBookingStateTestExtra {
         @Test
         fun allCasesAreTested() {
-            expect(ApiBookingState.entries.size) { ApiBookingStateSerializationTest.data().size }
+            ApiBookingState.entries.size shouldBe ApiBookingStateSerializationTest.data().size
         }
     }
 

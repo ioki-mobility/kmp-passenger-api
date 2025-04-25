@@ -1,15 +1,13 @@
 package com.ioki.passenger.api.models
 
+import io.kotest.matchers.shouldBe
 import kotlin.test.Test
-import kotlin.test.expect
 
 internal class ApiPaymentMethodResponseTypeTest {
     internal class ApiPaymentMethodResponseTypeTestExtra {
         @Test
         fun allCasesAreTested() {
-            expect(ApiPaymentMethodType.entries.size) {
-                ApiPaymentMethodResponseTypeSerializationTest.data().size
-            }
+            ApiPaymentMethodType.entries.size shouldBe ApiPaymentMethodResponseTypeSerializationTest.data().size
         }
     }
 
