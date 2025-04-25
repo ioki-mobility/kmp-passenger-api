@@ -18,7 +18,7 @@ import kotlinx.datetime.Instant
 import kotlin.test.Test
 import kotlinx.datetime.Clock
 
-class IokiApiParameters {
+class IokiApiParametersTest {
 
     @Test
     fun `test getRides parameters`() = runTest {
