@@ -6,6 +6,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 public data class ApiPurchaseResponse(
+    val id: String,
     @SerialName(value = "purchasable_id") val purchasableId: String,
     @SerialName(value = "debit_purchase_id") val debitPurchaseId: String?,
     @SerialName(value = "creator_id") val creatorId: String?,

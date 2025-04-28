@@ -10,6 +10,7 @@ internal class ApiPurchaseResponseTest : IokiApiModelTest() {
     fun serialization() {
         testJsonStringCanBeConvertedToModel(
             ApiPurchaseResponse(
+                id = "purId",
                 purchasableId = "purchasableId",
                 debitPurchaseId = "debitPurchaseId",
                 creatorId = "creatorId",
@@ -68,6 +69,7 @@ internal class ApiPurchaseResponseTest : IokiApiModelTest() {
     fun serializationMinimal() {
         testJsonStringCanBeConvertedToModel(
             ApiPurchaseResponse(
+                id = "purId",
                 purchasableId = "purchasableId",
                 purchasableType = ApiPurchasableType.BOOKING,
                 purchaseType = ApiPurchaseType.DEBIT,
@@ -94,6 +96,7 @@ internal class ApiPurchaseResponseTest : IokiApiModelTest() {
 private val purchaseResponse =
 """
 {
+    "id": "purId",
     "purchasable_id": "purchasableId",
     "debit_purchase_id": "debitPurchaseId",
     "creator_id": "creatorId",
@@ -161,6 +164,7 @@ private val purchaseResponse =
 private val purchaseResponseMinimal =
 """
 {
+    "id": "purId",
     "purchasable_id": "purchasableId",
     "purchasable_type": "Booking",
     "purchase_type": "debit",
