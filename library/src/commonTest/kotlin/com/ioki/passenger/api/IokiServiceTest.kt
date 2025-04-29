@@ -99,7 +99,10 @@ class IokiServiceTest {
         val httpResult = ByteReadChannel.Empty
         val iokiService = IokiService(
             accessTokenProvider = FakeAccessTokenProvider(),
-            iokiHttpClient = FakeHttpClient(HttpStatusCode.ServiceUnavailable, httpResult, throws = HttpRequestTimeoutException("", null, null)),
+            iokiHttpClient = FakeHttpClient(
+                statusCode = HttpStatusCode.ServiceUnavailable,
+                content = httpResult,
+                throws = HttpRequestTimeoutException("", null, null)),
         )
 
         val user = iokiService.getUser()

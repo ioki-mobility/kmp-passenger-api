@@ -12,7 +12,11 @@ import io.ktor.serialization.kotlinx.json.json
 import io.ktor.utils.io.ByteReadChannel
 
 @Suppress("FunctionName")
-internal fun FakeHttpClient(statusCode: HttpStatusCode, content: ByteReadChannel, throws: Throwable? = null): HttpClient {
+internal fun FakeHttpClient(
+    statusCode: HttpStatusCode,
+    content: ByteReadChannel,
+    throws: Throwable? = null,
+): HttpClient {
     val mockEngine = MockEngine { _ ->
         if (throws != null) throw throws
         respond(
