@@ -1,6 +1,7 @@
 package com.ioki.passenger.api.internal.utils
 
 import io.ktor.client.network.sockets.SocketTimeoutException
+import io.ktor.client.plugins.HttpRequestTimeoutException
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
@@ -15,7 +16,8 @@ import platform.Foundation.timeZoneForSecondsFromGMT
 private const val RFC1123_DATE_TIME_FORMAT = "EEE, dd MMM yyyy HH:mm:ss zzz"
 
 internal actual val Throwable.isConnectivityError: Boolean
-    get() = this is SocketTimeoutException
+    get() = this is SocketTimeoutException ||
+        this is HttpRequestTimeoutException
 
 internal actual fun parseRfc1123DateTime(dateTimeString: String): LocalDateTime {
     val dateFormatter = NSDateFormatter().apply {

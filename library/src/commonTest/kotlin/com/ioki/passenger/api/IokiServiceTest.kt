@@ -11,6 +11,7 @@ import com.ioki.result.mapFailure
 import com.ioki.result.successOrNull
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
+import io.ktor.client.plugins.HttpRequestTimeoutException
 import io.ktor.http.HttpStatusCode
 import io.ktor.utils.io.ByteReadChannel
 import kotlinx.coroutines.test.runTest
@@ -91,6 +92,23 @@ class IokiServiceTest {
             }
 
         user.failureOrNull() shouldBe "Api error. We might got an error? []"
+    }
+
+    @Test
+    fun `getUser throws HttpTimeoutException`() = runTest {
+        val httpResult = ByteReadChannel.Empty
+        val iokiService = IokiService(
+            accessTokenProvider = FakeAccessTokenProvider(),
+            iokiHttpClient = FakeHttpClient(
+                statusCode = HttpStatusCode.ServiceUnavailable,
+                content = httpResult,
+                throws = HttpRequestTimeoutException("", null, null),
+            ),
+        )
+
+        val user = iokiService.getUser()
+
+        user.shouldBeInstanceOf<Result.Failure<Error.Connectivity>>()
     }
 }
 
