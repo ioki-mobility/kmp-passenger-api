@@ -102,7 +102,8 @@ class IokiServiceTest {
             iokiHttpClient = FakeHttpClient(
                 statusCode = HttpStatusCode.ServiceUnavailable,
                 content = httpResult,
-                throws = HttpRequestTimeoutException("", null, null)),
+                throws = HttpRequestTimeoutException("", null, null),
+            ),
         )
 
         val user = iokiService.getUser()
