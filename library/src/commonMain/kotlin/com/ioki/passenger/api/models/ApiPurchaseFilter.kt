@@ -13,13 +13,13 @@ public data class ApiPurchaseFilter(
     @SerialName(value = "purchasable_id") val purchasableId: String? = null,
     @SerialName(value = "purchasable_type") val purchasableType: ApiPurchasableType? = null,
     val state: ApiPurchaseState? = null,
-    val page: String,
+    val page: Int,
     val since: Instant? = null,
     val until: Instant? = null,
     val filter: ApiPurchaseType? = null,
     val order: Order? = null,
     @SerialName(value = "order_by") val orderBy: OrderBy? = null,
-    @SerialName(value = "per_page") val perPage: String? = null,
+    @SerialName(value = "per_page") val perPage: Int? = null,
 ) {
     @Serializable(ApiPurchaseFilterOrderSerializer::class)
     public enum class Order {

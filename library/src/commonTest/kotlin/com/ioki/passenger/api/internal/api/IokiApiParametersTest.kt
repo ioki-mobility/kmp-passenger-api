@@ -162,13 +162,13 @@ class IokiApiParametersTest {
                     purchasableId = "purchasableId",
                     purchasableType = ApiPurchasableType.BOOKING,
                     state = ApiPurchaseState.FAILED,
-                    page = "2",
+                    page = 2,
                     since = Instant.fromEpochSeconds(671371675),
                     until = untilTime,
                     filter = ApiPurchaseType.DEBIT,
                     order = ApiPurchaseFilter.Order.DESCENDING,
                     orderBy = ApiPurchaseFilter.OrderBy.UPDATED_AT,
-                    perPage = "100",
+                    perPage = 100,
                 ),
             )
         }
