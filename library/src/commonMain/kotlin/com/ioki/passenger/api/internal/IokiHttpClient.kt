@@ -25,6 +25,7 @@ internal fun IokiHttpClient(
     requestHeaders: RequestHeaders,
     timeOffsetProvider: TimeOffsetProvider,
     logging: Logging?,
+    cachingEnabled: Boolean,
 ): IokiHttpClient = httpClient().config {
     install(ContentNegotiation) {
         json(createJson())
@@ -38,7 +39,10 @@ internal fun IokiHttpClient(
     install(DateHeaderPlugin) {
         offsetProvider = timeOffsetProvider
     }
-    install(HttpCache)
+
+    if (cachingEnabled) {
+        install(HttpCache)
+    }
 
     if (logging != null) {
         install(HttpLoggingPlugin) {

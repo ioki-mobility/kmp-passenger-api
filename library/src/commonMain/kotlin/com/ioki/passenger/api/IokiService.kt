@@ -100,8 +100,9 @@ public fun IokiService(
     interceptors: Set<ApiErrorInterceptor> = setOf(),
     timeOffsetProvider: TimeOffsetProvider = NoopTimeOffsetProvider,
     logging: Logging? = null,
+    cachingEnabled: Boolean = true,
 ): IokiService {
-    val httpClient = IokiHttpClient(baseUrl, requestHeaders, timeOffsetProvider, logging)
+    val httpClient = IokiHttpClient(baseUrl, requestHeaders, timeOffsetProvider, logging, cachingEnabled)
     return IokiService(
         accessTokenProvider = accessTokenProvider,
         iokiHttpClient = httpClient,
