@@ -28,6 +28,6 @@ public open class FakeCurrentRideService : CurrentRideService {
 
     override suspend fun updatePaymentMethodForRide(
         rideId: String,
-        body: ApiUpdatePaymentMethodForRideRequest,
+        request: ApiUpdatePaymentMethodForRideRequest,
     ): ApiResult<ApiRideResponse> = error("Not overridden")
 }
