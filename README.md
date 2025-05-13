@@ -1,7 +1,9 @@
 # KMP Passenger API
 
 [![Maven Central](https://img.shields.io/maven-central/v/com.ioki/passenger-api?labelColor=%2324292E&color=%233246c8)](https://central.sonatype.com/artifact/com.ioki/passenger-api)
-[![Snapshot](https://img.shields.io/nexus/s/com.ioki/passenger-api?labelColor=%2324292E&color=%234f78ff&server=https://s01.oss.sonatype.org)](https://s01.oss.sonatype.org/content/repositories/snapshots/com/ioki/passenger-api)
+<!-- Badge because of https://github.com/badges/shields/pull/10997
+[![Snapshot](https://img.shields.io/nexus/s/com.ioki/passenger-api?labelColor=%2324292E&color=%234f78ff&server=https://central.sonatype.com/repository/maven-snapshots/)](https://central.sonatype.com/service/rest/repository/browse/maven-snapshots/com/ioki/passenger-api/)
+-->
 
 ## Overview
 
@@ -46,14 +48,14 @@ val commonMain by getting {
 
 ```kotlin
 repositories {
-    maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/")
+    maven(url = "https://central.sonatype.com/repository/maven-snapshots/")
 }
 
 val commonMain by getting {
     dependencies {
-        implementation("com.ioki:passenger-api:$currentVersion-SNAPSHOT")
+        implementation("com.ioki:passenger-api:$currentSnapshotVersion")
     }
-}    
+}
 ```
 </details>
 
