@@ -31,9 +31,8 @@
 
 ### 5. Sign in to Sonatype and Close the Staged Repo
 
-   - Head to [Sonatype](https://s01.oss.sonatype.org/) and sign in (credentials are in the Bitwarden Open Source Collection).
-   - Search for the staged repo, click **Close**.
-   - After it's successfully **Closed**, click **Release** and check "Automatically drop".
+   - Head to the [Central Portal](https://central.sonatype.com/publishing/deployments) and sign in (credentials are in the Bitwarden Open Source Collection).
+   - Search for the artifacts you want to publish, click **Publish**.
 
 ### 6. Edit the Release on GitHub
 
