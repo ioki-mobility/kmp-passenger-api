@@ -228,7 +228,7 @@ public interface CurrentRideService {
 
     public suspend fun updatePaymentMethodForRide(
         rideId: String,
-        body: ApiUpdatePaymentMethodForRideRequest,
+        request: ApiUpdatePaymentMethodForRideRequest,
     ): ApiResult<ApiRideResponse>
 }
 
