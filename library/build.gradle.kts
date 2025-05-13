@@ -1,3 +1,8 @@
+@file:OptIn(ExperimentalEncodingApi::class)
+
+import kotlin.io.encoding.Base64
+import kotlin.io.encoding.ExperimentalEncodingApi
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
@@ -126,18 +131,23 @@ publishing {
     }
 
     repositories {
-        maven("https://s01.oss.sonatype.org/content/repositories/snapshots/") {
+        maven("https://central.sonatype.com/repository/maven-snapshots/") {
             name = "SonatypeSnapshot"
             credentials {
                 username = System.getenv("SONATYPE_USER")
                 password = System.getenv("SONATYPE_PASSWORD")
             }
         }
-        maven("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/") {
+        maven("https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/") {
             name = "SonatypeStaging"
-            credentials {
-                username = System.getenv("SONATYPE_USER")
-                password = System.getenv("SONATYPE_PASSWORD")
+            credentials(HttpHeaderCredentials::class) {
+                name = "Authorization"
+                val bearerToken = "${System.getenv("SONATYPE_USER")}:${System.getenv("SONATYPE_PASSWORD")}"
+                val base64EncodedBearerToken = Base64.encode(bearerToken.toByteArray())
+                value = "Bearer $base64EncodedBearerToken"
+            }
+            authentication {
+                create<HttpHeaderAuthentication>("header")
             }
         }
     }
