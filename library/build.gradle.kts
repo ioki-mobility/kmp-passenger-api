@@ -89,6 +89,10 @@ val dokkaJar = tasks.register<Jar>("dokkaJar") {
     archiveClassifier.set("javadoc")
 }
 
+val base64EncodedBearerToken = Base64.encode(
+    "${System.getenv("SONATYPE_USER")}:${System.getenv("SONATYPE_PASSWORD")}".toByteArray(),
+)
+
 publishing {
     // Workaround for the Android target
     // withType<MavenPublication> does not work for Android target
@@ -142,8 +146,6 @@ publishing {
             name = "SonatypeStaging"
             credentials(HttpHeaderCredentials::class) {
                 name = "Authorization"
-                val bearerToken = "${System.getenv("SONATYPE_USER")}:${System.getenv("SONATYPE_PASSWORD")}"
-                val base64EncodedBearerToken = Base64.encode(bearerToken.toByteArray())
                 value = "Bearer $base64EncodedBearerToken"
             }
             authentication {
@@ -168,4 +170,19 @@ signing {
 tasks.withType<AbstractPublishToMaven>().configureEach {
     val signingTasks = tasks.withType<Sign>()
     mustRunAfter(signingTasks)
+}
+
+tasks.register<Exec>("moveOssrhStagingToCentralPortal") {
+    group = "publishing"
+    description = "Runs after publishAllPublicationsToSonatypeStagingRepository to move the artifacts to the central portal"
+
+    shouldRunAfter("publishAllPublicationsToSonatypeStagingRepository")
+
+    commandLine = listOf(
+        "curl",
+        "-f",
+        "-X", "POST",
+        "-H", "Authorization: Bearer $base64EncodedBearerToken",
+        "https://ossrh-staging-api.central.sonatype.com/manual/upload/defaultRepository/com.ioki",
+    )
 }
