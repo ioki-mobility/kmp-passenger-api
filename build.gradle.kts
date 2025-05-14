@@ -11,8 +11,8 @@ allprojects.forEach {
 
 nmcpAggregation {
     centralPortal {
-        username = System.getenv("SONATYPE_USER")
-        password = System.getenv("SONATYPE_PASSWORD")
+        username = providers.systemProperty("SONATYPE_USER")
+        password = providers.systemProperty("SONATYPE_PASSWORD")
         publishingType = "USER_MANAGED"
     }
 
