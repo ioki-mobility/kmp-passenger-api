@@ -1,5 +1,10 @@
 # KMP Passenger API
 
+[![Maven Central](https://img.shields.io/maven-central/v/com.ioki/passenger-api?labelColor=%2324292E&color=%233246c8)](https://central.sonatype.com/artifact/com.ioki/passenger-api)
+<!-- Badge because of https://github.com/badges/shields/pull/10997
+[![Snapshot](https://img.shields.io/nexus/s/com.ioki/passenger-api?labelColor=%2324292E&color=%234f78ff&server=https://central.sonatype.com/repository/maven-snapshots/)](https://central.sonatype.com/service/rest/repository/browse/maven-snapshots/com/ioki/passenger-api/)
+-->
+
 ## Overview
 
 The KMP Passenger API Library is an open-source Kotlin Multiplatform project
@@ -21,6 +26,16 @@ Currenly supported platforms:
 
 To include the KMP Passenger API Library in your project, add the following dependency to your `build.gradle.kts` file:
 ```kotlin
+// Ensure you have the Kotlin Multiplatform plugin applied to your project
+plugins {
+    kotlin("multiplatform")
+}
+
+// The library is hosted on mavenCentral
+repositories {
+    mavenCentral()
+}
+
 val commonMain by getting {
     dependencies {
         implementation("com.ioki:passenger-api:$currentVersion")
@@ -28,13 +43,21 @@ val commonMain by getting {
 }
 ```
 
-Ensure you have the Kotlin Multiplatform plugin applied to your project:
+<details>
+    <summary>Snapshots of the development version are available in Sonatype's snapshots repository.</summary>
 
 ```kotlin
-plugins {
-    kotlin("multiplatform")
+repositories {
+    maven(url = "https://central.sonatype.com/repository/maven-snapshots/")
+}
+
+val commonMain by getting {
+    dependencies {
+        implementation("com.ioki:passenger-api:$currentSnapshotVersion")
+    }
 }
 ```
+</details>
 
 ## Usage
 

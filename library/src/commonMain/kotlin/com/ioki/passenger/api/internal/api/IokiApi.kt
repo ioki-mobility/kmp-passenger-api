@@ -496,8 +496,8 @@ internal class IokiApi(
 }
 
 private fun ApiPurchaseFilter.toStringValues(): StringValues = StringValues.build {
-    append("page", page)
-    perPage?.let { append("per_page", it) }
+    append("page", page.toString())
+    perPage?.let { append("per_page", it.toString()) }
     since?.let { append("since", it.toString()) }
     until?.let { append("until", it.toString()) }
     purchasableId?.let { append("purchasable_id", it) }
