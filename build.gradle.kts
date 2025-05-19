@@ -6,13 +6,13 @@ plugins {
 
 allprojects.forEach {
     it.group = "com.ioki"
-    it.version = "0.10.0-SNAPSHOT"
+    it.version = "0.9.1"
 }
 
 nmcpAggregation {
     centralPortal {
-        username = providers.systemProperty("SONATYPE_USER")
-        password = providers.systemProperty("SONATYPE_PASSWORD")
+        username = providers.environmentVariable("SONATYPE_USER")
+        password = providers.environmentVariable("SONATYPE_PASSWORD")
         publishingType = "USER_MANAGED"
     }
 
