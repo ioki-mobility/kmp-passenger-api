@@ -124,6 +124,16 @@ publishing {
             }
         }
     }
+
+    repositories {
+        maven("https://central.sonatype.com/repository/maven-snapshots/") {
+            name = "SonatypeSnapshot"
+            credentials {
+                username = System.getenv("SONATYPE_USER")
+                password = System.getenv("SONATYPE_PASSWORD")
+            }
+        }
+    }
 }
 
 signing {
