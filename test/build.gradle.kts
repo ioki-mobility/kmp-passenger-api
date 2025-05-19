@@ -96,7 +96,7 @@ publishing {
         }
     }
 
-     repositories {
+    repositories {
         maven("https://central.sonatype.com/repository/maven-snapshots/") {
             name = "SonatypeSnapshot"
             credentials {
