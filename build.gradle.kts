@@ -6,7 +6,7 @@ plugins {
 
 allprojects.forEach {
     it.group = "com.ioki"
-    it.version = "0.9.1"
+    it.version = "0.9.0"
 }
 
 nmcpAggregation {
