@@ -25,7 +25,7 @@ public data class ApiPurchaseResponse(
     val state: ApiPurchaseState,
     val amount: ApiMoney,
     val reason: String?,
-    val invoices: List<Invoice>,
+    val invoice: Invoice?,
 ) {
     @Serializable
     public data class ChargeSplits(

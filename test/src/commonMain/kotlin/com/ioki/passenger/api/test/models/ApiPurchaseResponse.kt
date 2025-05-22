@@ -31,7 +31,7 @@ public fun createApiPurchaseResponse(
     paymentMethod: ApiPaymentMethodResponse? = null,
     chargeSplits: List<ChargeSplits> = emptyList(),
     amount: ApiMoney = createApiMoney(),
-    invoices: List<Invoice> = emptyList(),
+    invoice: Invoice? = null,
 ): ApiPurchaseResponse = ApiPurchaseResponse(
     id = id,
     purchasableId = purchasableId,
@@ -52,5 +52,5 @@ public fun createApiPurchaseResponse(
     state = state,
     amount = amount,
     reason = reason,
-    invoices = invoices,
+    invoice = invoice,
 )
