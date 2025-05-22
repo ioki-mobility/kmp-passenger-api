@@ -52,15 +52,13 @@ internal class ApiPurchaseResponseTest : IokiApiModelTest() {
                 state = ApiPurchaseState.SUCCEEDED,
                 amount = createApiMoney(amount = 100, currency = "EUR"),
                 reason = "reason123",
-                invoices = listOf(
-                    ApiPurchaseResponse.Invoice(
-                        id = "invoiceId",
-                        userId = "userId",
-                        purchaseId = "purchaseId",
-                        attachmentUrl = "https://example.com/invoice.pdf",
-                        createdAt = Instant.parse("2023-07-19T13:17:42Z"),
-                        updatedAt = Instant.parse("2023-07-20T13:17:42Z"),
-                    ),
+                invoice = ApiPurchaseResponse.Invoice(
+                    id = "invoiceId",
+                    userId = "userId",
+                    purchaseId = "purchaseId",
+                    attachmentUrl = "https://example.com/invoice.pdf",
+                    createdAt = Instant.parse("2023-07-19T13:17:42Z"),
+                    updatedAt = Instant.parse("2023-07-20T13:17:42Z"),
                 ),
             ),
             purchaseResponse,
@@ -79,7 +77,7 @@ internal class ApiPurchaseResponseTest : IokiApiModelTest() {
                 chargeSplits = emptyList(),
                 state = ApiPurchaseState.PENDING,
                 amount = ApiMoney(amount = 25, currency = "USD"),
-                invoices = emptyList(),
+                invoice = null,
                 purchasableTitle = null,
                 purchasableDescription = null,
                 reason = null,
@@ -154,16 +152,14 @@ private val purchaseResponse =
         "currency": "EUR"
     },
     "reason": "reason123",
-    "invoices": [
-        {
-            "id": "invoiceId",
-            "user_id": "userId",
-            "purchase_id": "purchaseId",
-            "attachment_url": "https://example.com/invoice.pdf",
-            "created_at": "2023-07-19T13:17:42Z",
-            "updated_at": "2023-07-20T13:17:42Z"
-        }
-    ]
+    "invoice": {
+        "id": "invoiceId",
+        "user_id": "userId",
+        "purchase_id": "purchaseId",
+        "attachment_url": "https://example.com/invoice.pdf",
+        "created_at": "2023-07-19T13:17:42Z",
+        "updated_at": "2023-07-20T13:17:42Z"
+    }
 }
 """
 
@@ -180,7 +176,6 @@ private val purchaseResponseMinimal =
     "amount": {
         "amount": 25,
         "currency": "USD"
-    },
-    "invoices": []
+    }
 }
 """
