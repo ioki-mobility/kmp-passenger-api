@@ -18,6 +18,7 @@ public data class ApiPurchaseResponse(
     @SerialName(value = "creator_type") val creatorType: CreatorType?,
     @SerialName(value = "created_at") val createdAt: Instant,
     @SerialName(value = "updated_at") val updatedAt: Instant?,
+    @SerialName(value = "claimable_at") val claimableAt: Instant?,
     @SerialName(value = "forfeited_at") val forfeitedAt: Instant?,
     @SerialName(value = "succeeded_at") val succeededAt: Instant?,
     @SerialName(value = "payment_method") val paymentMethod: ApiPaymentMethodResponse?,

@@ -22,6 +22,7 @@ internal class ApiPurchaseResponseTest : IokiApiModelTest() {
                 creatorType = ApiPurchaseResponse.CreatorType.USER,
                 createdAt = Instant.parse("2023-07-19T13:17:42Z"),
                 updatedAt = Instant.parse("2023-07-20T13:17:42Z"),
+                claimableAt = Instant.parse("2023-07-19T15:17:42Z"),
                 forfeitedAt = Instant.parse("2023-07-20T11:17:42Z"),
                 succeededAt = Instant.parse("2023-07-20T13:17:42Z"),
                 paymentMethod = ApiPaymentMethodResponse(
@@ -86,6 +87,7 @@ internal class ApiPurchaseResponseTest : IokiApiModelTest() {
                 rideId = null,
                 creatorType = null,
                 updatedAt = null,
+                claimableAt = null,
                 forfeitedAt = null,
                 succeededAt = null,
                 paymentMethod = null,
@@ -110,6 +112,7 @@ private val purchaseResponse =
     "creator_type": "User",
     "created_at": "2023-07-19T13:17:42Z",
     "updated_at": "2023-07-20T13:17:42Z",
+    "claimable_at": "2023-07-19T15:17:42Z",
     "forfeited_at": "2023-07-20T11:17:42Z",
     "succeeded_at": "2023-07-20T13:17:42Z",
     "payment_method": {
