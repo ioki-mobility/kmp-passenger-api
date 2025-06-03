@@ -36,7 +36,7 @@ internal class ApiPurchaseResponseTest : IokiApiModelTest() {
                 chargeSplits = listOf(
                     ApiPurchaseResponse.ChargeSplits(
                         purchaseId = "purchaseId",
-                        amount = ApiMoney(amount = 100, currency = "EUR"),
+                        amount = ApiMoney(amount = 140, currency = "EUR"),
                         charge = ApiPurchaseResponse.Charge(
                             chargeType = ApiPurchaseResponse.Charge.ChargeType.PAYMENT,
                             userId = "userId",
@@ -45,13 +45,14 @@ internal class ApiPurchaseResponseTest : IokiApiModelTest() {
                             purchaseIds = listOf("purchaseId1", "purchaseId2"),
                             reservation = true,
                             state = ApiPurchaseResponse.Charge.State.PENDING,
-                            amount = ApiMoney(amount = 100, currency = "EUR"),
+                            amount = ApiMoney(amount = 90, currency = "EUR"),
                             receipt = null,
                         ),
                     ),
                 ),
                 state = ApiPurchaseState.SUCCEEDED,
                 amount = createApiMoney(amount = 100, currency = "EUR"),
+                giftedAmount = createApiMoney(amount = 10, currency = "EUR"),
                 reason = "reason123",
                 invoice = ApiPurchaseResponse.Invoice(
                     id = "invoiceId",
@@ -78,6 +79,7 @@ internal class ApiPurchaseResponseTest : IokiApiModelTest() {
                 chargeSplits = emptyList(),
                 state = ApiPurchaseState.PENDING,
                 amount = ApiMoney(amount = 25, currency = "USD"),
+                giftedAmount = ApiMoney(amount = 0, currency = "USD"),
                 invoice = null,
                 purchasableTitle = null,
                 purchasableDescription = null,
@@ -127,7 +129,7 @@ private val purchaseResponse =
         {
         "purchase_id": "purchaseId",
         "amount": {
-            "amount": 100,
+            "amount": 140,
             "currency": "EUR"
         },
         "charge": {
@@ -142,7 +144,7 @@ private val purchaseResponse =
             "reservation": true,
             "state": "pending",
             "amount": {
-                "amount": 100,
+                "amount": 90,
                 "currency": "EUR"
             },
             "receipt": null
@@ -152,6 +154,10 @@ private val purchaseResponse =
     "state": "succeeded",
     "amount": {
         "amount": 100,
+        "currency": "EUR"
+    },
+    "gifted_amount": {
+        "amount": 10,
         "currency": "EUR"
     },
     "reason": "reason123",
@@ -178,6 +184,10 @@ private val purchaseResponseMinimal =
     "state": "pending",
     "amount": {
         "amount": 25,
+        "currency": "USD"
+    },
+    "gifted_amount": {
+        "amount": 0,
         "currency": "USD"
     }
 }
