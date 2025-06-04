@@ -47,6 +47,7 @@ public data class ApiRideResponse(
     @SerialName(value = "offered_solutions") val offeredSolutions: List<ApiOfferedSolution>,
     @SerialName(value = "booked_solution") val bookedSolution: ApiBookedSolution?,
     @SerialName(value = "passenger_note_to_driver") val passengerNoteToDriver: String,
+    @SerialName(value = "show_pt_ticket_reminder") val showPublicTransportTicketReminder: Boolean,
 ) : Entity {
     @Serializable
     public data class PassengerSelection(
@@ -68,6 +69,7 @@ public data class ApiRideResponse(
         val host: String?,
         @SerialName(value = "mobile_ticket_data") val mobileTicketData: List<MobileTicketData?>?,
         @SerialName(value = "ticket_url") val ticketUrl: String,
+        val issuer: String,
     ) {
         @Serializable
         public data class MobileTicketData(
