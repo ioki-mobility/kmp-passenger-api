@@ -56,6 +56,7 @@ public fun createApiRideResponse(
     offeredSolutions: List<ApiOfferedSolution> = emptyList(),
     bookedSolution: ApiBookedSolution? = null,
     passengerNoteToDriver: String = "",
+    showPublicTransportTicketReminder: Boolean = false,
 ): ApiRideResponse = ApiRideResponse(
     id = id,
     productId = productId,
@@ -96,6 +97,7 @@ public fun createApiRideResponse(
     offeredSolutions = offeredSolutions,
     bookedSolution = bookedSolution,
     passengerNoteToDriver = passengerNoteToDriver,
+    showPublicTransportTicketReminder = showPublicTransportTicketReminder,
 )
 
 public fun createApiRideResponsePassengerSelection(
@@ -117,10 +119,12 @@ public fun createApiRideResponseTicket(
     host: String? = null,
     mobileTicketData: List<ApiRideResponse.Ticket.MobileTicketData?>? = null,
     ticketUrl: String = "",
+    issuer: String = "",
 ): ApiRideResponse.Ticket = ApiRideResponse.Ticket(
     host = host,
     mobileTicketData = mobileTicketData,
     ticketUrl = ticketUrl,
+    issuer = issuer,
 )
 
 public fun createApiRideResponseReceipt(

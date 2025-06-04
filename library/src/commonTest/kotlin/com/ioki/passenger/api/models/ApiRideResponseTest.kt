@@ -119,6 +119,7 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                         ),
                     ),
                     ticketUrl = "https://ioki.com",
+                    issuer = "ioki",
                 ),
                 receipts = listOf(
                     ApiRideResponse.Receipt(
@@ -220,6 +221,7 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                     ),
                 ),
                 passengerNoteToDriver = "This is a note to the driver",
+                showPublicTransportTicketReminder = true,
             ),
             jsonString = rideResponse,
         )
@@ -268,6 +270,7 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                 options = emptyList(),
                 bookedSolution = null,
                 passengerNoteToDriver = "",
+                showPublicTransportTicketReminder = false,
             ),
             jsonString = rideResponseMinimal,
         )
@@ -443,7 +446,8 @@ private val rideResponse =
       "purchase_id": "IOKI",
       "customer_code": "CUST123"
     }],
-    "ticket_url": "https://ioki.com"
+    "ticket_url": "https://ioki.com",
+    "issuer": "ioki"
   },
   "receipts": [
     {
@@ -570,7 +574,8 @@ private val rideResponse =
         }
       ]
     },
-    "passenger_note_to_driver": "This is a note to the driver"
+    "passenger_note_to_driver": "This is a note to the driver",
+    "show_pt_ticket_reminder": true
 }
 """
 
@@ -607,6 +612,7 @@ private val rideResponseMinimal =
   "receipts": [],
   "offered_solutions": [],
   "options": [],
-  "passenger_note_to_driver": ""
+  "passenger_note_to_driver": "",
+  "show_pt_ticket_reminder": false
 }
 """
