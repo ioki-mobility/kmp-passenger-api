@@ -93,6 +93,7 @@ private val rideResponse =
         options = emptyList(),
         bookedSolution = null,
         passengerNoteToDriver = "",
+        showPublicTransportTicketReminder = false,
     )
 
 private val rideSeriesResponseMinimal =
@@ -149,7 +150,8 @@ private val rideSeriesResponse =
       "receipts": [],
       "offered_solutions": [],
       "options": [],
-      "passenger_note_to_driver": ""
+      "passenger_note_to_driver": "",
+      "show_pt_ticket_reminder": false
     }
   ],
   "results": [
