@@ -15,6 +15,9 @@ public enum class ApiPurchaseType {
     @SerialName(value = "debit")
     DEBIT,
 
+    @SerialName(value = "claimable")
+    CLAIMABLE,
+
     UNSUPPORTED,
 }
 
@@ -26,6 +29,7 @@ private object ApiPurchaseTypeSerializer : KSerializer<ApiPurchaseType> {
             when (value) {
                 ApiPurchaseType.CREDIT -> "credit"
                 ApiPurchaseType.DEBIT -> "debit"
+                ApiPurchaseType.CLAIMABLE -> "claimable"
                 ApiPurchaseType.UNSUPPORTED -> "unsupported"
             },
         )
@@ -35,6 +39,7 @@ private object ApiPurchaseTypeSerializer : KSerializer<ApiPurchaseType> {
         return when (decoder.decodeString()) {
             "credit" -> ApiPurchaseType.CREDIT
             "debit" -> ApiPurchaseType.DEBIT
+            "claimable" -> ApiPurchaseType.CLAIMABLE
             else -> ApiPurchaseType.UNSUPPORTED
         }
     }
