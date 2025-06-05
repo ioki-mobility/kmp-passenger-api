@@ -23,6 +23,7 @@ public data class ApiPurchaseResponse(
     @SerialName(value = "succeeded_at") val succeededAt: Instant?,
     @SerialName(value = "payment_method") val paymentMethod: ApiPaymentMethodResponse?,
     @SerialName(value = "charge_splits") val chargeSplits: List<ChargeSplits>,
+    @SerialName(value = "gifted_amount") val giftedAmount: ApiMoney,
     val state: ApiPurchaseState,
     val amount: ApiMoney,
     val reason: String?,
