@@ -24,7 +24,7 @@ public open class FakeUserService : UserService {
 
     override suspend fun deleteUser(): ApiResult<Unit> = error("Not overridden")
 
-    override suspend fun logoutUser(): ApiResult<Unit> {
+    override suspend fun logoutUser(): ApiResult<ApiAuthenticatedUserResponse> {
         error("Not overridden")
     }
 
