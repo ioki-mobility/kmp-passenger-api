@@ -87,6 +87,10 @@ internal class IokiApi(
         header("Authorization", accessToken)
     }
 
+    suspend fun logoutUser(): HttpResponse = client.post("/api/passenger/user/logout") {
+        header("Authorization", accessToken)
+    }
+
     suspend fun createRide(body: ApiBody<ApiRideRequest>): HttpResponse = client.post("/api/passenger/rides") {
         header("Authorization", accessToken)
         setBody(body)

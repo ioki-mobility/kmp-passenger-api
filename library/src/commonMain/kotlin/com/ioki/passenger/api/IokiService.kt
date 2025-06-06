@@ -179,6 +179,8 @@ public interface UserService {
 
     public suspend fun deleteUser(): ApiResult<Unit>
 
+    public suspend fun logoutUser(): ApiResult<ApiAuthenticatedUserResponse>
+
     public suspend fun updatePhoneNumber(request: ApiUpdatePhoneNumberRequest): ApiResult<ApiAuthenticatedUserResponse>
 
     public suspend fun updateUserFlags(request: ApiUserFlagsRequest): ApiResult<ApiAuthenticatedUserResponse>
@@ -606,6 +608,11 @@ private class DefaultIokiService(
     override suspend fun deleteUser(): ApiResult<Unit> = apiCall<Unit, Unit> {
         deleteUser()
     }
+
+    override suspend fun logoutUser(): ApiResult<ApiAuthenticatedUserResponse> =
+        apiCall<ApiAuthenticatedUserResponse, ApiAuthenticatedUserResponse> {
+            logoutUser()
+        }
 
     override suspend fun updatePhoneNumber(
         request: ApiUpdatePhoneNumberRequest,
