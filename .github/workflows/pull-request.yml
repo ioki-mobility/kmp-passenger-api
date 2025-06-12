@@ -33,7 +33,12 @@ jobs:
               pr_number="${{ github.event.pull_request.number }}"
               pr_version="${base_version/SNAPSHOT/PR${pr_number}-SNAPSHOT}"
               echo "pr_version=$pr_version" >> $GITHUB_OUTPUT
-              echo "Publishing version: $pr_version"
+              if [[ "$pr_version" == *PR* && "$pr_version" == *SNAPSHOT* ]]; then
+                echo "Publishing version: $pr_version"
+              else
+                echo "Wrong PR version format: $pr_version"
+                exit 1
+              fi
 
           - name: Publish to Sonatype Snapshot
             run: ./gradlew publishAllPublicationsToSonatypeSnapshotRepository -PGPG_SIGNING_REQUIRED -Pversion=${{ steps.set_version.outputs.pr_version }} --no-configuration-cache
