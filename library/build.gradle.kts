@@ -84,15 +84,12 @@ val dokkaJar = tasks.register<Jar>("dokkaJar") {
     archiveClassifier.set("javadoc")
 }
 
-val publishVersion = findProperty("version") ?: project.version
-
 publishing {
     // Workaround for the Android target
     // withType<MavenPublication> does not work for Android target
     afterEvaluate {
         publications.withType<MavenPublication> {
             artifactId = artifactId.replace("library", "passenger-api")
-            version = publishVersion.toString()
         }
     }
     publications.withType<MavenPublication> {
