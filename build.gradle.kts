@@ -6,7 +6,7 @@ plugins {
 
 allprojects.forEach {
     it.group = "com.ioki"
-    it.version = if (hasProperty("version")) property("version") as String else "0.12.0-SNAPSHOT"
+    it.version = "0.12.0-SNAPSHOT"
 }
 
 nmcpAggregation {
