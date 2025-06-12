@@ -21,10 +21,13 @@ jobs:
 
           - name: Get project version
             id: get_version
-            run: echo "version=$(./gradlew -q properties | grep '^version:' | awk '{print $2}')" >> $GITHUB_OUTPUT
+            run: |
+              version=$(./gradlew -q properties | grep '^version:' | awk '{print $2}')
+              echo "version=$version" >> $GITHUB_OUTPUT
+              echo "Project version: $version"
 
-          - name: Set PR version
-            id: set_pr_version
+          - name: Set PR SNAPSHOT version
+            id: set_version
             run: |
               base_version="${{ steps.get_version.outputs.version }}"
               pr_number="${{ github.event.pull_request.number }}"
@@ -33,4 +36,4 @@ jobs:
               echo "Publishing version: $pr_version"
 
           - name: Publish to Sonatype Snapshot
-            run: ./gradlew publishAllPublicationsToSonatypeSnapshotRepository -PGPG_SIGNING_REQUIRED -Pversion=${{ steps.set_pr_version.outputs.pr_version }} --no-configuration-cache
+            run: ./gradlew publishAllPublicationsToSonatypeSnapshotRepository -PGPG_SIGNING_REQUIRED -Pversion=${{ steps.set_version.outputs.pr_version }} --no-configuration-cache
