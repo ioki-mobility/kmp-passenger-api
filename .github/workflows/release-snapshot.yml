@@ -4,14 +4,11 @@ on:
   push:
     branches:
       - 'main'
+  pull_request:
 
 jobs:
-  ci:
-    uses: ./.github/workflows/ci.yml
-
   release:
     runs-on: macos-latest
-    needs: ci
     env:
       GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
       GPG_SIGNING_PASSWORD: ${{ secrets.GPG_SIGNING_PASSWORD }}
@@ -21,5 +18,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Extract pre-release identifier
+        id: prerelease
+        run: |
+            if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+                echo "prerelease=${{ github.event.pull_request.number }}-SNAPSHOT" >> $GITHUB_OUTPUT
+            else
+                echo "prerelease=SNAPSHOT" >> $GITHUB_OUTPUT
+            fi
+
       - name: Publish to Sonatype Snapshot
-        run: ./gradlew publishAllPublicationsToSonatypeSnapshotRepository -PGPG_SIGNING_REQUIRED --no-configuration-cache
+        run: ./gradlew publishAllPublicationsToSonatypeSnapshotRepository -PPRE_RELEASE_IDENTIFIER=${{ steps.prerelease.outputs.prerelease }} -PGPG_SIGNING_REQUIRED --no-configuration-cache
