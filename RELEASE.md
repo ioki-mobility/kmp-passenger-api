@@ -15,6 +15,7 @@
      git tag x.y.z
      git push origin x.y.z
      ```
+     The tag name should match the version in the [`build.gradle.kts`](build.gradle.kts) file.
 
 ### 3. Trigger the Release Action
 
