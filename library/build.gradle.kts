@@ -94,7 +94,6 @@ publishing {
     }
     publications.withType<MavenPublication> {
         artifact(dokkaJar)
-        version = (findProperty("version") as String? ?: project.version.toString()) as String?
         pom {
             name.set("KMP ioki Passenger API")
             description.set("Kotlin Multiplatform ioki Passenger API")
