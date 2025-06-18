@@ -19,13 +19,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Extract pre-release identifier
-        id: prerelease
+        id: extract_prerelease
         run: |
             if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-                echo "prerelease=${{ github.event.pull_request.number }}-SNAPSHOT" >> $GITHUB_OUTPUT
+                echo "identifier=${{ github.event.pull_request.number }}-SNAPSHOT" >> $GITHUB_OUTPUT
             else
-                echo "prerelease=SNAPSHOT" >> $GITHUB_OUTPUT
+                echo "identifier=SNAPSHOT" >> $GITHUB_OUTPUT
             fi
 
       - name: Publish to Sonatype Snapshot
-        run: ./gradlew publishAllPublicationsToSonatypeSnapshotRepository -PPRE_RELEASE_IDENTIFIER=${{ steps.prerelease.outputs.prerelease }} -PGPG_SIGNING_REQUIRED --no-configuration-cache
+        run: ./gradlew publishAllPublicationsToSonatypeSnapshotRepository -PPRE_RELEASE_IDENTIFIER=${{ steps.extract_prerelease.outputs.identifier }} -PGPG_SIGNING_REQUIRED --no-configuration-cache
