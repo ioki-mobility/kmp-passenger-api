@@ -29,7 +29,7 @@
 
 ### 5. Edit the Release on GitHub
 
-   - After step 4 is complete, head to the [GitHub release page](../../releases) and edit the new release, and publish it. 🎉
+   - After step 3 is complete, head to the [GitHub release page](../../releases) and edit the new release, and publish it. 🎉
 
 ### 6. Bump the Version for Development
 
