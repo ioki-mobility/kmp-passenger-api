@@ -4,9 +4,15 @@ plugins {
     alias(libs.plugins.nmcpAggregation)
 }
 
-allprojects.forEach {
-    it.group = "com.ioki"
-    it.version = "0.12.0-SNAPSHOT"
+allprojects.forEach { project ->
+    project.group = "com.ioki"
+    project.version = buildString {
+        append("0.12.0")
+        project.findProperty("PRE_RELEASE_IDENTIFIER")?.let {
+            append('-')
+            append(it)
+        }
+    }
 }
 
 nmcpAggregation {
