@@ -51,7 +51,6 @@ public fun createApiRideResponse(
     route: ApiRideResponse.Route? = null,
     ticket: ApiRideResponse.Ticket? = null,
     tip: ApiTipResponse? = null,
-    receipts: List<ApiRideResponse.Receipt> = emptyList(),
     supportUri: String? = null,
     offeredSolutions: List<ApiOfferedSolution> = emptyList(),
     bookedSolution: ApiBookedSolution? = null,
