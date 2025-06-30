@@ -46,7 +46,7 @@ public data class ApiPurchaseResponse(
         val reservation: Boolean,
         val state: State,
         val amount: ApiMoney,
-        val receipt: ApiRideResponse.Receipt?,
+        val receipt: Receipt?,
     ) {
         @Serializable
         public enum class State {
@@ -87,6 +87,15 @@ public data class ApiPurchaseResponse(
 
             UNSUPPORTED,
         }
+
+        @Serializable
+        public data class Receipt(
+            val id: String?,
+            @SerialName(value = "charge_id") val chargeId: String,
+            @SerialName(value = "attachment_url") val attachmentUrl: String?,
+            @SerialName(value = "created_at") val createdAt: Instant?,
+            @SerialName(value = "updated_at") val updatedAt: Instant?,
+        )
     }
 
     @Serializable
