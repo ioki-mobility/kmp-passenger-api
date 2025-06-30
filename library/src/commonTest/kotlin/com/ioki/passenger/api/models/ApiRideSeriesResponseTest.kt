@@ -84,7 +84,6 @@ private val rideResponse =
         publicTransportUri = null,
         route = null,
         ticket = null,
-        receipts = emptyList(),
         driver = null,
         fare = null,
         tip = null,

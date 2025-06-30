@@ -2,11 +2,11 @@ package com.ioki.passenger.api.test.models
 
 import com.ioki.passenger.api.models.ApiMoney
 import com.ioki.passenger.api.models.ApiPaymentMethodResponse
+import com.ioki.passenger.api.models.ApiPurchasableType
 import com.ioki.passenger.api.models.ApiPurchaseResponse
 import com.ioki.passenger.api.models.ApiPurchaseResponse.ChargeSplits
-import com.ioki.passenger.api.models.ApiPurchaseResponse.Invoice
 import com.ioki.passenger.api.models.ApiPurchaseResponse.CreatorType
-import com.ioki.passenger.api.models.ApiPurchasableType
+import com.ioki.passenger.api.models.ApiPurchaseResponse.Invoice
 import com.ioki.passenger.api.models.ApiPurchaseState
 import com.ioki.passenger.api.models.ApiPurchaseType
 import kotlinx.datetime.Instant
@@ -57,4 +57,36 @@ public fun createApiPurchaseResponse(
     giftedAmount = giftedAmount,
     reason = reason,
     invoice = invoice,
+)
+
+public fun createApiPurchaseResponseChargeSplits(
+    purchaseId: String = "",
+    amount: ApiMoney = createApiMoney(),
+    charge: ApiPurchaseResponse.Charge = createApiPurchaseResponseCharge(),
+): ChargeSplits = ChargeSplits(
+    purchaseId = purchaseId,
+    amount = amount,
+    charge = charge,
+)
+
+public fun createApiPurchaseResponseCharge(
+    chargeType: ApiPurchaseResponse.Charge.ChargeType = ApiPurchaseResponse.Charge.ChargeType.UNSUPPORTED,
+    userId: String = "",
+    paymentChargeId: String? = null,
+    paymentMethod: ApiPaymentMethodResponse? = null,
+    purchaseIds: List<String> = emptyList(),
+    reservation: Boolean = false,
+    state: ApiPurchaseResponse.Charge.State = ApiPurchaseResponse.Charge.State.NOT_INITIATED,
+    amount: ApiMoney = createApiMoney(),
+    receipt: ApiPurchaseResponse.Charge.Receipt? = null,
+): ApiPurchaseResponse.Charge = ApiPurchaseResponse.Charge(
+    chargeType = chargeType,
+    userId = userId,
+    paymentChargeId = paymentChargeId,
+    paymentMethod = paymentMethod,
+    purchaseIds = purchaseIds,
+    reservation = reservation,
+    state = state,
+    amount = amount,
+    receipt = receipt,
 )

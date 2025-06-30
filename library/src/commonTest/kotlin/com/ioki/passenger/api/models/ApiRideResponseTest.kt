@@ -121,20 +121,6 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                     ticketUrl = "https://ioki.com",
                     issuer = "ioki",
                 ),
-                receipts = listOf(
-                    ApiRideResponse.Receipt(
-                        type = ApiRideResponse.Receipt.Type.PERSONAL_DISCOUNT,
-                        url = "https://receipt.com",
-                    ),
-                    ApiRideResponse.Receipt(ApiRideResponse.Receipt.Type.RIDE, null),
-                    ApiRideResponse.Receipt(ApiRideResponse.Receipt.Type.RIDE_PAYMENT_RECOVERY, null),
-                    ApiRideResponse.Receipt(ApiRideResponse.Receipt.Type.SERVICE_CREDIT, null),
-                    ApiRideResponse.Receipt(ApiRideResponse.Receipt.Type.TIP, null),
-                    ApiRideResponse.Receipt(ApiRideResponse.Receipt.Type.RIDE_REFUND, null),
-                    ApiRideResponse.Receipt(ApiRideResponse.Receipt.Type.BOOKING_REFUND, null),
-                    ApiRideResponse.Receipt(ApiRideResponse.Receipt.Type.BOOKING, null),
-                    ApiRideResponse.Receipt(ApiRideResponse.Receipt.Type.UNSUPPORTED, null),
-                ),
                 route = null,
                 tip = null,
                 supportUri = "https://ioki.com/en/ioki-devs",
@@ -261,7 +247,6 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                 publicTransportUri = null,
                 route = null,
                 ticket = null,
-                receipts = emptyList(),
                 driver = null,
                 fare = null,
                 tip = null,
@@ -449,36 +434,6 @@ private val rideResponse =
     "ticket_url": "https://ioki.com",
     "issuer": "ioki"
   },
-  "receipts": [
-    {
-      "receipt_type": "PersonalDiscountReceipt",
-      "attachment_url": "https://receipt.com"
-    },
-    {
-      "receipt_type": "RideReceipt"
-    },
-    {
-      "receipt_type": "RidePaymentRecoveryReceipt"
-    },
-    {
-      "receipt_type": "ServiceCreditReceipt"
-    },
-    {
-      "receipt_type": "TipReceipt"
-    },
-    {
-      "receipt_type": "RideRefundReceipt"
-    },
-    {
-      "receipt_type": "BookingRefundReceipt"
-    },
-    {
-      "receipt_type": "BookingReceipt"
-    },
-    {
-      "receipt_type" : "Not known"
-    }
-  ],
   "support_uri": "https://ioki.com/en/ioki-devs",
   "offered_solutions": [
     {

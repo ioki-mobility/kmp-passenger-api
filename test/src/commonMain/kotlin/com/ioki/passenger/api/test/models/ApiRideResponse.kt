@@ -91,7 +91,6 @@ public fun createApiRideResponse(
     route = route,
     ticket = ticket,
     tip = tip,
-    receipts = receipts,
     supportUri = supportUri,
     offeredSolutions = offeredSolutions,
     bookedSolution = bookedSolution,
@@ -124,12 +123,4 @@ public fun createApiRideResponseTicket(
     mobileTicketData = mobileTicketData,
     ticketUrl = ticketUrl,
     issuer = issuer,
-)
-
-public fun createApiRideResponseReceipt(
-    type: ApiRideResponse.Receipt.Type = ApiRideResponse.Receipt.Type.UNSUPPORTED,
-    url: String? = null,
-): ApiRideResponse.Receipt = ApiRideResponse.Receipt(
-    type = type,
-    url = url,
 )
