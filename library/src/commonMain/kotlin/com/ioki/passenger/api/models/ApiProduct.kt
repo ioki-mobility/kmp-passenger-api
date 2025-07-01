@@ -53,8 +53,6 @@ public data class ApiProduct(
     val supportWebsiteUrl: String?,
     @SerialName(value = "support_phone_number")
     val supportPhoneNumber: String?,
-    @SerialName(value = "payment_method_required_on_booking")
-    val paymentMethodRequiredOnBooking: Boolean,
 ) : Entity {
     @Serializable
     public data class Features(

@@ -149,7 +149,6 @@ internal class ApiProductTest : IokiApiModelTest() {
                         bookable = true,
                     ),
                 ),
-                paymentMethodRequiredOnBooking = false,
                 drtArea = PassengerApiArea(
                     type = "area",
                     id = "area-1",
@@ -291,7 +290,6 @@ internal class ApiProductTest : IokiApiModelTest() {
                         bookable = false,
                     ),
                 ),
-                paymentMethodRequiredOnBooking = false,
                 drtArea =
                 PassengerApiArea(
                     type = "",
@@ -346,7 +344,6 @@ private val productMinimal =
         "lng": 4.0
     }
   },
-  "payment_method_required_on_booking": false,
   "requires_fixed_station": false,
   "fixed_stations": [],
   "display_stations_on_map": false,
@@ -493,7 +490,6 @@ private val product =
   "prebookable":true,
   "ad_hoc_bookable": true,
   "requires_fixed_station": true,
-  "payment_method_required_on_booking": false,
   "fixed_stations": [
     {
       "id": "s1",
