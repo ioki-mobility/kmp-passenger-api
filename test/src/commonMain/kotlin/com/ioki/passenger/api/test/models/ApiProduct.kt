@@ -42,7 +42,6 @@ public fun createApiProduct(
     supportEmail: String? = null,
     supportWebsiteUrl: String? = null,
     supportPhoneNumber: String? = null,
-    paymentMethodRequiredOnBooking: Boolean = false,
 ): ApiProduct = ApiProduct(
     id = id,
     version = version,
@@ -73,7 +72,6 @@ public fun createApiProduct(
     supportEmail = supportEmail,
     supportWebsiteUrl = supportWebsiteUrl,
     supportPhoneNumber = supportPhoneNumber,
-    paymentMethodRequiredOnBooking = paymentMethodRequiredOnBooking,
 )
 
 public fun createApiProductFeatures(
