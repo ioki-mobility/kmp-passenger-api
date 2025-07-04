@@ -42,7 +42,6 @@ public data class ApiRideResponse(
     val route: Route?,
     val ticket: Ticket?,
     val tip: ApiTipResponse?,
-    val receipts: List<Receipt>,
     @SerialName(value = "support_uri") val supportUri: String?,
     @SerialName(value = "offered_solutions") val offeredSolutions: List<ApiOfferedSolution>,
     @SerialName(value = "booked_solution") val bookedSolution: ApiBookedSolution?,
@@ -76,41 +75,6 @@ public data class ApiRideResponse(
             @SerialName(value = "purchase_id") val purchaseId: String,
             @SerialName(value = "customer_code") val customerCode: String,
         )
-    }
-
-    @Serializable
-    public data class Receipt(
-        @SerialName(value = "receipt_type") val type: Type = Type.UNSUPPORTED,
-        @SerialName(value = "attachment_url") val url: String?,
-    ) {
-        @Serializable
-        public enum class Type {
-            @SerialName(value = "PersonalDiscountReceipt")
-            PERSONAL_DISCOUNT,
-
-            @SerialName(value = "RideReceipt")
-            RIDE,
-
-            @SerialName(value = "BookingReceipt")
-            BOOKING,
-
-            @SerialName(value = "RidePaymentRecoveryReceipt")
-            RIDE_PAYMENT_RECOVERY,
-
-            @SerialName(value = "ServiceCreditReceipt")
-            SERVICE_CREDIT,
-
-            @SerialName(value = "TipReceipt")
-            TIP,
-
-            @SerialName(value = "RideRefundReceipt")
-            RIDE_REFUND,
-
-            @SerialName(value = "BookingRefundReceipt")
-            BOOKING_REFUND,
-
-            UNSUPPORTED,
-        }
     }
 }
 

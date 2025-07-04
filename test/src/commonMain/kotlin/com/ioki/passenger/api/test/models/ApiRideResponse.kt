@@ -51,7 +51,6 @@ public fun createApiRideResponse(
     route: ApiRideResponse.Route? = null,
     ticket: ApiRideResponse.Ticket? = null,
     tip: ApiTipResponse? = null,
-    receipts: List<ApiRideResponse.Receipt> = emptyList(),
     supportUri: String? = null,
     offeredSolutions: List<ApiOfferedSolution> = emptyList(),
     bookedSolution: ApiBookedSolution? = null,
@@ -92,7 +91,6 @@ public fun createApiRideResponse(
     route = route,
     ticket = ticket,
     tip = tip,
-    receipts = receipts,
     supportUri = supportUri,
     offeredSolutions = offeredSolutions,
     bookedSolution = bookedSolution,
@@ -125,12 +123,4 @@ public fun createApiRideResponseTicket(
     mobileTicketData = mobileTicketData,
     ticketUrl = ticketUrl,
     issuer = issuer,
-)
-
-public fun createApiRideResponseReceipt(
-    type: ApiRideResponse.Receipt.Type = ApiRideResponse.Receipt.Type.UNSUPPORTED,
-    url: String? = null,
-): ApiRideResponse.Receipt = ApiRideResponse.Receipt(
-    type = type,
-    url = url,
 )
