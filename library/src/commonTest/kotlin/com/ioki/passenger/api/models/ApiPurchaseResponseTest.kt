@@ -46,7 +46,13 @@ internal class ApiPurchaseResponseTest : IokiApiModelTest() {
                             reservation = true,
                             state = ApiPurchaseResponse.Charge.State.PENDING,
                             amount = ApiMoney(amount = 90, currency = "EUR"),
-                            receipt = null,
+                            receipt = ApiPurchaseResponse.Charge.Receipt(
+                                id = "receiptId",
+                                chargeId = "chargeId",
+                                attachmentUrl = "https://example.com/receipt.pdf",
+                                createdAt = Instant.parse("2023-07-19T13:17:42Z"),
+                                updatedAt = Instant.parse("2023-07-20T13:17:42Z"),
+                            ),
                         ),
                     ),
                 ),
@@ -147,7 +153,13 @@ private val purchaseResponse =
                 "amount": 90,
                 "currency": "EUR"
             },
-            "receipt": null
+            "receipt": {
+                "id": "receiptId",
+                "charge_id": "chargeId",
+                "attachment_url": "https://example.com/receipt.pdf",
+                "created_at": "2023-07-19T13:17:42Z",
+                "updated_at": "2023-07-20T13:17:42Z"
+            }
         }
         }
     ],
