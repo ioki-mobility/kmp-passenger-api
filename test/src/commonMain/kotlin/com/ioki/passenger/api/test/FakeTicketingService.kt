@@ -25,6 +25,7 @@ public open class FakeTicketingService : TicketingService {
     override suspend fun getAllTicketingProducts(
         type: ApiTicketingProductFilterType,
         rideId: String?,
+        ticketFilter: Map<String, String>,
         page: Int,
     ): ApiResult<List<ApiTicketingProductResponse>> = error("Not overridden")
 

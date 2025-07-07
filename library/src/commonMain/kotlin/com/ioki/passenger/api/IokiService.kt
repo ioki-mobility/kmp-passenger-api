@@ -90,8 +90,8 @@ import com.ioki.result.Result
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.isSuccess
-import kotlin.coroutines.cancellation.CancellationException
 import kotlinx.datetime.Instant
+import kotlin.coroutines.cancellation.CancellationException
 
 public fun IokiService(
     baseUrl: String,
@@ -348,6 +348,7 @@ public interface TicketingService {
     public suspend fun getAllTicketingProducts(
         type: ApiTicketingProductFilterType,
         rideId: String?,
+        ticketFilter: Map<String, String>,
         page: Int,
     ): ApiResult<List<ApiTicketingProductResponse>>
 
@@ -783,10 +784,11 @@ private class DefaultIokiService(
     override suspend fun getAllTicketingProducts(
         type: ApiTicketingProductFilterType,
         rideId: String?,
+        ticketFilter: Map<String, String>,
         page: Int,
     ): ApiResult<List<ApiTicketingProductResponse>> =
         apiCall<ApiBody<List<ApiTicketingProductResponse>>, List<ApiTicketingProductResponse>> {
-            getAllTicketingProducts(filter = type.queryValue, rideId = rideId, page = page)
+            getAllTicketingProducts(filter = type.queryValue, ticketFilter = ticketFilter, rideId = rideId, page = page)
         }
 
     override suspend fun purchaseTicketingProduct(

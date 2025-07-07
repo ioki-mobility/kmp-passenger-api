@@ -108,6 +108,10 @@ class IokiApiParametersTest {
             it.getAllTicketingProducts(
                 filter = "filter",
                 rideId = "rideId",
+                ticketFilter = mapOf(
+                    "filter1" to "1",
+                    "filter2" to "2",
+                ),
                 page = 2,
                 perPage = 100,
             )
@@ -116,6 +120,8 @@ class IokiApiParametersTest {
         parameters.toMap() shouldContainExactly mapOf(
             "filter" to listOf("filter"),
             "ride_id" to listOf("rideId"),
+            "filter1" to listOf("1"),
+            "filter2" to listOf("2"),
             "page" to listOf("2"),
             "per_page" to listOf("100"),
         )

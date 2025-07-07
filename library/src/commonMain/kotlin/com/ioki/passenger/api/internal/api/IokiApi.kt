@@ -406,6 +406,7 @@ internal class IokiApi(
     suspend fun getAllTicketingProducts(
         filter: String,
         rideId: String?,
+        ticketFilter: Map<String, String>,
         page: Int = 1,
         perPage: Int = 10,
     ): HttpResponse = client.get("/api/passenger/ticketing/products") {
@@ -413,7 +414,10 @@ internal class IokiApi(
         url.parameters.appendAll(
             parameters {
                 append("filter", filter)
-                rideId?.let { append("ride_id", it.toString()) }
+                rideId?.let { append("ride_id", it) }
+                ticketFilter.forEach { (key, value) ->
+                    append(key, value)
+                }
                 append("page", page.toString())
                 append("per_page", perPage.toString())
             },
