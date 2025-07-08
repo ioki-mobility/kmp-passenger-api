@@ -1,5 +1,6 @@
 package com.ioki.passenger.api.models
 
+import kotlinx.datetime.Instant
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
@@ -8,6 +9,7 @@ import kotlinx.serialization.descriptors.buildClassSerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.JsonDecoder
+import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.boolean
 import kotlinx.serialization.json.booleanOrNull
@@ -29,6 +31,12 @@ public sealed class AnyValue {
 
     @Serializable
     public data class DoubleValue(val value: Double) : AnyValue()
+
+    @Serializable
+    public data class InstantValue(val value: Instant) : AnyValue()
+
+    @Serializable
+    public data class ApiPointValue(val value: ApiPoint) : AnyValue()
 }
 
 internal object AnyValueSerializer : KSerializer<AnyValue> {
@@ -40,6 +48,8 @@ internal object AnyValueSerializer : KSerializer<AnyValue> {
             is AnyValue.IntValue -> encoder.encodeInt(value.value)
             is AnyValue.BooleanValue -> encoder.encodeBoolean(value.value)
             is AnyValue.DoubleValue -> encoder.encodeDouble(value.value)
+            is AnyValue.InstantValue -> encoder.encodeSerializableValue(Instant.serializer(), value.value)
+            is AnyValue.ApiPointValue -> encoder.encodeSerializableValue(ApiPoint.serializer(), value.value)
             // Handle other types as needed
         }
     }
@@ -50,13 +60,25 @@ internal object AnyValueSerializer : KSerializer<AnyValue> {
 
         // Here we can add logic to determine the type
         return when {
-            jsonElement is JsonPrimitive && jsonElement.isString -> AnyValue.StringValue(jsonElement.content)
+            jsonElement is JsonPrimitive && jsonElement.isString -> runCatching {
+                AnyValue.InstantValue(input.json.decodeFromJsonElement(Instant.serializer(), jsonElement))
+            }.getOrElse {
+                AnyValue.StringValue(jsonElement.content)
+            }
+
             jsonElement is JsonPrimitive && jsonElement.intOrNull != null -> AnyValue.IntValue(jsonElement.int)
             jsonElement is JsonPrimitive && jsonElement.booleanOrNull != null ->
-                AnyValue.BooleanValue(
-                    jsonElement.boolean,
+                AnyValue.BooleanValue(jsonElement.boolean)
+
+            jsonElement is JsonPrimitive && jsonElement.doubleOrNull != null ->
+                AnyValue.DoubleValue(jsonElement.double)
+
+            jsonElement is JsonObject -> runCatching {
+                AnyValue.ApiPointValue(
+                    input.json.decodeFromJsonElement(ApiPoint.serializer(), jsonElement),
                 )
-            jsonElement is JsonPrimitive && jsonElement.doubleOrNull != null -> AnyValue.DoubleValue(jsonElement.double)
+            }.getOrElse { throw SerializationException("JsonObject is not a valid ApiPoint", it) }
+
             else -> throw SerializationException("Unknown type")
         }
     }
