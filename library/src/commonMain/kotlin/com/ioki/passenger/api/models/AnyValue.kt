@@ -73,11 +73,11 @@ internal object AnyValueSerializer : KSerializer<AnyValue> {
             jsonElement is JsonPrimitive && jsonElement.doubleOrNull != null ->
                 AnyValue.DoubleValue(jsonElement.double)
 
-            jsonElement is JsonObject -> runCatching {
+            jsonElement is JsonObject -> run {
                 AnyValue.ApiPointValue(
                     input.json.decodeFromJsonElement(ApiPoint.serializer(), jsonElement),
                 )
-            }.getOrElse { throw SerializationException("JsonObject is not a valid ApiPoint", it) }
+            }
 
             else -> throw SerializationException("Unknown type")
         }
