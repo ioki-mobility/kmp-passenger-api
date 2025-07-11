@@ -1,9 +1,11 @@
 package com.ioki.passenger.api.models
 
 import kotlinx.datetime.Instant
+import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertIs
 
 internal class AnyValueTest {
     private val json = Json { encodeDefaults = true }
@@ -88,5 +90,15 @@ internal class AnyValueTest {
         val apiPoint = ApiPoint(52.5200, 13.4050)
         val deserialized = json.decodeFromString(AnyValueSerializer, """{"lat":52.52,"lng":13.405}""")
         assertEquals(AnyValue.ApiPointValue(apiPoint), deserialized)
+    }
+
+    @Test
+    fun unsupportedType_throwsException() {
+        val unsupportedJson = """{"unsupported": "value"}"""
+        try {
+            json.decodeFromString(AnyValueSerializer, unsupportedJson)
+        } catch (e: Exception) {
+            assertIs<SerializationException>(e)
+        }
     }
 }
