@@ -6,6 +6,6 @@ public fun createApiDeviceRequest(
     token: String = "",
     supportsEncryptedNotifications: Boolean = true,
 ): ApiDeviceRequest = ApiDeviceRequest(
-    token = token, 
-    supportsEncryptedNotifications = supportsEncryptedNotifications
+    token = token,
+    supportsEncryptedNotifications = supportsEncryptedNotifications,
 )
