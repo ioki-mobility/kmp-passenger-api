@@ -15,6 +15,9 @@ import com.ioki.passenger.api.models.ApiDeviceRequest
 import com.ioki.passenger.api.models.ApiDoorStateChangeRequest
 import com.ioki.passenger.api.models.ApiFailedPaymentRequest
 import com.ioki.passenger.api.models.ApiFirebaseDebugRecordRequest
+import com.ioki.passenger.api.models.ApiGeocodingDetailsRequest
+import com.ioki.passenger.api.models.ApiGeocodingSearchRequest
+import com.ioki.passenger.api.models.ApiGeocodingSessionRequest
 import com.ioki.passenger.api.models.ApiLogPayAccountRequest
 import com.ioki.passenger.api.models.ApiPaymentMethodCreationRequest
 import com.ioki.passenger.api.models.ApiPersonalDiscountPurchaseRequest
@@ -501,17 +504,44 @@ internal class IokiApi(
             header("Authorization", accessToken)
             setBody(body)
         }
+
+    suspend fun geocodingSession(body: ApiBody<ApiGeocodingSessionRequest>): HttpResponse =
+        client.post(urlString = "/api/passenger/geocoding/session") {
+            header("Authorization", accessToken)
+            setBody(body)
+        }
+
+    suspend fun expireGeocodingSession(id: String): HttpResponse =
+        client.delete(urlString = "/api/passenger/geocoding/session/{$id}") {
+            header("Authorization", accessToken)
+        }
+
+    suspend fun geocodingSearch(id: String, body: ApiBody<ApiGeocodingSearchRequest>): HttpResponse =
+        client.post(urlString = "/api/passenger/geocoding/session{$id}/search") {
+            header("Authorization", accessToken)
+            setBody(body)
+        }
+
+    suspend fun geocodingDetails(id: String, body: ApiBody<ApiGeocodingDetailsRequest>): HttpResponse =
+        client.post(urlString = "/api/passenger/geocoding/session{$id}/details") {
+            header("Authorization", accessToken)
+            setBody(body)
+        }
 }
 
 private fun ApiPurchaseFilter.toStringValues(): StringValues = StringValues.build {
-    append("page", page.toString())
-    perPage?.let { append("per_page", it.toString()) }
-    since?.let { append("since", it.toString()) }
-    until?.let { append("until", it.toString()) }
-    purchasableId?.let { append("purchasable_id", it) }
-    purchasableType?.let { append("purchasable_type", Json.encodeToString(it).removeSurrounding("\"")) }
-    state?.let { append("state", Json.encodeToString(it).removeSurrounding("\"")) }
-    filter?.let { append("filter", Json.encodeToString(it).removeSurrounding("\"")) }
-    order?.let { append("order", Json.encodeToString(it).removeSurrounding("\"")) }
-    orderBy?.let { append("order_by", Json.encodeToString(it).removeSurrounding("\"")) }
+    append(name = "page", value = page.toString())
+    perPage?.let { append(name = "per_page", value = it.toString()) }
+    since?.let { append(name = "since", value = it.toString()) }
+    until?.let { append(name = "until", value = it.toString()) }
+    purchasableId?.let { append(name = "purchasable_id", value = it) }
+    purchasableType?.let {
+        append(name = "purchasable_type", value = Json.encodeToString(value = it).removeSurrounding(delimiter = "\""))
+    }
+    state?.let { append(name = "state", value = Json.encodeToString(value = it).removeSurrounding(delimiter = "\"")) }
+    filter?.let { append(name = "filter", value = Json.encodeToString(value = it).removeSurrounding(delimiter = "\"")) }
+    order?.let { append(name = "order", value = Json.encodeToString(value = it).removeSurrounding(delimiter = "\"")) }
+    orderBy?.let {
+        append(name = "order_by", value = Json.encodeToString(value = it).removeSurrounding(delimiter = "\""))
+    }
 }
