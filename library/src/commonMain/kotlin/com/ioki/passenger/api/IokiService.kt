@@ -90,7 +90,7 @@ import com.ioki.result.Result
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.isSuccess
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlin.coroutines.cancellation.CancellationException
 
 public fun IokiService(

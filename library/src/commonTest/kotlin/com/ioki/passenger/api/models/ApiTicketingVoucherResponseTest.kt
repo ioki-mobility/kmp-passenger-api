@@ -1,6 +1,6 @@
 package com.ioki.passenger.api.models
 
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlin.test.Test
 
 internal class ApiTicketingVoucherResponseTest : IokiApiModelTest() {
