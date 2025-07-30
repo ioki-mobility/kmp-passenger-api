@@ -517,13 +517,13 @@ internal class IokiApi(
         }
 
     suspend fun geocodingSearch(id: String, body: ApiBody<ApiGeocodingSearchRequest>): HttpResponse =
-        client.post(urlString = "/api/passenger/geocoding/session{$id}/search") {
+        client.post(urlString = "/api/passenger/geocoding/session/{$id}/search") {
             header("Authorization", accessToken)
             setBody(body)
         }
 
     suspend fun geocodingDetails(id: String, body: ApiBody<ApiGeocodingDetailsRequest>): HttpResponse =
-        client.post(urlString = "/api/passenger/geocoding/session{$id}/details") {
+        client.post(urlString = "/api/passenger/geocoding/session/{$id}/details") {
             header("Authorization", accessToken)
             setBody(body)
         }
