@@ -21,8 +21,6 @@ internal class ApiVehicleTest : IokiApiModelTest() {
                         ApiAvatar.Versions.ImageData(20, 20, "https://some.url/img.png"),
                     ),
                 ),
-                seats = 5,
-                storageSpaces = 3,
                 autonomous = false,
                 supportsOpenDoorRequests = false,
                 doorControlAvailable = false,
@@ -42,8 +40,6 @@ internal class ApiVehicleTest : IokiApiModelTest() {
                 "Diesel",
                 null,
                 null,
-                seats = 5,
-                storageSpaces = 3,
                 autonomous = true,
                 supportsOpenDoorRequests = true,
                 doorControlAvailable = true,
@@ -86,8 +82,6 @@ private val vehicle =
         }
     }
   },
-  "seats": 5,
-  "storage_spaces": 3,
   "autonomous": false,
   "supports_open_door_requests": false,
   "door_control_available": false
@@ -102,8 +96,6 @@ private val vehicleMinimal =
   "manufacturer": "Mercedes Benz",
   "model": "V-Klasse",
   "fuel_type":"Diesel",
-  "seats": 5,
-  "storage_spaces": 3,
   "autonomous": true,
   "supports_open_door_requests": true,
   "door_control_available": true
