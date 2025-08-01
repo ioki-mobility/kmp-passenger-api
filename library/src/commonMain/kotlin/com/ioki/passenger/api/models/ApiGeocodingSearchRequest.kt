@@ -1,0 +1,11 @@
+package com.ioki.passenger.api.models
+
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
+public data class ApiGeocodingSearchRequest(
+    val query: String,
+    @SerialName(value = "product_id") val productId: String,
+    @SerialName(value = "place_types") val placeTypes: String,
+)

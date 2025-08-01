@@ -27,6 +27,12 @@ import com.ioki.passenger.api.models.ApiFailedPaymentResponse
 import com.ioki.passenger.api.models.ApiFareResponse
 import com.ioki.passenger.api.models.ApiFirebaseDebugRecordRequest
 import com.ioki.passenger.api.models.ApiFirebaseTokenResponse
+import com.ioki.passenger.api.models.ApiGeocodingDetailsRequest
+import com.ioki.passenger.api.models.ApiGeocodingDetailsResponse
+import com.ioki.passenger.api.models.ApiGeocodingSearchRequest
+import com.ioki.passenger.api.models.ApiGeocodingSearchResponse
+import com.ioki.passenger.api.models.ApiGeocodingSessionRequest
+import com.ioki.passenger.api.models.ApiGeocodingSessionResponse
 import com.ioki.passenger.api.models.ApiLogPayAccountRequest
 import com.ioki.passenger.api.models.ApiLogPayType
 import com.ioki.passenger.api.models.ApiLogPayUrlResponse
@@ -145,7 +151,8 @@ public interface IokiService :
     PublicTransportService,
     TicketingService,
     StationsService,
-    VenuesService
+    VenuesService,
+    GeocodingService
 
 public interface PhoneVerificationService {
     public suspend fun solveCaptcha(captchaId: String, captchaRequest: ApiCaptchaRequest): ApiResult<Unit>
@@ -386,6 +393,19 @@ public interface PurchaseService {
     public suspend fun getPurchase(purchaseId: String): ApiResult<ApiPurchaseResponse>
     public suspend fun settleDebit(purchaseId: String, request: ApiSettleDebitRequest): ApiResult<ApiPurchaseResponse>
     public suspend fun resettleDebits(request: ApiResettleDebitsRequest): ApiResult<List<ApiPurchaseResponse>>
+}
+
+public interface GeocodingService {
+    public suspend fun getGeocodingSession(request: ApiGeocodingSessionRequest): ApiResult<ApiGeocodingSessionResponse>
+    public suspend fun expireGeocodingSession(sessionId: String): ApiResult<Unit>
+    public suspend fun getGeocodingSearch(
+        sessionId: String,
+        request: ApiGeocodingSearchRequest,
+    ): ApiResult<ApiGeocodingSearchResponse>
+    public suspend fun getGeocodingDetails(
+        sessionId: String,
+        request: ApiGeocodingDetailsRequest,
+    ): ApiResult<ApiGeocodingDetailsResponse>
 }
 
 private class DefaultIokiService(
@@ -830,6 +850,33 @@ private class DefaultIokiService(
     override suspend fun getRatingCriteria(rideId: String): ApiResult<List<ApiRatingCriteriaResponse>> =
         apiCall<ApiBody<List<ApiRatingCriteriaResponse>>, List<ApiRatingCriteriaResponse>> {
             getRatingCriteria(rideId = rideId)
+        }
+
+    override suspend fun getGeocodingSession(
+        request: ApiGeocodingSessionRequest,
+    ): ApiResult<ApiGeocodingSessionResponse> =
+        apiCall<ApiBody<ApiGeocodingSessionResponse>, ApiGeocodingSessionResponse> {
+            geocodingSession(body = ApiBody(request))
+        }
+
+    override suspend fun expireGeocodingSession(sessionId: String): ApiResult<Unit> = apiCall<Unit, Unit> {
+        expireGeocodingSession(id = sessionId)
+    }
+
+    override suspend fun getGeocodingSearch(
+        sessionId: String,
+        request: ApiGeocodingSearchRequest,
+    ): ApiResult<ApiGeocodingSearchResponse> =
+        apiCall<ApiBody<ApiGeocodingSearchResponse>, ApiGeocodingSearchResponse> {
+            geocodingSearch(id = sessionId, body = ApiBody(request))
+        }
+
+    override suspend fun getGeocodingDetails(
+        sessionId: String,
+        request: ApiGeocodingDetailsRequest,
+    ): ApiResult<ApiGeocodingDetailsResponse> =
+        apiCall<ApiBody<ApiGeocodingDetailsResponse>, ApiGeocodingDetailsResponse> {
+            geocodingDetails(id = sessionId, body = ApiBody(request))
         }
 
     private suspend inline fun <reified R, reified T> apiCall(
