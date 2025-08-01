@@ -2,7 +2,7 @@ package com.ioki.passenger.api.models
 
 import com.ioki.passenger.api.test.models.createApiLocation
 import io.kotest.matchers.shouldBe
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlin.test.Test
 
 internal class ApiLocationTest : IokiApiModelTest() {

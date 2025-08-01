@@ -3,7 +3,7 @@ package com.ioki.passenger.api.models
 import com.ioki.passenger.api.test.models.createApiFareResponse
 import com.ioki.passenger.api.test.models.createApiLocation
 import com.ioki.passenger.api.test.models.createApiVehicle
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlin.test.Test
 
 internal class ApiRideResponseTest : IokiApiModelTest() {

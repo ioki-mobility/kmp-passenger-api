@@ -2,7 +2,7 @@ package com.ioki.passenger.api.test.models
 
 import com.ioki.passenger.api.models.ApiPassengerSelectionRequest
 import com.ioki.passenger.api.models.ApiRideInquiryRequest
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 public fun createApiRideInquiryRequest(
     productId: String = "",

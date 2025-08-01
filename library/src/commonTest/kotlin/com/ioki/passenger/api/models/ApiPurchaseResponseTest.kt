@@ -3,7 +3,7 @@ package com.ioki.passenger.api.models
 import com.ioki.passenger.api.test.models.createApiMoney
 import com.ioki.passenger.api.test.models.createApiPaymentMethodResponseSummary
 import kotlin.test.Test
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 internal class ApiPurchaseResponseTest : IokiApiModelTest() {
     @Test

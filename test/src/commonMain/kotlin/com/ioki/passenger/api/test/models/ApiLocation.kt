@@ -2,7 +2,7 @@ package com.ioki.passenger.api.test.models
 
 import com.ioki.passenger.api.models.ApiLocation
 import com.ioki.passenger.api.models.ApiStationResponse
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 public fun createApiLocation(
     lat: Double = 0.0,

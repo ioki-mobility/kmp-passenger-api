@@ -14,7 +14,7 @@ import com.ioki.passenger.api.models.ApiRatingResponse
 import com.ioki.passenger.api.models.ApiRideResponse
 import com.ioki.passenger.api.models.ApiTipResponse
 import com.ioki.passenger.api.models.ApiVehicle
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 public fun createApiRideResponse(
     id: String = "",

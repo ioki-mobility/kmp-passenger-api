@@ -1,7 +1,7 @@
 package com.ioki.passenger.api.models
 
 import com.ioki.passenger.api.test.models.createApiLocation
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlinx.datetime.LocalDate
 import kotlin.test.Test
 

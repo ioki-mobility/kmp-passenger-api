@@ -2,7 +2,7 @@ package com.ioki.passenger.api.test.models
 
 import com.ioki.passenger.api.models.ApiAuthenticatedUserResponse
 import com.ioki.passenger.api.models.ApiMarketingResponse
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 public fun createApiMarketingResponse(
     id: String = "",

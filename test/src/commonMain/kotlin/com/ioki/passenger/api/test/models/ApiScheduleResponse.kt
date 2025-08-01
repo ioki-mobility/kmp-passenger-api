@@ -2,7 +2,7 @@ package com.ioki.passenger.api.test.models
 
 import com.ioki.passenger.api.models.ApiPublicTransportType
 import com.ioki.passenger.api.models.ApiScheduleResponse
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 public fun createApiScheduleResponse(
     transportType: ApiPublicTransportType = ApiPublicTransportType.UNSUPPORTED,

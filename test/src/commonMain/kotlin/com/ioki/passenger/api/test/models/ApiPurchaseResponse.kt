@@ -9,7 +9,7 @@ import com.ioki.passenger.api.models.ApiPurchaseResponse.CreatorType
 import com.ioki.passenger.api.models.ApiPurchaseResponse.Invoice
 import com.ioki.passenger.api.models.ApiPurchaseState
 import com.ioki.passenger.api.models.ApiPurchaseType
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 public fun createApiPurchaseResponse(
     id: String = "",

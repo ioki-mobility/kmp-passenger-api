@@ -1,7 +1,7 @@
 package com.ioki.passenger.api.test.models
 
 import com.ioki.passenger.api.models.ApiRedeemedPromoCodeResponse
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 public fun createApiRedeemedPromoCodeResponse(
     id: String = "",

@@ -1,7 +1,7 @@
 package com.ioki.passenger.api.models
 
 import com.ioki.passenger.api.models.ApiRideInquiryResponse.Assistance.ErrorCode
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
