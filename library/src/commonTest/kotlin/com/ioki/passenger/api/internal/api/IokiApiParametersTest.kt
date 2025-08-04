@@ -14,9 +14,9 @@ import io.ktor.http.Parameters
 import io.ktor.util.toMap
 import io.ktor.utils.io.ByteReadChannel
 import kotlinx.coroutines.test.runTest
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlin.test.Test
-import kotlinx.datetime.Clock
+import kotlin.time.Clock
 
 class IokiApiParametersTest {
 

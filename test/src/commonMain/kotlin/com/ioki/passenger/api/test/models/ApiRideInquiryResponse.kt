@@ -3,7 +3,7 @@ package com.ioki.passenger.api.test.models
 import com.ioki.passenger.api.models.ApiArea
 import com.ioki.passenger.api.models.ApiRideInquiryResponse
 import com.ioki.passenger.api.models.ApiRideInquiryResponse.Assistance.ErrorCode
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 public fun createApiRideInquiryResponse(
     availability: ApiRideInquiryResponse.Availability = createApiRideInquiryResponseAvailability(),
