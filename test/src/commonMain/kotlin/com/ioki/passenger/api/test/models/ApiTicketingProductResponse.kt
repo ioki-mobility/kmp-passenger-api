@@ -3,7 +3,7 @@ package com.ioki.passenger.api.test.models
 import com.ioki.passenger.api.models.ApiMoney
 import com.ioki.passenger.api.models.ApiTicketingProductOption
 import com.ioki.passenger.api.models.ApiTicketingProductResponse
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 public fun createApiTicketingProductResponse(
     id: String? = null,

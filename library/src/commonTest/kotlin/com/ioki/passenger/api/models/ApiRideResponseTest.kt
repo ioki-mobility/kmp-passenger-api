@@ -3,7 +3,7 @@ package com.ioki.passenger.api.models
 import com.ioki.passenger.api.test.models.createApiFareResponse
 import com.ioki.passenger.api.test.models.createApiLocation
 import com.ioki.passenger.api.test.models.createApiVehicle
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlin.test.Test
 
 internal class ApiRideResponseTest : IokiApiModelTest() {
@@ -80,8 +80,6 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                     fuelType = "Diesel",
                     operatorInfo = "Operated by Ioki",
                     avatar = null,
-                    seats = 5,
-                    storageSpaces = 3,
                     autonomous = false,
                 ),
                 driver = ApiDriver(
@@ -147,8 +145,6 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                                     fuelType = "Diesel",
                                     operatorInfo = "Operated by Ioki",
                                     avatar = null,
-                                    seats = 5,
-                                    storageSpaces = 3,
                                     autonomous = false,
                                     supportsOpenDoorRequests = false,
                                     doorControlAvailable = false,
@@ -188,8 +184,6 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                                 fuelType = "Diesel",
                                 operatorInfo = "Operated by Ioki",
                                 avatar = null,
-                                seats = 5,
-                                storageSpaces = 3,
                                 autonomous = false,
                                 supportsOpenDoorRequests = false,
                                 doorControlAvailable = false,
@@ -384,8 +378,6 @@ private val rideResponse =
     "model": "V-Klasse",
     "fuel_type":"Diesel",
     "operator_information":"Operated by Ioki",
-    "seats": 5,
-    "storage_spaces": 3,
     "autonomous": false,
     "door_control_available": false,
     "supports_open_door_requests": false
@@ -473,8 +465,6 @@ private val rideResponse =
             "model": "V-Klasse",
             "fuel_type": "Diesel",
             "operator_information": "Operated by Ioki",
-            "seats": 5,
-            "storage_spaces": 3,
             "autonomous": false,
             "supports_open_door_requests": false,
             "door_control_available": false
@@ -520,8 +510,6 @@ private val rideResponse =
             "model": "V-Klasse",
             "fuel_type": "Diesel",
             "operator_information": "Operated by Ioki",
-            "seats": 5,
-            "storage_spaces": 3,
             "autonomous": false,
             "supports_open_door_requests": false,
             "door_control_available": false

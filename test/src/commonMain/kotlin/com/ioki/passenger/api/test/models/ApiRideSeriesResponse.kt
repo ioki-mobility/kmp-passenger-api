@@ -2,7 +2,7 @@ package com.ioki.passenger.api.test.models
 
 import com.ioki.passenger.api.models.ApiRideResponse
 import com.ioki.passenger.api.models.ApiRideSeriesResponse
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlinx.datetime.LocalDate
 
 public fun createApiRideSeriesResponse(

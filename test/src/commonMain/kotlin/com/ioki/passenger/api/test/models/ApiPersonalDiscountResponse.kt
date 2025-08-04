@@ -2,7 +2,7 @@ package com.ioki.passenger.api.test.models
 
 import com.ioki.passenger.api.models.ApiMoney
 import com.ioki.passenger.api.models.ApiPersonalDiscountResponse
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 public fun createApiPersonalDiscountResponse(
     id: String = "",
