@@ -5,7 +5,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 public data class ApiGeocodingDetailsResponse(
-    val id: String,
     val lat: Double,
     val lng: Double,
     val vendor: String,

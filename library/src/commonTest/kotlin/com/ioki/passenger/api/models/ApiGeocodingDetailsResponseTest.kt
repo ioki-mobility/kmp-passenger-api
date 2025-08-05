@@ -8,7 +8,6 @@ internal class ApiGeocodingDetailsResponseTest : IokiApiModelTest() {
     fun serialization() {
         testJsonStringCanBeConvertedToModel(
             expectedModel = ApiGeocodingDetailsResponse(
-                id = "abc123",
                 lat = 50.113695,
                 lng = 8.678996,
                 vendorType = VendorType.PLACES,
@@ -31,7 +30,6 @@ internal class ApiGeocodingDetailsResponseTest : IokiApiModelTest() {
     fun serializationMinimal() {
         testJsonStringCanBeConvertedToModel(
             expectedModel = ApiGeocodingDetailsResponse(
-                id = "abc123",
                 lat = 50.113695,
                 lng = 8.678996,
                 vendor = "ioki",
@@ -54,7 +52,6 @@ internal class ApiGeocodingDetailsResponseTest : IokiApiModelTest() {
 private val details =
     """
 {
-    "id": "abc123",
     "lat": 50.113695,
     "lng": 8.678996,
     "vendor": "ioki",
@@ -74,7 +71,6 @@ private val details =
 private val detailsMinimal =
     """
 {
-    "id": "abc123",
     "lat": 50.113695,
     "lng": 8.678996,
     "vendor": "ioki",

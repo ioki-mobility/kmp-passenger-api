@@ -4,7 +4,6 @@ import com.ioki.passenger.api.models.ApiGeocodingDetailsResponse
 import com.ioki.passenger.api.models.ApiGeocodingDetailsResponse.VendorType
 
 public fun createApiGeocodingDetailsResponse(
-    id: String = "",
     vendor: String = "",
     vendorId: String = "",
     lat: Double = 0.0,
@@ -19,7 +18,6 @@ public fun createApiGeocodingDetailsResponse(
     county: String? = null,
     country: String? = null,
 ): ApiGeocodingDetailsResponse = ApiGeocodingDetailsResponse(
-    id = id,
     lat = lat,
     lng = lng,
     vendor = vendor,
