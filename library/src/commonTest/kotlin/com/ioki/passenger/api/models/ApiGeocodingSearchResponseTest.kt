@@ -34,8 +34,8 @@ internal class ApiGeocodingSearchResponseTest : IokiApiModelTest() {
                         id = "abc123",
                         vendor = "ioki",
                         vendorId = "vendor_123",
-                        lat = 50.113695,
-                        lng = 8.678996,
+                        lat = null,
+                        lng = null,
                         locationName = null,
                         description = null,
                         formattedAddress = null,
@@ -72,9 +72,7 @@ private val searchMinimal =
         {
             "id": "abc123",
             "vendor": "ioki",
-            "vendor_id": "vendor_123",
-            "lat": 50.113695,
-            "lng": 8.678996
+            "vendor_id": "vendor_123"
         }
     ]
 }
