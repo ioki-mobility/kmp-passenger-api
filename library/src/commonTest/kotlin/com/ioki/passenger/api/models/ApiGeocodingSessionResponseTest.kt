@@ -1,7 +1,7 @@
 package com.ioki.passenger.api.models
 
 import kotlin.test.Test
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 internal class ApiGeocodingSessionResponseTest : IokiApiModelTest() {
     @Test

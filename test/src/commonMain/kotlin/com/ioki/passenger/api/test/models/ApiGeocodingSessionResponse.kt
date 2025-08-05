@@ -1,7 +1,7 @@
 package com.ioki.passenger.api.test.models
 
 import com.ioki.passenger.api.models.ApiGeocodingSessionResponse
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 public fun createApiGeocodingSessionResponse(
     id: String = "",
