@@ -1,7 +1,12 @@
 package com.ioki.passenger.api.models
 
+import com.ioki.passenger.api.models.ApiGeocodingDetailsResponse.VendorType
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 @Serializable
 public data class ApiGeocodingDetailsResponse(
@@ -19,7 +24,7 @@ public data class ApiGeocodingDetailsResponse(
     val county: String?,
     val country: String?,
 ) {
-    @Serializable
+    @Serializable(with = VendorTypeSerializer::class)
     public enum class VendorType {
         @SerialName("station")
         STATION,
@@ -28,5 +33,27 @@ public data class ApiGeocodingDetailsResponse(
         PLACES,
 
         UNSUPPORTED,
+    }
+}
+
+private object VendorTypeSerializer : KSerializer<VendorType> {
+    override val descriptor = String.serializer().descriptor
+
+    override fun serialize(encoder: Encoder, value: VendorType) {
+        encoder.encodeString(
+            when (value) {
+                VendorType.STATION -> "station"
+                VendorType.PLACES -> "places"
+                VendorType.UNSUPPORTED -> "UNSUPPORTED"
+            },
+        )
+    }
+
+    override fun deserialize(decoder: Decoder): VendorType {
+        return when (decoder.decodeString()) {
+            "station" -> VendorType.STATION
+            "places" -> VendorType.PLACES
+            else -> VendorType.UNSUPPORTED
+        }
     }
 }
