@@ -7,7 +7,7 @@ plugins {
 allprojects.forEach { project ->
     project.group = "com.ioki"
     project.version = buildString {
-        append("0.14.0")
+        append("0.15.0")
         project.findProperty("PRE_RELEASE_IDENTIFIER")?.let {
             append('-')
             append(it)
