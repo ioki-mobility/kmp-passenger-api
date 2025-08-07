@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 public data class ApiGeocodingSearchRequest(
     val query: String,
     @SerialName(value = "product_id") val productId: String,
-    @SerialName(value = "place_types") val placeTypes: String = "",
+    @SerialName(value = "place_types") val placeTypes: String,
 )
