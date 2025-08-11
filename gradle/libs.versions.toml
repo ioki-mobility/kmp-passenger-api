@@ -9,7 +9,7 @@ ktlintVersion = "12.3.0"
 kotlinCoroutines = "1.10.2"
 result = "0.3.0"
 kotest = "5.9.1"
-nmcp = "0.1.5"
+nmcp = "1.0.3"
 
 [libraries]
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
