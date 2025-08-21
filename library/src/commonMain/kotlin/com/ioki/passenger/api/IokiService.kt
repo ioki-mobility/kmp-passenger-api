@@ -37,6 +37,7 @@ import com.ioki.passenger.api.models.ApiLogPayAccountRequest
 import com.ioki.passenger.api.models.ApiLogPayType
 import com.ioki.passenger.api.models.ApiLogPayUrlResponse
 import com.ioki.passenger.api.models.ApiMarketingResponse
+import com.ioki.passenger.api.models.ApiNotificationResponse
 import com.ioki.passenger.api.models.ApiPassengerSelectionRequest
 import com.ioki.passenger.api.models.ApiPaymentMethodCreationRequest
 import com.ioki.passenger.api.models.ApiPaymentMethodResponse
@@ -214,6 +215,8 @@ public interface NotificationService {
         request: ApiUpdateUserNotificationSettingsRequest,
         userId: String,
     ): ApiResult<ApiUserNotificationSettingsResponse>
+
+    public suspend fun getNotification(id: String): ApiResult<ApiNotificationResponse>
 }
 
 public interface CurrentRideService {
@@ -877,6 +880,11 @@ private class DefaultIokiService(
     ): ApiResult<ApiGeocodingDetailsResponse> =
         apiCall<ApiBody<ApiGeocodingDetailsResponse>, ApiGeocodingDetailsResponse> {
             geocodingDetails(id = sessionId, body = ApiBody(request))
+        }
+
+    override suspend fun getNotification(id: String): ApiResult<ApiNotificationResponse> =
+        apiCall<ApiBody<ApiNotificationResponse>, ApiNotificationResponse> {
+            getNotification(id)
         }
 
     private suspend inline fun <reified R, reified T> apiCall(

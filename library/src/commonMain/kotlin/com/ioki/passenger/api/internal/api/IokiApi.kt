@@ -527,6 +527,10 @@ internal class IokiApi(
             header("Authorization", accessToken)
             setBody(body)
         }
+
+    suspend fun getNotification(id: String): HttpResponse = client.get(urlString = "/api/passenger/notifications/$id") {
+        header("Authorization", accessToken)
+    }
 }
 
 private fun ApiPurchaseFilter.toStringValues(): StringValues = StringValues.build {

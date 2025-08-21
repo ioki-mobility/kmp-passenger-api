@@ -1,6 +1,7 @@
 package com.ioki.passenger.api.test
 
 import com.ioki.passenger.api.NotificationService
+import com.ioki.passenger.api.models.ApiNotificationResponse
 import com.ioki.passenger.api.models.ApiProviderNotificationSettingsResponse
 import com.ioki.passenger.api.models.ApiUpdateUserNotificationSettingsRequest
 import com.ioki.passenger.api.models.ApiUserNotificationSettingsResponse
@@ -22,4 +23,6 @@ public open class FakeNotificationService : NotificationService {
         request: ApiUpdateUserNotificationSettingsRequest,
         userId: String,
     ): ApiResult<ApiUserNotificationSettingsResponse> = error("Not overridden")
+
+    override suspend fun getNotification(id: String): ApiResult<ApiNotificationResponse> = error("Not overridden")
 }
