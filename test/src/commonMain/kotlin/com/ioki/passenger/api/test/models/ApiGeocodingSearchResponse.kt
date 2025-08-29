@@ -2,6 +2,7 @@ package com.ioki.passenger.api.test.models
 
 import com.ioki.passenger.api.models.ApiGeocodingSearchResponse
 import com.ioki.passenger.api.models.ApiGeocodingSearchResponse.SearchResult
+import com.ioki.passenger.api.models.ApiGeocodingSearchResponse.SearchResult.Vendor
 import kotlin.String
 
 public fun createApiGeocodingSearchResponse(results: List<SearchResult> = emptyList()): ApiGeocodingSearchResponse =
@@ -9,7 +10,7 @@ public fun createApiGeocodingSearchResponse(results: List<SearchResult> = emptyL
 
 public fun createApiGeocodingSearchResponseSearchResult(
     id: String = "",
-    vendor: String = "",
+    vendor: Vendor = Vendor.UNSUPPORTED,
     vendorId: String = "",
     lat: Double? = null,
     lng: Double? = null,
