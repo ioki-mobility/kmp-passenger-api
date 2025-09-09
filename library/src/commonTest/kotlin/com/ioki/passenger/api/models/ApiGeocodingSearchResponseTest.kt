@@ -1,6 +1,7 @@
 package com.ioki.passenger.api.models
 
 import com.ioki.passenger.api.models.ApiGeocodingSearchResponse.SearchResult
+import com.ioki.passenger.api.models.ApiGeocodingSearchResponse.SearchResult.Vendor
 import kotlin.test.Test
 
 internal class ApiGeocodingSearchResponseTest : IokiApiModelTest() {
@@ -14,7 +15,7 @@ internal class ApiGeocodingSearchResponseTest : IokiApiModelTest() {
                         lat = 50.113695,
                         lng = 8.678996,
                         locationName = "Hauptwache",
-                        vendor = "ioki",
+                        vendor = Vendor.IOKI,
                         vendorId = "vendor_123",
                         formattedAddress = "Hauptwache, Frankfurt am Main, Germany",
                         description = "description_a",
@@ -32,7 +33,7 @@ internal class ApiGeocodingSearchResponseTest : IokiApiModelTest() {
                 results = listOf(
                     SearchResult(
                         id = "abc123",
-                        vendor = "ioki",
+                        vendor = Vendor.IOKI,
                         vendorId = "vendor_123",
                         lat = null,
                         lng = null,
