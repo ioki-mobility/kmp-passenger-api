@@ -16,12 +16,10 @@ public fun createApiLogPayAccountRequest(
 )
 
 public fun createApiLogPayAccountRequestPerson(
-    gender: ApiLogPayAccountRequest.Person.Gender = ApiLogPayAccountRequest.Person.Gender.UNSUPPORTED,
     firstName: String = "",
     lastName: String = "",
     dateOfBirth: String = "",
 ): ApiLogPayAccountRequest.Person = ApiLogPayAccountRequest.Person(
-    gender = gender,
     firstName = firstName,
     lastName = lastName,
     dateOfBirth = dateOfBirth,

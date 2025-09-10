@@ -9,7 +9,6 @@ internal class ApiLogPayAccountRequestTest : IokiApiModelTest() {
             ApiLogPayAccountRequest(
                 emailAddress = "john.doe@gmail.com",
                 person = ApiLogPayAccountRequest.Person(
-                    gender = ApiLogPayAccountRequest.Person.Gender.MALE,
                     firstName = "John",
                     lastName = "Doe",
                     dateOfBirth = "1990-01-01",
@@ -33,7 +32,6 @@ internal class ApiLogPayAccountRequestTest : IokiApiModelTest() {
             ApiLogPayAccountRequest(
                 emailAddress = "john.doe@gmail.com",
                 person = ApiLogPayAccountRequest.Person(
-                    gender = ApiLogPayAccountRequest.Person.Gender.UNSUPPORTED,
                     firstName = "John",
                     lastName = "Doe",
                     dateOfBirth = "1990-01-01",
@@ -57,7 +55,6 @@ internal class ApiLogPayAccountRequestTest : IokiApiModelTest() {
             ApiLogPayAccountRequest(
                 emailAddress = "john.doe@gmail.com",
                 person = ApiLogPayAccountRequest.Person(
-                    gender = ApiLogPayAccountRequest.Person.Gender.UNSUPPORTED,
                     firstName = "John",
                     lastName = "Doe",
                     dateOfBirth = "1990-01-01",
@@ -81,7 +78,6 @@ private val apiLogPayAccountRequestJson =
    {
       "email": "john.doe@gmail.com",
       "person": {
-        "gender": "MALE",
         "forename": "John",
         "surname": "Doe",
         "birth": "1990-01-01"
@@ -102,7 +98,6 @@ private val apiLogPayAccountRequestPaymentMethodTypeUndefinedJson =
    {
       "email": "john.doe@gmail.com",
       "person": {
-        "gender": "UNDEFINED",
         "forename": "John",
         "surname": "Doe",
         "birth": "1990-01-01"
@@ -123,7 +118,6 @@ private val apiLogPayAccountRequestMinimalJson =
    {
       "email": "john.doe@gmail.com",
       "person": {
-        "gender": "UNDEFINED",
         "forename": "John",
         "surname": "Doe",
         "birth": "1990-01-01"
