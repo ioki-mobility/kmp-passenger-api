@@ -28,8 +28,7 @@ public data class ApiLogPayAccountRequest(
         val lastName: String,
         @SerialName(value = "birth")
         val dateOfBirth: String,
-    ) {
-    }
+    )
 
     @Serializable
     public data class Address(
