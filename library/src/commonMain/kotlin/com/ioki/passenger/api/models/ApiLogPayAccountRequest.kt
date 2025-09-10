@@ -22,22 +22,13 @@ public data class ApiLogPayAccountRequest(
 ) {
     @Serializable
     public data class Person(
-        val gender: Gender = Gender.UNSUPPORTED,
         @SerialName(value = "forename")
         val firstName: String,
         @SerialName(value = "surname")
         val lastName: String,
         @SerialName(value = "birth")
         val dateOfBirth: String,
-    ) {
-        @Serializable(with = GenderSerializer::class)
-        public enum class Gender {
-            MALE,
-            FEMALE,
-            DIVERS,
-            UNSUPPORTED,
-        }
-    }
+    )
 
     @Serializable
     public data class Address(
@@ -50,30 +41,6 @@ public data class ApiLogPayAccountRequest(
         val place: String,
         val country: String,
     )
-}
-
-private object GenderSerializer : KSerializer<ApiLogPayAccountRequest.Person.Gender> {
-    override val descriptor = String.serializer().descriptor
-
-    override fun serialize(encoder: Encoder, value: ApiLogPayAccountRequest.Person.Gender) {
-        encoder.encodeString(
-            when (value) {
-                ApiLogPayAccountRequest.Person.Gender.MALE -> "MALE"
-                ApiLogPayAccountRequest.Person.Gender.FEMALE -> "FEMALE"
-                ApiLogPayAccountRequest.Person.Gender.DIVERS -> "DIVERS"
-                ApiLogPayAccountRequest.Person.Gender.UNSUPPORTED -> "UNSUPPORTED"
-            },
-        )
-    }
-
-    override fun deserialize(decoder: Decoder): ApiLogPayAccountRequest.Person.Gender {
-        return when (decoder.decodeString()) {
-            "MALE" -> ApiLogPayAccountRequest.Person.Gender.MALE
-            "FEMALE" -> ApiLogPayAccountRequest.Person.Gender.FEMALE
-            "DIVERS" -> ApiLogPayAccountRequest.Person.Gender.DIVERS
-            else -> ApiLogPayAccountRequest.Person.Gender.UNSUPPORTED
-        }
-    }
 }
 
 private object ApiLogPayTypeSerializer : KSerializer<ApiLogPayType?> {
