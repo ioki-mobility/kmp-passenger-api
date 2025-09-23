@@ -57,7 +57,7 @@ public fun createApiRideResponse(
     bookedSolution: ApiBookedSolution? = null,
     passengerNoteToDriver: String = "",
     showPublicTransportTicketReminder: Boolean = false,
-    matchingState: ApiMatchingState = createApiMatchingState()
+    matchingState: ApiMatchingState = createApiMatchingState(),
 ): ApiRideResponse = ApiRideResponse(
     id = id,
     productId = productId,
