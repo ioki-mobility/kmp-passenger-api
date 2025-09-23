@@ -570,5 +570,6 @@ private val rideResponseMinimal =
   "offered_solutions": [],
   "options": [],
   "passenger_note_to_driver": "",
+  "show_pt_ticket_reminder": false
 }
 """
