@@ -7,6 +7,7 @@ import com.ioki.passenger.api.models.ApiCancellationReason
 import com.ioki.passenger.api.models.ApiDriver
 import com.ioki.passenger.api.models.ApiFareResponse
 import com.ioki.passenger.api.models.ApiLocation
+import com.ioki.passenger.api.models.ApiMatchingState
 import com.ioki.passenger.api.models.ApiOfferedSolution
 import com.ioki.passenger.api.models.ApiOption
 import com.ioki.passenger.api.models.ApiPaymentMethodResponse
@@ -56,6 +57,7 @@ public fun createApiRideResponse(
     bookedSolution: ApiBookedSolution? = null,
     passengerNoteToDriver: String = "",
     showPublicTransportTicketReminder: Boolean = false,
+    matchingState: ApiMatchingState = createApiMatchingState()
 ): ApiRideResponse = ApiRideResponse(
     id = id,
     productId = productId,
@@ -96,6 +98,7 @@ public fun createApiRideResponse(
     bookedSolution = bookedSolution,
     passengerNoteToDriver = passengerNoteToDriver,
     showPublicTransportTicketReminder = showPublicTransportTicketReminder,
+    matchingState = matchingState,
 )
 
 public fun createApiRideResponsePassengerSelection(
