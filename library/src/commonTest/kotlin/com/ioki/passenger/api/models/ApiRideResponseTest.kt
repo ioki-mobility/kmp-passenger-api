@@ -2,6 +2,7 @@ package com.ioki.passenger.api.models
 
 import com.ioki.passenger.api.test.models.createApiFareResponse
 import com.ioki.passenger.api.test.models.createApiLocation
+import com.ioki.passenger.api.test.models.createApiMatchingState
 import com.ioki.passenger.api.test.models.createApiVehicle
 import kotlin.time.Instant
 import kotlin.test.Test
@@ -202,6 +203,10 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                 ),
                 passengerNoteToDriver = "This is a note to the driver",
                 showPublicTransportTicketReminder = true,
+                matchingState = createApiMatchingState(
+                    id = "matching-id",
+                    logs = listOf(ApiMatchingState.MatchingStateLog("log message")),
+                ),
             ),
             jsonString = rideResponse,
         )
@@ -250,6 +255,7 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                 bookedSolution = null,
                 passengerNoteToDriver = "",
                 showPublicTransportTicketReminder = false,
+                matchingState = null,
             ),
             jsonString = rideResponseMinimal,
         )
@@ -518,7 +524,15 @@ private val rideResponse =
       ]
     },
     "passenger_note_to_driver": "This is a note to the driver",
-    "show_pt_ticket_reminder": true
+    "show_pt_ticket_reminder": true,
+    "matching_state": {
+      "id": "matching-id",
+      "logs": [
+        {
+          "message": "log message"
+        }
+      ]
+    }
 }
 """
 
@@ -556,6 +570,5 @@ private val rideResponseMinimal =
   "offered_solutions": [],
   "options": [],
   "passenger_note_to_driver": "",
-  "show_pt_ticket_reminder": false
 }
 """
