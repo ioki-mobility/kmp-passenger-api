@@ -59,7 +59,7 @@ public data class ApiPersonalDiscountResponse(
         ASSIGNED_FOR_PROMOTION,
 
         @SerialName(value = "assigned_for_other_reason")
-        ASSIGNED_FOR_OTHER_REASONS,
+        ASSIGNED_FOR_OTHER_REASON,
 
         @SerialName(value = "sold_by_operator")
         SOLD_BY_OPERATOR,
@@ -109,7 +109,7 @@ private object ApiPersonalDiscountResponseChannelSerializer : KSerializer<Channe
                 Channel.OPERATOR_ASSIGNED -> "operator_assigned"
                 Channel.ASSIGNED_FOR_GOOD_WILL -> "assigned_for_good_will"
                 Channel.ASSIGNED_FOR_PROMOTION -> "assigned_for_promotion"
-                Channel.ASSIGNED_FOR_OTHER_REASONS -> "assigned_for_other_reason"
+                Channel.ASSIGNED_FOR_OTHER_REASON -> "assigned_for_other_reason"
                 Channel.SOLD_BY_OPERATOR -> "sold_by_operator"
                 Channel.UNSUPPORTED -> "unsupported"
             },
@@ -123,7 +123,7 @@ private object ApiPersonalDiscountResponseChannelSerializer : KSerializer<Channe
         "operator_assigned" -> Channel.OPERATOR_ASSIGNED
         "assigned_for_good_will" -> Channel.ASSIGNED_FOR_GOOD_WILL
         "assigned_for_promotion" -> Channel.ASSIGNED_FOR_PROMOTION
-        "assigned_for_other_reason" -> Channel.ASSIGNED_FOR_OTHER_REASONS
+        "assigned_for_other_reason" -> Channel.ASSIGNED_FOR_OTHER_REASON
         "sold_by_operator" -> Channel.SOLD_BY_OPERATOR
         else -> Channel.UNSUPPORTED
     }
