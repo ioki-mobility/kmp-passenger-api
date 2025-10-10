@@ -52,6 +52,9 @@ public data class ApiPersonalDiscountResponse(
         @SerialName(value = "operator_assigned")
         OPERATOR_ASSIGNED,
 
+        @SerialName(value = "operator_assigned_legacy")
+        OPERATOR_ASSIGNED_LEGACY,
+
         @SerialName(value = "assigned_for_good_will")
         ASSIGNED_FOR_GOOD_WILL,
 
@@ -107,6 +110,7 @@ private object ApiPersonalDiscountResponseChannelSerializer : KSerializer<Channe
                 Channel.PROMOTION -> "promotion"
                 Channel.REFERRAL -> "referral"
                 Channel.OPERATOR_ASSIGNED -> "operator_assigned"
+                Channel.OPERATOR_ASSIGNED_LEGACY -> "operator_assigned_legacy"
                 Channel.ASSIGNED_FOR_GOOD_WILL -> "assigned_for_good_will"
                 Channel.ASSIGNED_FOR_PROMOTION -> "assigned_for_promotion"
                 Channel.ASSIGNED_FOR_OTHER_REASON -> "assigned_for_other_reason"
@@ -121,6 +125,7 @@ private object ApiPersonalDiscountResponseChannelSerializer : KSerializer<Channe
         "promotion" -> Channel.PROMOTION
         "referral" -> Channel.REFERRAL
         "operator_assigned" -> Channel.OPERATOR_ASSIGNED
+        "operator_assigned_legacy" -> Channel.OPERATOR_ASSIGNED_LEGACY
         "assigned_for_good_will" -> Channel.ASSIGNED_FOR_GOOD_WILL
         "assigned_for_promotion" -> Channel.ASSIGNED_FOR_PROMOTION
         "assigned_for_other_reason" -> Channel.ASSIGNED_FOR_OTHER_REASON
