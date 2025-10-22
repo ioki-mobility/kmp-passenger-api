@@ -16,6 +16,7 @@ public data class ApiGeocodingSearchResponse(val results: List<SearchResult>) {
         val lat: Double?,
         val lng: Double?,
         val vendor: Vendor,
+        @SerialName(value = "result_type") val resultType: ResultType,
         @SerialName(value = "vendor_id") val vendorId: String,
         @SerialName(value = "location_name") val locationName: String?,
         @SerialName(value = "formatted_address") val formattedAddress: String?,
@@ -30,6 +31,20 @@ public data class ApiGeocodingSearchResponse(val results: List<SearchResult>) {
             IOKI,
 
             UNSUPPORTED,
+        }
+
+        public enum class ResultType {
+            @SerialName("default")
+            DEFAULT,
+
+            @SerialName("station")
+            STATION,
+
+            @SerialName("google_place")
+            PLACE,
+
+            @SerialName("poi")
+            POI,
         }
     }
 }
