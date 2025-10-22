@@ -36,6 +36,7 @@ public data class ApiRideResponse(
     val booking: ApiBooking?,
     val rating: ApiRatingResponse?,
     @SerialName(value = "payment_method") val paymentMethod: ApiPaymentMethodResponse?,
+    @SerialName(value = "matching_state") val matchingState: ApiMatchingState?,
     @SerialName(value = "driver_can_be_called") val driverCanBeCalled: Boolean,
     @SerialName(value = "public_transport_uri") val publicTransportUri: String?,
     @SerialName(value = "created_at") val createdAt: Instant,

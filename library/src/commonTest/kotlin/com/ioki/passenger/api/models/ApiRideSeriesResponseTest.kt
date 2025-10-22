@@ -93,6 +93,7 @@ private val rideResponse =
         bookedSolution = null,
         passengerNoteToDriver = "",
         showPublicTransportTicketReminder = false,
+        matchingState = null,
     )
 
 private val rideSeriesResponseMinimal =
