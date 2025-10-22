@@ -31,16 +31,10 @@ public data class ApiProvider(
     @SerialName(value = "custom_urls") val customUrls: List<CustomUrl>,
 ) {
     @Serializable
-    public data class CustomUrl(
-        val name: String,
-        val url: String,
-        @SerialName(value = "sort_key") val sortKey: Int,
-    )
+    public data class CustomUrl(val name: String, val url: String, @SerialName(value = "sort_key") val sortKey: Int)
 
     @Serializable
-    public data class CreditOptions(
-        val packages: List<ApiOfferedCreditPackage>,
-    )
+    public data class CreditOptions(val packages: List<ApiOfferedCreditPackage>)
 
     @Serializable
     public enum class PaymentServiceProvider {
@@ -73,14 +67,10 @@ public data class ApiProvider(
         @SerialName(value = "tickets") val ticketsEnabled: Boolean,
     ) {
         @Serializable
-        public data class Referrals(
-            val description: String,
-        )
+        public data class Referrals(val description: String)
 
         @Serializable
-        public data class MinimumAgeConfirmation(
-            @SerialName(value = "minimum_age") val minimumAge: Int,
-        )
+        public data class MinimumAgeConfirmation(@SerialName(value = "minimum_age") val minimumAge: Int)
 
         public companion object {
             public val ALL: Features =

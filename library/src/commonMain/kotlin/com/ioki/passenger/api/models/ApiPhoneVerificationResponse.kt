@@ -17,8 +17,5 @@ public data class ApiPhoneVerificationResponse(
     )
 
     @Serializable
-    public data class ClientChallenge(
-        val id: String,
-        val challenge: String,
-    )
+    public data class ClientChallenge(val id: String, val challenge: String)
 }

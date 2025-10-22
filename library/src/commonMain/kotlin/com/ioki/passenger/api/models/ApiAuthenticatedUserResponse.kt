@@ -26,9 +26,5 @@ public data class ApiAuthenticatedUserResponse(
     @SerialName(value = "additional_data") val additionalData: ApiAdditionalData?,
 ) : Entity {
     @Serializable
-    public data class LogPaySupportDetails(
-        val email: String,
-        val subject: String,
-        val body: String,
-    )
+    public data class LogPaySupportDetails(val email: String, val subject: String, val body: String)
 }

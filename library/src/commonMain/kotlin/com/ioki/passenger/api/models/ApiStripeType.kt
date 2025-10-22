@@ -30,11 +30,9 @@ internal object ApiStripeTypeSerializer : KSerializer<ApiStripeType> {
         )
     }
 
-    override fun deserialize(decoder: Decoder): ApiStripeType {
-        return when (decoder.decodeString()) {
-            "card" -> ApiStripeType.CARD
-            "sepa_debit" -> ApiStripeType.SEPA_DEBIT
-            else -> ApiStripeType.UNSUPPORTED
-        }
+    override fun deserialize(decoder: Decoder): ApiStripeType = when (decoder.decodeString()) {
+        "card" -> ApiStripeType.CARD
+        "sepa_debit" -> ApiStripeType.SEPA_DEBIT
+        else -> ApiStripeType.UNSUPPORTED
     }
 }

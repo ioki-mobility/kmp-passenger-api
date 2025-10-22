@@ -12,10 +12,6 @@ public data class ApiAvatar(val versions: Versions?) {
         val mini: ImageData?,
     ) {
         @Serializable
-        public data class ImageData(
-            val width: Int,
-            val height: Int,
-            val url: String,
-        )
+        public data class ImageData(val width: Int, val height: Int, val url: String)
     }
 }

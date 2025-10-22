@@ -27,11 +27,9 @@ public data class ApiRatingCriteriaResponse(
 internal object ApiRatingCriteriaResponseTypeSerializer : KSerializer<ApiRatingCriteriaResponse.Type> {
     override val descriptor = String.serializer().descriptor
 
-    override fun deserialize(decoder: Decoder): ApiRatingCriteriaResponse.Type {
-        return when (decoder.decodeString()) {
-            "rating_criterion" -> ApiRatingCriteriaResponse.Type.RATING_CRITERION
-            else -> ApiRatingCriteriaResponse.Type.UNSUPPORTED
-        }
+    override fun deserialize(decoder: Decoder): ApiRatingCriteriaResponse.Type = when (decoder.decodeString()) {
+        "rating_criterion" -> ApiRatingCriteriaResponse.Type.RATING_CRITERION
+        else -> ApiRatingCriteriaResponse.Type.UNSUPPORTED
     }
 
     override fun serialize(encoder: Encoder, value: ApiRatingCriteriaResponse.Type) {

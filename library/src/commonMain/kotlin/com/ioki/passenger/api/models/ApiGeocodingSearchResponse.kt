@@ -62,11 +62,9 @@ private object VendorSerializer : KSerializer<Vendor> {
         )
     }
 
-    override fun deserialize(decoder: Decoder): Vendor {
-        return when (decoder.decodeString()) {
-            "google" -> Vendor.GOOGLE
-            "ioki" -> Vendor.IOKI
-            else -> Vendor.UNSUPPORTED
-        }
+    override fun deserialize(decoder: Decoder): Vendor = when (decoder.decodeString()) {
+        "google" -> Vendor.GOOGLE
+        "ioki" -> Vendor.IOKI
+        else -> Vendor.UNSUPPORTED
     }
 }

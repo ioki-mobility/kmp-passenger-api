@@ -4,6 +4,4 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class ApiGeocodingSessionRequest(
-    @SerialName(value = "product_id") val productId: String,
-)
+public data class ApiGeocodingSessionRequest(@SerialName(value = "product_id") val productId: String)

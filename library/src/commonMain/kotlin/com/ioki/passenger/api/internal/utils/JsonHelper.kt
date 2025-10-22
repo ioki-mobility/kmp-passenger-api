@@ -51,9 +51,7 @@ private object LocalDateTimeSerializer : KSerializer<LocalDateTime> {
         encoder.encodeString(formatter.format(value))
     }
 
-    override fun deserialize(decoder: Decoder): LocalDateTime {
-        return LocalDateTime.parse(decoder.decodeString(), formatter)
-    }
+    override fun deserialize(decoder: Decoder): LocalDateTime = LocalDateTime.parse(decoder.decodeString(), formatter)
 }
 
 private object LocalDateSerializer : KSerializer<LocalDate> {
@@ -66,9 +64,7 @@ private object LocalDateSerializer : KSerializer<LocalDate> {
         encoder.encodeString(formatter.format(value))
     }
 
-    override fun deserialize(decoder: Decoder): LocalDate {
-        return LocalDate.parse(decoder.decodeString(), formatter)
-    }
+    override fun deserialize(decoder: Decoder): LocalDate = LocalDate.parse(decoder.decodeString(), formatter)
 }
 
 private object InstantSerializer : KSerializer<Instant> {

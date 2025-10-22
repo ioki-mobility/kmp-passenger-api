@@ -24,9 +24,7 @@ public data class ApiRideInquiryResponse(
     )
 
     @Serializable
-    public data class Constraints(
-        val area: ApiArea?,
-    )
+    public data class Constraints(val area: ApiArea?)
 
     @Serializable
     public data class Assistance(
@@ -65,12 +63,10 @@ internal object ErrorCodeSerializer : KSerializer<ErrorCode> {
         )
     }
 
-    override fun deserialize(decoder: Decoder): ErrorCode {
-        return when (decoder.decodeString()) {
-            "service_not_available" -> ErrorCode.SERVICE_NOT_AVAILABLE
-            "origin_outside_of_service_area" -> ErrorCode.ORIGIN_OUTSIDE_OF_SERVICE_AREA
-            "destination_outside_of_service_area" -> ErrorCode.DESTINATION_OUTSIDE_OF_SERVICE_AREA
-            else -> ErrorCode.UNSUPPORTED
-        }
+    override fun deserialize(decoder: Decoder): ErrorCode = when (decoder.decodeString()) {
+        "service_not_available" -> ErrorCode.SERVICE_NOT_AVAILABLE
+        "origin_outside_of_service_area" -> ErrorCode.ORIGIN_OUTSIDE_OF_SERVICE_AREA
+        "destination_outside_of_service_area" -> ErrorCode.DESTINATION_OUTSIDE_OF_SERVICE_AREA
+        else -> ErrorCode.UNSUPPORTED
     }
 }

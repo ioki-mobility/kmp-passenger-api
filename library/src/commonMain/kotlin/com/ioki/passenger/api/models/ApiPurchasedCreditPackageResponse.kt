@@ -4,6 +4,4 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class ApiPurchasedCreditPackageResponse(
-    @SerialName(value = "balance") val balance: ApiMoney,
-)
+public data class ApiPurchasedCreditPackageResponse(@SerialName(value = "balance") val balance: ApiMoney)

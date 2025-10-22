@@ -22,13 +22,11 @@ internal class ApiNotificationChannelTypeTest {
         }
 
         companion object {
-            fun data(): Collection<Array<Any>> {
-                return listOf(
-                    arrayOf(ApiNotificationChannelType.SMS, "\"sms\""),
-                    arrayOf(ApiNotificationChannelType.EMAIL, "\"email\""),
-                    arrayOf(ApiNotificationChannelType.UNSUPPORTED, "\"UNSUPPORTED\""),
-                )
-            }
+            fun data(): Collection<Array<Any>> = listOf(
+                arrayOf(ApiNotificationChannelType.SMS, "\"sms\""),
+                arrayOf(ApiNotificationChannelType.EMAIL, "\"email\""),
+                arrayOf(ApiNotificationChannelType.UNSUPPORTED, "\"UNSUPPORTED\""),
+            )
         }
     }
 }

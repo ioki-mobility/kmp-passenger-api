@@ -19,10 +19,8 @@ public sealed class Error {
         public abstract val errors: List<ApiErrorBody.ApiError>
         public abstract val httpStatusCode: Int
 
-        public data class Generic(
-            override val errors: List<ApiErrorBody.ApiError>,
-            override val httpStatusCode: Int,
-        ) : Api()
+        public data class Generic(override val errors: List<ApiErrorBody.ApiError>, override val httpStatusCode: Int) :
+            Api()
 
         public data class Intercepted(
             override val errors: List<ApiErrorBody.ApiError>,
