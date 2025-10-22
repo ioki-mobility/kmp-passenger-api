@@ -56,10 +56,7 @@ import io.ktor.util.StringValues
 import kotlin.time.Instant
 import kotlinx.serialization.json.Json
 
-internal class IokiApi(
-    private val client: IokiHttpClient,
-    private val authHeaderProvider: AuthHeaderProvider,
-) {
+internal class IokiApi(private val client: IokiHttpClient, private val authHeaderProvider: AuthHeaderProvider) {
     private val accessToken get() = authHeaderProvider.provide()
 
     suspend fun requestPhoneVerification(body: ApiBody<ApiPhoneVerificationRequest>): HttpResponse =

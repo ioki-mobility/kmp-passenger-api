@@ -59,9 +59,7 @@ public data class ApiRideResponse(
     )
 
     @Serializable
-    public data class Route(
-        @SerialName(value = "track") val track: String?,
-    )
+    public data class Route(@SerialName(value = "track") val track: String?)
 
     @Serializable
     public data class Ticket(

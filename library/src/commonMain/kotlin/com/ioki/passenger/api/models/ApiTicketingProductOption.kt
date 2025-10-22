@@ -16,12 +16,7 @@ public data class ApiTicketingProductOption(
 ) {
 
     @Serializable
-    public data class EnumItem(
-        val slug: String,
-        val name: String,
-        val description: String,
-        val value: String,
-    )
+    public data class EnumItem(val slug: String, val name: String, val description: String, val value: String)
 
     @Serializable
     public enum class DataType {

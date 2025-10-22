@@ -35,17 +35,15 @@ public enum class ApiPaymentMethodType {
 internal object ApiPaymentMethodTypeSerializer : KSerializer<ApiPaymentMethodType> {
     override val descriptor = String.serializer().descriptor
 
-    override fun deserialize(decoder: Decoder): ApiPaymentMethodType {
-        return when (decoder.decodeString()) {
-            "cash" -> ApiPaymentMethodType.CASH
-            "psp_provided" -> ApiPaymentMethodType.PSP_PROVIDED
-            "stripe" -> ApiPaymentMethodType.STRIPE
-            "logpay" -> ApiPaymentMethodType.LOGPAY
-            "public_transport_ticket" -> ApiPaymentMethodType.PUBLIC_TRANSPORT_TICKET
-            "service_credits" -> ApiPaymentMethodType.SERVICE_CREDITS
-            "pos_payment" -> ApiPaymentMethodType.POS_PAYMENT
-            else -> ApiPaymentMethodType.UNSUPPORTED
-        }
+    override fun deserialize(decoder: Decoder): ApiPaymentMethodType = when (decoder.decodeString()) {
+        "cash" -> ApiPaymentMethodType.CASH
+        "psp_provided" -> ApiPaymentMethodType.PSP_PROVIDED
+        "stripe" -> ApiPaymentMethodType.STRIPE
+        "logpay" -> ApiPaymentMethodType.LOGPAY
+        "public_transport_ticket" -> ApiPaymentMethodType.PUBLIC_TRANSPORT_TICKET
+        "service_credits" -> ApiPaymentMethodType.SERVICE_CREDITS
+        "pos_payment" -> ApiPaymentMethodType.POS_PAYMENT
+        else -> ApiPaymentMethodType.UNSUPPORTED
     }
 
     override fun serialize(encoder: Encoder, value: ApiPaymentMethodType) {

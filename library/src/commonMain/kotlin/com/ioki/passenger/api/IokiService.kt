@@ -411,10 +411,8 @@ public interface GeocodingService {
     ): ApiResult<ApiGeocodingDetailsResponse>
 }
 
-private class DefaultIokiService(
-    private val iokiApi: IokiApi,
-    private val interceptors: Set<ApiErrorInterceptor>,
-) : IokiService {
+private class DefaultIokiService(private val iokiApi: IokiApi, private val interceptors: Set<ApiErrorInterceptor>) :
+    IokiService {
     override suspend fun requestPhoneVerification(
         verification: ApiPhoneVerificationRequest,
     ): ApiResult<ApiPhoneVerificationResponse> =
@@ -889,20 +887,18 @@ private class DefaultIokiService(
 
     private suspend inline fun <reified R, reified T> apiCall(
         crossinline block: suspend IokiApi.() -> HttpResponse,
-    ): ApiResult<T> {
-        return try {
-            val response = iokiApi.block()
-            if (response.status.isSuccess()) {
-                mapSuccess<R, T>(response)
-            } else {
-                mapApiError(response, interceptors)
-            }
-        } catch (e: Exception) {
-            when {
-                e is CancellationException -> throw e
-                e.isConnectivityError -> Result.Failure(Error.Connectivity(e))
-                else -> Result.Failure(Error.Generic(e))
-            }
+    ): ApiResult<T> = try {
+        val response = iokiApi.block()
+        if (response.status.isSuccess()) {
+            mapSuccess<R, T>(response)
+        } else {
+            mapApiError(response, interceptors)
+        }
+    } catch (e: Exception) {
+        when {
+            e is CancellationException -> throw e
+            e.isConnectivityError -> Result.Failure(Error.Connectivity(e))
+            else -> Result.Failure(Error.Generic(e))
         }
     }
 }

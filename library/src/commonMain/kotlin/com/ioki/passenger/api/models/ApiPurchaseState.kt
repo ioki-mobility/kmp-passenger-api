@@ -51,16 +51,14 @@ internal object ApiPurchaseStateSerializer : KSerializer<ApiPurchaseState> {
         )
     }
 
-    override fun deserialize(decoder: Decoder): ApiPurchaseState {
-        return when (decoder.decodeString()) {
-            "succeeded" -> ApiPurchaseState.SUCCEEDED
-            "forfeited" -> ApiPurchaseState.FORFEITED
-            "cancelled" -> ApiPurchaseState.CANCELLED
-            "not_initiated" -> ApiPurchaseState.NOT_INITIATED
-            "pending" -> ApiPurchaseState.PENDING
-            "reserved" -> ApiPurchaseState.RESERVED
-            "failed" -> ApiPurchaseState.FAILED
-            else -> ApiPurchaseState.UNSUPPORTED
-        }
+    override fun deserialize(decoder: Decoder): ApiPurchaseState = when (decoder.decodeString()) {
+        "succeeded" -> ApiPurchaseState.SUCCEEDED
+        "forfeited" -> ApiPurchaseState.FORFEITED
+        "cancelled" -> ApiPurchaseState.CANCELLED
+        "not_initiated" -> ApiPurchaseState.NOT_INITIATED
+        "pending" -> ApiPurchaseState.PENDING
+        "reserved" -> ApiPurchaseState.RESERVED
+        "failed" -> ApiPurchaseState.FAILED
+        else -> ApiPurchaseState.UNSUPPORTED
     }
 }

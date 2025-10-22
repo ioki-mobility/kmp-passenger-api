@@ -22,21 +22,19 @@ internal class ApiPaymentMethodResponseTypeTest {
         }
 
         companion object {
-            fun data(): Collection<Array<Any>> {
-                return listOf(
-                    arrayOf(ApiPaymentMethodType.CASH, "\"cash\""),
-                    arrayOf(ApiPaymentMethodType.PSP_PROVIDED, "\"psp_provided\""),
-                    arrayOf(ApiPaymentMethodType.STRIPE, "\"stripe\""),
-                    arrayOf(ApiPaymentMethodType.LOGPAY, "\"logpay\""),
-                    arrayOf(
-                        ApiPaymentMethodType.PUBLIC_TRANSPORT_TICKET,
-                        "\"public_transport_ticket\"",
-                    ),
-                    arrayOf(ApiPaymentMethodType.SERVICE_CREDITS, "\"service_credits\""),
-                    arrayOf(ApiPaymentMethodType.POS_PAYMENT, "\"pos_payment\""),
-                    arrayOf(ApiPaymentMethodType.UNSUPPORTED, "\"UNSUPPORTED\""),
-                )
-            }
+            fun data(): Collection<Array<Any>> = listOf(
+                arrayOf(ApiPaymentMethodType.CASH, "\"cash\""),
+                arrayOf(ApiPaymentMethodType.PSP_PROVIDED, "\"psp_provided\""),
+                arrayOf(ApiPaymentMethodType.STRIPE, "\"stripe\""),
+                arrayOf(ApiPaymentMethodType.LOGPAY, "\"logpay\""),
+                arrayOf(
+                    ApiPaymentMethodType.PUBLIC_TRANSPORT_TICKET,
+                    "\"public_transport_ticket\"",
+                ),
+                arrayOf(ApiPaymentMethodType.SERVICE_CREDITS, "\"service_credits\""),
+                arrayOf(ApiPaymentMethodType.POS_PAYMENT, "\"pos_payment\""),
+                arrayOf(ApiPaymentMethodType.UNSUPPORTED, "\"UNSUPPORTED\""),
+            )
         }
     }
 }

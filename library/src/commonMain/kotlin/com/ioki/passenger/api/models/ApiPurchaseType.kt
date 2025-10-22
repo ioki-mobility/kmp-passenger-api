@@ -35,12 +35,10 @@ private object ApiPurchaseTypeSerializer : KSerializer<ApiPurchaseType> {
         )
     }
 
-    override fun deserialize(decoder: Decoder): ApiPurchaseType {
-        return when (decoder.decodeString()) {
-            "credit" -> ApiPurchaseType.CREDIT
-            "debit" -> ApiPurchaseType.DEBIT
-            "claimable" -> ApiPurchaseType.CLAIMABLE
-            else -> ApiPurchaseType.UNSUPPORTED
-        }
+    override fun deserialize(decoder: Decoder): ApiPurchaseType = when (decoder.decodeString()) {
+        "credit" -> ApiPurchaseType.CREDIT
+        "debit" -> ApiPurchaseType.DEBIT
+        "claimable" -> ApiPurchaseType.CLAIMABLE
+        else -> ApiPurchaseType.UNSUPPORTED
     }
 }

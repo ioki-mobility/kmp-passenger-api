@@ -43,14 +43,12 @@ private object ApiPurchasableTypeSerializer : KSerializer<ApiPurchasableType> {
         )
     }
 
-    override fun deserialize(decoder: Decoder): ApiPurchasableType {
-        return when (decoder.decodeString()) {
-            "Booking" -> ApiPurchasableType.BOOKING
-            "Tip" -> ApiPurchasableType.TIP
-            "ServiceCredit" -> ApiPurchasableType.SERVICE_CREDIT
-            "PersonalDiscount" -> ApiPurchasableType.PERSONAL_DISCOUNT
-            "Ticketing::Voucher" -> ApiPurchasableType.TICKETING_VOUCHER
-            else -> ApiPurchasableType.UNSUPPORTED
-        }
+    override fun deserialize(decoder: Decoder): ApiPurchasableType = when (decoder.decodeString()) {
+        "Booking" -> ApiPurchasableType.BOOKING
+        "Tip" -> ApiPurchasableType.TIP
+        "ServiceCredit" -> ApiPurchasableType.SERVICE_CREDIT
+        "PersonalDiscount" -> ApiPurchasableType.PERSONAL_DISCOUNT
+        "Ticketing::Voucher" -> ApiPurchasableType.TICKETING_VOUCHER
+        else -> ApiPurchasableType.UNSUPPORTED
     }
 }

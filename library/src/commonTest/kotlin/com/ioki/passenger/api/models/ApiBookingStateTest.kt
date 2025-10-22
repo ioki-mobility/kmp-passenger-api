@@ -22,19 +22,17 @@ internal class ApiBookingStateTest {
         }
 
         companion object {
-            fun data(): Collection<Array<Any>> {
-                return listOf(
-                    arrayOf(ApiBookingState.CANCELLED, "\"cancelled\""),
-                    arrayOf(ApiBookingState.DRIVER_ACCEPTED, "\"driver_accepted\""),
-                    arrayOf(ApiBookingState.PASSENGER_ACCEPTED, "\"passenger_accepted\""),
-                    arrayOf(ApiBookingState.DROPPED_OFF, "\"dropped_off\""),
-                    arrayOf(ApiBookingState.NOT_STARTED, "\"not_started\""),
-                    arrayOf(ApiBookingState.PICKED_UP, "\"picked_up\""),
-                    arrayOf(ApiBookingState.READY, "\"ready\""),
-                    arrayOf(ApiBookingState.SEARCHING, "\"searching\""),
-                    arrayOf(ApiBookingState.UNSUPPORTED, "\"UNSUPPORTED\""),
-                )
-            }
+            fun data(): Collection<Array<Any>> = listOf(
+                arrayOf(ApiBookingState.CANCELLED, "\"cancelled\""),
+                arrayOf(ApiBookingState.DRIVER_ACCEPTED, "\"driver_accepted\""),
+                arrayOf(ApiBookingState.PASSENGER_ACCEPTED, "\"passenger_accepted\""),
+                arrayOf(ApiBookingState.DROPPED_OFF, "\"dropped_off\""),
+                arrayOf(ApiBookingState.NOT_STARTED, "\"not_started\""),
+                arrayOf(ApiBookingState.PICKED_UP, "\"picked_up\""),
+                arrayOf(ApiBookingState.READY, "\"ready\""),
+                arrayOf(ApiBookingState.SEARCHING, "\"searching\""),
+                arrayOf(ApiBookingState.UNSUPPORTED, "\"UNSUPPORTED\""),
+            )
         }
     }
 }

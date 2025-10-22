@@ -30,11 +30,9 @@ internal object ApiNotificationChannelTypeSerializer : KSerializer<ApiNotificati
         )
     }
 
-    override fun deserialize(decoder: Decoder): ApiNotificationChannelType {
-        return when (decoder.decodeString()) {
-            "sms" -> ApiNotificationChannelType.SMS
-            "email" -> ApiNotificationChannelType.EMAIL
-            else -> ApiNotificationChannelType.UNSUPPORTED
-        }
+    override fun deserialize(decoder: Decoder): ApiNotificationChannelType = when (decoder.decodeString()) {
+        "sms" -> ApiNotificationChannelType.SMS
+        "email" -> ApiNotificationChannelType.EMAIL
+        else -> ApiNotificationChannelType.UNSUPPORTED
     }
 }

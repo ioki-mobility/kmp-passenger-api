@@ -9,9 +9,7 @@ internal interface AuthHeaderProvider {
     fun provide(): String
 }
 
-private class DefaultAuthHeaderProvider(
-    private val accessTokenProvider: AccessTokenProvider,
-) : AuthHeaderProvider {
+private class DefaultAuthHeaderProvider(private val accessTokenProvider: AccessTokenProvider) : AuthHeaderProvider {
     override fun provide(): String = "Bearer ${accessTokenProvider.accessTokenOrUnauthorized}"
 }
 

@@ -17,8 +17,5 @@ public data class ApiPurchaseTicketingProductRequest(
     val paypalSecureElement: String?,
 ) {
     @Serializable
-    public data class Option(
-        val slug: String,
-        val value: AnyValue,
-    )
+    public data class Option(val slug: String, val value: AnyValue)
 }

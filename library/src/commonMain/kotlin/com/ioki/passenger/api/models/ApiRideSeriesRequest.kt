@@ -5,6 +5,4 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class ApiRideSeriesRequest(
-    @SerialName(value = "additional_dates") val additionalDates: List<LocalDate>,
-)
+public data class ApiRideSeriesRequest(@SerialName(value = "additional_dates") val additionalDates: List<LocalDate>)

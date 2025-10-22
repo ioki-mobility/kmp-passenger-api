@@ -60,18 +60,16 @@ internal object ApiRideRatingCriteriaSerializer : KSerializer<ApiRideRatingCrite
         )
     }
 
-    override fun deserialize(decoder: Decoder): ApiRideRatingCriteria {
-        return when (decoder.decodeString()) {
-            "driver_rating" -> ApiRideRatingCriteria.DRIVER_RATING
-            "vehicle_rating" -> ApiRideRatingCriteria.VEHICLE_RATING
-            "service_rating" -> ApiRideRatingCriteria.SERVICE_RATING
-            "ride_rating" -> ApiRideRatingCriteria.RIDE_RATING
-            "waiting_time_rating" -> ApiRideRatingCriteria.WAITING_TIME_RATING
-            "punctuality_rating" -> ApiRideRatingCriteria.PUNCTUALITY_RATING
-            "vehicle_cleanliness_rating" -> ApiRideRatingCriteria.VEHICLE_CLEANLINESS_RATING
-            "autonomous_happiness_rating" -> ApiRideRatingCriteria.AUTONOMOUS_HAPPINESS
-            "autonomous_feeling_of_security_rating" -> ApiRideRatingCriteria.AUTONOMOUS_FEELING_OF_SECURITY
-            else -> ApiRideRatingCriteria.UNSUPPORTED
-        }
+    override fun deserialize(decoder: Decoder): ApiRideRatingCriteria = when (decoder.decodeString()) {
+        "driver_rating" -> ApiRideRatingCriteria.DRIVER_RATING
+        "vehicle_rating" -> ApiRideRatingCriteria.VEHICLE_RATING
+        "service_rating" -> ApiRideRatingCriteria.SERVICE_RATING
+        "ride_rating" -> ApiRideRatingCriteria.RIDE_RATING
+        "waiting_time_rating" -> ApiRideRatingCriteria.WAITING_TIME_RATING
+        "punctuality_rating" -> ApiRideRatingCriteria.PUNCTUALITY_RATING
+        "vehicle_cleanliness_rating" -> ApiRideRatingCriteria.VEHICLE_CLEANLINESS_RATING
+        "autonomous_happiness_rating" -> ApiRideRatingCriteria.AUTONOMOUS_HAPPINESS
+        "autonomous_feeling_of_security_rating" -> ApiRideRatingCriteria.AUTONOMOUS_FEELING_OF_SECURITY
+        else -> ApiRideRatingCriteria.UNSUPPORTED
     }
 }
