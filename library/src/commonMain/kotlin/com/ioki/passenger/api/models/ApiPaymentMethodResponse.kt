@@ -69,16 +69,14 @@ internal object ApiPaymentMethodResponseKindSerializer : KSerializer<Kind> {
         )
     }
 
-    override fun deserialize(decoder: Decoder): Kind {
-        return when (decoder.decodeString()) {
-            "card" -> Kind.CREDIT_CARD
-            "sepa_debit" -> Kind.SEPA_DEBIT
-            "paypal" -> Kind.PAYPAL
-            "cash" -> Kind.CASH
-            "service_credits" -> Kind.SERVICE_CREDITS
-            "pos_payment" -> Kind.POS_PAYMENT
-            "external_payment" -> Kind.EXTERNAL_PAYMENT
-            else -> Kind.UNSUPPORTED
-        }
+    override fun deserialize(decoder: Decoder): Kind = when (decoder.decodeString()) {
+        "card" -> Kind.CREDIT_CARD
+        "sepa_debit" -> Kind.SEPA_DEBIT
+        "paypal" -> Kind.PAYPAL
+        "cash" -> Kind.CASH
+        "service_credits" -> Kind.SERVICE_CREDITS
+        "pos_payment" -> Kind.POS_PAYMENT
+        "external_payment" -> Kind.EXTERNAL_PAYMENT
+        else -> Kind.UNSUPPORTED
     }
 }
