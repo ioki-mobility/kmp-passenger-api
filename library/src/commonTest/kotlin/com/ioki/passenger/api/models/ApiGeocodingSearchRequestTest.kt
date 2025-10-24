@@ -9,7 +9,6 @@ internal class ApiGeocodingSearchRequestTest : IokiApiModelTest() {
             expectedModel = ApiGeocodingSearchRequest(
                 query = "Hauptwache",
                 productId = "prd_123",
-                placeTypes = "a,b,c",
             ),
             jsonString = search,
         )
@@ -20,7 +19,6 @@ private val search =
     """
 {
     "query": "Hauptwache",
-    "product_id": "prd_123",
-    "place_types": "a,b,c"
+    "product_id": "prd_123"
 }
 """
