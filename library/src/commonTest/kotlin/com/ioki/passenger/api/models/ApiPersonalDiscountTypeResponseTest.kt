@@ -81,8 +81,8 @@ private val stubPersonalDiscountTypeLocalDate =
         price = ApiMoney(100, "EUR"),
         timeValidityMode = ApiPersonalDiscountTypeResponse.TimeValidityMode.FIXED_START_AND_END,
         defaultDuration = null,
-        fixedStartDate = LocalDate(year = 2022, monthNumber = 5, dayOfMonth = 12),
-        fixedEndDate = LocalDate(year = 2023, monthNumber = 7, dayOfMonth = 11),
+        fixedStartDate = LocalDate(year = 2022, month = 5, day = 12),
+        fixedEndDate = LocalDate(year = 2023, month = 7, day = 11),
     )
 
 private val purchaseablePersonalDiscountTypeAbsoluteJson =
