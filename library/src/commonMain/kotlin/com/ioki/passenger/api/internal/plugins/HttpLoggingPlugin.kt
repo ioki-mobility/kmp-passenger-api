@@ -2,10 +2,10 @@ package com.ioki.passenger.api.internal.plugins
 
 import com.ioki.passenger.api.internal.Logging
 import io.ktor.client.HttpClient
+import io.ktor.client.call.replaceResponse
 import io.ktor.client.plugins.api.ClientHook
 import io.ktor.client.plugins.api.ClientPlugin
 import io.ktor.client.plugins.api.createClientPlugin
-import io.ktor.client.plugins.observer.wrapWithContent
 import io.ktor.client.statement.HttpReceivePipeline
 import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.request
@@ -47,7 +47,7 @@ internal val HttpLoggingPlugin: ClientPlugin<HttpLoggingConfig> =
                 if (text.isNotBlank()) logging?.invoke(text)
             }
 
-            proceedWith(response.call.wrapWithContent(responseContent).response)
+            proceedWith(response.call.replaceResponse { responseContent }.response)
         }
     }
 
