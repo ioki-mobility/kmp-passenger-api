@@ -6,7 +6,6 @@ import io.ktor.client.call.replaceResponse
 import io.ktor.client.plugins.api.ClientHook
 import io.ktor.client.plugins.api.ClientPlugin
 import io.ktor.client.plugins.api.createClientPlugin
-import io.ktor.client.plugins.observer.wrapWithContent
 import io.ktor.client.statement.HttpReceivePipeline
 import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.request
