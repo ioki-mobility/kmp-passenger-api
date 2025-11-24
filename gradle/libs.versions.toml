@@ -8,7 +8,7 @@ ktor = "3.3.2"
 ktlintVersion = "13.1.0"
 kotlinCoroutines = "1.10.2"
 result = "0.3.0"
-kotest = "6.0.4"
+kotest = "6.0.5"
 nmcp = "1.2.0"
 
 [libraries]
