@@ -36,6 +36,10 @@ public data class ApiTicketingVoucherResponse(
 
         @SerialName(value = "redeemed")
         REDEEMED,
+
+        @SerialName(value = "reserved")
+        RESERVED,
+
         UNSUPPORTED,
     }
 
@@ -75,6 +79,7 @@ internal object ApiTicketingVoucherResponseStateSerializer : KSerializer<ApiTick
             ApiTicketingVoucherResponse.State.CANCELLED -> encoder.encodeString("cancelled")
             ApiTicketingVoucherResponse.State.ISSUED -> encoder.encodeString("issued")
             ApiTicketingVoucherResponse.State.REDEEMED -> encoder.encodeString("redeemed")
+            ApiTicketingVoucherResponse.State.RESERVED -> encoder.encodeString("reserved")
             ApiTicketingVoucherResponse.State.UNSUPPORTED -> encoder.encodeString("unsupported")
         }
     }
@@ -86,6 +91,7 @@ internal object ApiTicketingVoucherResponseStateSerializer : KSerializer<ApiTick
             "cancelled" -> ApiTicketingVoucherResponse.State.CANCELLED
             "issued" -> ApiTicketingVoucherResponse.State.ISSUED
             "redeemed" -> ApiTicketingVoucherResponse.State.REDEEMED
+            "reserved" -> ApiTicketingVoucherResponse.State.RESERVED
             else -> ApiTicketingVoucherResponse.State.UNSUPPORTED
         }
     }
