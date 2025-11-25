@@ -53,8 +53,8 @@ import io.ktor.client.request.url
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.parameters
 import io.ktor.util.StringValues
-import kotlin.time.Instant
 import kotlinx.serialization.json.Json
+import kotlin.time.Instant
 
 internal class IokiApi(private val client: IokiHttpClient, private val authHeaderProvider: AuthHeaderProvider) {
     private val accessToken get() = authHeaderProvider.provide()
@@ -449,6 +449,18 @@ internal class IokiApi(private val client: IokiHttpClient, private val authHeade
                 parameters {
                     append("page", page.toString())
                     append("filter", "inactive")
+                    append("per_page", perPage.toString())
+                },
+            )
+        }
+
+    suspend fun getReservedUserTicketingVouchers(page: Int, perPage: Int = 10): HttpResponse =
+        client.get("/api/passenger/ticketing/vouchers") {
+            header("Authorization", accessToken)
+            url.parameters.appendAll(
+                parameters {
+                    append("page", page.toString())
+                    append("filter", "reserved")
                     append("per_page", perPage.toString())
                 },
             )

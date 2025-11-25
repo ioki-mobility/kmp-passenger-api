@@ -353,6 +353,8 @@ public interface TicketingService {
 
     public suspend fun getInactiveUserTicketingVouchers(page: Int): ApiResult<List<ApiTicketingVoucherResponse>>
 
+    public suspend fun getReservedUserTicketingVouchers(page: Int): ApiResult<List<ApiTicketingVoucherResponse>>
+
     public suspend fun getUserTicketingVoucher(ticketVoucherId: String): ApiResult<ApiTicketingVoucherResponse>
 
     public suspend fun getAllTicketingProducts(
@@ -862,6 +864,11 @@ private class DefaultIokiService(private val iokiApi: IokiApi, private val inter
     override suspend fun getInactiveUserTicketingVouchers(page: Int): ApiResult<List<ApiTicketingVoucherResponse>> =
         apiCall<ApiBody<List<ApiTicketingVoucherResponse>>, List<ApiTicketingVoucherResponse>> {
             getInactiveUserTicketingVouchers(page = page)
+        }
+
+    override suspend fun getReservedUserTicketingVouchers(page: Int): ApiResult<List<ApiTicketingVoucherResponse>> =
+        apiCall<ApiBody<List<ApiTicketingVoucherResponse>>, List<ApiTicketingVoucherResponse>> {
+            getReservedUserTicketingVouchers(page = page)
         }
 
     override suspend fun getUserTicketingVoucher(ticketVoucherId: String): ApiResult<ApiTicketingVoucherResponse> =
