@@ -528,6 +528,17 @@ internal class IokiApi(private val client: IokiHttpClient, private val authHeade
     suspend fun getNotification(id: String): HttpResponse = client.get(urlString = "/api/passenger/notifications/$id") {
         header("Authorization", accessToken)
     }
+
+    suspend fun reserveTicketingProduct(id: String, body: ApiBody<ApiPurchaseTicketingProductRequest>): HttpResponse =
+        client.post("/api/passenger/ticketing/products/$id/reservations") {
+            header("Authorization", accessToken)
+            setBody(body)
+        }
+
+    suspend fun cancelReservedTicketingVoucher(id: String): HttpResponse =
+        client.post("/api/passenger/ticketing/vouchers/$id/cancellation") {
+            header("Authorization", accessToken)
+        }
 }
 
 private fun ApiPurchaseFilter.toStringValues(): StringValues = StringValues.build {

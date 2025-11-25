@@ -1,6 +1,5 @@
 package com.ioki.passenger.api.models
 
-import kotlin.time.Instant
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -9,6 +8,7 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.descriptors.buildClassSerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import kotlin.time.Instant
 
 @Serializable
 public data class ApiTicketingVoucherResponse(
@@ -20,6 +20,8 @@ public data class ApiTicketingVoucherResponse(
     val product: ApiTicketingProductResponse?,
     val ticket: Ticket?,
     @SerialName(value = "renewal_information") val renewalInformation: RenewalInformation,
+    @SerialName(value = "ride_id") val rideId: String?,
+    @SerialName(value = "cancellation_reason_translated") val cancellationReasonTranslated: String?,
 ) {
     @Serializable
     public enum class State {

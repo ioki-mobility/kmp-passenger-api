@@ -1,7 +1,7 @@
 package com.ioki.passenger.api.models
 
-import kotlin.time.Instant
 import kotlin.test.Test
+import kotlin.time.Instant
 
 internal class ApiTicketingVoucherResponseTest : IokiApiModelTest() {
     @Test
@@ -34,6 +34,7 @@ internal class ApiTicketingVoucherResponseTest : IokiApiModelTest() {
                     ),
                     purchaseOptions = emptyList(),
                     redemptionOptions = emptyList(),
+                    reservable = true,
                 ),
                 ticket = ApiTicketingVoucherResponse.Ticket(
                     id = "",
@@ -54,6 +55,8 @@ internal class ApiTicketingVoucherResponseTest : IokiApiModelTest() {
                     validFrom = null,
                     validUntil = null,
                 ),
+                rideId = "rideId",
+                cancellationReasonTranslated = "cancelled",
             ),
             ticketingVoucherResponse,
         )
@@ -76,6 +79,8 @@ internal class ApiTicketingVoucherResponseTest : IokiApiModelTest() {
                     validFrom = null,
                     validUntil = null,
                 ),
+                rideId = null,
+                cancellationReasonTranslated = null,
             ),
             ticketingVoucherResponseMinimal,
         )
@@ -109,7 +114,8 @@ private val ticketingVoucherResponse = """
             "currency": ""
         },
         "purchase_options": [],
-        "redemption_options": []
+        "redemption_options": [],
+        "reservable": true
     },
     "ticket": {
         "id": "",
@@ -129,7 +135,9 @@ private val ticketingVoucherResponse = """
         "renewable": false,
         "valid_from": null,
         "valid_until": null
-    }
+    },
+    "ride_id": "rideId",
+    "cancellation_reason_translated": "cancelled"
 }
 """.trimIndent()
 
