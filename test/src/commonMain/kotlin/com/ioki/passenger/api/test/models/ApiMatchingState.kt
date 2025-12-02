@@ -5,7 +5,7 @@ import com.ioki.passenger.api.models.ApiMatchingState
 public fun createApiMatchingState(
     id: String = "matching-state-id",
     logs: List<ApiMatchingState.MatchingStateLog> = emptyList(),
-    finalSummary: String? = null
+    finalSummary: String? = null,
 ): ApiMatchingState = ApiMatchingState(
     id = id,
     logs = logs,
