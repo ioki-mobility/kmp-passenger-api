@@ -22,6 +22,7 @@ public fun createApiTicketingProductResponse(
     price: ApiMoney? = null,
     purchaseOptions: List<ApiTicketingProductOption> = emptyList(),
     redemptionOptions: List<ApiTicketingProductOption> = emptyList(),
+    reservable: Boolean = false,
 ): ApiTicketingProductResponse = ApiTicketingProductResponse(
     id = id,
     type = type,
@@ -39,4 +40,5 @@ public fun createApiTicketingProductResponse(
     price = price,
     purchaseOptions = purchaseOptions,
     redemptionOptions = redemptionOptions,
+    reservable = reservable,
 )

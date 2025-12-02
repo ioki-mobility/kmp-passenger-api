@@ -53,8 +53,8 @@ import io.ktor.client.request.url
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.parameters
 import io.ktor.util.StringValues
-import kotlin.time.Instant
 import kotlinx.serialization.json.Json
+import kotlin.time.Instant
 
 internal class IokiApi(private val client: IokiHttpClient, private val authHeaderProvider: AuthHeaderProvider) {
     private val accessToken get() = authHeaderProvider.provide()
@@ -454,6 +454,18 @@ internal class IokiApi(private val client: IokiHttpClient, private val authHeade
             )
         }
 
+    suspend fun getReservedUserTicketingVouchers(page: Int, perPage: Int = 10): HttpResponse =
+        client.get("/api/passenger/ticketing/vouchers") {
+            header("Authorization", accessToken)
+            url.parameters.appendAll(
+                parameters {
+                    append("page", page.toString())
+                    append("filter", "reserved")
+                    append("per_page", perPage.toString())
+                },
+            )
+        }
+
     suspend fun getUserTicketingVoucher(id: String): HttpResponse =
         client.get("/api/passenger/ticketing/vouchers/$id") {
             header("Authorization", accessToken)
@@ -528,6 +540,17 @@ internal class IokiApi(private val client: IokiHttpClient, private val authHeade
     suspend fun getNotification(id: String): HttpResponse = client.get(urlString = "/api/passenger/notifications/$id") {
         header("Authorization", accessToken)
     }
+
+    suspend fun reserveTicketingProduct(id: String, body: ApiBody<ApiPurchaseTicketingProductRequest>): HttpResponse =
+        client.post("/api/passenger/ticketing/products/$id/reservations") {
+            header("Authorization", accessToken)
+            setBody(body)
+        }
+
+    suspend fun cancelReservedTicketingVoucher(id: String): HttpResponse =
+        client.post("/api/passenger/ticketing/vouchers/$id/cancellation") {
+            header("Authorization", accessToken)
+        }
 }
 
 private fun ApiPurchaseFilter.toStringValues(): StringValues = StringValues.build {

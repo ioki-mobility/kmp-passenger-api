@@ -97,8 +97,8 @@ import com.ioki.result.Result
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.isSuccess
-import kotlin.time.Instant
 import kotlin.coroutines.cancellation.CancellationException
+import kotlin.time.Instant
 
 public fun IokiService(
     baseUrl: String,
@@ -353,6 +353,8 @@ public interface TicketingService {
 
     public suspend fun getInactiveUserTicketingVouchers(page: Int): ApiResult<List<ApiTicketingVoucherResponse>>
 
+    public suspend fun getReservedUserTicketingVouchers(page: Int): ApiResult<List<ApiTicketingVoucherResponse>>
+
     public suspend fun getUserTicketingVoucher(ticketVoucherId: String): ApiResult<ApiTicketingVoucherResponse>
 
     public suspend fun getAllTicketingProducts(
@@ -373,6 +375,13 @@ public interface TicketingService {
     ): ApiResult<ApiTicketingVoucherResponse>
 
     public suspend fun cancelTicketingVoucher(voucherId: String): ApiResult<ApiTicketingVoucherResponse>
+
+    public suspend fun reserveTicketingProduct(
+        id: String,
+        request: ApiPurchaseTicketingProductRequest,
+    ): ApiResult<ApiTicketingVoucherResponse>
+
+    public suspend fun cancelReservedTicketingVoucher(voucherId: String): ApiResult<ApiTicketingVoucherResponse>
 }
 
 public interface BootstrapService {
@@ -405,6 +414,7 @@ public interface GeocodingService {
         sessionId: String,
         request: ApiGeocodingSearchRequest,
     ): ApiResult<ApiGeocodingSearchResponse>
+
     public suspend fun getGeocodingDetails(
         sessionId: String,
         request: ApiGeocodingDetailsRequest,
@@ -833,6 +843,19 @@ private class DefaultIokiService(private val iokiApi: IokiApi, private val inter
             cancelUserTicketingVoucher(id = voucherId)
         }
 
+    override suspend fun reserveTicketingProduct(
+        id: String,
+        request: ApiPurchaseTicketingProductRequest,
+    ): ApiResult<ApiTicketingVoucherResponse> =
+        apiCall<ApiBody<ApiTicketingVoucherResponse>, ApiTicketingVoucherResponse> {
+            iokiApi.reserveTicketingProduct(id = id, body = ApiBody(request))
+        }
+
+    override suspend fun cancelReservedTicketingVoucher(voucherId: String): ApiResult<ApiTicketingVoucherResponse> =
+        apiCall<ApiBody<ApiTicketingVoucherResponse>, ApiTicketingVoucherResponse> {
+            iokiApi.cancelReservedTicketingVoucher(id = voucherId)
+        }
+
     override suspend fun getActiveUserTicketingVouchers(page: Int): ApiResult<List<ApiTicketingVoucherResponse>> =
         apiCall<ApiBody<List<ApiTicketingVoucherResponse>>, List<ApiTicketingVoucherResponse>> {
             getActiveUserTicketingVouchers(page = page)
@@ -841,6 +864,11 @@ private class DefaultIokiService(private val iokiApi: IokiApi, private val inter
     override suspend fun getInactiveUserTicketingVouchers(page: Int): ApiResult<List<ApiTicketingVoucherResponse>> =
         apiCall<ApiBody<List<ApiTicketingVoucherResponse>>, List<ApiTicketingVoucherResponse>> {
             getInactiveUserTicketingVouchers(page = page)
+        }
+
+    override suspend fun getReservedUserTicketingVouchers(page: Int): ApiResult<List<ApiTicketingVoucherResponse>> =
+        apiCall<ApiBody<List<ApiTicketingVoucherResponse>>, List<ApiTicketingVoucherResponse>> {
+            getReservedUserTicketingVouchers(page = page)
         }
 
     override suspend fun getUserTicketingVoucher(ticketVoucherId: String): ApiResult<ApiTicketingVoucherResponse> =

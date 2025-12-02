@@ -16,6 +16,9 @@ public open class FakeTicketingService : TicketingService {
     override suspend fun getInactiveUserTicketingVouchers(page: Int): ApiResult<List<ApiTicketingVoucherResponse>> =
         error("Not overridden")
 
+    override suspend fun getReservedUserTicketingVouchers(page: Int): ApiResult<List<ApiTicketingVoucherResponse>> =
+        error("Not overridden")
+
     override suspend fun getShopConfiguration(): ApiResult<ApiTicketingShopConfigurationResponse> =
         error("Not overridden")
 
@@ -40,5 +43,13 @@ public open class FakeTicketingService : TicketingService {
     ): ApiResult<ApiTicketingVoucherResponse> = error("Not overridden")
 
     override suspend fun cancelTicketingVoucher(voucherId: String): ApiResult<ApiTicketingVoucherResponse> =
+        error("Not overridden")
+
+    override suspend fun reserveTicketingProduct(
+        id: String,
+        request: ApiPurchaseTicketingProductRequest,
+    ): ApiResult<ApiTicketingVoucherResponse> = error("Not overridden")
+
+    override suspend fun cancelReservedTicketingVoucher(voucherId: String): ApiResult<ApiTicketingVoucherResponse> =
         error("Not overridden")
 }

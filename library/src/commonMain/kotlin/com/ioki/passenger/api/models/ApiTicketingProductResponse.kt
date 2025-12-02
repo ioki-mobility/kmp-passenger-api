@@ -22,6 +22,7 @@ public data class ApiTicketingProductResponse(
     val price: ApiMoney?,
     @SerialName(value = "purchase_options") val purchaseOptions: List<ApiTicketingProductOption>,
     @SerialName(value = "redemption_options") val redemptionOptions: List<ApiTicketingProductOption>,
+    val reservable: Boolean,
 ) {
     @Serializable
     public enum class PriceType {
