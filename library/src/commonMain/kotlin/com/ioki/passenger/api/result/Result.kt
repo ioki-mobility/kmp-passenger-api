@@ -8,6 +8,8 @@ public typealias ApiResult<T> = Result<SuccessData<T>, Error>
 
 public data class SuccessData<out T>(val value: T, val meta: ApiBody.Meta? = null)
 
+public fun <T> ApiResult(value: T): ApiResult<T> = Result.Success(SuccessData(value))
+
 public val <T> Result.Success<SuccessData<T>>.value: T
     get() = this.data.value
 
