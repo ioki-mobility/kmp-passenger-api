@@ -206,6 +206,7 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                 matchingState = createApiMatchingState(
                     id = "matching-id",
                     logs = listOf(ApiMatchingState.MatchingStateLog("log message")),
+                    finalSummary = "We couldn't find a ride."
                 ),
             ),
             jsonString = rideResponse,
