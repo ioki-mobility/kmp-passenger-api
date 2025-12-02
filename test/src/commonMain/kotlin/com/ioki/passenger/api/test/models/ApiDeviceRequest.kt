@@ -5,7 +5,9 @@ import com.ioki.passenger.api.models.ApiDeviceRequest
 public fun createApiDeviceRequest(
     token: String = "",
     supportsEncryptedNotifications: Boolean = false,
+    supportsFetchingNotifications: Boolean = false,
 ): ApiDeviceRequest = ApiDeviceRequest(
     token = token,
     supportsEncryptedNotifications = supportsEncryptedNotifications,
+    supportsFetchingNotifications = supportsFetchingNotifications,
 )
