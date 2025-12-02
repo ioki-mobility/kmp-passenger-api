@@ -19,7 +19,7 @@ jobs:
       SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Publish to Sonatype Staging
         run: ./gradlew publishAggregationToCentralPortal -PGPG_SIGNING_REQUIRED
