@@ -206,6 +206,7 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                 matchingState = createApiMatchingState(
                     id = "matching-id",
                     logs = listOf(ApiMatchingState.MatchingStateLog("log message")),
+                    finalSummary = "We couldn't find a ride.",
                 ),
             ),
             jsonString = rideResponse,
@@ -527,6 +528,7 @@ private val rideResponse =
     "show_pt_ticket_reminder": true,
     "matching_state": {
       "id": "matching-id",
+      "final_summary": "We couldn't find a ride."
       "logs": [
         {
           "message": "log message"
