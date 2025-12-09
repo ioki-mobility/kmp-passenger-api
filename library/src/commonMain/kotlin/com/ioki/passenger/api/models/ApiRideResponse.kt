@@ -48,6 +48,7 @@ public data class ApiRideResponse(
     @SerialName(value = "booked_solution") val bookedSolution: ApiBookedSolution?,
     @SerialName(value = "passenger_note_to_driver") val passengerNoteToDriver: String,
     @SerialName(value = "show_pt_ticket_reminder") val showPublicTransportTicketReminder: Boolean,
+    @SerialName(value = "payment_method_required") val paymentMethodRequired: Boolean,
 ) : Entity {
     @Serializable
     public data class PassengerSelection(

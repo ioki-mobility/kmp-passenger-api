@@ -93,6 +93,7 @@ private val rideResponse =
         bookedSolution = null,
         passengerNoteToDriver = "",
         showPublicTransportTicketReminder = false,
+        paymentMethodRequired = false,
         matchingState = null,
     )
 
@@ -151,7 +152,8 @@ private val rideSeriesResponse =
       "offered_solutions": [],
       "options": [],
       "passenger_note_to_driver": "",
-      "show_pt_ticket_reminder": false
+      "show_pt_ticket_reminder": false,
+      "payment_method_required": false
     }
   ],
   "results": [
