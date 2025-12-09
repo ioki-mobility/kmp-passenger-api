@@ -203,6 +203,7 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                 ),
                 passengerNoteToDriver = "This is a note to the driver",
                 showPublicTransportTicketReminder = true,
+                paymentMethodRequired = true,
                 matchingState = createApiMatchingState(
                     id = "matching-id",
                     logs = listOf(ApiMatchingState.MatchingStateLog("log message")),
@@ -256,6 +257,7 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                 bookedSolution = null,
                 passengerNoteToDriver = "",
                 showPublicTransportTicketReminder = false,
+                paymentMethodRequired = false,
                 matchingState = null,
             ),
             jsonString = rideResponseMinimal,
@@ -526,6 +528,7 @@ private val rideResponse =
     },
     "passenger_note_to_driver": "This is a note to the driver",
     "show_pt_ticket_reminder": true,
+    "payment_method_required": true,
     "matching_state": {
       "id": "matching-id",
       "final_summary": "We couldn't find a ride."
@@ -572,6 +575,7 @@ private val rideResponseMinimal =
   "offered_solutions": [],
   "options": [],
   "passenger_note_to_driver": "",
-  "show_pt_ticket_reminder": false
+  "show_pt_ticket_reminder": false,
+  "payment_method_required": false
 }
 """
