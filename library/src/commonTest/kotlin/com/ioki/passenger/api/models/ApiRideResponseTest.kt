@@ -209,6 +209,7 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                     logs = listOf(ApiMatchingState.MatchingStateLog("log message")),
                     finalSummary = "We couldn't find a ride.",
                 ),
+                hasTicketingVouchers = true,
             ),
             jsonString = rideResponse,
         )
@@ -259,6 +260,7 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                 showPublicTransportTicketReminder = false,
                 paymentMethodRequired = false,
                 matchingState = null,
+                hasTicketingVouchers = false,
             ),
             jsonString = rideResponseMinimal,
         )
@@ -537,7 +539,8 @@ private val rideResponse =
           "message": "log message"
         }
       ]
-    }
+    },
+    "has_ticketing_vouchers": true
 }
 """
 
@@ -576,6 +579,7 @@ private val rideResponseMinimal =
   "options": [],
   "passenger_note_to_driver": "",
   "show_pt_ticket_reminder": false,
-  "payment_method_required": false
+  "payment_method_required": false,
+  "has_ticketing_vouchers": false
 }
 """

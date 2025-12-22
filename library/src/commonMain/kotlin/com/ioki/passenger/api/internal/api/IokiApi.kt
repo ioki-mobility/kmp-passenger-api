@@ -42,6 +42,7 @@ import com.ioki.passenger.api.models.ApiUpdatePhoneNumberRequest
 import com.ioki.passenger.api.models.ApiUpdateUserNotificationSettingsRequest
 import com.ioki.passenger.api.models.ApiUpdateUserRequest
 import com.ioki.passenger.api.models.ApiUserFlagsRequest
+import com.ioki.passenger.api.models.ApiUserTicketingVouchersFilter
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import io.ktor.client.request.header
@@ -53,8 +54,8 @@ import io.ktor.client.request.url
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.parameters
 import io.ktor.util.StringValues
-import kotlin.time.Instant
 import kotlinx.serialization.json.Json
+import kotlin.time.Instant
 
 internal class IokiApi(private val client: IokiHttpClient, private val authHeaderProvider: AuthHeaderProvider) {
     private val accessToken get() = authHeaderProvider.provide()
@@ -424,35 +425,32 @@ internal class IokiApi(private val client: IokiHttpClient, private val authHeade
         )
     }
 
-    suspend fun purchaseTicketingProduct(id: String, body: ApiBody<ApiPurchaseTicketingProductRequest>): HttpResponse =
-        client.post("/api/passenger/ticketing/products/$id/purchase") {
+    suspend fun orderTicketingProduct(id: String, body: ApiBody<ApiPurchaseTicketingProductRequest>): HttpResponse =
+        client.post("/api/passenger/ticketing/products/$id/order") {
             header("Authorization", accessToken)
             setBody(body)
         }
 
-    suspend fun getActiveUserTicketingVouchers(page: Int, perPage: Int = 10): HttpResponse =
-        client.get("/api/passenger/ticketing/vouchers") {
+    suspend fun preorderTicketingProduct(id: String, body: ApiBody<ApiPurchaseTicketingProductRequest>): HttpResponse =
+        client.post("/api/passenger/ticketing/products/$id/preorder") {
             header("Authorization", accessToken)
-            url.parameters.appendAll(
-                parameters {
-                    append("page", page.toString())
-                    append("filter", "active")
-                    append("per_page", perPage.toString())
-                },
-            )
+            setBody(body)
         }
 
-    suspend fun getInactiveUserTicketingVouchers(page: Int, perPage: Int = 10): HttpResponse =
-        client.get("/api/passenger/ticketing/vouchers") {
-            header("Authorization", accessToken)
-            url.parameters.appendAll(
-                parameters {
-                    append("page", page.toString())
-                    append("filter", "inactive")
-                    append("per_page", perPage.toString())
-                },
-            )
-        }
+    suspend fun getUserTicketingVouchers(
+        page: Int,
+        filter: ApiUserTicketingVouchersFilter,
+        perPage: Int = 10,
+    ): HttpResponse = client.get("/api/passenger/ticketing/vouchers") {
+        header("Authorization", accessToken)
+        url.parameters.appendAll(
+            parameters {
+                append("page", page.toString())
+                append("filter", filter.queryValue)
+                append("per_page", perPage.toString())
+            },
+        )
+    }
 
     suspend fun getUserTicketingVoucher(id: String): HttpResponse =
         client.get("/api/passenger/ticketing/vouchers/$id") {

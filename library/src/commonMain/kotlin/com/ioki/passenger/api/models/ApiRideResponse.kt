@@ -1,8 +1,8 @@
 package com.ioki.passenger.api.models
 
-import kotlin.time.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.time.Instant
 
 @Serializable
 public data class ApiRideResponse(
@@ -49,6 +49,7 @@ public data class ApiRideResponse(
     @SerialName(value = "passenger_note_to_driver") val passengerNoteToDriver: String,
     @SerialName(value = "show_pt_ticket_reminder") val showPublicTransportTicketReminder: Boolean,
     @SerialName(value = "payment_method_required") val paymentMethodRequired: Boolean,
+    @SerialName(value = "has_ticketing_vouchers") val hasTicketingVouchers: Boolean,
 ) : Entity {
     @Serializable
     public data class PassengerSelection(

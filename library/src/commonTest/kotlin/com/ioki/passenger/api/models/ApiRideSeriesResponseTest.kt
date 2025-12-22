@@ -95,6 +95,7 @@ private val rideResponse =
         showPublicTransportTicketReminder = false,
         paymentMethodRequired = false,
         matchingState = null,
+        hasTicketingVouchers = false,
     )
 
 private val rideSeriesResponseMinimal =
@@ -153,7 +154,8 @@ private val rideSeriesResponse =
       "options": [],
       "passenger_note_to_driver": "",
       "show_pt_ticket_reminder": false,
-      "payment_method_required": false
+      "payment_method_required": false,
+      "has_ticketing_vouchers": false
     }
   ],
   "results": [
