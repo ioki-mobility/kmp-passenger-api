@@ -7,17 +7,17 @@ import com.ioki.passenger.api.models.ApiTicketingProductFilterType
 import com.ioki.passenger.api.models.ApiTicketingProductResponse
 import com.ioki.passenger.api.models.ApiTicketingShopConfigurationResponse
 import com.ioki.passenger.api.models.ApiTicketingVoucherResponse
+import com.ioki.passenger.api.models.ApiUserTicketingVouchersFilter
 import com.ioki.passenger.api.result.ApiResult
 
 public open class FakeTicketingService : TicketingService {
-    override suspend fun getActiveUserTicketingVouchers(page: Int): ApiResult<List<ApiTicketingVoucherResponse>> =
-        error("Not overridden")
-
-    override suspend fun getInactiveUserTicketingVouchers(page: Int): ApiResult<List<ApiTicketingVoucherResponse>> =
-        error("Not overridden")
-
     override suspend fun getShopConfiguration(): ApiResult<ApiTicketingShopConfigurationResponse> =
         error("Not overridden")
+
+    override suspend fun getUserTicketingVouchers(
+        page: Int,
+        filter: ApiUserTicketingVouchersFilter,
+    ): ApiResult<List<ApiTicketingVoucherResponse>> = error("Not overridden")
 
     override suspend fun getUserTicketingVoucher(ticketVoucherId: String): ApiResult<ApiTicketingVoucherResponse> =
         error("Not overridden")
