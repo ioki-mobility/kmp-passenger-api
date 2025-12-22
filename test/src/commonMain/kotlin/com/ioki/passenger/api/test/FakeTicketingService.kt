@@ -29,7 +29,12 @@ public open class FakeTicketingService : TicketingService {
         page: Int,
     ): ApiResult<List<ApiTicketingProductResponse>> = error("Not overridden")
 
-    override suspend fun purchaseTicketingProduct(
+    override suspend fun orderTicketingProduct(
+        id: String,
+        request: ApiPurchaseTicketingProductRequest,
+    ): ApiResult<ApiTicketingVoucherResponse> = error("Not overridden")
+
+    override suspend fun preorderTicketingProduct(
         id: String,
         request: ApiPurchaseTicketingProductRequest,
     ): ApiResult<ApiTicketingVoucherResponse> = error("Not overridden")

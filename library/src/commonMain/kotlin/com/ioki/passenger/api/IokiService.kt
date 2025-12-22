@@ -364,7 +364,12 @@ public interface TicketingService {
         page: Int,
     ): ApiResult<List<ApiTicketingProductResponse>>
 
-    public suspend fun purchaseTicketingProduct(
+    public suspend fun orderTicketingProduct(
+        id: String,
+        request: ApiPurchaseTicketingProductRequest,
+    ): ApiResult<ApiTicketingVoucherResponse>
+
+    public suspend fun preorderTicketingProduct(
         id: String,
         request: ApiPurchaseTicketingProductRequest,
     ): ApiResult<ApiTicketingVoucherResponse>
@@ -823,12 +828,20 @@ private class DefaultIokiService(private val iokiApi: IokiApi, private val inter
             getAllTicketingProducts(filter = type.queryValue, ticketFilter = ticketFilter, rideId = rideId, page = page)
         }
 
-    override suspend fun purchaseTicketingProduct(
+    override suspend fun orderTicketingProduct(
         id: String,
         request: ApiPurchaseTicketingProductRequest,
     ): ApiResult<ApiTicketingVoucherResponse> =
         apiCall<ApiBody<ApiTicketingVoucherResponse>, ApiTicketingVoucherResponse> {
-            purchaseTicketingProduct(id = id, body = ApiBody(request))
+            orderTicketingProduct(id = id, body = ApiBody(request))
+        }
+
+    override suspend fun preorderTicketingProduct(
+        id: String,
+        request: ApiPurchaseTicketingProductRequest,
+    ): ApiResult<ApiTicketingVoucherResponse> =
+        apiCall<ApiBody<ApiTicketingVoucherResponse>, ApiTicketingVoucherResponse> {
+            preorderTicketingProduct(id = id, body = ApiBody(request))
         }
 
     override suspend fun renewTicketingVoucher(
