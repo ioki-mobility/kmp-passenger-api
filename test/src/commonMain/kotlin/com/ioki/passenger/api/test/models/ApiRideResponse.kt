@@ -59,6 +59,7 @@ public fun createApiRideResponse(
     showPublicTransportTicketReminder: Boolean = false,
     paymentMethodRequired: Boolean = false,
     matchingState: ApiMatchingState = createApiMatchingState(),
+    hasTicketingVouchers: Boolean = false,
 ): ApiRideResponse = ApiRideResponse(
     id = id,
     productId = productId,
@@ -101,6 +102,7 @@ public fun createApiRideResponse(
     showPublicTransportTicketReminder = showPublicTransportTicketReminder,
     paymentMethodRequired = paymentMethodRequired,
     matchingState = matchingState,
+    hasTicketingVouchers = hasTicketingVouchers,
 )
 
 public fun createApiRideResponsePassengerSelection(
