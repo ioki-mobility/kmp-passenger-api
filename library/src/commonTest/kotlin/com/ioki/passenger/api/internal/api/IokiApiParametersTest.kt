@@ -6,6 +6,7 @@ import com.ioki.passenger.api.models.ApiPurchasableType
 import com.ioki.passenger.api.models.ApiPurchaseFilter
 import com.ioki.passenger.api.models.ApiPurchaseState
 import com.ioki.passenger.api.models.ApiPurchaseType
+import com.ioki.passenger.api.models.ApiUserTicketingVouchersFilter
 import io.kotest.matchers.maps.shouldContainExactly
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.statement.HttpResponse
@@ -14,9 +15,9 @@ import io.ktor.http.Parameters
 import io.ktor.util.toMap
 import io.ktor.utils.io.ByteReadChannel
 import kotlinx.coroutines.test.runTest
-import kotlin.time.Instant
 import kotlin.test.Test
 import kotlin.time.Clock
+import kotlin.time.Instant
 
 class IokiApiParametersTest {
 
@@ -128,32 +129,17 @@ class IokiApiParametersTest {
     }
 
     @Test
-    fun `test getActiveUserTicketingVouchers parameters`() = runTest {
+    fun `test getTicketingVouchers parameters`() = runTest {
         val parameters = setupParameterTest {
-            it.getActiveUserTicketingVouchers(
+            it.getUserTicketingVouchers(
                 page = 2,
+                filter = ApiUserTicketingVouchersFilter.PROCESSING,
                 perPage = 100,
             )
         }
 
         parameters.toMap() shouldContainExactly mapOf(
-            "filter" to listOf("active"),
-            "page" to listOf("2"),
-            "per_page" to listOf("100"),
-        )
-    }
-
-    @Test
-    fun `test getInactiveTicketingVouchers parameters`() = runTest {
-        val parameters = setupParameterTest {
-            it.getInactiveUserTicketingVouchers(
-                page = 2,
-                perPage = 100,
-            )
-        }
-
-        parameters.toMap() shouldContainExactly mapOf(
-            "filter" to listOf("inactive"),
+            "filter" to listOf("processing"),
             "page" to listOf("2"),
             "per_page" to listOf("100"),
         )
