@@ -11,6 +11,7 @@ public fun createApiTicketingVoucherResponse(
     price: ApiMoney = createApiMoney(),
     product: ApiTicketingProductResponse? = null,
     ticket: ApiTicketingVoucherResponse.Ticket? = null,
+    rideId: String? = null,
     renewalInformation: ApiTicketingVoucherResponse.RenewalInformation = createApiTicketingVoucherRenewalInformation(),
 ): ApiTicketingVoucherResponse = ApiTicketingVoucherResponse(
     id = id,
@@ -18,6 +19,7 @@ public fun createApiTicketingVoucherResponse(
     price = price,
     product = product,
     ticket = ticket,
+    rideId = rideId,
     renewalInformation = renewalInformation,
 )
 
