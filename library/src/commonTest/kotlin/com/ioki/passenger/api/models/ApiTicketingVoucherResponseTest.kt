@@ -54,6 +54,7 @@ internal class ApiTicketingVoucherResponseTest : IokiApiModelTest() {
                     validFrom = null,
                     validUntil = null,
                 ),
+                rideId = "r_123",
             ),
             ticketingVoucherResponse,
         )
@@ -76,6 +77,7 @@ internal class ApiTicketingVoucherResponseTest : IokiApiModelTest() {
                     validFrom = null,
                     validUntil = null,
                 ),
+                rideId = null,
             ),
             ticketingVoucherResponseMinimal,
         )
@@ -90,6 +92,7 @@ private val ticketingVoucherResponse = """
         "amount": 1,
         "currency": "EUR"
     },
+    "ride_id": "r_123",
     "product": {
         "id": "",
         "type": "",
