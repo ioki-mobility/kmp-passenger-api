@@ -20,6 +20,7 @@ public data class ApiTicketingVoucherResponse(
     val product: ApiTicketingProductResponse?,
     val ticket: Ticket?,
     @SerialName(value = "ride_id") val rideId: String?,
+    @SerialName(value = "scheduled_processing_time") val scheduledProcessingTime: Instant?,
     @SerialName(value = "renewal_information") val renewalInformation: RenewalInformation,
 ) {
     @Serializable

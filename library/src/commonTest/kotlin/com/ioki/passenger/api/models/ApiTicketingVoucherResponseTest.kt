@@ -55,6 +55,7 @@ internal class ApiTicketingVoucherResponseTest : IokiApiModelTest() {
                     validUntil = null,
                 ),
                 rideId = "r_123",
+                scheduledProcessingTime = Instant.parse("2021-09-10T10:00:00Z"),
             ),
             ticketingVoucherResponse,
         )
@@ -78,6 +79,7 @@ internal class ApiTicketingVoucherResponseTest : IokiApiModelTest() {
                     validUntil = null,
                 ),
                 rideId = null,
+                scheduledProcessingTime = null,
             ),
             ticketingVoucherResponseMinimal,
         )
@@ -93,6 +95,7 @@ private val ticketingVoucherResponse = """
         "currency": "EUR"
     },
     "ride_id": "r_123",
+    "scheduled_processing_time": "2021-09-10T10:00:00Z",
     "product": {
         "id": "",
         "type": "",

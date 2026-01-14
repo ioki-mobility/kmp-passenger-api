@@ -12,6 +12,7 @@ public fun createApiTicketingVoucherResponse(
     product: ApiTicketingProductResponse? = null,
     ticket: ApiTicketingVoucherResponse.Ticket? = null,
     rideId: String? = null,
+    scheduledProcessingTime: Instant? = null,
     renewalInformation: ApiTicketingVoucherResponse.RenewalInformation = createApiTicketingVoucherRenewalInformation(),
 ): ApiTicketingVoucherResponse = ApiTicketingVoucherResponse(
     id = id,
@@ -20,6 +21,7 @@ public fun createApiTicketingVoucherResponse(
     product = product,
     ticket = ticket,
     rideId = rideId,
+    scheduledProcessingTime = scheduledProcessingTime,
     renewalInformation = renewalInformation,
 )
 
