@@ -1,9 +1,7 @@
 # KMP Passenger API
 
 [![Maven Central](https://img.shields.io/maven-central/v/com.ioki/passenger-api?labelColor=%2324292E&color=%233246c8)](https://central.sonatype.com/artifact/com.ioki/passenger-api)
-<!-- Badge because of https://github.com/badges/shields/pull/10997
-[![Snapshot](https://img.shields.io/nexus/s/com.ioki/passenger-api?labelColor=%2324292E&color=%234f78ff&server=https://central.sonatype.com/repository/maven-snapshots/)](https://central.sonatype.com/service/rest/repository/browse/maven-snapshots/com/ioki/passenger-api/)
--->
+![Snapshot](https://img.shields.io/maven-metadata/v?metadataUrl=https://central.sonatype.com/repository/maven-snapshots/com/ioki/passenger-api/maven-metadata.xml&labelColor=%2324292E&color=%234f78ff&label=maven-snapshot)
 
 ## Overview
 
