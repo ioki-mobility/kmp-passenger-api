@@ -856,12 +856,12 @@ private class DefaultIokiService(private val iokiApi: IokiApi, private val inter
 
     override suspend fun cancelTicketingVoucherSubscription(voucherId: String): ApiResult<ApiTicketingVoucherResponse> =
         apiCall<ApiBody<ApiTicketingVoucherResponse>, ApiTicketingVoucherResponse> {
-            cancelUserTicketingVoucherSubscription(id = voucherId)
+            cancelTicketingVoucherSubscription(id = voucherId)
         }
 
     override suspend fun cancelPreorderedTicketingVoucher(voucherId: String): ApiResult<ApiTicketingVoucherResponse> =
         apiCall<ApiBody<ApiTicketingVoucherResponse>, ApiTicketingVoucherResponse> {
-            cancelPreorderedUserTicketingVoucher(id = voucherId)
+            cancelPreorderedTicketingVoucher(id = voucherId)
         }
 
     override suspend fun getUserTicketingVoucher(ticketVoucherId: String): ApiResult<ApiTicketingVoucherResponse> =
