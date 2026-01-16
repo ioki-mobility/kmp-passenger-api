@@ -437,6 +437,11 @@ internal class IokiApi(private val client: IokiHttpClient, private val authHeade
             setBody(body)
         }
 
+    suspend fun cancelPreorderedTicketingVoucher(id: String): HttpResponse =
+        client.post("/api/passenger/ticketing/vouchers/$id/cancellation") {
+            header("Authorization", accessToken)
+        }
+
     suspend fun getUserTicketingVouchers(
         page: Int,
         filter: ApiUserTicketingVouchersFilter,
@@ -463,7 +468,7 @@ internal class IokiApi(private val client: IokiHttpClient, private val authHeade
             setBody(body)
         }
 
-    suspend fun cancelUserTicketingVoucher(id: String): HttpResponse =
+    suspend fun cancelTicketingVoucherSubscription(id: String): HttpResponse =
         client.post("/api/passenger/ticketing/vouchers/$id/subscription_cancellation") {
             header("Authorization", accessToken)
         }
