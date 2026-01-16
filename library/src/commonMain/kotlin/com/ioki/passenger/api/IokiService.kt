@@ -204,7 +204,7 @@ public interface MarketingService {
 }
 
 public interface NotificationService {
-    public suspend fun getUserNotificationSettings(): ApiResult<List<ApiUserNotificationSettingsResponse>?>
+    public suspend fun getUserNotificationSettings(): ApiResult<List<ApiUserNotificationSettingsResponse>>
 
     public suspend fun getAvailableProviderNotificationSettings(): //
         ApiResult<List<ApiProviderNotificationSettingsResponse>>
@@ -580,8 +580,8 @@ private class DefaultIokiService(private val iokiApi: IokiApi, private val inter
             getVenues()
         }
 
-    override suspend fun getUserNotificationSettings(): ApiResult<List<ApiUserNotificationSettingsResponse>?> =
-        apiCall<ApiBody<List<ApiUserNotificationSettingsResponse>?>, List<ApiUserNotificationSettingsResponse>?> {
+    override suspend fun getUserNotificationSettings(): ApiResult<List<ApiUserNotificationSettingsResponse>> =
+        apiCall<ApiBody<List<ApiUserNotificationSettingsResponse>?>, List<ApiUserNotificationSettingsResponse>> {
             getUserNotificationSettings()
         }
 

@@ -8,7 +8,7 @@ import com.ioki.passenger.api.models.ApiUserNotificationSettingsResponse
 import com.ioki.passenger.api.result.ApiResult
 
 public open class FakeNotificationService : NotificationService {
-    override suspend fun getUserNotificationSettings(): ApiResult<List<ApiUserNotificationSettingsResponse>?> =
+    override suspend fun getUserNotificationSettings(): ApiResult<List<ApiUserNotificationSettingsResponse>> =
         error("Not overridden")
 
     @Suppress("ktlint:standard:function-signature")
