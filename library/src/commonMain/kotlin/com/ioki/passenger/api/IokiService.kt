@@ -374,12 +374,14 @@ public interface TicketingService {
         request: ApiPurchaseTicketingProductRequest,
     ): ApiResult<ApiTicketingVoucherResponse>
 
+    public suspend fun cancelPreorderedTicketingVoucher(voucherId: String): ApiResult<ApiTicketingVoucherResponse>
+
     public suspend fun renewTicketingVoucher(
         id: String,
         request: ApiRenewTicketingVoucherRequest,
     ): ApiResult<ApiTicketingVoucherResponse>
 
-    public suspend fun cancelTicketingVoucher(voucherId: String): ApiResult<ApiTicketingVoucherResponse>
+    public suspend fun cancelTicketingVoucherSubscription(voucherId: String): ApiResult<ApiTicketingVoucherResponse>
 }
 
 public interface BootstrapService {
@@ -852,9 +854,14 @@ private class DefaultIokiService(private val iokiApi: IokiApi, private val inter
             renewUserTicketingVoucher(id = id, body = ApiBody(request))
         }
 
-    override suspend fun cancelTicketingVoucher(voucherId: String): ApiResult<ApiTicketingVoucherResponse> =
+    override suspend fun cancelTicketingVoucherSubscription(voucherId: String): ApiResult<ApiTicketingVoucherResponse> =
         apiCall<ApiBody<ApiTicketingVoucherResponse>, ApiTicketingVoucherResponse> {
-            cancelUserTicketingVoucher(id = voucherId)
+            cancelUserTicketingVoucherSubscription(id = voucherId)
+        }
+
+    override suspend fun cancelPreorderedTicketingVoucher(voucherId: String): ApiResult<ApiTicketingVoucherResponse> =
+        apiCall<ApiBody<ApiTicketingVoucherResponse>, ApiTicketingVoucherResponse> {
+            cancelPreorderedUserTicketingVoucher(id = voucherId)
         }
 
     override suspend fun getUserTicketingVoucher(ticketVoucherId: String): ApiResult<ApiTicketingVoucherResponse> =
