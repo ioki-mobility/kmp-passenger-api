@@ -23,34 +23,4 @@ public data class ApiLocation(
     @SerialName(value = "walking_track") val walkingTrack: String?,
     @SerialName(value = "station") val station: ApiStationResponse?,
     @SerialName(value = "display_times") val displayTimes: List<Instant>,
-) : Addressable {
-    override val address: ApiAddress
-        get() =
-            ApiAddress(
-                locationName = locationName ?: "",
-                streetName = streetName ?: "",
-                streetNumber = streetNumber ?: "",
-                postalCode = postalCode ?: "",
-                city = city ?: "",
-                county = county ?: "",
-                country = country ?: "",
-            )
-}
-
-// If the given pickup or dropoff point has a station or a walkingDuration greater than zero,
-// location is different to the origin or destination point.
-public val ApiLocation?.hasDifferentPoint: Boolean
-    get() =
-        when {
-            this == null -> false
-            stationId != null -> true
-            else -> walkingDuration ?: 0 > 0
-        }
-
-// If the given pickup or dropoff point has a station or the duration is greater than zero,
-// location is different to the origin or destination point.
-public fun ApiLocation?.hasDifferentPoint(hopDuration: Int): Boolean = when {
-    this == null -> false
-    stationId != null -> true
-    else -> hopDuration > 0
-}
+)

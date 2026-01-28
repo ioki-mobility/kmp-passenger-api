@@ -1,7 +1,6 @@
 package com.ioki.passenger.api.models
 
 import com.ioki.passenger.api.test.models.createApiLocation
-import io.kotest.matchers.shouldBe
 import kotlin.time.Instant
 import kotlin.test.Test
 
@@ -45,43 +44,6 @@ internal class ApiLocationTest : IokiApiModelTest() {
             ),
             locationMinimal,
         )
-    }
-
-    @Test
-    fun `location hasDifferentPoint with stationId returns true`() {
-        val location = createApiLocation(stationId = "stationId")
-
-        location.hasDifferentPoint shouldBe true
-    }
-
-    @Test
-    fun `location hasDifferentPoint without stationId without walkingDuration returns false`() {
-        val location = createApiLocation(
-            stationId = null,
-            walkingDuration = null,
-        )
-
-        location.hasDifferentPoint shouldBe false
-    }
-
-    @Test
-    fun `location hasDifferentPoint without stationId with walkingDuration zero returns false`() {
-        val location = createApiLocation(
-            stationId = null,
-            walkingDuration = 0,
-        )
-
-        location.hasDifferentPoint shouldBe false
-    }
-
-    @Test
-    fun `location hasDifferentPoint without stationId with walkingDuration greater zero returns true`() {
-        val location = createApiLocation(
-            stationId = null,
-            walkingDuration = 500,
-        )
-
-        location.hasDifferentPoint shouldBe true
     }
 }
 
