@@ -15,6 +15,7 @@ public data class ApiLocation(
     val city: String?,
     val county: String?,
     val country: String?,
+    @SerialName(value = "formatted_address") val formattedAddress: String?,
     val type: String?,
     val time: Instant?,
     @SerialName(value = "waypoint_type") val waypointType: String?,

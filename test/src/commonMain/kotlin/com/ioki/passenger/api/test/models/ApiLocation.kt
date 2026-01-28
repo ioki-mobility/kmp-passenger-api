@@ -14,6 +14,7 @@ public fun createApiLocation(
     city: String? = null,
     county: String? = null,
     country: String? = null,
+    formattedAddress: String? = null,
     type: String? = null,
     time: Instant? = null,
     waypointType: String? = null,
@@ -40,4 +41,5 @@ public fun createApiLocation(
     walkingTrack = walkingTrack,
     station = station,
     displayTimes = displayTimes,
+    formattedAddress = formattedAddress,
 )
