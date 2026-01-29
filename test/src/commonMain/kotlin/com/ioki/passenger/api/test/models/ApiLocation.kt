@@ -14,7 +14,7 @@ public fun createApiLocation(
     city: String? = null,
     county: String? = null,
     country: String? = null,
-    formattedAddress: String? = null,
+    formattedAddress: String = "",
     type: String? = null,
     time: Instant? = null,
     waypointType: String? = null,

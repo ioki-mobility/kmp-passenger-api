@@ -4,8 +4,8 @@ import com.ioki.passenger.api.test.models.createApiFareResponse
 import com.ioki.passenger.api.test.models.createApiLocation
 import com.ioki.passenger.api.test.models.createApiMatchingState
 import com.ioki.passenger.api.test.models.createApiVehicle
-import kotlin.time.Instant
 import kotlin.test.Test
+import kotlin.time.Instant
 
 internal class ApiRideResponseTest : IokiApiModelTest() {
     @Test
@@ -65,14 +65,18 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                 cancellable = false,
                 needsCancellationCode = true,
                 prebooked = true,
-                origin = createApiLocation(lat = 50.104692, lng = 8.644062, locationName = "Galluswarte"),
-                destination = createApiLocation(lat = 50.113695, lng = 8.678996, locationName = "Hauptwache"),
+                origin = createApiLocation(lat = 50.104692, lng = 8.644062, formattedAddress = "50.104692, 8.644062"),
+                destination = createApiLocation(
+                    lat = 50.113695,
+                    lng = 8.678996,
+                    formattedAddress = "50.113695, 8.678996",
+                ),
                 pickup = createApiLocation(
                     lat = 50.116792,
                     lng = 8.671273,
-                    locationName = "Station neben \"der Welle\"",
+                    formattedAddress = "50.116792, 8.671273",
                 ),
-                dropoff = createApiLocation(lat = 50.10953, lng = 8.668499, locationName = "Silver Tower"),
+                dropoff = createApiLocation(lat = 50.10953, lng = 8.668499, formattedAddress = "50.10953, 8.668499"),
                 vehicle = createApiVehicle(
                     licensePlate = "AB CD 123",
                     nickname = "Bob the Vehicle 2",
@@ -153,10 +157,12 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                                 from = createApiLocation(
                                     lat = 51.34341,
                                     lng = 12.34252,
+                                    formattedAddress = "51.34341, 12.34252",
                                 ),
                                 to = createApiLocation(
                                     lat = 51.32094,
                                     lng = 12.3734,
+                                    formattedAddress = "51.32094, 12.3734",
                                 ),
                                 details = null,
                             ),
@@ -192,10 +198,12 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                             from = createApiLocation(
                                 lat = 51.34341,
                                 lng = 12.34252,
+                                formattedAddress = "51.34341, 12.34252",
                             ),
                             to = createApiLocation(
                                 lat = 51.32094,
                                 lng = 12.3734,
+                                formattedAddress = "51.32094, 12.3734",
                             ),
                             details = null,
                         ),
@@ -236,8 +244,12 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                 cancellable = false,
                 needsCancellationCode = true,
                 prebooked = true,
-                origin = createApiLocation(lat = 50.104692, lng = 8.644062, locationName = "Galluswarte"),
-                destination = createApiLocation(lat = 50.113695, lng = 8.678996, locationName = "Hauptwache"),
+                origin = createApiLocation(lat = 50.104692, lng = 8.644062, formattedAddress = "50.104692, 8.644062"),
+                destination = createApiLocation(
+                    lat = 50.113695,
+                    lng = 8.678996,
+                    formattedAddress = "50.113695, 8.678996",
+                ),
                 createdAt = Instant.parse("2017-05-15T12:23:41Z"),
                 booking = null,
                 rating = null,
@@ -359,13 +371,13 @@ private val rideResponse =
   "driver_can_be_called": true,
   "public_transport_uri": "",
   "origin": {
-    "location_name": "Galluswarte",
+    "formatted_address": "50.104692, 8.644062",
     "lat": 50.104692,
     "lng": 8.644062,
     "display_times": []
   },
   "destination": {
-    "location_name": "Hauptwache",
+    "formatted_address": "50.113695, 8.678996",
     "lat": 50.113695,
     "lng": 8.678996,
     "display_times": []
@@ -373,13 +385,13 @@ private val rideResponse =
   "pickup": {
     "lat": 50.116792,
     "lng": 8.671273,
-    "location_name": "Station neben \"der Welle\"",
+    "formatted_address": "50.116792, 8.671273",
     "display_times": []
   },
   "dropoff": {
     "lat": 50.10953,
     "lng": 8.668499,
-    "location_name": "Silver Tower",
+    "formatted_address": "50.10953, 8.668499",
     "display_times": []
   },
   "vehicle": {
@@ -460,12 +472,14 @@ private val rideResponse =
           "from": {
             "display_times":[],
             "lat": 51.34341,
-            "lng": 12.34252
+            "lng": 12.34252,
+            "formatted_address": "51.34341, 12.34252"
           },
           "to": {
             "display_times":[],
             "lat": 51.32094,
-            "lng": 12.3734
+            "lng": 12.3734,
+            "formatted_address": "51.32094, 12.3734"
           },
           "track": "_khkH_q`q@_ry@_ry@",
           "duration": 600,
@@ -503,11 +517,13 @@ private val rideResponse =
         {
           "transport_mode": "drt",
           "from": {
+            "formatted_address": "51.34341, 12.34252",
             "display_times":[],
             "lat": 51.34341,
             "lng": 12.34252
           },
           "to": {
+            "formatted_address": "51.32094, 12.3734",
             "display_times":[],
             "lat": 51.32094,
             "lng": 12.3734
@@ -563,13 +579,13 @@ private val rideResponseMinimal =
   "prebooked": true,
   "driver_can_be_called": false,
   "origin": {
-    "location_name": "Galluswarte",
+    "formatted_address": "50.104692, 8.644062",
     "lat": 50.104692,
     "lng": 8.644062,
     "display_times": []
   },
   "destination": {
-    "location_name": "Hauptwache",
+    "formatted_address": "50.113695, 8.678996",
     "lat": 50.113695,
     "lng": 8.678996,
     "display_times": []

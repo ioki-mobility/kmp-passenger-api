@@ -41,7 +41,7 @@ internal class ApiLocationTest : IokiApiModelTest() {
             createApiLocation(
                 lat = 50.104558,
                 lng = 8.649113,
-                locationName = "DB Office Center",
+                formattedAddress = "50.104558, 8.649113",
             ),
             locationMinimal,
         )
@@ -76,7 +76,7 @@ private val locationMinimal =
 {
   "lat": 50.104558,
   "lng": 8.649113,
-  "location_name": "DB Office Center",
+  "formatted_address": "50.104558, 8.649113",
   "display_times": []
 }
 """
