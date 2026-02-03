@@ -9,6 +9,8 @@ internal class ApiProviderTest : IokiApiModelTest() {
         testJsonStringCanBeConvertedToModel(
             ApiProvider(
                 name = "Ioki GmbH",
+                countryCode = "DE",
+                merchantName = "Ioki GmbH",
                 paymentServiceProvider = ApiProvider.PaymentServiceProvider.STRIPE,
                 ridePaymentMethodTypes = setOf(
                     ApiPaymentMethodType.CASH,
@@ -50,7 +52,7 @@ internal class ApiProviderTest : IokiApiModelTest() {
     @Test
     fun serializationMinimal() {
         testJsonStringCanBeConvertedToModel(
-            createApiProvider(name = "Ioki GmbH", features = ApiProvider.Features.NONE),
+            createApiProvider(name = "Ioki GmbH", countryCode = "DE", features = ApiProvider.Features.NONE),
             providerMinimal,
         )
     }
@@ -60,6 +62,7 @@ internal class ApiProviderTest : IokiApiModelTest() {
         testJsonStringCanBeConvertedToModel(
             createApiProvider(
                 name = "Ioki GmbH",
+                countryCode = "DE",
                 features = ApiProvider.Features.NONE,
                 stripeTypes = setOf(
                     ApiStripeType.UNSUPPORTED,
@@ -76,6 +79,8 @@ private val provider =
     """
 {
   "name": "Ioki GmbH",
+  "country_code": "DE",
+  "merchant_name": "Ioki GmbH",
   "psp": "stripe",
   "ride_payment_method_types": ["cash", "pos_payment"],
   "ticketing_payment_method_types": ["cash", "pos_payment"],
@@ -127,6 +132,7 @@ private val providerMinimal =
     """
 {
   "name": "Ioki GmbH",
+  "country_code": "DE",
   "psp": "no_psp",
   "ride_payment_method_types": [],
   "ticketing_payment_method_types": [],
@@ -155,6 +161,7 @@ private val providerStripeTypesWithWrongTypeMinimal =
     """
 {
   "name": "Ioki GmbH",
+  "country_code": "DE",
   "psp": "no_psp",
   "ride_payment_method_types": [],
   "ticketing_payment_method_types": [],

@@ -24,6 +24,8 @@ public data class ApiProvider(
     val logPayTypes: Set<ApiLogPayType>?,
     @SerialName(value = "service_credit_options") val creditOptions: CreditOptions?,
     @SerialName(value = "stripe_account_id") val stripeAccountId: String?,
+    @SerialName(value = "merchant_name") val merchantName: String?,
+    @SerialName(value = "country_code") val countryCode: String,
     val features: Features,
     val avatar: ApiAvatar?,
     @SerialName(value = "avatar_darkmode")
