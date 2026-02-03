@@ -11,6 +11,7 @@ internal class ApiBootstrapResponseTest : IokiApiModelTest() {
             ApiBootstrapResponse(
                 provider = createApiProvider(
                     name = "Some Company Inc.",
+                    countryCode = "DE",
                     paymentServiceProvider = ApiProvider.PaymentServiceProvider.NONE,
                     features = ApiProvider.Features.NONE,
                 ),
@@ -35,6 +36,7 @@ private val bootstrap =
 {
   "provider": {
     "name": "Some Company Inc.",
+    "country_code": "DE",
     "psp": "no_psp",
     "ride_payment_method_types": [],
     "ticketing_payment_method_types": [],
