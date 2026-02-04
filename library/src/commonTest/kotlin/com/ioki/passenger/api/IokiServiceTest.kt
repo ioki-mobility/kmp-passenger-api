@@ -124,7 +124,7 @@ private val authenticatedUser = """
     "registered": true,
     "analytics_tracking":false,
     "email": {
-      "email_address": "john.doe@deutschebahn.com",
+      "email_address": "john.doe@ioki.com",
       "newsletter": false,
       "receipt": true,
       "confirmed": true
