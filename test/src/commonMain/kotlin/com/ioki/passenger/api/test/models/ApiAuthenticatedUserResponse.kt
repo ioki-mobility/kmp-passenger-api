@@ -1,6 +1,5 @@
 package com.ioki.passenger.api.test.models
 
-import com.ioki.passenger.api.models.ApiAdditionalData
 import com.ioki.passenger.api.models.ApiAuthenticatedUserResponse
 import com.ioki.passenger.api.models.ApiEmail
 
@@ -18,12 +17,9 @@ public fun createApiAuthenticatedUserResponse(
     referringUserSet: Boolean = false,
     referralCode: String? = null,
     remainingReferrals: Int? = null,
-    allowMarketing: Boolean? = null,
-    airshipNamedUserId: String? = null,
     logpayCustomerSet: Boolean = false,
     logpaySupportDetails: ApiAuthenticatedUserResponse.LogPaySupportDetails? = null,
     uniqueCustomerId: String? = null,
-    additionalData: ApiAdditionalData? = null,
 ): ApiAuthenticatedUserResponse = ApiAuthenticatedUserResponse(
     id = id,
     firstName = firstName,
@@ -38,12 +34,9 @@ public fun createApiAuthenticatedUserResponse(
     referringUserSet = referringUserSet,
     referralCode = referralCode,
     remainingReferrals = remainingReferrals,
-    allowMarketing = allowMarketing,
-    airshipNamedUserId = airshipNamedUserId,
     logpayCustomerSet = logpayCustomerSet,
     logpaySupportDetails = logpaySupportDetails,
     uniqueCustomerId = uniqueCustomerId,
-    additionalData = additionalData,
 )
 
 public fun createApiAuthenticatedUserResponseLogPaySupportDetails(
