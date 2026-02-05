@@ -79,9 +79,4 @@ public data class ApiRideResponse(
     }
 }
 
-// If a ride has a station or a walkingDuration greater than zero,
-// dropoff is different to the destination point.
-public val ApiRideResponse.hasDifferentDropoffAndDestinationPoints: Boolean
-    get() = dropoff.hasDifferentPoint
-
 public typealias ApiBookedSolution = ApiOfferedSolution

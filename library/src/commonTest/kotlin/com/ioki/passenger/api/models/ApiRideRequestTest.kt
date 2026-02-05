@@ -74,12 +74,12 @@ internal class ApiRideRequestTest : IokiApiModelTest() {
                 origin = createApiLocation(
                     lat = 50.104692,
                     lng = 8.644062,
-                    locationName = "Galluswarte",
+                    formattedAddress = "Galluswarte",
                 ),
                 destination = createApiLocation(
                     lat = 50.113695,
                     lng = 8.678996,
-                    locationName = "Hauptwache",
+                    formattedAddress = "Hauptwache",
                 ),
                 driverNote = null,
             ),
@@ -153,13 +153,13 @@ private val rideRequest =
   "origin": {
     "lat": 50.104692,
     "lng": 8.644062,
-    "location_name": "Galluswarte",
+    "formatted_address": "Galluswarte",
     "display_times": []
   },
   "destination": {
     "lat": 50.113695,
     "lng": 8.678996,
-    "location_name": "Hauptwache",
+    "formatted_address": "Hauptwache",
     "display_times": []
   }
 }
