@@ -6,7 +6,7 @@ internal class ApiSignUpRequestTest : IokiApiModelTest() {
     @Test
     fun serialization() {
         val email = ApiEmail(
-            emailAddress = "new.email@deutschebahn.com",
+            emailAddress = "new.email@ioki.com",
             newsletter = false,
             receipt = true,
             confirmed = null,
@@ -34,7 +34,7 @@ private val signupRequest =
   "version": 2,
   "minimum_age_confirmed": true,
   "email": {
-    "email_address": "new.email@deutschebahn.com",
+    "email_address": "new.email@ioki.com",
     "newsletter": false,
     "receipt": true
   }

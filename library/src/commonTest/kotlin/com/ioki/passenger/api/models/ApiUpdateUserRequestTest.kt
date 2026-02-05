@@ -6,7 +6,7 @@ internal class ApiUpdateUserRequestTest : IokiApiModelTest() {
     @Test
     fun serialization() {
         val email = ApiEmail(
-            emailAddress = "new.email@deutschebahn.com",
+            emailAddress = "new.email@ioki.com",
             newsletter = false,
             receipt = true,
             confirmed = null,
@@ -45,7 +45,7 @@ private val updateUserRequest =
   "terms_accepted": true,
   "version": 2,
   "email": {
-    "email_address": "new.email@deutschebahn.com",
+    "email_address": "new.email@ioki.com",
     "newsletter": false,
     "receipt": true
   },
