@@ -12,5 +12,6 @@ public open class FakeStripeService : StripeService {
 
     override suspend fun createPaymentMethodFromStripePaymentMethod(
         stripePaymentMethodId: String,
+        attached: Boolean,
     ): ApiResult<ApiPaymentMethodResponse> = error("Not overridden")
 }

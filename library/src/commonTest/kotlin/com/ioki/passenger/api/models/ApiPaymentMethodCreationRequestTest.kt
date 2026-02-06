@@ -8,6 +8,7 @@ internal class ApiPaymentMethodCreationRequestTest : IokiApiModelTest() {
         testJsonStringCanBeConvertedToModel(
             ApiPaymentMethodCreationRequest(
                 paymentMethodType = "stripe",
+                attached = true,
                 details = ApiPaymentMethodCreationRequest.Details(
                     stripePaymentMethodId = null,
                     braintreeNonce = null,
@@ -23,6 +24,7 @@ internal class ApiPaymentMethodCreationRequestTest : IokiApiModelTest() {
         testJsonStringCanBeConvertedToModel(
             ApiPaymentMethodCreationRequest(
                 paymentMethodType = "stripe",
+                attached = true,
                 details = ApiPaymentMethodCreationRequest.Details(
                     stripePaymentMethodId = "stripe_method_id",
                     braintreeNonce = "braintree_nonce",
@@ -38,6 +40,7 @@ private val paymentMethodCreationRequestMinimal =
     """
 {
   "payment_method_type": "stripe",
+  "attached": true,
   "details": {
   }
 }
@@ -47,6 +50,7 @@ private val paymentMethodCreationRequest =
     """
 {
   "payment_method_type": "stripe",
+  "attached": true,
   "details": {
     "stripe_payment_method_id": "stripe_method_id",
     "braintree_nonce": "braintree_nonce",
