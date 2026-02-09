@@ -15,7 +15,7 @@ jobs:
             os: macos-latest
           - task: jvmTest
             os: ubuntu-latest
-          - task: testDebugUnitTest
+          - task: testAndroidHostTest
             os: ubuntu-latest
 
     runs-on: ${{ matrix.os }}
