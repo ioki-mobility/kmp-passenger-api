@@ -311,7 +311,7 @@ public interface StripeService {
 
     public suspend fun createPaymentMethodFromStripePaymentMethod(
         stripePaymentMethodId: String,
-        attached: Boolean = true,
+        attached: Boolean? = null,
     ): ApiResult<ApiPaymentMethodResponse>
 }
 
@@ -757,7 +757,7 @@ private class DefaultIokiService(private val iokiApi: IokiApi, private val inter
 
     override suspend fun createPaymentMethodFromStripePaymentMethod(
         stripePaymentMethodId: String,
-        attached: Boolean,
+        attached: Boolean?,
     ): ApiResult<ApiPaymentMethodResponse> = apiCall<ApiBody<ApiPaymentMethodResponse>, ApiPaymentMethodResponse> {
         val data = ApiPaymentMethodCreationRequest(
             paymentMethodType = "stripe",
