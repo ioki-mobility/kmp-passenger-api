@@ -311,6 +311,7 @@ public interface StripeService {
 
     public suspend fun createPaymentMethodFromStripePaymentMethod(
         stripePaymentMethodId: String,
+        attached: Boolean? = null,
     ): ApiResult<ApiPaymentMethodResponse>
 }
 
@@ -756,10 +757,12 @@ private class DefaultIokiService(private val iokiApi: IokiApi, private val inter
 
     override suspend fun createPaymentMethodFromStripePaymentMethod(
         stripePaymentMethodId: String,
+        attached: Boolean?,
     ): ApiResult<ApiPaymentMethodResponse> = apiCall<ApiBody<ApiPaymentMethodResponse>, ApiPaymentMethodResponse> {
         val data = ApiPaymentMethodCreationRequest(
-            "stripe",
-            ApiPaymentMethodCreationRequest.Details(
+            paymentMethodType = "stripe",
+            attached = attached,
+            details = ApiPaymentMethodCreationRequest.Details(
                 stripePaymentMethodId = stripePaymentMethodId,
                 null,
                 null,
@@ -773,8 +776,9 @@ private class DefaultIokiService(private val iokiApi: IokiApi, private val inter
         paypalSecureElement: String,
     ): ApiResult<ApiPaymentMethodResponse> = apiCall<ApiBody<ApiPaymentMethodResponse>, ApiPaymentMethodResponse> {
         val data = ApiPaymentMethodCreationRequest(
-            "logpay",
-            ApiPaymentMethodCreationRequest.Details(
+            paymentMethodType = "logpay",
+            attached = true,
+            details = ApiPaymentMethodCreationRequest.Details(
                 braintreeNonce = braintreeNonce,
                 paypalSecureElement = paypalSecureElement,
                 stripePaymentMethodId = null,

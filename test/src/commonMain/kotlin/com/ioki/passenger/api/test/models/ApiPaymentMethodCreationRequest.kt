@@ -4,9 +4,11 @@ import com.ioki.passenger.api.models.ApiPaymentMethodCreationRequest
 
 public fun createApiPaymentMethodCreationRequest(
     paymentMethodType: String = "",
+    attached: Boolean? = null,
     details: ApiPaymentMethodCreationRequest.Details = createApiPaymentMethodCreationRequestDetails(),
 ): ApiPaymentMethodCreationRequest = ApiPaymentMethodCreationRequest(
     paymentMethodType = paymentMethodType,
+    attached = attached,
     details = details,
 )
 

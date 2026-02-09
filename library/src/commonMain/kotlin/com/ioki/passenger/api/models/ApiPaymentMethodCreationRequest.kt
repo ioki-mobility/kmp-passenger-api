@@ -6,6 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 public data class ApiPaymentMethodCreationRequest(
     @SerialName(value = "payment_method_type") val paymentMethodType: String,
+    val attached: Boolean?,
     val details: Details,
 ) {
     @Serializable
