@@ -21,16 +21,4 @@ public data class ApiStationResponse(
     val publicTransportTypes: List<ApiPublicTransportType>?,
     @SerialName(value = "transport_connections_url") val publicTransportScheduleUrl: String?,
     @SerialName(value = "visible_on_map") val visibleOnMap: Boolean,
-) : Addressable {
-    override val address: ApiAddress
-        get() =
-            ApiAddress(
-                locationName = locationName,
-                streetName = streetName ?: "",
-                streetNumber = streetNumber ?: "",
-                postalCode = postalCode ?: "",
-                city = city ?: "",
-                county = county ?: "",
-                country = country ?: "",
-            )
-}
+)
