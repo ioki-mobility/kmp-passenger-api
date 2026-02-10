@@ -1,8 +1,3 @@
-@file:OptIn(ExperimentalEncodingApi::class)
-
-import kotlin.io.encoding.Base64
-import kotlin.io.encoding.ExperimentalEncodingApi
-
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
@@ -21,8 +16,10 @@ kotlin {
     jvmToolchain(17)
 
     jvm()
-    androidTarget {
-        publishLibraryVariants("release")
+    androidLibrary {
+        namespace = "com.ioki.passenger.api.test"
+        compileSdk = 34
+        minSdk = 26
     }
     iosX64()
     iosArm64()
@@ -39,17 +36,6 @@ kotlin {
                 api(project(":library"))
             }
         }
-    }
-}
-
-android {
-    namespace = "com.ioki.passenger.api.test"
-    compileSdk = 34
-    defaultConfig {
-        minSdk = 26
-    }
-    buildFeatures {
-        buildConfig = true
     }
 }
 

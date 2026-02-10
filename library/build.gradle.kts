@@ -16,8 +16,17 @@ kotlin {
     jvmToolchain(17)
 
     jvm()
-    androidTarget {
-        publishLibraryVariants("release")
+    androidLibrary {
+        namespace = "com.ioki.passenger.api"
+        compileSdk = 34
+        minSdk = 26
+        withHostTest {}
+        optimization {
+            consumerKeepRules.apply {
+                publish = true
+                file("consumer-rules.pro")
+            }
+        }
     }
     iosX64()
     iosArm64()
@@ -64,21 +73,6 @@ kotlin {
                 implementation(libs.ktor.client.okhttp)
             }
         }
-    }
-}
-
-android {
-    namespace = "com.ioki.passenger.api"
-    compileSdk = 34
-    defaultConfig {
-        minSdk = 26
-    }
-    buildFeatures {
-        buildConfig = true
-    }
-    defaultConfig {
-        val consumerFile = file("consumer-rules.pro")
-        consumerProguardFiles(consumerFile)
     }
 }
 
