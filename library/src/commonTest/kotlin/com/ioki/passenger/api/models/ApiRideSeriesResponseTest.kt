@@ -71,8 +71,8 @@ private val rideResponse =
         cancellable = false,
         needsCancellationCode = true,
         prebooked = true,
-        origin = createApiLocation(50.104692, 8.644062, "Galluswarte"),
-        destination = createApiLocation(50.113695, 8.678996, "Hauptwache"),
+        origin = createApiLocation(lat = 50.104692, lng = 8.644062, formattedAddress = "50.104692, 8.644062"),
+        destination = createApiLocation(lat = 50.113695, lng = 8.678996, formattedAddress = "50.113695, 8.678996"),
         createdAt = Instant.parse("2017-05-15T12:23:41Z"),
         booking = null,
         rating = null,
@@ -138,13 +138,13 @@ private val rideSeriesResponse =
       "prebooked": true,
       "driver_can_be_called": false,
       "origin": {
-        "location_name": "Galluswarte",
+        "formatted_address": "50.104692, 8.644062",
         "lat": 50.104692,
         "lng": 8.644062,
         "display_times": []
       },
       "destination": {
-        "location_name": "Hauptwache",
+        "formatted_address": "50.113695, 8.678996",
         "lat": 50.113695,
         "lng": 8.678996,
         "display_times": []

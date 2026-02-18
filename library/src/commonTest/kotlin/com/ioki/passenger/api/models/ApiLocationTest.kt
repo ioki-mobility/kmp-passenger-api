@@ -1,7 +1,6 @@
 package com.ioki.passenger.api.models
 
 import com.ioki.passenger.api.test.models.createApiLocation
-import io.kotest.matchers.shouldBe
 import kotlin.time.Instant
 import kotlin.test.Test
 
@@ -19,6 +18,7 @@ internal class ApiLocationTest : IokiApiModelTest() {
                 city = "Frankfurt am Main",
                 county = "Hessen",
                 country = "Germany",
+                formattedAddress = "HOLON GmbH, Elsener Straße 95, 33102 Paderborn, Germany",
                 type = "requested_point",
                 time = Instant.parse("2017-09-06T15:13:43Z"),
                 waypointType = "dropoff",
@@ -41,47 +41,10 @@ internal class ApiLocationTest : IokiApiModelTest() {
             createApiLocation(
                 lat = 50.104558,
                 lng = 8.649113,
-                locationName = "DB Office Center",
+                formattedAddress = "50.104558, 8.649113",
             ),
             locationMinimal,
         )
-    }
-
-    @Test
-    fun `location hasDifferentPoint with stationId returns true`() {
-        val location = createApiLocation(stationId = "stationId")
-
-        location.hasDifferentPoint shouldBe true
-    }
-
-    @Test
-    fun `location hasDifferentPoint without stationId without walkingDuration returns false`() {
-        val location = createApiLocation(
-            stationId = null,
-            walkingDuration = null,
-        )
-
-        location.hasDifferentPoint shouldBe false
-    }
-
-    @Test
-    fun `location hasDifferentPoint without stationId with walkingDuration zero returns false`() {
-        val location = createApiLocation(
-            stationId = null,
-            walkingDuration = 0,
-        )
-
-        location.hasDifferentPoint shouldBe false
-    }
-
-    @Test
-    fun `location hasDifferentPoint without stationId with walkingDuration greater zero returns true`() {
-        val location = createApiLocation(
-            stationId = null,
-            walkingDuration = 500,
-        )
-
-        location.hasDifferentPoint shouldBe true
     }
 }
 
@@ -97,6 +60,7 @@ private val location =
   "city": "Frankfurt am Main",
   "county": "Hessen",
   "country": "Germany",
+  "formatted_address": "HOLON GmbH, Elsener Straße 95, 33102 Paderborn, Germany",
   "type": "requested_point",
   "time": "2017-09-06T15:13:43Z",
   "waypoint_type": "dropoff",
@@ -112,7 +76,7 @@ private val locationMinimal =
 {
   "lat": 50.104558,
   "lng": 8.649113,
-  "location_name": "DB Office Center",
+  "formatted_address": "50.104558, 8.649113",
   "display_times": []
 }
 """
