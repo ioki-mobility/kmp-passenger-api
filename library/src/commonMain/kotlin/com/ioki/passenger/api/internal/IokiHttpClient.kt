@@ -1,17 +1,24 @@
 package com.ioki.passenger.api.internal
 
+import com.ioki.passenger.api.AccessTokenProvider
 import com.ioki.passenger.api.RequestHeaders
 import com.ioki.passenger.api.TimeOffsetProvider
+import com.ioki.passenger.api.internal.authorisation.UNAUTHORIZED
 import com.ioki.passenger.api.internal.plugins.AuthorizationPlugin
 import com.ioki.passenger.api.internal.plugins.DateHeaderPlugin
 import com.ioki.passenger.api.internal.plugins.HttpLoggingPlugin
 import com.ioki.passenger.api.internal.utils.createJson
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.HttpTimeout
+import io.ktor.client.plugins.auth.Auth
+import io.ktor.client.plugins.auth.providers.BearerAuthProvider
+import io.ktor.client.plugins.auth.providers.BearerTokens
+import io.ktor.client.plugins.auth.providers.bearer
 import io.ktor.client.plugins.cache.HttpCache
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.headers
+import io.ktor.http.headers
 import io.ktor.serialization.kotlinx.json.json
 
 private const val TIMEOUT_MILLISECONDS = 20 * 1000L
@@ -26,7 +33,9 @@ internal fun IokiHttpClient(
     timeOffsetProvider: TimeOffsetProvider,
     logging: Logging?,
     cachingEnabled: Boolean,
-): IokiHttpClient = httpClient().config {
+    accessTokenProvider: AccessTokenProvider,
+    httpClient: HttpClient = httpClient(),
+): IokiHttpClient = httpClient.config {
     install(ContentNegotiation) {
         json(createJson())
     }
@@ -35,10 +44,22 @@ internal fun IokiHttpClient(
         connectTimeoutMillis = TIMEOUT_MILLISECONDS
         socketTimeoutMillis = TIMEOUT_MILLISECONDS
     }
-    install(AuthorizationPlugin)
     install(DateHeaderPlugin) {
         offsetProvider = timeOffsetProvider
     }
+    install(Auth) {
+        providers.add(
+            BearerAuthProvider(
+
+            )
+        )
+        bearer {
+            loadTokens {
+                BearerTokens(accessTokenProvider.accessToken ?: UNAUTHORIZED, null)
+            }
+        }
+    }
+    install(AuthorizationPlugin)
 
     if (cachingEnabled) {
         install(HttpCache)

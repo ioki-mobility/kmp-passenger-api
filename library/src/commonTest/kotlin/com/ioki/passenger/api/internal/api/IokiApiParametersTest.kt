@@ -1,7 +1,6 @@
 package com.ioki.passenger.api.internal.api
 
 import com.ioki.passenger.api.FakeHttpClient
-import com.ioki.passenger.api.internal.authorisation.AuthHeaderProvider
 import com.ioki.passenger.api.models.ApiPurchasableType
 import com.ioki.passenger.api.models.ApiPurchaseFilter
 import com.ioki.passenger.api.models.ApiPurchaseState
@@ -181,12 +180,7 @@ class IokiApiParametersTest {
 
     private suspend fun setupParameterTest(apiCallToTest: suspend (IokiApi) -> HttpResponse): Parameters {
         val client = FakeHttpClient(HttpStatusCode.OK, ByteReadChannel.Empty)
-        val api = IokiApi(
-            client,
-            object : AuthHeaderProvider {
-                override fun provide(): String = "Doesn't matter"
-            },
-        )
+        val api = IokiApi(client)
 
         apiCallToTest(api)
 
