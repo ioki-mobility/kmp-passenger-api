@@ -23,7 +23,6 @@ class IokiServiceTest {
     fun `getUser returns user successfully`() = runTest {
         val httpResult = ByteReadChannel(text = authenticatedUser)
         val iokiService = IokiService(
-            accessTokenProvider = FakeAccessTokenProvider(),
             iokiHttpClient = FakeHttpClient(HttpStatusCode.OK, httpResult),
         )
 
@@ -36,7 +35,6 @@ class IokiServiceTest {
     fun `getUser returns ResultSuccess that I can map and mapFailure`() = runTest {
         val httpResult = ByteReadChannel(text = authenticatedUser)
         val iokiService = IokiService(
-            accessTokenProvider = FakeAccessTokenProvider(),
             iokiHttpClient = FakeHttpClient(HttpStatusCode.OK, httpResult),
         )
 
@@ -58,7 +56,6 @@ class IokiServiceTest {
     fun `getUser returns ResultSuccess`() = runTest {
         val httpResult = ByteReadChannel(text = authenticatedUser)
         val iokiService = IokiService(
-            accessTokenProvider = FakeAccessTokenProvider(),
             iokiHttpClient = FakeHttpClient(HttpStatusCode.OK, httpResult),
         )
 
@@ -76,7 +73,6 @@ class IokiServiceTest {
     fun `getUser returns ResultFailure that I can map and mapFailure`() = runTest {
         val httpResult = ByteReadChannel.Empty
         val iokiService = IokiService(
-            accessTokenProvider = FakeAccessTokenProvider(),
             iokiHttpClient = FakeHttpClient(HttpStatusCode.Unauthorized, httpResult),
         )
 
@@ -98,7 +94,6 @@ class IokiServiceTest {
     fun `getUser throws HttpTimeoutException`() = runTest {
         val httpResult = ByteReadChannel.Empty
         val iokiService = IokiService(
-            accessTokenProvider = FakeAccessTokenProvider(),
             iokiHttpClient = FakeHttpClient(
                 statusCode = HttpStatusCode.ServiceUnavailable,
                 content = httpResult,
@@ -111,8 +106,6 @@ class IokiServiceTest {
         user.shouldBeInstanceOf<Result.Failure<Error.Connectivity>>()
     }
 }
-
-private class FakeAccessTokenProvider(override var accessToken: String? = "") : AccessTokenProvider
 
 private val authenticatedUser = """
 {
