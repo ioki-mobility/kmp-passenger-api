@@ -1,6 +1,7 @@
 package com.ioki.passenger.api.models
 
 import com.ioki.passenger.api.models.ApiPaymentMethodResponse.Summary.Kind
+import com.ioki.passenger.api.models.ApiPaymentMethodResponse.Summary.Wallet
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -18,6 +19,7 @@ public data class ApiPaymentMethodResponse(
     @Serializable
     public data class Summary(
         val kind: Kind = Kind.UNSUPPORTED,
+        val wallet: Wallet?,
         val title: String,
         val expiration: String?,
         @SerialName(value = "mandate_url")
@@ -45,6 +47,14 @@ public data class ApiPaymentMethodResponse(
 
             @SerialName(value = "external_payment")
             EXTERNAL_PAYMENT,
+
+            UNSUPPORTED,
+        }
+
+        @Serializable(with = ApiPaymentMethodResponseWalletSerializer::class)
+        public enum class Wallet {
+            @SerialName(value = "google_pay")
+            GOOGLE_PAY,
 
             UNSUPPORTED,
         }
@@ -78,5 +88,23 @@ internal object ApiPaymentMethodResponseKindSerializer : KSerializer<Kind> {
         "pos_payment" -> Kind.POS_PAYMENT
         "external_payment" -> Kind.EXTERNAL_PAYMENT
         else -> Kind.UNSUPPORTED
+    }
+}
+
+internal object ApiPaymentMethodResponseWalletSerializer : KSerializer<Wallet> {
+    override val descriptor = String.serializer().descriptor
+
+    override fun serialize(encoder: Encoder, value: Wallet) {
+        encoder.encodeString(
+            when (value) {
+                Wallet.GOOGLE_PAY -> "google_pay"
+                Wallet.UNSUPPORTED -> "unsupported"
+            },
+        )
+    }
+
+    override fun deserialize(decoder: Decoder): Wallet = when (decoder.decodeString()) {
+        "google_pay" -> Wallet.GOOGLE_PAY
+        else -> Wallet.UNSUPPORTED
     }
 }

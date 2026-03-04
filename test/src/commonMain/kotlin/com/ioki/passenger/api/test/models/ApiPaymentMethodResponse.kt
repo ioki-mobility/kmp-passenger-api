@@ -15,11 +15,13 @@ public fun createApiPaymentMethodResponse(
 
 public fun createApiPaymentMethodResponseSummary(
     kind: ApiPaymentMethodResponse.Summary.Kind = ApiPaymentMethodResponse.Summary.Kind.UNSUPPORTED,
+    wallet: ApiPaymentMethodResponse.Summary.Wallet? = null,
     title: String = "",
     expiration: String? = null,
     mandateUrl: String? = null,
 ): ApiPaymentMethodResponse.Summary = ApiPaymentMethodResponse.Summary(
     kind = kind,
+    wallet = wallet,
     title = title,
     expiration = expiration,
     mandateUrl = mandateUrl,
