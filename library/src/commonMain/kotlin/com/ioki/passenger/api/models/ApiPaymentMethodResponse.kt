@@ -56,6 +56,9 @@ public data class ApiPaymentMethodResponse(
             @SerialName(value = "google_pay")
             GOOGLE_PAY,
 
+            @SerialName(value = "apple_pay")
+            APPLE_PAY,
+
             UNSUPPORTED,
         }
     }
@@ -98,6 +101,7 @@ internal object ApiPaymentMethodResponseWalletSerializer : KSerializer<Wallet> {
         encoder.encodeString(
             when (value) {
                 Wallet.GOOGLE_PAY -> "google_pay"
+                Wallet.APPLE_PAY -> "apple_pay"
                 Wallet.UNSUPPORTED -> "unsupported"
             },
         )
@@ -105,6 +109,7 @@ internal object ApiPaymentMethodResponseWalletSerializer : KSerializer<Wallet> {
 
     override fun deserialize(decoder: Decoder): Wallet = when (decoder.decodeString()) {
         "google_pay" -> Wallet.GOOGLE_PAY
+        "apple_pay" -> Wallet.APPLE_PAY
         else -> Wallet.UNSUPPORTED
     }
 }
