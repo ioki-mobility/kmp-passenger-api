@@ -21,6 +21,8 @@ public data class ApiPaymentMethodResponse(
         val kind: Kind = Kind.UNSUPPORTED,
         val wallet: Wallet?,
         val title: String,
+        val brand: String?,
+        val last4: String?,
         val expiration: String?,
         @SerialName(value = "mandate_url")
         val mandateUrl: String?,
