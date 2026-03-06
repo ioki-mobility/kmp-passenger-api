@@ -20,8 +20,8 @@ internal class ApiPaymentMethodResponseTest : IokiApiModelTest() {
                 summary = ApiPaymentMethodResponse.Summary(
                     kind = ApiPaymentMethodResponse.Summary.Kind.CREDIT_CARD,
                     wallet = ApiPaymentMethodResponse.Summary.Wallet.GOOGLE_PAY,
+                    brand = ApiPaymentMethodResponse.Summary.Brand.VISA,
                     title = "Visa (*1234)",
-                    brand = "Visa",
                     last4 = "1234",
                     expiration = "11/20",
                     mandateUrl = null,
@@ -47,7 +47,7 @@ private val paymentMethod =
   "summary": {
         "kind": "card",
         "wallet": "google_pay",
-        "brand": "Visa",
+        "brand": "visa",
         "last4": "1234",
         "title": "Visa (*1234)",
         "expiration": "11/20"

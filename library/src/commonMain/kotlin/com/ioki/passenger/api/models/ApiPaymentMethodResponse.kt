@@ -1,5 +1,6 @@
 package com.ioki.passenger.api.models
 
+import com.ioki.passenger.api.models.ApiPaymentMethodResponse.Summary.Brand
 import com.ioki.passenger.api.models.ApiPaymentMethodResponse.Summary.Kind
 import com.ioki.passenger.api.models.ApiPaymentMethodResponse.Summary.Wallet
 import kotlinx.serialization.KSerializer
@@ -20,8 +21,8 @@ public data class ApiPaymentMethodResponse(
     public data class Summary(
         val kind: Kind = Kind.UNSUPPORTED,
         val wallet: Wallet?,
+        val brand: Brand?,
         val title: String,
-        val brand: String?,
         val last4: String?,
         val expiration: String?,
         @SerialName(value = "mandate_url")
@@ -60,6 +61,35 @@ public data class ApiPaymentMethodResponse(
 
             @SerialName(value = "apple_pay")
             APPLE_PAY,
+
+            UNSUPPORTED,
+        }
+
+        @Serializable(with = ApiPaymentMethodResponseBrandSerializer::class)
+        public enum class Brand {
+            @SerialName(value = "visa")
+            VISA,
+
+            @SerialName(value = "mastercard")
+            MASTERCARD,
+
+            @SerialName(value = "amex")
+            AMEX,
+
+            @SerialName(value = "cartes_bancaires")
+            CARTES_BANCAIRES,
+
+            @SerialName(value = "diners_club")
+            DINERS_CLUB,
+
+            @SerialName(value = "discover")
+            DISCOVER,
+
+            @SerialName(value = "jcb")
+            JCB,
+
+            @SerialName(value = "unionpay")
+            UNIONPAY,
 
             UNSUPPORTED,
         }
@@ -113,5 +143,37 @@ internal object ApiPaymentMethodResponseWalletSerializer : KSerializer<Wallet> {
         "google_pay" -> Wallet.GOOGLE_PAY
         "apple_pay" -> Wallet.APPLE_PAY
         else -> Wallet.UNSUPPORTED
+    }
+}
+
+internal object ApiPaymentMethodResponseBrandSerializer : KSerializer<Brand> {
+    override val descriptor = String.serializer().descriptor
+
+    override fun serialize(encoder: Encoder, value: Brand) {
+        encoder.encodeString(
+            when (value) {
+                Brand.VISA -> "visa"
+                Brand.MASTERCARD -> "mastercard"
+                Brand.AMEX -> "amex"
+                Brand.CARTES_BANCAIRES -> "cartes_bancaires"
+                Brand.DINERS_CLUB -> "diners_club"
+                Brand.DISCOVER -> "discover"
+                Brand.JCB -> "jcb"
+                Brand.UNIONPAY -> "unionpay"
+                Brand.UNSUPPORTED -> "unsupported"
+            },
+        )
+    }
+
+    override fun deserialize(decoder: Decoder): Brand = when (decoder.decodeString()) {
+        "visa" -> Brand.VISA
+        "mastercard" -> Brand.MASTERCARD
+        "amex" -> Brand.AMEX
+        "cartes_bancaires" -> Brand.CARTES_BANCAIRES
+        "diners_club" -> Brand.DINERS_CLUB
+        "discover" -> Brand.DISCOVER
+        "jcb" -> Brand.JCB
+        "unionpay" -> Brand.UNIONPAY
+        else -> Brand.UNSUPPORTED
     }
 }

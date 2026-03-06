@@ -16,8 +16,8 @@ public fun createApiPaymentMethodResponse(
 public fun createApiPaymentMethodResponseSummary(
     kind: ApiPaymentMethodResponse.Summary.Kind = ApiPaymentMethodResponse.Summary.Kind.UNSUPPORTED,
     wallet: ApiPaymentMethodResponse.Summary.Wallet? = null,
+    brand: ApiPaymentMethodResponse.Summary.Brand? = null,
     title: String = "",
-    brand: String? = null,
     last4: String? = null,
     expiration: String? = null,
     mandateUrl: String? = null,
