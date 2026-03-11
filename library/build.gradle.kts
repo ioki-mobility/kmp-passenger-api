@@ -44,6 +44,7 @@ kotlin {
                 implementation(libs.ktor.core)
                 implementation(libs.ktor.serialization)
                 implementation(libs.ktor.client.negotiation)
+                implementation(libs.ktor.client.auth)
 
                 api(libs.kotlinx.datetime)
                 api(libs.result)

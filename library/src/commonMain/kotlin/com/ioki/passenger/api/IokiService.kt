@@ -3,7 +3,6 @@ package com.ioki.passenger.api
 import com.ioki.passenger.api.internal.IokiHttpClient
 import com.ioki.passenger.api.internal.Logging
 import com.ioki.passenger.api.internal.api.IokiApi
-import com.ioki.passenger.api.internal.authorisation.createAuthHeaderProvider
 import com.ioki.passenger.api.internal.utils.isConnectivityError
 import com.ioki.passenger.api.models.ApiAuthenticatedUserResponse
 import com.ioki.passenger.api.models.ApiBody
@@ -109,25 +108,27 @@ public fun IokiService(
     timeOffsetProvider: TimeOffsetProvider = NoopTimeOffsetProvider,
     logging: Logging? = null,
     cachingEnabled: Boolean = true,
-): IokiService {
-    val httpClient = IokiHttpClient(baseUrl, requestHeaders, timeOffsetProvider, logging, cachingEnabled)
-    return IokiService(
+): IokiService = IokiService(
+    iokiHttpClient = IokiHttpClient(
+        baseUrl = baseUrl,
+        requestHeaders = requestHeaders,
+        timeOffsetProvider = timeOffsetProvider,
+        logging = logging,
+        cachingEnabled = cachingEnabled,
         accessTokenProvider = accessTokenProvider,
-        iokiHttpClient = httpClient,
-        interceptors = interceptors,
-    )
-}
+    ),
+    interceptors = interceptors,
+)
 
 /**
  * Visible 'internal' for testing only.
  * Here, we can inject a custom IokiHttpClient.
  */
 internal fun IokiService(
-    accessTokenProvider: AccessTokenProvider,
     iokiHttpClient: IokiHttpClient,
     interceptors: Set<ApiErrorInterceptor> = setOf(),
 ): IokiService = DefaultIokiService(
-    iokiApi = IokiApi(iokiHttpClient, createAuthHeaderProvider(accessTokenProvider)),
+    iokiApi = IokiApi(iokiHttpClient),
     interceptors = interceptors,
 )
 
