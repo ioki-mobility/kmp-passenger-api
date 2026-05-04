@@ -100,6 +100,7 @@ import io.ktor.client.network.sockets.SocketTimeoutException
 import io.ktor.client.plugins.HttpRequestTimeoutException
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.isSuccess
+import io.ktor.utils.io.ClosedByteChannelException
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.time.Instant
 
@@ -973,4 +974,5 @@ private val Exception.isConnectivityError
     get() =
         this is SocketTimeoutException ||
             this is HttpRequestTimeoutException ||
+            this is ClosedByteChannelException ||
             this.isPlatformConnectivityError
