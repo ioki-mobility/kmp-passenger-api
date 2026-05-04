@@ -4,7 +4,7 @@ import com.ioki.passenger.api.internal.IokiHttpClient
 import com.ioki.passenger.api.internal.Logging
 import com.ioki.passenger.api.internal.api.IokiApi
 import com.ioki.passenger.api.internal.authorisation.createAuthHeaderProvider
-import com.ioki.passenger.api.internal.utils.isConnectivityError
+import com.ioki.passenger.api.internal.utils.isPlatformConnectivityError
 import com.ioki.passenger.api.models.ApiAuthenticatedUserResponse
 import com.ioki.passenger.api.models.ApiBody
 import com.ioki.passenger.api.models.ApiBookingRequest
@@ -96,6 +96,8 @@ import com.ioki.passenger.api.result.HttpStatusCode
 import com.ioki.passenger.api.result.SuccessData
 import com.ioki.result.Result
 import io.ktor.client.call.body
+import io.ktor.client.network.sockets.SocketTimeoutException
+import io.ktor.client.plugins.HttpRequestTimeoutException
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.isSuccess
 import kotlin.coroutines.cancellation.CancellationException
@@ -966,3 +968,9 @@ internal suspend fun mapApiError(
 
     return Result.Failure(Error.Api.Generic(apiErrors, code))
 }
+
+private val Exception.isConnectivityError
+    get() =
+        this is SocketTimeoutException ||
+            this is HttpRequestTimeoutException ||
+            this.isPlatformConnectivityError
