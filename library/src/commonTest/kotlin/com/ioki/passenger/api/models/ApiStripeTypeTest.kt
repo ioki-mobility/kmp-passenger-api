@@ -25,6 +25,7 @@ internal class ApiStripeTypeTest {
             fun data(): Collection<Array<Any>> = listOf(
                 arrayOf(ApiStripeType.CARD, "\"card\""),
                 arrayOf(ApiStripeType.SEPA_DEBIT, "\"sepa_debit\""),
+                arrayOf(ApiStripeType.GOOGLE_PAY, "\"google_pay\""),
                 arrayOf(ApiStripeType.UNSUPPORTED, "\"UNSUPPORTED\""),
             )
         }
