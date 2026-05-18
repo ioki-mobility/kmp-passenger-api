@@ -6,7 +6,11 @@ internal class ApiPhoneVerificationRequestTest : IokiApiModelTest() {
     @Test
     fun serialization() {
         testJsonStringCanBeConvertedToModel(
-            ApiPhoneVerificationRequest("+491601234567", null),
+            ApiPhoneVerificationRequest(
+                claim = "+491601234567",
+                channel = ApiVerificationChannelType.SMS,
+                usDataTransferAccepted = null,
+            ),
             verification,
         )
     }
@@ -15,6 +19,7 @@ internal class ApiPhoneVerificationRequestTest : IokiApiModelTest() {
 private val verification =
     """
 {
-  "phone_number": "+491601234567"
+  "claim": "+491601234567",
+  "channel": "sms"
 }
 """

@@ -14,4 +14,10 @@ public data class ApiClientInfoResponse(
     @SerialName(value = "support_website_url") val supportWebsiteUrl: String?,
     @SerialName(value = "support_phone_number") val supportPhoneNumber: String?,
     @SerialName(value = "sms_support_number") val smsPhoneNumber: String?,
+    @SerialName(value = "preferred_verification_channel")
+    val preferredVerificationChannel: ApiVerificationChannelType?,
+    @SerialName(value = "signin_verification_channels")
+    val signInVerificationChannels: List<ApiVerificationChannelType>,
+    @SerialName(value = "signup_verification_channels")
+    val signUpVerificationChannels: List<ApiVerificationChannelType>,
 )

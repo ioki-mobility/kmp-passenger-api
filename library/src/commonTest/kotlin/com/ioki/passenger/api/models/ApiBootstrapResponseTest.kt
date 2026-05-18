@@ -64,7 +64,9 @@ private val bootstrap =
     "distribution_url": "url",
     "terms_of_service_url": "https://example.com/terms_of_service.html",
     "privacy_policy_url": "https://example.com/privacy_policy.html",
-    "imprint_url": "https://example.com/imprint_url.html"
+    "imprint_url": "https://example.com/imprint_url.html",
+    "signin_verification_channels": [],
+    "signup_verification_channels": []
   },
   "rides_with_failed_payments": [],
   "renewable_ticketing_vouchers": [],

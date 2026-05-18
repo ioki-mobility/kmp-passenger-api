@@ -16,6 +16,12 @@ internal class ApiClientInfoResponseTest : IokiApiModelTest() {
                 supportWebsiteUrl = "https://example.com/support_url.html",
                 supportPhoneNumber = "+16465550192",
                 smsPhoneNumber = "+16465550199",
+                preferredVerificationChannel = ApiVerificationChannelType.EMAIL,
+                signInVerificationChannels = listOf(ApiVerificationChannelType.SMS),
+                signUpVerificationChannels = listOf(
+                    ApiVerificationChannelType.SMS,
+                    ApiVerificationChannelType.EMAIL,
+                ),
             ),
             clientInfo,
         )
@@ -34,6 +40,9 @@ internal class ApiClientInfoResponseTest : IokiApiModelTest() {
                 supportWebsiteUrl = null,
                 smsPhoneNumber = null,
                 supportPhoneNumber = null,
+                preferredVerificationChannel = null,
+                signInVerificationChannels = emptyList(),
+                signUpVerificationChannels = emptyList(),
             ),
             clientInfoMinimal,
         )
@@ -51,7 +60,10 @@ private val clientInfo =
     "support_email": "support@example.com",
     "support_website_url": "https://example.com/support_url.html",
     "support_phone_number": "+16465550192",
-    "sms_support_number": "+16465550199"
+    "sms_support_number": "+16465550199",
+    "preferred_verification_channel": "email",
+    "signin_verification_channels": ["sms"],
+    "signup_verification_channels": ["sms", "email"]
 }
 """
 
@@ -61,6 +73,8 @@ private val clientInfoMinimal =
     "distribution_url": "https://play.google.com/our-app",
     "terms_of_service_url": "https://example.com/terms_of_service.html",
     "privacy_policy_url": "https://example.com/privacy_policy.html",
-    "imprint_url": "https://example.com/imprint_url.html"
+    "imprint_url": "https://example.com/imprint_url.html",
+    "signin_verification_channels": [],
+    "signup_verification_channels": []
 }
 """
