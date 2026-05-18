@@ -2,6 +2,7 @@ package com.ioki.passenger.api
 
 import com.ioki.passenger.api.models.ApiBody
 import com.ioki.passenger.api.models.ApiClientInfoResponse
+import com.ioki.passenger.api.models.ApiVerificationChannelType
 import com.ioki.passenger.api.result.SuccessData
 import com.ioki.result.Result
 import io.kotest.assertions.throwables.shouldThrow
@@ -20,11 +21,16 @@ class MapSuccessTest {
         termsOfServiceUrl = "https://example.com/terms",
         privacyPolicyUrl = "https://example.com/privacy",
         imprintUrl = "https://example.com/imprint",
+        phoneNumberRequired = true,
+        emailAddressRequired = false,
         helpUrl = "https://example.com/help",
         supportEmail = "support@example.com",
         supportWebsiteUrl = "https://example.com/support",
         supportPhoneNumber = "+1234567890",
         smsPhoneNumber = "+0987654321",
+        preferredVerificationChannel = ApiVerificationChannelType.EMAIL,
+        signInVerificationChannels = listOf(ApiVerificationChannelType.SMS),
+        signUpVerificationChannels = listOf(ApiVerificationChannelType.SMS, ApiVerificationChannelType.EMAIL),
     )
 
     @Test
@@ -37,11 +43,16 @@ class MapSuccessTest {
                     "terms_of_service_url": "https://example.com/terms",
                     "privacy_policy_url": "https://example.com/privacy",
                     "imprint_url": "https://example.com/imprint",
+                    "phone_number_required": true,
+                    "email_address_required": false,
                     "help_url": "https://example.com/help",
                     "support_email": "support@example.com",
                     "support_website_url": "https://example.com/support",
                     "support_phone_number": "+1234567890",
-                    "sms_support_number": "+0987654321"
+                    "sms_support_number": "+0987654321",
+                    "preferred_verification_channel": "email",
+                    "signin_verification_channels": ["sms"],
+                    "signup_verification_channels": ["sms", "email"]
                   },
                   "meta": {
                     "page": 1,
@@ -66,14 +77,19 @@ class MapSuccessTest {
             text = """
                 {
                   "distribution_url": "https://example.com/distribution",
-                   "terms_of_service_url": "https://example.com/terms",
-                   "privacy_policy_url": "https://example.com/privacy",
-                   "imprint_url": "https://example.com/imprint",
-                   "help_url": "https://example.com/help",
-                   "support_email": "support@example.com",
-                   "support_website_url": "https://example.com/support",
-                   "support_phone_number": "+1234567890",
-                   "sms_support_number": "+0987654321"
+                  "terms_of_service_url": "https://example.com/terms",
+                  "privacy_policy_url": "https://example.com/privacy",
+                  "imprint_url": "https://example.com/imprint",
+                  "phone_number_required": true,
+                  "email_address_required": false,
+                  "help_url": "https://example.com/help",
+                  "support_email": "support@example.com",
+                  "support_website_url": "https://example.com/support",
+                  "support_phone_number": "+1234567890",
+                  "sms_support_number": "+0987654321",
+                  "preferred_verification_channel": "email",
+                  "signin_verification_channels": ["sms"],
+                  "signup_verification_channels": ["sms", "email"]
                 }
             """.trimIndent(),
         )

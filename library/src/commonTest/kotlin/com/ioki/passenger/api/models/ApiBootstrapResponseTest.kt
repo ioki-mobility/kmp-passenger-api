@@ -20,6 +20,8 @@ internal class ApiBootstrapResponseTest : IokiApiModelTest() {
                     termsOfServiceUrl = "https://example.com/terms_of_service.html",
                     privacyPolicyUrl = "https://example.com/privacy_policy.html",
                     imprintUrl = "https://example.com/imprint_url.html",
+                    phoneNumberRequired = false,
+                    emailAddressRequired = false,
                 ),
                 products = emptyList(),
                 ridesWithFailedPayments = emptyList(),
@@ -64,7 +66,11 @@ private val bootstrap =
     "distribution_url": "url",
     "terms_of_service_url": "https://example.com/terms_of_service.html",
     "privacy_policy_url": "https://example.com/privacy_policy.html",
-    "imprint_url": "https://example.com/imprint_url.html"
+    "imprint_url": "https://example.com/imprint_url.html",
+    "phone_number_required": false,
+    "email_address_required": false,
+    "signin_verification_channels": [],
+    "signup_verification_channels": []
   },
   "rides_with_failed_payments": [],
   "renewable_ticketing_vouchers": [],
