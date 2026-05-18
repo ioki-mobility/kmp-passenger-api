@@ -73,19 +73,22 @@ val iokiService: IokiService = IokiService(
 
 After that, you can communicate with it to make API calls:
 ```kotlin
-val phoneNumber = ""
-val request = ApiPhoneVerificationRequest(phoneNumber, null)
-val phoneVerificationResult = iokiService.requestPhoneVerification(request)
+val request = ApiVerificationRequest(
+    claim = "+491601234567",
+    channel = ApiVerificationChannelType.SMS,
+    usDataTransferAccepted = null,
+)
+val verificationResult = iokiService.requestVerification(request)
 ```
 
 The results of the API calls are wrapped into an [`ApiResult`](library/src/commonMain/kotlin/com/ioki/passenger/api/result/Result.kt) class.
 Which is just a small wrapper around [`ioki-mobility/Result`](https://github.com/ioki-mobility/Result).
 A basic usage could look like this:
 ```kotlin
-when(phoneVerificationResult) {
-    is Result.Success -> { /* Do somehing with the success ${phoneVerificationResult.value} */ }
+when(verificationResult) {
+    is Result.Success -> { /* Do somehing with the success ${verificationResult.value} */ }
     is Result.Error -> {
-        // Do somehing with the error ${phoneVerificationResult.error}.
+        // Do somehing with the error ${verificationResult.error}.
         // This error is one of the sub types `Api`, `Generic`, and `Connectivity`
     }
 }

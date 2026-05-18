@@ -45,8 +45,6 @@ import com.ioki.passenger.api.models.ApiPaypalClientTokenResponse
 import com.ioki.passenger.api.models.ApiPersonalDiscountPurchaseRequest
 import com.ioki.passenger.api.models.ApiPersonalDiscountResponse
 import com.ioki.passenger.api.models.ApiPersonalDiscountTypeResponse
-import com.ioki.passenger.api.models.ApiPhoneVerificationRequest
-import com.ioki.passenger.api.models.ApiPhoneVerificationResponse
 import com.ioki.passenger.api.models.ApiProviderNotificationSettingsResponse
 import com.ioki.passenger.api.models.ApiPurchaseFilter
 import com.ioki.passenger.api.models.ApiPurchaseResponse
@@ -90,6 +88,8 @@ import com.ioki.passenger.api.models.ApiUserFlagsRequest
 import com.ioki.passenger.api.models.ApiUserNotificationSettingsResponse
 import com.ioki.passenger.api.models.ApiUserTicketingVouchersFilter
 import com.ioki.passenger.api.models.ApiVenueResponse
+import com.ioki.passenger.api.models.ApiVerificationRequest
+import com.ioki.passenger.api.models.ApiVerificationResponse
 import com.ioki.passenger.api.result.ApiResult
 import com.ioki.passenger.api.result.Error
 import com.ioki.passenger.api.result.HttpStatusCode
@@ -137,7 +137,7 @@ internal fun IokiService(
 public interface IokiService :
     BootstrapService,
     ClientService,
-    PhoneVerificationService,
+    VerificationService,
     FirebaseService,
     UserService,
     MarketingService,
@@ -159,14 +159,12 @@ public interface IokiService :
     VenuesService,
     GeocodingService
 
-public interface PhoneVerificationService {
+public interface VerificationService {
     public suspend fun solveCaptcha(captchaId: String, captchaRequest: ApiCaptchaRequest): ApiResult<Unit>
 
     public suspend fun solveClientChallenge(id: String, request: ApiClientChallengeRequest): ApiResult<Unit>
 
-    public suspend fun requestPhoneVerification(
-        verification: ApiPhoneVerificationRequest,
-    ): ApiResult<ApiPhoneVerificationResponse>
+    public suspend fun requestVerification(verification: ApiVerificationRequest): ApiResult<ApiVerificationResponse>
 }
 
 public interface FirebaseService {
@@ -427,11 +425,9 @@ public interface GeocodingService {
 
 private class DefaultIokiService(private val iokiApi: IokiApi, private val interceptors: Set<ApiErrorInterceptor>) :
     IokiService {
-    override suspend fun requestPhoneVerification(
-        verification: ApiPhoneVerificationRequest,
-    ): ApiResult<ApiPhoneVerificationResponse> =
-        apiCall<ApiBody<ApiPhoneVerificationResponse>, ApiPhoneVerificationResponse> {
-            requestPhoneVerification(ApiBody(verification))
+    override suspend fun requestVerification(verification: ApiVerificationRequest): ApiResult<ApiVerificationResponse> =
+        apiCall<ApiBody<ApiVerificationResponse>, ApiVerificationResponse> {
+            requestVerification(ApiBody(verification))
         }
 
     override suspend fun requestApiToken(request: ApiRequestTokenRequest): ApiResult<ApiRequestTokenResponse> =

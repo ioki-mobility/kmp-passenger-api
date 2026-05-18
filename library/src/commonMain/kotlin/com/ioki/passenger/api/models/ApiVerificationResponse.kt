@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class ApiPhoneVerificationResponse(
+public data class ApiVerificationResponse(
     @SerialName(value = "phone_number") val phoneNumber: String,
     val captcha: Captcha?,
     @SerialName(value = "client_challenge") val clientChallenge: ClientChallenge?,
