@@ -73,8 +73,11 @@ val iokiService: IokiService = IokiService(
 
 After that, you can communicate with it to make API calls:
 ```kotlin
-val phoneNumber = ""
-val request = ApiPhoneVerificationRequest(phoneNumber, null)
+val request = ApiPhoneVerificationRequest(
+    claim = "+491601234567",
+    channel = ApiVerificationChannelType.SMS,
+    usDataTransferAccepted = null,
+)
 val phoneVerificationResult = iokiService.requestPhoneVerification(request)
 ```
 

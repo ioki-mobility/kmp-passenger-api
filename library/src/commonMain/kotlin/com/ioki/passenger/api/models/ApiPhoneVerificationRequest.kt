@@ -5,6 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 public data class ApiPhoneVerificationRequest(
-    @SerialName(value = "phone_number") val phoneNumber: String,
+    val claim: String,
+    val channel: ApiVerificationChannelType,
     @SerialName(value = "us_data_transfer_accepted") val usDataTransferAccepted: Boolean?,
 )
