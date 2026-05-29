@@ -167,6 +167,7 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                                 details = null,
                             ),
                         ),
+                        solutionType = ApiOfferedSolution.SolutionType.DRT,
                     ),
                 ),
                 bookedSolution = ApiOfferedSolution(
@@ -208,6 +209,7 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                             details = null,
                         ),
                     ),
+                    solutionType = ApiOfferedSolution.SolutionType.DRT,
                 ),
                 passengerNoteToDriver = "This is a note to the driver",
                 showPublicTransportTicketReminder = true,

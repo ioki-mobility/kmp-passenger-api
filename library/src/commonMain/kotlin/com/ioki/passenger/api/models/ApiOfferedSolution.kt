@@ -16,7 +16,20 @@ public data class ApiOfferedSolution(
     val bookable: Boolean,
     val fare: ApiFareResponse?,
     val hops: List<Hop>,
+    @SerialName(value = "solution_type") val solutionType: SolutionType,
 ) {
+    public enum class SolutionType {
+        @SerialName(value = "drt")
+        DRT,
+
+        @SerialName(value = "public_transport")
+        PUBLIC_TRANSPORT,
+
+        @SerialName(value = "intermodal")
+        INTERMODAL,
+        UNSUPPORTED,
+    }
+
     @Serializable
     public data class Hop(
         @SerialName(value = "transport_mode")
