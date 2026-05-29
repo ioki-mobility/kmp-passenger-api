@@ -498,7 +498,7 @@ private val rideResponse =
           }
         }
       ],
-      "solution_type": "drt",
+      "solution_type": "drt"
     }
   ],
   "booked_solution": {
@@ -546,7 +546,7 @@ private val rideResponse =
           }
         }
       ],
-      "solution_type": "drt",
+      "solution_type": "drt"
     },
     "passenger_note_to_driver": "This is a note to the driver",
     "show_pt_ticket_reminder": true,
