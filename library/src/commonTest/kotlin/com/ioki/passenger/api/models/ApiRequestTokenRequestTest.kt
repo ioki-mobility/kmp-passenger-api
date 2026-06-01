@@ -6,7 +6,11 @@ internal class ApiRequestTokenRequestTest : IokiApiModelTest() {
     @Test
     fun serialization() {
         testJsonStringCanBeConvertedToModel(
-            ApiRequestTokenRequest("+491601234567", "123456"),
+            ApiRequestTokenRequest(
+                claim = "+491601234567",
+                channel = ApiVerificationChannelType.SMS,
+                code = "123456",
+            ),
             requestTokenRequest,
         )
     }
@@ -15,7 +19,8 @@ internal class ApiRequestTokenRequestTest : IokiApiModelTest() {
 private val requestTokenRequest =
     """
 {
-  "phone_number": "+491601234567",
+  "claim": "+491601234567",
+  "channel": "sms",
   "code": "123456"
 }
 """
