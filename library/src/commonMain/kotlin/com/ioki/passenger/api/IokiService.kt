@@ -81,7 +81,7 @@ import com.ioki.passenger.api.models.ApiTicketingVoucherResponse
 import com.ioki.passenger.api.models.ApiTipResponse
 import com.ioki.passenger.api.models.ApiUpdatePassengersForRideRequest
 import com.ioki.passenger.api.models.ApiUpdatePaymentMethodForRideRequest
-import com.ioki.passenger.api.models.ApiUpdatePhoneNumberRequest
+import com.ioki.passenger.api.models.ApiUpdateClaimRequest
 import com.ioki.passenger.api.models.ApiUpdateUserNotificationSettingsRequest
 import com.ioki.passenger.api.models.ApiUpdateUserRequest
 import com.ioki.passenger.api.models.ApiUserFlagsRequest
@@ -191,7 +191,7 @@ public interface UserService {
 
     public suspend fun logoutUser(): ApiResult<Unit>
 
-    public suspend fun updatePhoneNumber(request: ApiUpdatePhoneNumberRequest): ApiResult<ApiAuthenticatedUserResponse>
+    public suspend fun updateClaim(request: ApiUpdateClaimRequest): ApiResult<ApiAuthenticatedUserResponse>
 
     public suspend fun updateUserFlags(request: ApiUserFlagsRequest): ApiResult<ApiAuthenticatedUserResponse>
 
@@ -653,11 +653,9 @@ private class DefaultIokiService(private val iokiApi: IokiApi, private val inter
         logoutUser()
     }
 
-    override suspend fun updatePhoneNumber(
-        request: ApiUpdatePhoneNumberRequest,
-    ): ApiResult<ApiAuthenticatedUserResponse> =
+    override suspend fun updateClaim(request: ApiUpdateClaimRequest): ApiResult<ApiAuthenticatedUserResponse> =
         apiCall<ApiBody<ApiAuthenticatedUserResponse>, ApiAuthenticatedUserResponse> {
-            updatePhoneNumber(body = ApiBody(request))
+            updateClaim(body = ApiBody(request))
         }
 
     override suspend fun createLogPayCustomer(request: ApiLogPayAccountRequest): ApiResult<ApiLogPayUrlResponse> =
