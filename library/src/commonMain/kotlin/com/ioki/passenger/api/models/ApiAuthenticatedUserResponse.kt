@@ -12,7 +12,7 @@ public data class ApiAuthenticatedUserResponse(
     override val version: Int,
     @SerialName(value = "phone_number") val phoneNumber: String,
     @SerialName(value = "phone_number_verified") val phoneNumberVerified: Boolean,
-    @SerialName(value = "email_address") val emailAddress: String,
+    @SerialName(value = "email_address") val emailAddress: String?,
     @SerialName(value = "email_address_verified") val emailAddressVerified: Boolean,
     @SerialName(value = "email_address_newsletter") val emailAddressNewsletter: Boolean,
     @SerialName(value = "email_address_receipt") val emailAddressReceipt: Boolean,

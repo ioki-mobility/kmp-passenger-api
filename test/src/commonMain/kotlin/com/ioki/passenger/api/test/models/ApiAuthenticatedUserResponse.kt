@@ -10,7 +10,7 @@ public fun createApiAuthenticatedUserResponse(
     version: Int = 0,
     phoneNumber: String = "",
     phoneNumberVerified: Boolean = false,
-    emailAddress: String = "",
+    emailAddress: String? = null,
     emailAddressVerified: Boolean = false,
     emailAddressNewsletter: Boolean = false,
     emailAddressReceipt: Boolean = false,
