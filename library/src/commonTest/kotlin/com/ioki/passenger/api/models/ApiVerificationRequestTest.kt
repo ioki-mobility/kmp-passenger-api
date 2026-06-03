@@ -2,25 +2,24 @@ package com.ioki.passenger.api.models
 
 import kotlin.test.Test
 
-internal class ApiRequestTokenRequestTest : IokiApiModelTest() {
+internal class ApiVerificationRequestTest : IokiApiModelTest() {
     @Test
     fun serialization() {
         testJsonStringCanBeConvertedToModel(
-            ApiRequestTokenRequest(
+            ApiVerificationRequest(
                 claim = "+491601234567",
                 channel = ApiVerificationChannelType.SMS,
-                code = "123456",
+                usDataTransferAccepted = null,
             ),
-            requestTokenRequest,
+            verification,
         )
     }
 }
 
-private val requestTokenRequest =
+private val verification =
     """
 {
   "claim": "+491601234567",
-  "channel": "sms",
-  "code": "123456"
+  "channel": "sms"
 }
 """

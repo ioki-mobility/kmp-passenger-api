@@ -9,9 +9,17 @@ public data class ApiClientInfoResponse(
     @SerialName(value = "terms_of_service_url") val termsOfServiceUrl: String,
     @SerialName(value = "privacy_policy_url") val privacyPolicyUrl: String,
     @SerialName(value = "imprint_url") val imprintUrl: String,
+    @SerialName(value = "phone_number_required") val phoneNumberRequired: Boolean,
+    @SerialName(value = "email_address_required") val emailAddressRequired: Boolean,
     @SerialName(value = "help_url") val helpUrl: String?,
     @SerialName(value = "support_email") val supportEmail: String?,
     @SerialName(value = "support_website_url") val supportWebsiteUrl: String?,
     @SerialName(value = "support_phone_number") val supportPhoneNumber: String?,
     @SerialName(value = "sms_support_number") val smsPhoneNumber: String?,
+    @SerialName(value = "preferred_verification_channel")
+    val preferredVerificationChannel: ApiVerificationChannelType?,
+    @SerialName(value = "signin_verification_channels")
+    val signInVerificationChannels: List<ApiVerificationChannelType>,
+    @SerialName(value = "signup_verification_channels")
+    val signUpVerificationChannels: List<ApiVerificationChannelType>,
 )

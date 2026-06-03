@@ -21,7 +21,7 @@ import com.ioki.passenger.api.models.ApiGeocodingSessionRequest
 import com.ioki.passenger.api.models.ApiLogPayAccountRequest
 import com.ioki.passenger.api.models.ApiPaymentMethodCreationRequest
 import com.ioki.passenger.api.models.ApiPersonalDiscountPurchaseRequest
-import com.ioki.passenger.api.models.ApiPhoneVerificationRequest
+import com.ioki.passenger.api.models.ApiVerificationRequest
 import com.ioki.passenger.api.models.ApiPurchaseFilter
 import com.ioki.passenger.api.models.ApiPurchaseTicketingProductRequest
 import com.ioki.passenger.api.models.ApiPurchasingCreditPackageRequest
@@ -38,7 +38,7 @@ import com.ioki.passenger.api.models.ApiSettleDebitRequest
 import com.ioki.passenger.api.models.ApiSignUpRequest
 import com.ioki.passenger.api.models.ApiUpdatePassengersForRideRequest
 import com.ioki.passenger.api.models.ApiUpdatePaymentMethodForRideRequest
-import com.ioki.passenger.api.models.ApiUpdatePhoneNumberRequest
+import com.ioki.passenger.api.models.ApiUpdateClaimRequest
 import com.ioki.passenger.api.models.ApiUpdateUserNotificationSettingsRequest
 import com.ioki.passenger.api.models.ApiUpdateUserRequest
 import com.ioki.passenger.api.models.ApiUserFlagsRequest
@@ -60,8 +60,8 @@ import kotlin.time.Instant
 internal class IokiApi(private val client: IokiHttpClient, private val authHeaderProvider: AuthHeaderProvider) {
     private val accessToken get() = authHeaderProvider.provide()
 
-    suspend fun requestPhoneVerification(body: ApiBody<ApiPhoneVerificationRequest>): HttpResponse =
-        client.post("/api/passenger/phone_verification_requests") {
+    suspend fun requestVerification(body: ApiBody<ApiVerificationRequest>): HttpResponse =
+        client.post("/api/passenger/verification_requests") {
             setBody(body)
         }
 
@@ -267,8 +267,8 @@ internal class IokiApi(private val client: IokiHttpClient, private val authHeade
         header("Authorization", accessToken)
     }
 
-    suspend fun updatePhoneNumber(body: ApiBody<ApiUpdatePhoneNumberRequest>): HttpResponse =
-        client.patch("/api/passenger/user/phone_number") {
+    suspend fun updateClaim(body: ApiBody<ApiUpdateClaimRequest>): HttpResponse =
+        client.patch("/api/passenger/user/claim") {
             header("Authorization", accessToken)
             setBody(body)
         }
