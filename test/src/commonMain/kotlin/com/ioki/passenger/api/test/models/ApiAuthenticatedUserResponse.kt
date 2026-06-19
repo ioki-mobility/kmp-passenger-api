@@ -1,7 +1,6 @@
 package com.ioki.passenger.api.test.models
 
 import com.ioki.passenger.api.models.ApiAuthenticatedUserResponse
-import com.ioki.passenger.api.models.ApiEmail
 
 public fun createApiAuthenticatedUserResponse(
     id: String = "",
@@ -10,8 +9,12 @@ public fun createApiAuthenticatedUserResponse(
     registered: Boolean = false,
     version: Int = 0,
     phoneNumber: String = "",
+    phoneNumberVerified: Boolean = false,
+    emailAddress: String? = null,
+    emailAddressVerified: Boolean = false,
+    emailAddressNewsletter: Boolean = false,
+    emailAddressReceipt: Boolean = false,
     analyticsTracking: Boolean? = null,
-    email: ApiEmail? = null,
     currentTermsAccepted: Boolean = false,
     minimumAgeConfirmed: Boolean = false,
     referringUserSet: Boolean = false,
@@ -27,8 +30,12 @@ public fun createApiAuthenticatedUserResponse(
     registered = registered,
     version = version,
     phoneNumber = phoneNumber,
+    phoneNumberVerified = phoneNumberVerified,
+    emailAddress = emailAddress,
+    emailAddressVerified = emailAddressVerified,
+    emailAddressNewsletter = emailAddressNewsletter,
+    emailAddressReceipt = emailAddressReceipt,
     analyticsTracking = analyticsTracking,
-    email = email,
     currentTermsAccepted = currentTermsAccepted,
     minimumAgeConfirmed = minimumAgeConfirmed,
     referringUserSet = referringUserSet,

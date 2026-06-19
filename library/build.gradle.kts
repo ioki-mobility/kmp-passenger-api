@@ -13,7 +13,10 @@ kotlin {
 
     applyDefaultHierarchyTemplate()
 
-    jvmToolchain(17)
+    jvmToolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+        vendor.set(JvmVendorSpec.ADOPTIUM)
+    }
 
     jvm()
     androidLibrary {
@@ -63,15 +66,17 @@ kotlin {
                 implementation(libs.ktor.client.darwin)
             }
         }
-        val jvmMain by getting {
+        val jvmAndroid by creating {
+            dependsOn(commonMain)
             dependencies {
                 implementation(libs.ktor.client.okhttp)
             }
         }
+        val jvmMain by getting {
+            dependsOn(jvmAndroid)
+        }
         val androidMain by getting {
-            dependencies {
-                implementation(libs.ktor.client.okhttp)
-            }
+            dependsOn(jvmAndroid)
         }
     }
 }

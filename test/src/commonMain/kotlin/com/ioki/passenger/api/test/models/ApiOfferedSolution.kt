@@ -12,12 +12,14 @@ public fun createApiOfferedSolution(
     bookable: Boolean = false,
     fare: ApiFareResponse? = null,
     hops: List<ApiOfferedSolution.Hop> = emptyList(),
+    solutionType: ApiOfferedSolution.SolutionType = ApiOfferedSolution.SolutionType.UNSUPPORTED,
 ): ApiOfferedSolution = ApiOfferedSolution(
     type = type,
     id = id,
     bookable = bookable,
     fare = fare,
     hops = hops,
+    solutionType = solutionType,
 )
 
 public fun createApiOfferedSolutionHop(

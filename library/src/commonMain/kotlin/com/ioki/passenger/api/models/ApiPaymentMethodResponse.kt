@@ -1,6 +1,8 @@
 package com.ioki.passenger.api.models
 
+import com.ioki.passenger.api.models.ApiPaymentMethodResponse.Summary.Brand
 import com.ioki.passenger.api.models.ApiPaymentMethodResponse.Summary.Kind
+import com.ioki.passenger.api.models.ApiPaymentMethodResponse.Summary.Wallet
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -18,7 +20,10 @@ public data class ApiPaymentMethodResponse(
     @Serializable
     public data class Summary(
         val kind: Kind = Kind.UNSUPPORTED,
+        val wallet: Wallet?,
+        val brand: Brand?,
         val title: String,
+        val last4: String?,
         val expiration: String?,
         @SerialName(value = "mandate_url")
         val mandateUrl: String?,
@@ -45,6 +50,46 @@ public data class ApiPaymentMethodResponse(
 
             @SerialName(value = "external_payment")
             EXTERNAL_PAYMENT,
+
+            UNSUPPORTED,
+        }
+
+        @Serializable(with = ApiPaymentMethodResponseWalletSerializer::class)
+        public enum class Wallet {
+            @SerialName(value = "google_pay")
+            GOOGLE_PAY,
+
+            @SerialName(value = "apple_pay")
+            APPLE_PAY,
+
+            UNSUPPORTED,
+        }
+
+        @Serializable(with = ApiPaymentMethodResponseBrandSerializer::class)
+        public enum class Brand {
+            @SerialName(value = "visa")
+            VISA,
+
+            @SerialName(value = "mastercard")
+            MASTERCARD,
+
+            @SerialName(value = "amex")
+            AMEX,
+
+            @SerialName(value = "cartes_bancaires")
+            CARTES_BANCAIRES,
+
+            @SerialName(value = "diners_club")
+            DINERS_CLUB,
+
+            @SerialName(value = "discover")
+            DISCOVER,
+
+            @SerialName(value = "jcb")
+            JCB,
+
+            @SerialName(value = "unionpay")
+            UNIONPAY,
 
             UNSUPPORTED,
         }
@@ -78,5 +123,57 @@ internal object ApiPaymentMethodResponseKindSerializer : KSerializer<Kind> {
         "pos_payment" -> Kind.POS_PAYMENT
         "external_payment" -> Kind.EXTERNAL_PAYMENT
         else -> Kind.UNSUPPORTED
+    }
+}
+
+internal object ApiPaymentMethodResponseWalletSerializer : KSerializer<Wallet> {
+    override val descriptor = String.serializer().descriptor
+
+    override fun serialize(encoder: Encoder, value: Wallet) {
+        encoder.encodeString(
+            when (value) {
+                Wallet.GOOGLE_PAY -> "google_pay"
+                Wallet.APPLE_PAY -> "apple_pay"
+                Wallet.UNSUPPORTED -> "unsupported"
+            },
+        )
+    }
+
+    override fun deserialize(decoder: Decoder): Wallet = when (decoder.decodeString()) {
+        "google_pay" -> Wallet.GOOGLE_PAY
+        "apple_pay" -> Wallet.APPLE_PAY
+        else -> Wallet.UNSUPPORTED
+    }
+}
+
+internal object ApiPaymentMethodResponseBrandSerializer : KSerializer<Brand> {
+    override val descriptor = String.serializer().descriptor
+
+    override fun serialize(encoder: Encoder, value: Brand) {
+        encoder.encodeString(
+            when (value) {
+                Brand.VISA -> "visa"
+                Brand.MASTERCARD -> "mastercard"
+                Brand.AMEX -> "amex"
+                Brand.CARTES_BANCAIRES -> "cartes_bancaires"
+                Brand.DINERS_CLUB -> "diners_club"
+                Brand.DISCOVER -> "discover"
+                Brand.JCB -> "jcb"
+                Brand.UNIONPAY -> "unionpay"
+                Brand.UNSUPPORTED -> "unsupported"
+            },
+        )
+    }
+
+    override fun deserialize(decoder: Decoder): Brand = when (decoder.decodeString()) {
+        "visa" -> Brand.VISA
+        "mastercard" -> Brand.MASTERCARD
+        "amex" -> Brand.AMEX
+        "cartes_bancaires" -> Brand.CARTES_BANCAIRES
+        "diners_club" -> Brand.DINERS_CLUB
+        "discover" -> Brand.DISCOVER
+        "jcb" -> Brand.JCB
+        "unionpay" -> Brand.UNIONPAY
+        else -> Brand.UNSUPPORTED
     }
 }

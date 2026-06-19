@@ -4,7 +4,7 @@ import com.ioki.passenger.api.internal.IokiHttpClient
 import com.ioki.passenger.api.internal.Logging
 import com.ioki.passenger.api.internal.api.IokiApi
 import com.ioki.passenger.api.internal.authorisation.createAuthHeaderProvider
-import com.ioki.passenger.api.internal.utils.isConnectivityError
+import com.ioki.passenger.api.internal.utils.isPlatformConnectivityError
 import com.ioki.passenger.api.models.ApiAuthenticatedUserResponse
 import com.ioki.passenger.api.models.ApiBody
 import com.ioki.passenger.api.models.ApiBookingRequest
@@ -45,8 +45,6 @@ import com.ioki.passenger.api.models.ApiPaypalClientTokenResponse
 import com.ioki.passenger.api.models.ApiPersonalDiscountPurchaseRequest
 import com.ioki.passenger.api.models.ApiPersonalDiscountResponse
 import com.ioki.passenger.api.models.ApiPersonalDiscountTypeResponse
-import com.ioki.passenger.api.models.ApiPhoneVerificationRequest
-import com.ioki.passenger.api.models.ApiPhoneVerificationResponse
 import com.ioki.passenger.api.models.ApiProviderNotificationSettingsResponse
 import com.ioki.passenger.api.models.ApiPurchaseFilter
 import com.ioki.passenger.api.models.ApiPurchaseResponse
@@ -83,21 +81,26 @@ import com.ioki.passenger.api.models.ApiTicketingVoucherResponse
 import com.ioki.passenger.api.models.ApiTipResponse
 import com.ioki.passenger.api.models.ApiUpdatePassengersForRideRequest
 import com.ioki.passenger.api.models.ApiUpdatePaymentMethodForRideRequest
-import com.ioki.passenger.api.models.ApiUpdatePhoneNumberRequest
+import com.ioki.passenger.api.models.ApiUpdateClaimRequest
 import com.ioki.passenger.api.models.ApiUpdateUserNotificationSettingsRequest
 import com.ioki.passenger.api.models.ApiUpdateUserRequest
 import com.ioki.passenger.api.models.ApiUserFlagsRequest
 import com.ioki.passenger.api.models.ApiUserNotificationSettingsResponse
 import com.ioki.passenger.api.models.ApiUserTicketingVouchersFilter
 import com.ioki.passenger.api.models.ApiVenueResponse
+import com.ioki.passenger.api.models.ApiVerificationRequest
+import com.ioki.passenger.api.models.ApiVerificationResponse
 import com.ioki.passenger.api.result.ApiResult
 import com.ioki.passenger.api.result.Error
 import com.ioki.passenger.api.result.HttpStatusCode
 import com.ioki.passenger.api.result.SuccessData
 import com.ioki.result.Result
 import io.ktor.client.call.body
+import io.ktor.client.network.sockets.SocketTimeoutException
+import io.ktor.client.plugins.HttpRequestTimeoutException
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.isSuccess
+import io.ktor.utils.io.ClosedByteChannelException
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.time.Instant
 
@@ -134,7 +137,7 @@ internal fun IokiService(
 public interface IokiService :
     BootstrapService,
     ClientService,
-    PhoneVerificationService,
+    VerificationService,
     FirebaseService,
     UserService,
     MarketingService,
@@ -156,14 +159,12 @@ public interface IokiService :
     VenuesService,
     GeocodingService
 
-public interface PhoneVerificationService {
+public interface VerificationService {
     public suspend fun solveCaptcha(captchaId: String, captchaRequest: ApiCaptchaRequest): ApiResult<Unit>
 
     public suspend fun solveClientChallenge(id: String, request: ApiClientChallengeRequest): ApiResult<Unit>
 
-    public suspend fun requestPhoneVerification(
-        verification: ApiPhoneVerificationRequest,
-    ): ApiResult<ApiPhoneVerificationResponse>
+    public suspend fun requestVerification(verification: ApiVerificationRequest): ApiResult<ApiVerificationResponse>
 }
 
 public interface FirebaseService {
@@ -190,7 +191,7 @@ public interface UserService {
 
     public suspend fun logoutUser(): ApiResult<Unit>
 
-    public suspend fun updatePhoneNumber(request: ApiUpdatePhoneNumberRequest): ApiResult<ApiAuthenticatedUserResponse>
+    public suspend fun updateClaim(request: ApiUpdateClaimRequest): ApiResult<ApiAuthenticatedUserResponse>
 
     public suspend fun updateUserFlags(request: ApiUserFlagsRequest): ApiResult<ApiAuthenticatedUserResponse>
 
@@ -424,11 +425,9 @@ public interface GeocodingService {
 
 private class DefaultIokiService(private val iokiApi: IokiApi, private val interceptors: Set<ApiErrorInterceptor>) :
     IokiService {
-    override suspend fun requestPhoneVerification(
-        verification: ApiPhoneVerificationRequest,
-    ): ApiResult<ApiPhoneVerificationResponse> =
-        apiCall<ApiBody<ApiPhoneVerificationResponse>, ApiPhoneVerificationResponse> {
-            requestPhoneVerification(ApiBody(verification))
+    override suspend fun requestVerification(verification: ApiVerificationRequest): ApiResult<ApiVerificationResponse> =
+        apiCall<ApiBody<ApiVerificationResponse>, ApiVerificationResponse> {
+            requestVerification(ApiBody(verification))
         }
 
     override suspend fun requestApiToken(request: ApiRequestTokenRequest): ApiResult<ApiRequestTokenResponse> =
@@ -654,11 +653,9 @@ private class DefaultIokiService(private val iokiApi: IokiApi, private val inter
         logoutUser()
     }
 
-    override suspend fun updatePhoneNumber(
-        request: ApiUpdatePhoneNumberRequest,
-    ): ApiResult<ApiAuthenticatedUserResponse> =
+    override suspend fun updateClaim(request: ApiUpdateClaimRequest): ApiResult<ApiAuthenticatedUserResponse> =
         apiCall<ApiBody<ApiAuthenticatedUserResponse>, ApiAuthenticatedUserResponse> {
-            updatePhoneNumber(body = ApiBody(request))
+            updateClaim(body = ApiBody(request))
         }
 
     override suspend fun createLogPayCustomer(request: ApiLogPayAccountRequest): ApiResult<ApiLogPayUrlResponse> =
@@ -966,3 +963,10 @@ internal suspend fun mapApiError(
 
     return Result.Failure(Error.Api.Generic(apiErrors, code))
 }
+
+private val Exception.isConnectivityError
+    get() =
+        this is SocketTimeoutException ||
+            this is HttpRequestTimeoutException ||
+            this is ClosedByteChannelException ||
+            this.isPlatformConnectivityError

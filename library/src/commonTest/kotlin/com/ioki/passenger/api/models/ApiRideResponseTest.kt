@@ -167,6 +167,7 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                                 details = null,
                             ),
                         ),
+                        solutionType = ApiOfferedSolution.SolutionType.DRT,
                     ),
                 ),
                 bookedSolution = ApiOfferedSolution(
@@ -208,6 +209,7 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                             details = null,
                         ),
                     ),
+                    solutionType = ApiOfferedSolution.SolutionType.DRT,
                 ),
                 passengerNoteToDriver = "This is a note to the driver",
                 showPublicTransportTicketReminder = true,
@@ -495,7 +497,8 @@ private val rideResponse =
             "door_control_available": false
           }
         }
-      ]
+      ],
+      "solution_type": "drt"
     }
   ],
   "booked_solution": {
@@ -542,7 +545,8 @@ private val rideResponse =
             "door_control_available": false
           }
         }
-      ]
+      ],
+      "solution_type": "drt"
     },
     "passenger_note_to_driver": "This is a note to the driver",
     "show_pt_ticket_reminder": true,

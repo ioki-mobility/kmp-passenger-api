@@ -1,14 +1,14 @@
 [versions]
-agp = "9.0.1"
-kotlin = "2.3.10"
-kotlinx-serialization = "1.9.0"
+agp = "9.1.0"
+kotlin = "2.3.21"
+kotlinx-serialization = "1.11.0"
 kotlinx-datetime = "0.7.1"
 dokka = "2.1.0"
-ktor = "3.3.3"
-ktlintVersion = "14.0.1"
+ktor = "3.4.3"
+ktlintVersion = "14.2.0"
 kotlinCoroutines = "1.10.2"
-result = "0.3.0"
-kotest = "6.0.7"
+result = "0.4.0"
+kotest = "6.1.5"
 nmcp = "1.4.4"
 
 [libraries]

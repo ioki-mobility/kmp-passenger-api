@@ -5,12 +5,6 @@ import kotlin.test.Test
 internal class ApiAuthenticatedUserResponseTest : IokiApiModelTest() {
     @Test
     fun serialization() {
-        val userDetail = ApiEmail(
-            emailAddress = "john.doe@ioki.com",
-            newsletter = false,
-            receipt = true,
-            confirmed = true,
-        )
         testJsonStringCanBeConvertedToModel(
             expectedModel = ApiAuthenticatedUserResponse(
                 id = "abc123",
@@ -19,8 +13,12 @@ internal class ApiAuthenticatedUserResponseTest : IokiApiModelTest() {
                 registered = true,
                 version = 2,
                 phoneNumber = "+4912345",
+                phoneNumberVerified = true,
+                emailAddress = "john.doe@ioki.com",
+                emailAddressVerified = true,
+                emailAddressNewsletter = false,
+                emailAddressReceipt = true,
                 analyticsTracking = false,
-                email = userDetail,
                 currentTermsAccepted = true,
                 minimumAgeConfirmed = true,
                 referringUserSet = true,
@@ -45,14 +43,13 @@ private val authenticatedUser = """
   "first_name": "John",
   "last_name": "Doe",
   "phone_number": "+4912345",
+  "phone_number_verified": true,
   "registered": true,
+  "email_address": "john.doe@ioki.com",
+  "email_address_verified": true,
+  "email_address_newsletter": false,
+  "email_address_receipt": true,
   "analytics_tracking":false,
-  "email": {
-    "email_address": "john.doe@ioki.com",
-    "newsletter": false,
-    "receipt": true,
-    "confirmed": true
-  },
   "current_terms_accepted": true,
   "minimum_age_confirmed": true,
   "referring_user_set": true,
