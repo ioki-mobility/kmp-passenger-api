@@ -15,8 +15,6 @@ public enum class ApiStripeType {
     @SerialName(value = "sepa_debit")
     SEPA_DEBIT,
 
-    @SerialName(value = "google_pay")
-    GOOGLE_PAY,
     UNSUPPORTED,
 }
 
@@ -28,7 +26,6 @@ internal object ApiStripeTypeSerializer : KSerializer<ApiStripeType> {
             when (value) {
                 ApiStripeType.CARD -> "card"
                 ApiStripeType.SEPA_DEBIT -> "sepa_debit"
-                ApiStripeType.GOOGLE_PAY -> "google_pay"
                 ApiStripeType.UNSUPPORTED -> "unsupported"
             },
         )
@@ -37,7 +34,6 @@ internal object ApiStripeTypeSerializer : KSerializer<ApiStripeType> {
     override fun deserialize(decoder: Decoder): ApiStripeType = when (decoder.decodeString()) {
         "card" -> ApiStripeType.CARD
         "sepa_debit" -> ApiStripeType.SEPA_DEBIT
-        "google_pay" -> ApiStripeType.GOOGLE_PAY
         else -> ApiStripeType.UNSUPPORTED
     }
 }
