@@ -44,7 +44,7 @@ public data class ApiProduct(
     val rideRatingCriteria: List<ApiRideRatingCriteria>,
     val avatar: ApiAvatar?,
     @SerialName(value = "avatar_darkmode")
-    val avatarDarkmode: ApiAvatar?,
+    val avatarDarkMode: ApiAvatar?,
     @SerialName(value = "help_url")
     val helpUrl: String?,
     @SerialName(value = "support_email")
