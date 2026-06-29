@@ -24,7 +24,6 @@ internal class ApiPaymentMethodResponseTypeTest {
         companion object {
             fun data(): Collection<Array<Any>> = listOf(
                 arrayOf(ApiPaymentMethodType.CASH, "\"cash\""),
-                arrayOf(ApiPaymentMethodType.PSP_PROVIDED, "\"psp_provided\""),
                 arrayOf(ApiPaymentMethodType.STRIPE, "\"stripe\""),
                 arrayOf(ApiPaymentMethodType.LOGPAY, "\"logpay\""),
                 arrayOf(
