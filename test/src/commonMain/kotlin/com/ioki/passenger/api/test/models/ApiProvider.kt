@@ -1,47 +1,37 @@
 package com.ioki.passenger.api.test.models
 
 import com.ioki.passenger.api.models.ApiAvatar
-import com.ioki.passenger.api.models.ApiLogPayType
 import com.ioki.passenger.api.models.ApiOfferedCreditPackage
-import com.ioki.passenger.api.models.ApiPaymentMethodType
 import com.ioki.passenger.api.models.ApiProvider
-import com.ioki.passenger.api.models.ApiStripeType
+import com.ioki.passenger.api.models.ApiProvider.PaymentMethodType
 
 public fun createApiProvider(
     name: String = "",
-    paymentServiceProvider: ApiProvider.PaymentServiceProvider = ApiProvider.PaymentServiceProvider.NONE,
-    ridePaymentMethodTypes: Set<ApiPaymentMethodType> = emptySet(),
-    ticketingPaymentMethodTypes: Set<ApiPaymentMethodType> = emptySet(),
-    serviceCreditPaymentMethodTypes: Set<ApiPaymentMethodType> = emptySet(),
-    personalDiscountPaymentMethodTypes: Set<ApiPaymentMethodType> = emptySet(),
-    tipPaymentMethodTypes: Set<ApiPaymentMethodType> = emptySet(),
-    stripeTypes: Set<ApiStripeType>? = null,
-    logPayTypes: Set<ApiLogPayType>? = null,
+    ridePaymentMethodTypes: Set<PaymentMethodType> = emptySet(),
+    ticketingPaymentMethodTypes: Set<PaymentMethodType> = emptySet(),
+    serviceCreditPaymentMethodTypes: Set<PaymentMethodType> = emptySet(),
+    personalDiscountPaymentMethodTypes: Set<PaymentMethodType> = emptySet(),
+    tipPaymentMethodTypes: Set<PaymentMethodType> = emptySet(),
     creditOptions: ApiProvider.CreditOptions? = null,
-    stripeAccountId: String? = null,
     merchantName: String? = null,
     countryCode: String = "",
     features: ApiProvider.Features = createApiProviderFeatures(),
     avatar: ApiAvatar? = null,
-    avatarDarkmode: ApiAvatar? = null,
+    avatarDarkMode: ApiAvatar? = null,
     customUrls: List<ApiProvider.CustomUrl> = emptyList(),
 ): ApiProvider = ApiProvider(
     name = name,
-    paymentServiceProvider = paymentServiceProvider,
     ridePaymentMethodTypes = ridePaymentMethodTypes,
     ticketingPaymentMethodTypes = ticketingPaymentMethodTypes,
     serviceCreditPaymentMethodTypes = serviceCreditPaymentMethodTypes,
     personalDiscountPaymentMethodTypes = personalDiscountPaymentMethodTypes,
     tipPaymentMethodTypes = tipPaymentMethodTypes,
-    stripeTypes = stripeTypes,
-    logPayTypes = logPayTypes,
     creditOptions = creditOptions,
-    stripeAccountId = stripeAccountId,
     merchantName = merchantName,
     countryCode = countryCode,
     features = features,
     avatar = avatar,
-    avatarDarkmode = avatarDarkmode,
+    avatarDarkMode = avatarDarkMode,
     customUrls = customUrls,
 )
 

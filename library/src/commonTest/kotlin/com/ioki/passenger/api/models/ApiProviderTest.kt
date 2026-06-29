@@ -1,5 +1,6 @@
 package com.ioki.passenger.api.models
 
+import com.ioki.passenger.api.models.ApiProvider.PaymentMethodType
 import com.ioki.passenger.api.test.models.createApiProvider
 import kotlin.test.Test
 
@@ -11,20 +12,17 @@ internal class ApiProviderTest : IokiApiModelTest() {
                 name = "Ioki GmbH",
                 countryCode = "DE",
                 merchantName = "Ioki GmbH",
-                paymentServiceProvider = ApiProvider.PaymentServiceProvider.STRIPE,
                 ridePaymentMethodTypes = setOf(
-                    ApiPaymentMethodType.CASH,
-                    ApiPaymentMethodType.POS_PAYMENT,
+                    PaymentMethodType.CASH,
+                    PaymentMethodType.POS_PAYMENT,
                 ),
                 ticketingPaymentMethodTypes = setOf(
-                    ApiPaymentMethodType.CASH,
-                    ApiPaymentMethodType.POS_PAYMENT,
+                    PaymentMethodType.CASH,
+                    PaymentMethodType.POS_PAYMENT,
                 ),
-                serviceCreditPaymentMethodTypes = setOf(ApiPaymentMethodType.STRIPE),
-                personalDiscountPaymentMethodTypes = setOf(ApiPaymentMethodType.SERVICE_CREDITS),
-                tipPaymentMethodTypes = setOf(ApiPaymentMethodType.STRIPE),
-                stripeTypes = setOf(ApiStripeType.CARD),
-                logPayTypes = setOf(ApiLogPayType.SEPA_DEBIT),
+                serviceCreditPaymentMethodTypes = setOf(PaymentMethodType.PSP_PROVIDED),
+                personalDiscountPaymentMethodTypes = setOf(PaymentMethodType.SERVICE_CREDITS),
+                tipPaymentMethodTypes = setOf(PaymentMethodType.PSP_PROVIDED),
                 creditOptions = ApiProvider.CreditOptions(
                     listOf(
                         ApiOfferedCreditPackage(
@@ -33,10 +31,9 @@ internal class ApiProviderTest : IokiApiModelTest() {
                         ),
                     ),
                 ),
-                stripeAccountId = "AccountId",
                 features = ApiProvider.Features.NONE,
                 avatar = null,
-                avatarDarkmode = null,
+                avatarDarkMode = null,
                 customUrls = listOf(
                     ApiProvider.CustomUrl(
                         name = "other",
@@ -64,11 +61,6 @@ internal class ApiProviderTest : IokiApiModelTest() {
                 name = "Ioki GmbH",
                 countryCode = "DE",
                 features = ApiProvider.Features.NONE,
-                stripeTypes = setOf(
-                    ApiStripeType.UNSUPPORTED,
-                    ApiStripeType.CARD,
-                    ApiStripeType.SEPA_DEBIT,
-                ),
             ),
             providerStripeTypesWithWrongTypeMinimal,
         )
@@ -81,14 +73,11 @@ private val provider =
   "name": "Ioki GmbH",
   "country_code": "DE",
   "merchant_name": "Ioki GmbH",
-  "psp": "stripe",
   "ride_payment_method_types": ["cash", "pos_payment"],
   "ticketing_payment_method_types": ["cash", "pos_payment"],
-  "service_credit_payment_method_types": ["stripe"],
+  "service_credit_payment_method_types": ["psp_provided"],
   "personal_discount_payment_method_types": ["service_credits"],
-  "stripe_payment_method_types": ["card"],
-  "logpay_payment_method_types": ["sepa_debit"],
-  "tip_payment_method_types": ["stripe"],
+  "tip_payment_method_types": ["psp_provided"],
   "service_credit_options": {
     "packages": [
       {
@@ -103,7 +92,6 @@ private val provider =
       }
     ]
   },
-  "stripe_account_id": "AccountId",
   "custom_urls": [
     {
       "name": "other",
@@ -133,7 +121,6 @@ private val providerMinimal =
 {
   "name": "Ioki GmbH",
   "country_code": "DE",
-  "psp": "no_psp",
   "ride_payment_method_types": [],
   "ticketing_payment_method_types": [],
   "service_credit_payment_method_types": [],
@@ -162,7 +149,6 @@ private val providerStripeTypesWithWrongTypeMinimal =
 {
   "name": "Ioki GmbH",
   "country_code": "DE",
-  "psp": "no_psp",
   "ride_payment_method_types": [],
   "ticketing_payment_method_types": [],
   "service_credit_payment_method_types": [],
