@@ -85,6 +85,8 @@ import com.ioki.passenger.api.models.ApiUpdateClaimRequest
 import com.ioki.passenger.api.models.ApiUpdateUserNotificationSettingsRequest
 import com.ioki.passenger.api.models.ApiUpdateUserRequest
 import com.ioki.passenger.api.models.ApiUserFlagsRequest
+import com.ioki.passenger.api.models.ApiUserLocation
+import com.ioki.passenger.api.models.ApiUserLocationsRequest
 import com.ioki.passenger.api.models.ApiUserNotificationSettingsResponse
 import com.ioki.passenger.api.models.ApiUserTicketingVouchersFilter
 import com.ioki.passenger.api.models.ApiVenueResponse
@@ -98,6 +100,7 @@ import com.ioki.result.Result
 import io.ktor.client.call.body
 import io.ktor.client.network.sockets.SocketTimeoutException
 import io.ktor.client.plugins.HttpRequestTimeoutException
+import io.ktor.client.request.request
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.isSuccess
 import io.ktor.utils.io.ClosedByteChannelException
@@ -196,6 +199,8 @@ public interface UserService {
     public suspend fun updateUserFlags(request: ApiUserFlagsRequest): ApiResult<ApiAuthenticatedUserResponse>
 
     public suspend fun updateLanguage(): ApiResult<Unit>
+
+    public suspend fun userLocations(request: ApiUserLocationsRequest): ApiResult<List<ApiUserLocation>>
 }
 
 public interface MarketingService {
@@ -688,6 +693,18 @@ private class DefaultIokiService(private val iokiApi: IokiApi, private val inter
             createBooking(rideId = rideId, body = ApiBody(request))
         }
 
+    override suspend fun userLocations(request: ApiUserLocationsRequest): ApiResult<List<ApiUserLocation>> =
+        apiCall<ApiBody<List<ApiUserLocation>>, List<ApiUserLocation>> {
+            getUserLocations(
+                page = request.page,
+                since = request.since,
+                until = request.until,
+                order = request.order,
+                orderBy = request.orderBy,
+                perPage = request.perPage,
+            )
+        }
+
     override suspend fun updateLanguage(): ApiResult<Unit> = apiCall<Unit, Unit> {
         updateLanguage()
     }
@@ -932,8 +949,11 @@ internal suspend inline fun <reified R, reified T> mapSuccess(
     val body = successfulResponse.body<R>()
     val meta = (body as? ApiBody<*>)?.meta
     val data = when (body) {
-        null -> Unit as? T // For Void (no content) body
+        null -> Unit as? T
+
+        // For Void (no content) body
         is T -> body
+
         is ApiBody<*> ->
             when {
                 body.data is T -> body.data

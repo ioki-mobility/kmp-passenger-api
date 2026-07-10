@@ -8,6 +8,8 @@ import com.ioki.passenger.api.models.ApiSignUpRequest
 import com.ioki.passenger.api.models.ApiUpdateClaimRequest
 import com.ioki.passenger.api.models.ApiUpdateUserRequest
 import com.ioki.passenger.api.models.ApiUserFlagsRequest
+import com.ioki.passenger.api.models.ApiUserLocation
+import com.ioki.passenger.api.models.ApiUserLocationsRequest
 import com.ioki.passenger.api.result.ApiResult
 
 public open class FakeUserService : UserService {
@@ -33,4 +35,7 @@ public open class FakeUserService : UserService {
         error("Not overridden")
 
     override suspend fun updateLanguage(): ApiResult<Unit> = error("Not overridden")
+
+    override suspend fun userLocations(request: ApiUserLocationsRequest): ApiResult<List<ApiUserLocation>> =
+        error("Not overridden")
 }

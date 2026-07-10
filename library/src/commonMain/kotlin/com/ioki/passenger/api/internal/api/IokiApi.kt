@@ -4,6 +4,7 @@ import com.ioki.passenger.api.internal.IokiHttpClient
 import com.ioki.passenger.api.internal.authorisation.AuthHeaderProvider
 import com.ioki.passenger.api.models.ApiBody
 import com.ioki.passenger.api.models.ApiBookingRequest
+import com.ioki.passenger.api.models.ApiBoundingBox
 import com.ioki.passenger.api.models.ApiCalculateNewFareRequest
 import com.ioki.passenger.api.models.ApiCancellationRequest
 import com.ioki.passenger.api.models.ApiCancellationVoucherRequest
@@ -42,6 +43,9 @@ import com.ioki.passenger.api.models.ApiUpdateClaimRequest
 import com.ioki.passenger.api.models.ApiUpdateUserNotificationSettingsRequest
 import com.ioki.passenger.api.models.ApiUpdateUserRequest
 import com.ioki.passenger.api.models.ApiUserFlagsRequest
+import com.ioki.passenger.api.models.ApiUserLocationsRequest
+import com.ioki.passenger.api.models.ApiUserLocationsRequest.Order
+import com.ioki.passenger.api.models.ApiUserLocationsRequest.OrderBy
 import com.ioki.passenger.api.models.ApiUserTicketingVouchersFilter
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
@@ -54,6 +58,8 @@ import io.ktor.client.request.url
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.parameters
 import io.ktor.util.StringValues
+import io.ktor.util.appendAll
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.json.Json
 import kotlin.time.Instant
 
@@ -83,6 +89,28 @@ internal class IokiApi(private val client: IokiHttpClient, private val authHeade
     suspend fun getUser(): HttpResponse = client.get("/api/passenger/user") {
         header("Authorization", accessToken)
     }
+
+    suspend fun getUserLocations(
+        page: Int = 1,
+        since: Instant? = null,
+        until: Instant? = null,
+        order: Order? = null,
+        orderBy: OrderBy? = null,
+        perPage: Int? = null,
+    ): HttpResponse =
+        client.get("/api/passenger/user/user_locations") {
+            header("Authorization", accessToken)
+            url.parameters.appendAll(
+                parameters {
+                    append("page", page.toString())
+                    since?.let { append("since", it.toString()) }
+                    until?.let { append("until", it.toString()) }
+                    order?.let { append("order", it.toString()) }
+                    orderBy?.let { append("order_by", it.toString()) }
+                    perPage?.let { append("per_page", it.toString()) }
+                },
+            )
+        }
 
     suspend fun deleteUser(): HttpResponse = client.post("/api/passenger/user/deletion_request") {
         header("Authorization", accessToken)
