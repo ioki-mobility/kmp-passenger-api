@@ -1,4 +1,3 @@
-
 package com.ioki.passenger.api.models
 
 import kotlinx.serialization.KSerializer
@@ -36,35 +35,27 @@ public data class ApiUserLocation(
     }
 
     @Serializable
-    public data class CustomFlag(
-        val slug: String,
-        val name: String,
-    )
+    public data class CustomFlag(val slug: String, val name: String)
 }
 
 internal object ApiUserLocationTypeSerializer : KSerializer<ApiUserLocation.Type> {
     override val descriptor: SerialDescriptor
         get() = String.serializer().descriptor
 
-    override fun serialize(
-        encoder: Encoder,
-        value: ApiUserLocation.Type,
-    ) {
+    override fun serialize(encoder: Encoder, value: ApiUserLocation.Type) {
         encoder.encodeString(
             when (value) {
                 ApiUserLocation.Type.HOME -> "home"
                 ApiUserLocation.Type.WORK -> "work"
                 ApiUserLocation.Type.OTHER -> "other"
-            }
+            },
         )
     }
 
-    override fun deserialize(decoder: Decoder): ApiUserLocation.Type {
-        return when (decoder.decodeString()) {
-            "home" -> ApiUserLocation.Type.HOME
-            "work" -> ApiUserLocation.Type.WORK
-            "other" -> ApiUserLocation.Type.OTHER
-            else -> ApiUserLocation.Type.OTHER
-        }
+    override fun deserialize(decoder: Decoder): ApiUserLocation.Type = when (decoder.decodeString()) {
+        "home" -> ApiUserLocation.Type.HOME
+        "work" -> ApiUserLocation.Type.WORK
+        "other" -> ApiUserLocation.Type.OTHER
+        else -> ApiUserLocation.Type.OTHER
     }
 }
