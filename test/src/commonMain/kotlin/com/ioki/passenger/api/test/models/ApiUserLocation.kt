@@ -1,9 +1,7 @@
 package com.ioki.passenger.api.test.models
 
-import com.ioki.passenger.api.models.ApiStationResponse
 import com.ioki.passenger.api.models.ApiUserLocation
 import com.ioki.passenger.api.models.ApiUserLocation.Type
-import kotlin.time.Instant
 
 public fun createApiUserLocation(
     id: String = "",
@@ -19,15 +17,9 @@ public fun createApiUserLocation(
     city: String? = null,
     county: String? = null,
     country: String? = null,
-    formattedAddress: String = "",
-    type: String? = null,
-    time: Instant? = null,
-    waypointType: String? = null,
-    stationId: String? = null,
-    walkingDuration: Long? = null,
-    walkingTrack: String? = null,
-    station: ApiStationResponse? = null,
-    displayTimes: List<Instant> = emptyList(),
+    editableByUser: Boolean = false,
+    userId: String = "",
+    customFlags: List<ApiUserLocation.CustomFlag> = emptyList(),
 ): ApiUserLocation = ApiUserLocation(
     id = id,
     version = version,
@@ -42,13 +34,13 @@ public fun createApiUserLocation(
     city = city,
     county = county,
     country = country,
-    formattedAddress = formattedAddress,
-    type = type,
-    time = time,
-    waypointType = waypointType,
-    stationId = stationId,
-    walkingDuration = walkingDuration,
-    walkingTrack = walkingTrack,
-    station = station,
-    displayTimes = displayTimes,
+    editableByUser = editableByUser,
+    userId = userId,
+    customFlags = customFlags,
 )
+
+public fun createCustomFlag(slug: String = "", name: String = ""): ApiUserLocation.CustomFlag =
+    ApiUserLocation.CustomFlag(
+        slug = slug,
+        name = name,
+    )
