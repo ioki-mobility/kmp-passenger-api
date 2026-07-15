@@ -13,7 +13,7 @@ public data class ApiUserLocation(
     val id: String,
     val version: Int,
     val title: String,
-    val locationType: Type,
+    @SerialName(value = "location_type") val locationType: Type,
     val lat: Double,
     val lng: Double,
     @SerialName(value = "location_name") val locationName: String?,
