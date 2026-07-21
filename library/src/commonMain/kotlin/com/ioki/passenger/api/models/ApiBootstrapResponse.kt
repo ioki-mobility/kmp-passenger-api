@@ -56,6 +56,7 @@ public sealed class PaymentServiceProvider {
     @Serializable
     public data class LogPay(
         @SerialName(value = "logpay_payment_method_types") val logPayTypes: List<ApiLogPayType>?,
+        @SerialName(value = "use_legacy_paypal_flow") val useLegacyPaypalFlow: Boolean,
     ) : PaymentServiceProvider() {
         override val type: Type = Type.LOGPAY
     }

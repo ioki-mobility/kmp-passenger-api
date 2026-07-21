@@ -84,6 +84,7 @@ internal class ApiBootstrapResponseTest : IokiApiModelTest() {
                 ),
                 paymentServiceProvider = createLogPayPaymentServiceProvider(
                     logPayTypes = listOf(ApiLogPayType.CARD),
+                    useLegacyPaypalFlow = true,
                 ),
                 products = emptyList(),
                 ridesWithFailedPayments = emptyList(),
@@ -194,7 +195,8 @@ private val bootstrapLogPay =
 {
   "payment_service_provider": {
     "type": "payment_service_provider/logpay",
-    "logpay_payment_method_types": ["card"]
+    "logpay_payment_method_types": ["card"],
+    "use_legacy_paypal_flow": true
   },
   "provider": {
     "name": "Some Company Inc.",

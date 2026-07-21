@@ -38,5 +38,10 @@ public fun createStripePaymentServiceProvider(
     stripeAccountId = stripeAccountId,
 )
 
-public fun createLogPayPaymentServiceProvider(logPayTypes: List<ApiLogPayType>? = null): PaymentServiceProvider =
-    PaymentServiceProvider.LogPay(logPayTypes = logPayTypes)
+public fun createLogPayPaymentServiceProvider(
+    logPayTypes: List<ApiLogPayType>? = null,
+    useLegacyPaypalFlow: Boolean = false,
+): PaymentServiceProvider = PaymentServiceProvider.LogPay(
+    logPayTypes = logPayTypes,
+    useLegacyPaypalFlow = useLegacyPaypalFlow,
+)
