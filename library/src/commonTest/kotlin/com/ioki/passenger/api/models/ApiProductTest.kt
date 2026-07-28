@@ -76,7 +76,7 @@ internal class ApiProductTest : IokiApiModelTest() {
                     ApiRideRatingCriteria.WAITING_TIME_RATING,
                 ),
                 avatar = null,
-                avatarDarkMode = null,
+                avatarDarkmode = null,
                 cancellationStatements = listOf(
                     ApiCancellationStatement(
                         id = "id",
@@ -220,7 +220,7 @@ internal class ApiProductTest : IokiApiModelTest() {
                 tipping = null,
                 rideRatingCriteria = emptyList(),
                 avatar = null,
-                avatarDarkMode = null,
+                avatarDarkmode = null,
                 cancellationStatements = null,
                 helpUrl = null,
                 supportEmail = null,

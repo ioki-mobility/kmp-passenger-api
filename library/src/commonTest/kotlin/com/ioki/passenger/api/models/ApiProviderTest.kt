@@ -33,7 +33,7 @@ internal class ApiProviderTest : IokiApiModelTest() {
                 ),
                 features = ApiProvider.Features.NONE,
                 avatar = null,
-                avatarDarkMode = null,
+                avatarDarkmode = null,
                 customUrls = listOf(
                     ApiProvider.CustomUrl(
                         name = "other",

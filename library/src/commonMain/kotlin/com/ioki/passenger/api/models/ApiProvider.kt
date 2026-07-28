@@ -27,7 +27,7 @@ public data class ApiProvider(
     val features: Features,
     val avatar: ApiAvatar?,
     @SerialName(value = "avatar_darkmode")
-    val avatarDarkMode: ApiAvatar?,
+    val avatarDarkmode: ApiAvatar?,
     @SerialName(value = "custom_urls") val customUrls: List<CustomUrl>,
 ) {
     @Serializable

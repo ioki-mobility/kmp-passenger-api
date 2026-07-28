@@ -17,7 +17,7 @@ public fun createApiProvider(
     countryCode: String = "",
     features: ApiProvider.Features = createApiProviderFeatures(),
     avatar: ApiAvatar? = null,
-    avatarDarkMode: ApiAvatar? = null,
+    avatarDarkmode: ApiAvatar? = null,
     customUrls: List<ApiProvider.CustomUrl> = emptyList(),
 ): ApiProvider = ApiProvider(
     name = name,
@@ -31,7 +31,7 @@ public fun createApiProvider(
     countryCode = countryCode,
     features = features,
     avatar = avatar,
-    avatarDarkMode = avatarDarkMode,
+    avatarDarkmode = avatarDarkmode,
     customUrls = customUrls,
 )
 
