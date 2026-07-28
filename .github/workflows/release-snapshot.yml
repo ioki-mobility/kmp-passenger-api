@@ -16,7 +16,7 @@ jobs:
       SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Extract pre-release identifier
         id: extract_prerelease
