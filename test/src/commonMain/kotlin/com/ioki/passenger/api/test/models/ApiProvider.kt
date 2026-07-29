@@ -1,12 +1,16 @@
 package com.ioki.passenger.api.test.models
 
 import com.ioki.passenger.api.models.ApiAvatar
+import com.ioki.passenger.api.models.ApiLogPayType
 import com.ioki.passenger.api.models.ApiOfferedCreditPackage
 import com.ioki.passenger.api.models.ApiProvider
 import com.ioki.passenger.api.models.ApiProvider.PaymentMethodType
+import com.ioki.passenger.api.models.ApiStripeType
+import com.ioki.passenger.api.models.PaymentServiceProvider
 
 public fun createApiProvider(
     name: String = "",
+    paymentServiceProvider: PaymentServiceProvider? = null,
     ridePaymentMethodTypes: Set<PaymentMethodType> = emptySet(),
     ticketingPaymentMethodTypes: Set<PaymentMethodType> = emptySet(),
     serviceCreditPaymentMethodTypes: Set<PaymentMethodType> = emptySet(),
@@ -21,6 +25,7 @@ public fun createApiProvider(
     customUrls: List<ApiProvider.CustomUrl> = emptyList(),
 ): ApiProvider = ApiProvider(
     name = name,
+    paymentServiceProvider = paymentServiceProvider,
     ridePaymentMethodTypes = ridePaymentMethodTypes,
     ticketingPaymentMethodTypes = ticketingPaymentMethodTypes,
     serviceCreditPaymentMethodTypes = serviceCreditPaymentMethodTypes,
@@ -33,6 +38,24 @@ public fun createApiProvider(
     avatar = avatar,
     avatarDarkmode = avatarDarkmode,
     customUrls = customUrls,
+)
+
+public fun createStripePaymentServiceProvider(
+    stripeAccountId: String? = null,
+    stripeTypes: List<ApiStripeType>? = null,
+    googlePaySupported: Boolean = false,
+): PaymentServiceProvider = PaymentServiceProvider.Stripe(
+    googlePaySupported = googlePaySupported,
+    stripeTypes = stripeTypes,
+    stripeAccountId = stripeAccountId,
+)
+
+public fun createLogPayPaymentServiceProvider(
+    logPayTypes: List<ApiLogPayType>? = null,
+    useLegacyPaypalFlow: Boolean = false,
+): PaymentServiceProvider = PaymentServiceProvider.LogPay(
+    logPayTypes = logPayTypes,
+    useLegacyPaypalFlow = useLegacyPaypalFlow,
 )
 
 public fun createApiProviderCreditOptions(
