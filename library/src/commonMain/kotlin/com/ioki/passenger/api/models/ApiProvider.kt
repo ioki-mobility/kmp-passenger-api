@@ -1,22 +1,24 @@
 package com.ioki.passenger.api.models
 
 import com.ioki.passenger.api.models.ApiProvider.PaymentMethodType
-import kotlinx.serialization.DeserializationStrategy
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.builtins.NothingSerializer
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotlinx.serialization.json.JsonContentPolymorphicSerializer
-import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonDecoder
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
 @Serializable
 public data class ApiProvider(
     val name: String,
-    @SerialName(value = "payment_service_provider") val paymentServiceProvider: PaymentServiceProvider?,
+    @SerialName(value = "payment_service_provider")
+    val paymentServiceProvider: PaymentServiceProvider?,
     @SerialName(value = "ride_payment_method_types")
     val ridePaymentMethodTypes: Set<PaymentMethodType>,
     @SerialName(value = "ticketing_payment_method_types")
@@ -160,47 +162,44 @@ public val ApiProvider.allPaymentMethodTypes: Set<PaymentMethodType>
             personalDiscountPaymentMethodTypes +
             tipPaymentMethodTypes
 
-internal object PaymentServiceProviderSerializer : JsonContentPolymorphicSerializer<PaymentServiceProvider>(
-    PaymentServiceProvider::class,
-) {
-    override fun selectDeserializer(element: JsonElement): DeserializationStrategy<PaymentServiceProvider> {
-        val jsonObject = element.jsonObject
-        val type = jsonObject.getValue("type").jsonPrimitive.content
+internal object PaymentServiceProviderSerializer : KSerializer<PaymentServiceProvider?> {
+    override val descriptor: SerialDescriptor = PaymentServiceProvider.Stripe.serializer().descriptor
+
+    @OptIn(ExperimentalSerializationApi::class)
+    override fun serialize(encoder: Encoder, value: PaymentServiceProvider?) = when (value) {
+        is PaymentServiceProvider.Stripe ->
+            encoder.encodeNullableSerializableValue(PaymentServiceProvider.Stripe.serializer(), value)
+        is PaymentServiceProvider.LogPay ->
+            encoder.encodeNullableSerializableValue(PaymentServiceProvider.LogPay.serializer(), value)
+        else -> encoder.encodeNullableSerializableValue(NothingSerializer(), null)
+    }
+
+    override fun deserialize(decoder: Decoder): PaymentServiceProvider? {
+        val input = decoder as? JsonDecoder ?: error("Only Json format is supported")
+        val element = input.decodeJsonElement()
+        val type = element.jsonObject["type"]?.jsonPrimitive?.content
         return when (type) {
-            "payment_service_provider/stripe" -> PaymentServiceProvider.Stripe.serializer()
-            "payment_service_provider/logpay" -> PaymentServiceProvider.LogPay.serializer()
-            else -> throw IllegalArgumentException("Unsupported PaymentServiceProvider type.")
+            "payment_service_provider/stripe" ->
+                input.json.decodeFromJsonElement(PaymentServiceProvider.Stripe.serializer(), element)
+            "payment_service_provider/logpay" ->
+                input.json.decodeFromJsonElement(PaymentServiceProvider.LogPay.serializer(), element)
+            else -> null
         }
     }
 }
 
 @Serializable(PaymentServiceProviderSerializer::class)
 public sealed class PaymentServiceProvider {
-    public abstract val type: Type
-
     @Serializable
     public data class Stripe(
         @SerialName(value = "stripe_account_id") val stripeAccountId: String?,
         @SerialName(value = "stripe_payment_method_types") val stripeTypes: List<ApiStripeType>?,
         @SerialName(value = "google_pay_supported") val googlePaySupported: Boolean,
-    ) : PaymentServiceProvider() {
-        override val type: Type = Type.STRIPE
-    }
+    ) : PaymentServiceProvider()
 
     @Serializable
     public data class LogPay(
         @SerialName(value = "logpay_payment_method_types") val logPayTypes: List<ApiLogPayType>?,
         @SerialName(value = "use_legacy_paypal_flow") val useLegacyPaypalFlow: Boolean,
-    ) : PaymentServiceProvider() {
-        override val type: Type = Type.LOGPAY
-    }
-
-    @Serializable
-    public enum class Type {
-        @SerialName(value = "payment_service_provider/logpay")
-        LOGPAY,
-
-        @SerialName(value = "payment_service_provider/stripe")
-        STRIPE,
-    }
+    ) : PaymentServiceProvider()
 }
