@@ -3,6 +3,7 @@ package com.ioki.passenger.api.models
 import com.ioki.passenger.api.test.models.createApiFareResponse
 import com.ioki.passenger.api.test.models.createApiLocation
 import com.ioki.passenger.api.test.models.createApiMatchingState
+import com.ioki.passenger.api.test.models.createApiPaymentMethodResponse
 import com.ioki.passenger.api.test.models.createApiVehicle
 import kotlin.test.Test
 import kotlin.time.Instant
@@ -105,7 +106,7 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                     ),
                     comment = "Nice comment",
                 ),
-                paymentMethod = ApiPaymentMethodResponse(
+                paymentMethod = createApiPaymentMethodResponse(
                     paymentMethodType = ApiPaymentMethodType.STRIPE,
                     id = null,
                     summary = null,
@@ -440,7 +441,8 @@ private val rideResponse =
     "comment": "Nice comment"
   },
   "payment_method": {
-    "payment_method_type": "stripe"
+    "payment_method_type": "stripe",
+    "requires_paypal_secure_element": false
   },
   "ticket":{
     "host": "https://ioki.com",

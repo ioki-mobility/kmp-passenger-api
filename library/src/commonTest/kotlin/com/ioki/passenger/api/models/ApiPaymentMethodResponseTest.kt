@@ -1,12 +1,14 @@
 package com.ioki.passenger.api.models
 
+import com.ioki.passenger.api.test.models.createApiPaymentMethodResponse
+import com.ioki.passenger.api.test.models.createApiPaymentMethodResponseSummary
 import kotlin.test.Test
 
 internal class ApiPaymentMethodResponseTest : IokiApiModelTest() {
     @Test
     fun serializationMinimal() {
         testJsonStringCanBeConvertedToModel(
-            ApiPaymentMethodResponse(ApiPaymentMethodType.CASH, null, null),
+            createApiPaymentMethodResponse(paymentMethodType = ApiPaymentMethodType.CASH),
             paymentMethodMinimal,
         )
     }
@@ -14,17 +16,17 @@ internal class ApiPaymentMethodResponseTest : IokiApiModelTest() {
     @Test
     fun serialization() {
         testJsonStringCanBeConvertedToModel(
-            expectedModel = ApiPaymentMethodResponse(
+            expectedModel = createApiPaymentMethodResponse(
                 paymentMethodType = ApiPaymentMethodType.STRIPE,
+                requiresPaypalSecureElement = false,
                 id = "someId",
-                summary = ApiPaymentMethodResponse.Summary(
+                summary = createApiPaymentMethodResponseSummary(
                     kind = ApiPaymentMethodResponse.Summary.Kind.CREDIT_CARD,
                     wallet = ApiPaymentMethodResponse.Summary.Wallet.GOOGLE_PAY,
                     brand = ApiPaymentMethodResponse.Summary.Brand.VISA,
                     title = "Visa (*1234)",
                     last4 = "1234",
                     expiration = "11/20",
-                    mandateUrl = null,
                 ),
             ),
             jsonString = paymentMethod,
@@ -35,7 +37,8 @@ internal class ApiPaymentMethodResponseTest : IokiApiModelTest() {
 private val paymentMethodMinimal =
     """
 {
-  "payment_method_type": "cash"
+  "payment_method_type": "cash",
+  "requires_paypal_secure_element": false
 }
 """
 
@@ -43,6 +46,7 @@ private val paymentMethod =
     """
 {
   "payment_method_type": "stripe",
+  "requires_paypal_secure_element": false,
   "id": "someId",
   "summary": {
         "kind": "card",
