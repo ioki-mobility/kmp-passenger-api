@@ -44,7 +44,7 @@ public fun createStripePaymentServiceProvider(
     stripeAccountId: String? = null,
     stripeTypes: List<ApiStripeType>? = null,
     googlePaySupported: Boolean = false,
-): PaymentServiceProvider = PaymentServiceProvider.Stripe(
+): PaymentServiceProvider.Stripe = PaymentServiceProvider.Stripe(
     googlePaySupported = googlePaySupported,
     stripeTypes = stripeTypes,
     stripeAccountId = stripeAccountId,
@@ -53,7 +53,7 @@ public fun createStripePaymentServiceProvider(
 public fun createLogPayPaymentServiceProvider(
     logPayTypes: List<ApiLogPayType>? = null,
     useLegacyPaypalFlow: Boolean = false,
-): PaymentServiceProvider = PaymentServiceProvider.LogPay(
+): PaymentServiceProvider.LogPay = PaymentServiceProvider.LogPay(
     logPayTypes = logPayTypes,
     useLegacyPaypalFlow = useLegacyPaypalFlow,
 )
