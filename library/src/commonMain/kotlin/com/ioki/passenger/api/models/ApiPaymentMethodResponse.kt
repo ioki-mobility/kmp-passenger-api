@@ -14,6 +14,8 @@ import kotlinx.serialization.encoding.Encoder
 public data class ApiPaymentMethodResponse(
     @SerialName(value = "payment_method_type")
     val paymentMethodType: ApiPaymentMethodType = ApiPaymentMethodType.UNSUPPORTED,
+    @SerialName(value = "requires_paypal_secure_element")
+    val requiresPaypalSecureElement: Boolean,
     val id: String?,
     val summary: Summary?,
 ) {

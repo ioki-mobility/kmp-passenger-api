@@ -3,22 +3,20 @@ package com.ioki.passenger.api.test.models
 import com.ioki.passenger.api.models.ApiAvatar
 import com.ioki.passenger.api.models.ApiLogPayType
 import com.ioki.passenger.api.models.ApiOfferedCreditPackage
-import com.ioki.passenger.api.models.ApiPaymentMethodType
 import com.ioki.passenger.api.models.ApiProvider
+import com.ioki.passenger.api.models.ApiProvider.PaymentMethodType
 import com.ioki.passenger.api.models.ApiStripeType
+import com.ioki.passenger.api.models.PaymentServiceProvider
 
 public fun createApiProvider(
     name: String = "",
-    paymentServiceProvider: ApiProvider.PaymentServiceProvider = ApiProvider.PaymentServiceProvider.NONE,
-    ridePaymentMethodTypes: Set<ApiPaymentMethodType> = emptySet(),
-    ticketingPaymentMethodTypes: Set<ApiPaymentMethodType> = emptySet(),
-    serviceCreditPaymentMethodTypes: Set<ApiPaymentMethodType> = emptySet(),
-    personalDiscountPaymentMethodTypes: Set<ApiPaymentMethodType> = emptySet(),
-    tipPaymentMethodTypes: Set<ApiPaymentMethodType> = emptySet(),
-    stripeTypes: Set<ApiStripeType>? = null,
-    logPayTypes: Set<ApiLogPayType>? = null,
+    paymentServiceProvider: PaymentServiceProvider? = null,
+    ridePaymentMethodTypes: Set<PaymentMethodType> = emptySet(),
+    ticketingPaymentMethodTypes: Set<PaymentMethodType> = emptySet(),
+    serviceCreditPaymentMethodTypes: Set<PaymentMethodType> = emptySet(),
+    personalDiscountPaymentMethodTypes: Set<PaymentMethodType> = emptySet(),
+    tipPaymentMethodTypes: Set<PaymentMethodType> = emptySet(),
     creditOptions: ApiProvider.CreditOptions? = null,
-    stripeAccountId: String? = null,
     merchantName: String? = null,
     countryCode: String = "",
     features: ApiProvider.Features = createApiProviderFeatures(),
@@ -33,16 +31,31 @@ public fun createApiProvider(
     serviceCreditPaymentMethodTypes = serviceCreditPaymentMethodTypes,
     personalDiscountPaymentMethodTypes = personalDiscountPaymentMethodTypes,
     tipPaymentMethodTypes = tipPaymentMethodTypes,
-    stripeTypes = stripeTypes,
-    logPayTypes = logPayTypes,
     creditOptions = creditOptions,
-    stripeAccountId = stripeAccountId,
     merchantName = merchantName,
     countryCode = countryCode,
     features = features,
     avatar = avatar,
     avatarDarkmode = avatarDarkmode,
     customUrls = customUrls,
+)
+
+public fun createStripePaymentServiceProvider(
+    stripeAccountId: String? = null,
+    stripeTypes: List<ApiStripeType>? = null,
+    googlePaySupported: Boolean = false,
+): PaymentServiceProvider.Stripe = PaymentServiceProvider.Stripe(
+    googlePaySupported = googlePaySupported,
+    stripeTypes = stripeTypes,
+    stripeAccountId = stripeAccountId,
+)
+
+public fun createLogPayPaymentServiceProvider(
+    logPayTypes: List<ApiLogPayType>? = null,
+    useLegacyPaypalFlow: Boolean = false,
+): PaymentServiceProvider.LogPay = PaymentServiceProvider.LogPay(
+    logPayTypes = logPayTypes,
+    useLegacyPaypalFlow = useLegacyPaypalFlow,
 )
 
 public fun createApiProviderCreditOptions(

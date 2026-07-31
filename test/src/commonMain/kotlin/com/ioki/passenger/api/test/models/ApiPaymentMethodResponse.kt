@@ -5,10 +5,12 @@ import com.ioki.passenger.api.models.ApiPaymentMethodType
 
 public fun createApiPaymentMethodResponse(
     paymentMethodType: ApiPaymentMethodType = ApiPaymentMethodType.UNSUPPORTED,
+    requiresPaypalSecureElement: Boolean = false,
     id: String? = null,
     summary: ApiPaymentMethodResponse.Summary? = null,
 ): ApiPaymentMethodResponse = ApiPaymentMethodResponse(
     paymentMethodType = paymentMethodType,
+    requiresPaypalSecureElement = requiresPaypalSecureElement,
     id = id,
     summary = summary,
 )

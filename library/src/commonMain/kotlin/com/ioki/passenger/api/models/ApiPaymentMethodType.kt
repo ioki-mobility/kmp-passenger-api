@@ -12,9 +12,6 @@ public enum class ApiPaymentMethodType {
     @SerialName(value = "cash")
     CASH,
 
-    @SerialName(value = "psp_provided")
-    PSP_PROVIDED,
-
     @SerialName(value = "stripe")
     STRIPE,
 
@@ -37,7 +34,6 @@ internal object ApiPaymentMethodTypeSerializer : KSerializer<ApiPaymentMethodTyp
 
     override fun deserialize(decoder: Decoder): ApiPaymentMethodType = when (decoder.decodeString()) {
         "cash" -> ApiPaymentMethodType.CASH
-        "psp_provided" -> ApiPaymentMethodType.PSP_PROVIDED
         "stripe" -> ApiPaymentMethodType.STRIPE
         "logpay" -> ApiPaymentMethodType.LOGPAY
         "public_transport_ticket" -> ApiPaymentMethodType.PUBLIC_TRANSPORT_TICKET
@@ -50,7 +46,6 @@ internal object ApiPaymentMethodTypeSerializer : KSerializer<ApiPaymentMethodTyp
         encoder.encodeString(
             when (value) {
                 ApiPaymentMethodType.CASH -> "cash"
-                ApiPaymentMethodType.PSP_PROVIDED -> "psp_provided"
                 ApiPaymentMethodType.STRIPE -> "stripe"
                 ApiPaymentMethodType.LOGPAY -> "logpay"
                 ApiPaymentMethodType.PUBLIC_TRANSPORT_TICKET -> "public_transport_ticket"
