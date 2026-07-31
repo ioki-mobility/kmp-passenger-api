@@ -8,7 +8,7 @@ import kotlin.test.Test
 
 internal class ApiProviderTest : IokiApiModelTest() {
     @Test
-    fun serializationStripe() {
+    fun serializationStripePSP() {
         testJsonStringCanBeConvertedToModel(
             ApiProvider(
                 name = "Ioki GmbH",
@@ -54,7 +54,7 @@ internal class ApiProviderTest : IokiApiModelTest() {
     }
 
     @Test
-    fun serializationLogPay() {
+    fun serializationLogPayPSP() {
         testJsonStringCanBeConvertedToModel(
             ApiProvider(
                 name = "Ioki GmbH",
@@ -99,22 +99,18 @@ internal class ApiProviderTest : IokiApiModelTest() {
     }
 
     @Test
-    fun serializationMinimal() {
+    fun serializationUnknownPSP() {
         testJsonStringCanBeConvertedToModel(
             createApiProvider(name = "Ioki GmbH", countryCode = "DE", features = ApiProvider.Features.NONE),
-            providerMinimal,
+            providerUnknownPSP,
         )
     }
 
     @Test
-    fun serializationStipeTypeWithWrongTypeMinimal() {
+    fun serializationMinimal() {
         testJsonStringCanBeConvertedToModel(
-            createApiProvider(
-                name = "Ioki GmbH",
-                countryCode = "DE",
-                features = ApiProvider.Features.NONE,
-            ),
-            providerStripeTypesWithWrongTypeMinimal,
+            createApiProvider(name = "Ioki GmbH", countryCode = "DE", features = ApiProvider.Features.NONE),
+            providerMinimal,
         )
     }
 }
@@ -256,17 +252,19 @@ private val providerMinimal =
 }
 """
 
-private val providerStripeTypesWithWrongTypeMinimal =
+private val providerUnknownPSP =
     """
 {
   "name": "Ioki GmbH",
+   "payment_service_provider": {
+    "type": "payment_service_provider/unknown_psp"
+  },
   "country_code": "DE",
   "ride_payment_method_types": [],
   "ticketing_payment_method_types": [],
   "service_credit_payment_method_types": [],
   "personal_discount_payment_method_types": [],
   "tip_payment_method_types": [],
-  "stripe_payment_method_types": ["undefined", "card", "sepa_debit"],
   "custom_urls": [],
   "features": {
     "non_purchasable_personal_discounts": false,
