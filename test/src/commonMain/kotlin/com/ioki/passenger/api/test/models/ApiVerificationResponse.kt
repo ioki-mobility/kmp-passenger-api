@@ -1,12 +1,17 @@
 package com.ioki.passenger.api.test.models
 
+import com.ioki.passenger.api.models.ApiVerificationChannelType
 import com.ioki.passenger.api.models.ApiVerificationResponse
 
 public fun createApiVerificationResponse(
-    phoneNumber: String = "",
+    channel: ApiVerificationChannelType = ApiVerificationChannelType.UNSUPPORTED,
+    emailAddress: String? = null,
+    phoneNumber: String? = null,
     captcha: ApiVerificationResponse.Captcha? = null,
     clientChallenge: ApiVerificationResponse.ClientChallenge? = null,
 ): ApiVerificationResponse = ApiVerificationResponse(
+    channel = channel,
+    emailAddress = emailAddress,
     phoneNumber = phoneNumber,
     captcha = captcha,
     clientChallenge = clientChallenge,

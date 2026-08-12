@@ -5,7 +5,9 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 public data class ApiVerificationResponse(
-    @SerialName(value = "phone_number") val phoneNumber: String,
+    val channel: ApiVerificationChannelType,
+    @SerialName(value = "email_address") val emailAddress: String?,
+    @SerialName(value = "phone_number") val phoneNumber: String?,
     val captcha: Captcha?,
     @SerialName(value = "client_challenge") val clientChallenge: ClientChallenge?,
 ) {
