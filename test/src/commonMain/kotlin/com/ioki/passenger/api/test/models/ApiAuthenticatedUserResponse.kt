@@ -8,7 +8,7 @@ public fun createApiAuthenticatedUserResponse(
     lastName: String? = null,
     registered: Boolean = false,
     version: Int = 0,
-    phoneNumber: String = "",
+    phoneNumber: String? = null,
     phoneNumberVerified: Boolean = false,
     emailAddress: String? = null,
     emailAddressVerified: Boolean = false,
