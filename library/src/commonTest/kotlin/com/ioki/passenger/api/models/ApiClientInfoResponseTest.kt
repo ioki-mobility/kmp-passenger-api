@@ -1,12 +1,13 @@
 package com.ioki.passenger.api.models
 
+import com.ioki.passenger.api.test.models.createApiClientInfoResponse
 import kotlin.test.Test
 
 internal class ApiClientInfoResponseTest : IokiApiModelTest() {
     @Test
     fun serialization() {
         testJsonStringCanBeConvertedToModel(
-            ApiClientInfoResponse(
+            createApiClientInfoResponse(
                 distributionUrl = "https://play.google.com/our-app",
                 termsOfServiceUrl = "https://example.com/terms_of_service.html",
                 privacyPolicyUrl = "https://example.com/privacy_policy.html",
@@ -32,19 +33,12 @@ internal class ApiClientInfoResponseTest : IokiApiModelTest() {
     @Test
     fun serializationMinimal() {
         testJsonStringCanBeConvertedToModel(
-            ApiClientInfoResponse(
+            createApiClientInfoResponse(
                 distributionUrl = "https://play.google.com/our-app",
                 termsOfServiceUrl = "https://example.com/terms_of_service.html",
                 privacyPolicyUrl = "https://example.com/privacy_policy.html",
-                imprintUrl = null,
                 phoneNumberRequired = false,
                 emailAddressRequired = false,
-                helpUrl = null,
-                supportEmail = null,
-                supportWebsiteUrl = null,
-                smsPhoneNumber = null,
-                supportPhoneNumber = null,
-                preferredVerificationChannel = null,
                 signInVerificationChannels = emptyList(),
                 signUpVerificationChannels = emptyList(),
             ),
