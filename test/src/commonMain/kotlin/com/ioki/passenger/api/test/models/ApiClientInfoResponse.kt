@@ -7,7 +7,7 @@ public fun createApiClientInfoResponse(
     distributionUrl: String = "",
     termsOfServiceUrl: String = "",
     privacyPolicyUrl: String = "",
-    imprintUrl: String = "",
+    imprintUrl: String? = "",
     phoneNumberRequired: Boolean = false,
     emailAddressRequired: Boolean = false,
     helpUrl: String? = null,
