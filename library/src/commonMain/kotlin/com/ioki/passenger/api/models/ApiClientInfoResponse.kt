@@ -8,7 +8,7 @@ public data class ApiClientInfoResponse(
     @SerialName(value = "distribution_url") val distributionUrl: String,
     @SerialName(value = "terms_of_service_url") val termsOfServiceUrl: String,
     @SerialName(value = "privacy_policy_url") val privacyPolicyUrl: String,
-    @SerialName(value = "imprint_url") val imprintUrl: String,
+    @SerialName(value = "imprint_url") val imprintUrl: String?,
     @SerialName(value = "phone_number_required") val phoneNumberRequired: Boolean,
     @SerialName(value = "email_address_required") val emailAddressRequired: Boolean,
     @SerialName(value = "help_url") val helpUrl: String?,
