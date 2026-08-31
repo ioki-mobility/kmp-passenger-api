@@ -32,7 +32,16 @@ internal class ApiUpdateUserRequestTest : IokiApiModelTest() {
     @Test
     fun serializationMinimal() {
         testJsonStringCanBeConvertedToModel(
-            ApiUpdateUserRequest(2, null, null, null, null, null, null, null),
+            ApiUpdateUserRequest(
+                version = 2,
+                firstName = null,
+                lastName = null,
+                email = null,
+                termsAccepted = null,
+                tracking = null,
+                additionalData = null,
+                phoneNumber = null,
+            ),
             updateUserRequestMinimal,
         )
     }
