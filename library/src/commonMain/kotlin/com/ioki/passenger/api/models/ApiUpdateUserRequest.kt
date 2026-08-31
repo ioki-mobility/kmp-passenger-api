@@ -12,4 +12,5 @@ public data class ApiUpdateUserRequest(
     @SerialName(value = "terms_accepted") val termsAccepted: Boolean?,
     @SerialName(value = "analytics_tracking") val tracking: Boolean?,
     @SerialName(value = "additional_data") val additionalData: ApiAdditionalData?,
+    @SerialName(value = "phone_number") val phoneNumber: String?,
 )

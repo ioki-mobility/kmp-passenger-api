@@ -23,6 +23,7 @@ internal class ApiUpdateUserRequestTest : IokiApiModelTest() {
                     marketingAutomationPushChannelEnabled = true,
                     marketingAutomationMessageCenterChannelEnabled = false,
                 ),
+                phoneNumber = "+491234567",
             ),
             updateUserRequest,
         )
@@ -31,7 +32,7 @@ internal class ApiUpdateUserRequestTest : IokiApiModelTest() {
     @Test
     fun serializationMinimal() {
         testJsonStringCanBeConvertedToModel(
-            ApiUpdateUserRequest(2, null, null, null, null, null, null),
+            ApiUpdateUserRequest(2, null, null, null, null, null, null, null),
             updateUserRequestMinimal,
         )
     }
@@ -52,7 +53,8 @@ private val updateUserRequest =
   "additional_data": {
       "marketing_automation_push_channel_enabled": true,
       "marketing_automation_message_center_channel_enabled": false
-  }
+  },
+  "phone_number": "+491234567"
 }
 """
 
