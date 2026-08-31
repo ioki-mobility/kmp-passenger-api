@@ -141,11 +141,7 @@ private val authenticatedUser = """
       "subject": "Declined payment",
       "body": "Your account is suspended"
     },
-    "unique_customer_id": "IOKI42",
-    "additional_data": {
-      "marketing_automation_push_channel_enabled": true,
-      "marketing_automation_message_center_channel_enabled": false
-    }
+    "unique_customer_id": "IOKI42"
   }
 }
 """

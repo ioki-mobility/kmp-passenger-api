@@ -19,10 +19,6 @@ internal class ApiUpdateUserRequestTest : IokiApiModelTest() {
                 email = email,
                 termsAccepted = true,
                 tracking = null,
-                additionalData = ApiAdditionalData(
-                    marketingAutomationPushChannelEnabled = true,
-                    marketingAutomationMessageCenterChannelEnabled = false,
-                ),
                 phoneNumber = "+491234567",
                 minimumAgeConfirmed = true,
             ),
@@ -40,7 +36,6 @@ internal class ApiUpdateUserRequestTest : IokiApiModelTest() {
                 email = null,
                 termsAccepted = null,
                 tracking = null,
-                additionalData = null,
                 phoneNumber = null,
                 minimumAgeConfirmed = null,
             ),
@@ -60,10 +55,6 @@ private val updateUserRequest =
     "email_address": "new.email@ioki.com",
     "newsletter": false,
     "receipt": true
-  },
-  "additional_data": {
-      "marketing_automation_push_channel_enabled": true,
-      "marketing_automation_message_center_channel_enabled": false
   },
   "phone_number": "+491234567",
   "minimum_age_confirmed": true
