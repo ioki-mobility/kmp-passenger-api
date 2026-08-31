@@ -13,4 +13,5 @@ public data class ApiUpdateUserRequest(
     @SerialName(value = "analytics_tracking") val tracking: Boolean?,
     @SerialName(value = "additional_data") val additionalData: ApiAdditionalData?,
     @SerialName(value = "phone_number") val phoneNumber: String?,
+    @SerialName(value = "minimum_age_confirmed") val minimumAgeConfirmed: Boolean?,
 )

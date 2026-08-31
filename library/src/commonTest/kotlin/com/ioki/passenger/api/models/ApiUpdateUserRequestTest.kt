@@ -24,6 +24,7 @@ internal class ApiUpdateUserRequestTest : IokiApiModelTest() {
                     marketingAutomationMessageCenterChannelEnabled = false,
                 ),
                 phoneNumber = "+491234567",
+                minimumAgeConfirmed = true,
             ),
             updateUserRequest,
         )
@@ -41,6 +42,7 @@ internal class ApiUpdateUserRequestTest : IokiApiModelTest() {
                 tracking = null,
                 additionalData = null,
                 phoneNumber = null,
+                minimumAgeConfirmed = null,
             ),
             updateUserRequestMinimal,
         )
@@ -63,7 +65,8 @@ private val updateUserRequest =
       "marketing_automation_push_channel_enabled": true,
       "marketing_automation_message_center_channel_enabled": false
   },
-  "phone_number": "+491234567"
+  "phone_number": "+491234567",
+  "minimum_age_confirmed": true
 }
 """
 

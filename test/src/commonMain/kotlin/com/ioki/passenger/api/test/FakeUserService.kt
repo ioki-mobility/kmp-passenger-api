@@ -4,7 +4,6 @@ import com.ioki.passenger.api.UserService
 import com.ioki.passenger.api.models.ApiAuthenticatedUserResponse
 import com.ioki.passenger.api.models.ApiRequestTokenRequest
 import com.ioki.passenger.api.models.ApiRequestTokenResponse
-import com.ioki.passenger.api.models.ApiSignUpRequest
 import com.ioki.passenger.api.models.ApiUpdateClaimRequest
 import com.ioki.passenger.api.models.ApiUpdateUserRequest
 import com.ioki.passenger.api.models.ApiUserFlagsRequest
@@ -14,9 +13,6 @@ import com.ioki.passenger.api.result.ApiResult
 
 public open class FakeUserService : UserService {
     override suspend fun requestApiToken(request: ApiRequestTokenRequest): ApiResult<ApiRequestTokenResponse> =
-        error("Not overridden")
-
-    override suspend fun signUp(request: ApiSignUpRequest): ApiResult<ApiAuthenticatedUserResponse> =
         error("Not overridden")
 
     override suspend fun getUser(): ApiResult<ApiAuthenticatedUserResponse> = error("Not overridden")

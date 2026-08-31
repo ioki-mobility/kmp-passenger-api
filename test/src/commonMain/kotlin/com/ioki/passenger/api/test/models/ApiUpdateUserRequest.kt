@@ -13,6 +13,7 @@ public fun createApiUpdateUserRequest(
     tracking: Boolean? = null,
     additionalData: ApiAdditionalData? = null,
     phoneNumber: String? = null,
+    minimumAgeConfirmed: Boolean? = null,
 ): ApiUpdateUserRequest = ApiUpdateUserRequest(
     version = version,
     firstName = firstName,
@@ -22,4 +23,5 @@ public fun createApiUpdateUserRequest(
     tracking = tracking,
     additionalData = additionalData,
     phoneNumber = phoneNumber,
+    minimumAgeConfirmed = minimumAgeConfirmed,
 )
