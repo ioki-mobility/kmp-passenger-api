@@ -8,10 +8,11 @@ on:
 
 jobs:
   release:
+    # Skip PRs coming from forks: they never get access to repository/Dependabot
+    # secrets (by GitHub design), so publishing would fail anyway.
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: macos-latest
     env:
-      GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
-      GPG_SIGNING_PASSWORD: ${{ secrets.GPG_SIGNING_PASSWORD }}
       SONATYPE_USER: ${{ secrets.SONATYPE_USER }}
       SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
     steps:
@@ -28,4 +29,4 @@ jobs:
             fi
 
       - name: Publish to Sonatype Snapshot
-        run: ./gradlew publishAllPublicationsToSonatypeSnapshotRepository -PPRE_RELEASE_IDENTIFIER=${{ steps.extract_prerelease.outputs.identifier }} -PGPG_SIGNING_REQUIRED --no-configuration-cache
+        run: ./gradlew publishAllPublicationsToSonatypeSnapshotRepository -PPRE_RELEASE_IDENTIFIER=${{ steps.extract_prerelease.outputs.identifier }} --no-configuration-cache
