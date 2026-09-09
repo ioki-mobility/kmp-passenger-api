@@ -20,6 +20,7 @@ internal class ApiUserLocationTest : IokiApiModelTest() {
                 city = "Berlin",
                 county = "Berlin",
                 country = "Germany",
+                formattedAddress = "Europaplatz 1, 10557 Berlin",
                 editableByUser = false,
                 userId = "userId",
                 customFlags = listOf(ApiUserLocation.CustomFlag(slug = "slug", name = "name")),
@@ -45,6 +46,7 @@ internal class ApiUserLocationTest : IokiApiModelTest() {
                 city = null,
                 county = null,
                 country = null,
+                formattedAddress = "52.520008, 13.404954",
                 editableByUser = false,
                 userId = "userId",
                 customFlags = listOf(),
@@ -70,6 +72,7 @@ private val userLocation: String =
             "city": "Berlin",
             "county": "Berlin",
             "country": "Germany",
+            "formatted_address": "Europaplatz 1, 10557 Berlin",
             "editable_by_user": "false",
             "user_id": "userId",
             "custom_flags": [{
@@ -87,6 +90,7 @@ private val userLocationMinimal: String =
             "location_type": "home",
             "lat": 52.520008,
             "lng": 13.404954,
+            "formatted_address": "52.520008, 13.404954",
             "editable_by_user": "false",
             "user_id": "userId",
             "custom_flags": []
