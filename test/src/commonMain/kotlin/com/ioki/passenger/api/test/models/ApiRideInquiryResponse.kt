@@ -1,6 +1,5 @@
 package com.ioki.passenger.api.test.models
 
-import com.ioki.passenger.api.models.ApiArea
 import com.ioki.passenger.api.models.ApiRideInquiryResponse
 import com.ioki.passenger.api.models.ApiRideInquiryResponse.Assistance.ErrorCode
 import kotlin.time.Instant
@@ -23,8 +22,8 @@ public fun createApiRideInquiryResponseAvailability(
     nextAvailability = nextAvailability,
 )
 
-public fun createApiRideInquiryResponseConstraints(area: ApiArea? = null): ApiRideInquiryResponse.Constraints =
-    ApiRideInquiryResponse.Constraints(area = area)
+public fun createApiRideInquiryResponseConstraints(): ApiRideInquiryResponse.Constraints =
+    ApiRideInquiryResponse.Constraints
 
 public fun createApiRideInquiryResponseAssistance(
     title: String = "",

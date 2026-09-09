@@ -4,13 +4,11 @@ import com.ioki.passenger.api.models.ApiAnnouncement
 import com.ioki.passenger.api.models.ApiAvatar
 import com.ioki.passenger.api.models.ApiBoundingBox
 import com.ioki.passenger.api.models.ApiCancellationStatement
-import com.ioki.passenger.api.models.PassengerApiArea
 import com.ioki.passenger.api.models.ApiProduct
-import com.ioki.passenger.api.models.ApiRideOptions
-import com.ioki.passenger.api.models.ApiRideRatingCriteria
 import com.ioki.passenger.api.models.ApiStationResponse
 import com.ioki.passenger.api.models.ApiTimezone
 import com.ioki.passenger.api.models.ApiTipping
+import com.ioki.passenger.api.models.PassengerApiArea
 
 public fun createApiProduct(
     id: String = "",
@@ -20,12 +18,7 @@ public fun createApiProduct(
     timezone: ApiTimezone = createApiTimezone(),
     drtArea: PassengerApiArea = createPassengerApiArea(),
     intermodalArea: PassengerApiArea? = null,
-    boundingBox: ApiBoundingBox? = null,
     defaultMapBoundingBox: ApiBoundingBox? = null,
-    rideOptions: ApiRideOptions = createApiRideOptions(),
-    productRideOptions: List<ApiProduct.RideOptions> = emptyList(),
-    passengerTypes: List<ApiProduct.PassengerType> = emptyList(),
-    passengerOptions: List<ApiProduct.PassengerOption> = emptyList(),
     prebookable: Boolean = false,
     adHocBookable: Boolean = false,
     requiresFixedStation: Boolean = false,
@@ -35,7 +28,6 @@ public fun createApiProduct(
     displayStationsOnMap: Boolean = false,
     cancellationStatements: List<ApiCancellationStatement>? = null,
     features: ApiProduct.Features = createApiProductFeatures(),
-    rideRatingCriteria: List<ApiRideRatingCriteria> = emptyList(),
     avatar: ApiAvatar? = null,
     avatarDarkmode: ApiAvatar? = null,
     helpUrl: String? = null,
@@ -50,12 +42,7 @@ public fun createApiProduct(
     timezone = timezone,
     drtArea = drtArea,
     intermodalArea = intermodalArea,
-    boundingBox = boundingBox,
     defaultMapBoundingBox = defaultMapBoundingBox,
-    rideOptions = rideOptions,
-    productRideOptions = productRideOptions,
-    passengerTypes = passengerTypes,
-    passengerOptions = passengerOptions,
     prebookable = prebookable,
     adHocBookable = adHocBookable,
     requiresFixedStation = requiresFixedStation,
@@ -65,7 +52,6 @@ public fun createApiProduct(
     displayStationsOnMap = displayStationsOnMap,
     cancellationStatements = cancellationStatements,
     features = features,
-    rideRatingCriteria = rideRatingCriteria,
     avatar = avatar,
     avatarDarkmode = avatarDarkmode,
     helpUrl = helpUrl,

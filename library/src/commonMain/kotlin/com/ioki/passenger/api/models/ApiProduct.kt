@@ -12,23 +12,8 @@ public data class ApiProduct(
     @SerialName(value = "timezone") val timezone: ApiTimezone,
     @SerialName(value = "drt_area") val drtArea: PassengerApiArea,
     @SerialName(value = "intermodal_area") val intermodalArea: PassengerApiArea?,
-    @SerialName(value = "bounding_box")
-    val boundingBox: ApiBoundingBox?,
     @SerialName(value = "default_map_bounding_box")
     val defaultMapBoundingBox: ApiBoundingBox?,
-    @SerialName(value = "ride_options")
-    @Deprecated(
-        message =
-        "Use 'productRiderOptions', 'passengerTypes' and 'passengerOptions instead. " +
-            "Except of 'prebooking_threshold'. Backend will discuss this and come back to us with that.",
-    )
-    val rideOptions: ApiRideOptions,
-    @SerialName(value = "product_ride_options")
-    val productRideOptions: List<RideOptions>,
-    @SerialName(value = "passenger_types")
-    val passengerTypes: List<PassengerType>,
-    @SerialName(value = "passenger_options")
-    val passengerOptions: List<PassengerOption>,
     val prebookable: Boolean,
     @SerialName(value = "ad_hoc_bookable") val adHocBookable: Boolean,
     @SerialName(value = "requires_fixed_station") val requiresFixedStation: Boolean,
@@ -40,8 +25,6 @@ public data class ApiProduct(
     @SerialName(value = "cancellation_statements")
     val cancellationStatements: List<ApiCancellationStatement>?,
     val features: Features,
-    @SerialName(value = "ride_rating_criteria")
-    val rideRatingCriteria: List<ApiRideRatingCriteria>,
     val avatar: ApiAvatar?,
     @SerialName(value = "avatar_darkmode")
     val avatarDarkmode: ApiAvatar?,

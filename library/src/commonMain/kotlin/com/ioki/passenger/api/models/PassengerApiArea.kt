@@ -20,5 +20,4 @@ public data class PassengerApiArea(
     @SerialName(value = "legend_index") val legendIndex: Int,
     @SerialName(value = "legend_title") val legendTitle: String?,
     @SerialName(value = "legend_description") val legendDescription: String?,
-    val area: ApiArea,
 )
