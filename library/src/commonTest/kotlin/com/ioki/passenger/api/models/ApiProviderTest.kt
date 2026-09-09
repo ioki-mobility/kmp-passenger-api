@@ -19,17 +19,12 @@ internal class ApiProviderTest : IokiApiModelTest() {
                 ),
                 countryCode = "DE",
                 merchantName = "Ioki GmbH",
-                ridePaymentMethodTypes = setOf(
-                    PaymentMethodType.CASH,
-                    PaymentMethodType.POS_PAYMENT,
-                ),
                 ticketingPaymentMethodTypes = setOf(
                     PaymentMethodType.CASH,
                     PaymentMethodType.POS_PAYMENT,
                 ),
                 serviceCreditPaymentMethodTypes = setOf(PaymentMethodType.PSP_PROVIDED),
                 personalDiscountPaymentMethodTypes = setOf(PaymentMethodType.SERVICE_CREDITS),
-                tipPaymentMethodTypes = setOf(PaymentMethodType.PSP_PROVIDED),
                 creditOptions = ApiProvider.CreditOptions(
                     listOf(
                         ApiOfferedCreditPackage(
@@ -64,17 +59,12 @@ internal class ApiProviderTest : IokiApiModelTest() {
                 ),
                 countryCode = "DE",
                 merchantName = "Ioki GmbH",
-                ridePaymentMethodTypes = setOf(
-                    PaymentMethodType.CASH,
-                    PaymentMethodType.POS_PAYMENT,
-                ),
                 ticketingPaymentMethodTypes = setOf(
                     PaymentMethodType.CASH,
                     PaymentMethodType.POS_PAYMENT,
                 ),
                 serviceCreditPaymentMethodTypes = setOf(PaymentMethodType.PSP_PROVIDED),
                 personalDiscountPaymentMethodTypes = setOf(PaymentMethodType.SERVICE_CREDITS),
-                tipPaymentMethodTypes = setOf(PaymentMethodType.PSP_PROVIDED),
                 creditOptions = ApiProvider.CreditOptions(
                     listOf(
                         ApiOfferedCreditPackage(

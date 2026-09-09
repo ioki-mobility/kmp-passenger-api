@@ -24,12 +24,10 @@ public fun createApiTicketingProductOption(
 
 public fun createApiTicketingProductOptionEnumItem(
     slug: String = "",
-    name: String = "",
     description: String = "",
     value: String = "",
 ): ApiTicketingProductOption.EnumItem = ApiTicketingProductOption.EnumItem(
     slug = slug,
-    name = name,
     description = description,
     value = value,
 )

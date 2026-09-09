@@ -15,15 +15,7 @@ internal class ApiProductTest : IokiApiModelTest() {
                 name = "Magic Bus Frankfurt",
                 description = "This is such a magic product",
                 timezone = ApiTimezone(identifier = "Europe/Berlin"),
-                boundingBox = ApiBoundingBox(ApiPoint(1.0, 2.0), ApiPoint(3.0, 4.0)),
                 defaultMapBoundingBox = ApiBoundingBox(ApiPoint(0.0, 0.0), ApiPoint(0.0, 0.0)),
-                rideOptions = ApiRideOptions(
-                    passengers = ApiRideOptions.Passenger(
-                        nameRequiredIfNoPublicTransportTicket = true,
-                    ),
-                    destinationTimeBasedMatching = false,
-                    preBookingThreshold = ApiRideOptions.PreBookingThreshold(3600, 604800),
-                ),
                 announcements =
                 listOf(
                     createApiAnnouncement(
@@ -70,11 +62,6 @@ internal class ApiProductTest : IokiApiModelTest() {
                 ),
                 displayStationsOnMap = true,
                 tipping = null,
-                rideRatingCriteria = listOf(
-                    ApiRideRatingCriteria.RIDE_RATING,
-                    ApiRideRatingCriteria.PUNCTUALITY_RATING,
-                    ApiRideRatingCriteria.WAITING_TIME_RATING,
-                ),
                 avatar = null,
                 avatarDarkmode = null,
                 cancellationStatements = listOf(
@@ -100,55 +87,6 @@ internal class ApiProductTest : IokiApiModelTest() {
                     showAutonomousOnboarding = false,
                     passengerNoteToDriver = true,
                 ),
-                productRideOptions = listOf(
-                    ApiProduct.RideOptions(
-                        dataType = ApiProduct.DataType.BOOLEAN,
-                        slug = "book_for_others",
-                        localizedName = "Ride Option 2",
-                        optionType = ApiProduct.RideOptions.Type.BOOK_FOR_OTHERS,
-                        bookable = false,
-                    ),
-                    ApiProduct.RideOptions(
-                        dataType = ApiProduct.DataType.INTEGER,
-                        slug = "storage_spaces",
-                        localizedName = "Ride Option 1",
-                        optionType = ApiProduct.RideOptions.Type.STORAGE,
-                        bookable = true,
-                    ),
-                ),
-                passengerTypes = listOf(
-                    ApiProduct.PassengerType(
-                        slug = "adult",
-                        localizedName = "Passenger Type 1",
-                        localizedInfo = "18+",
-                        optionType = ApiProduct.PassengerType.Type.ADULT,
-                        bookable = true,
-                    ),
-                ),
-                passengerOptions = listOf(
-                    ApiProduct.PassengerOption(
-                        dataType = ApiProduct.DataType.BOOLEAN,
-                        slug = "bahncard",
-                        localizedName = "Passenger Option 4",
-                        localizedInfo = "Passenger Info 4",
-                        localizedDescription = "Passenger Desc 4",
-                        localizedLink = "Passenger Link 4",
-                        localizedLinkText = "Passenger LinkTest 4",
-                        optionType = ApiProduct.PassengerOption.Type.BAHNCARD,
-                        bookable = true,
-                    ),
-                    ApiProduct.PassengerOption(
-                        dataType = ApiProduct.DataType.BOOLEAN,
-                        slug = "blue_badge",
-                        localizedName = "Passenger Option 5",
-                        localizedInfo = null,
-                        localizedDescription = null,
-                        localizedLink = null,
-                        localizedLinkText = null,
-                        optionType = ApiProduct.PassengerOption.Type.DOG,
-                        bookable = true,
-                    ),
-                ),
                 drtArea = PassengerApiArea(
                     type = "area",
                     id = "area-1",
@@ -165,7 +103,6 @@ internal class ApiProductTest : IokiApiModelTest() {
                     legendIndex = 0,
                     legendTitle = "title",
                     legendDescription = "description",
-                    area = ApiArea("MultiPolygon", emptyList()),
                 ),
                 intermodalArea = PassengerApiArea(
                     type = "area",
@@ -183,7 +120,6 @@ internal class ApiProductTest : IokiApiModelTest() {
                     legendIndex = 0,
                     legendTitle = "title",
                     legendDescription = "description",
-                    area = ApiArea("MultiPolygon", emptyList()),
                 ),
             ),
             jsonString = product,
@@ -199,17 +135,7 @@ internal class ApiProductTest : IokiApiModelTest() {
                 version = 1,
                 name = "Magic Bus Frankfurt",
                 timezone = ApiTimezone(identifier = "Europe/Berlin"),
-                boundingBox = ApiBoundingBox(ApiPoint(1.0, 2.0), ApiPoint(3.0, 4.0)),
                 defaultMapBoundingBox = null,
-                rideOptions =
-                ApiRideOptions(
-                    passengers =
-                    ApiRideOptions.Passenger(
-                        nameRequiredIfNoPublicTransportTicket = false,
-                    ),
-                    destinationTimeBasedMatching = false,
-                    preBookingThreshold = null,
-                ),
                 prebookable = false,
                 adHocBookable = false,
                 displayStationsOnMap = false,
@@ -218,7 +144,6 @@ internal class ApiProductTest : IokiApiModelTest() {
                 fixedStations = emptyList(),
                 announcements = emptyList(),
                 tipping = null,
-                rideRatingCriteria = emptyList(),
                 avatar = null,
                 avatarDarkmode = null,
                 cancellationStatements = null,
@@ -238,58 +163,6 @@ internal class ApiProductTest : IokiApiModelTest() {
                     showAutonomousOnboarding = false,
                     passengerNoteToDriver = false,
                 ),
-                productRideOptions =
-                listOf(
-                    ApiProduct.RideOptions(
-                        dataType = ApiProduct.DataType.BOOLEAN,
-                        slug = "book_for_others",
-                        localizedName = "Ride Option 2",
-                        optionType = ApiProduct.RideOptions.Type.DEFAULT,
-                        bookable = true,
-                    ),
-                    ApiProduct.RideOptions(
-                        dataType = ApiProduct.DataType.INTEGER,
-                        slug = "storage_spaces",
-                        localizedName = "Ride Option 1",
-                        optionType = ApiProduct.RideOptions.Type.STORAGE,
-                        bookable = false,
-                    ),
-                ),
-                passengerTypes =
-                listOf(
-                    ApiProduct.PassengerType(
-                        slug = "adult",
-                        localizedName = "Passenger Type 1",
-                        localizedInfo = null,
-                        optionType = ApiProduct.PassengerType.Type.ADULT,
-                        bookable = true,
-                    ),
-                ),
-                passengerOptions =
-                listOf(
-                    ApiProduct.PassengerOption(
-                        dataType = ApiProduct.DataType.BOOLEAN,
-                        slug = "bahncard",
-                        localizedName = "Passenger Option 4",
-                        localizedInfo = null,
-                        localizedDescription = null,
-                        localizedLink = null,
-                        localizedLinkText = null,
-                        optionType = ApiProduct.PassengerOption.Type.BAHNCARD,
-                        bookable = true,
-                    ),
-                    ApiProduct.PassengerOption(
-                        dataType = ApiProduct.DataType.BOOLEAN,
-                        slug = "childseat",
-                        localizedName = "Passenger Option 5",
-                        localizedInfo = null,
-                        localizedDescription = null,
-                        localizedLink = null,
-                        localizedLinkText = null,
-                        optionType = ApiProduct.PassengerOption.Type.CHILDSEAT,
-                        bookable = false,
-                    ),
-                ),
                 drtArea =
                 PassengerApiArea(
                     type = "",
@@ -307,7 +180,6 @@ internal class ApiProductTest : IokiApiModelTest() {
                     legendIndex = 0,
                     legendTitle = null,
                     legendDescription = null,
-                    area = ApiArea("", emptyList()),
                 ),
                 intermodalArea = null,
             ),

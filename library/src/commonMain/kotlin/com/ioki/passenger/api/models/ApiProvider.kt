@@ -19,16 +19,12 @@ public data class ApiProvider(
     val name: String,
     @SerialName(value = "payment_service_provider")
     val paymentServiceProvider: PaymentServiceProvider?,
-    @SerialName(value = "ride_payment_method_types")
-    val ridePaymentMethodTypes: Set<PaymentMethodType>,
     @SerialName(value = "ticketing_payment_method_types")
     val ticketingPaymentMethodTypes: Set<PaymentMethodType>,
     @SerialName(value = "service_credit_payment_method_types")
     val serviceCreditPaymentMethodTypes: Set<PaymentMethodType>,
     @SerialName(value = "personal_discount_payment_method_types")
     val personalDiscountPaymentMethodTypes: Set<PaymentMethodType>,
-    @SerialName(value = "tip_payment_method_types")
-    val tipPaymentMethodTypes: Set<PaymentMethodType>,
     @SerialName(value = "service_credit_options") val creditOptions: CreditOptions?,
     @SerialName(value = "merchant_name") val merchantName: String?,
     @SerialName(value = "country_code") val countryCode: String,
@@ -53,7 +49,6 @@ public data class ApiProvider(
         @SerialName(value = "promo_codes") val promoCodesEnabled: Boolean,
         @SerialName(value = "analytics_tracking") val analyticsTracking: Boolean,
         @SerialName(value = "user_email_required") val userEmailRequired: Boolean,
-        @SerialName(value = "marketing_automation") val marketingAutomation: Boolean,
         val referrals: Referrals?,
         @SerialName(value = "minimum_age_confirmation") val minimumAgeConfirmation: MinimumAgeConfirmation?,
         @SerialName(value = "newsletter") val newsletterEnabled: Boolean,
@@ -78,7 +73,6 @@ public data class ApiProvider(
                     promoCodesEnabled = true,
                     analyticsTracking = true,
                     userEmailRequired = true,
-                    marketingAutomation = true,
                     referrals = Referrals(""),
                     minimumAgeConfirmation = MinimumAgeConfirmation(0),
                     newsletterEnabled = true,
@@ -95,7 +89,6 @@ public data class ApiProvider(
                     promoCodesEnabled = false,
                     analyticsTracking = false,
                     userEmailRequired = false,
-                    marketingAutomation = false,
                     referrals = null,
                     minimumAgeConfirmation = null,
                     newsletterEnabled = false,
@@ -153,14 +146,13 @@ internal object PaymentMethodTypeSerializer : KSerializer<PaymentMethodType> {
 }
 
 public val ApiProvider.Features.permissionCenterEnabled: Boolean
-    get() = analyticsTracking || marketingAutomation || newsletterEnabled || receiptsEnabled
+    get() = analyticsTracking || newsletterEnabled || receiptsEnabled
 
 public val ApiProvider.allPaymentMethodTypes: Set<PaymentMethodType>
     get() =
-        ridePaymentMethodTypes +
+        ticketingPaymentMethodTypes +
             serviceCreditPaymentMethodTypes +
-            personalDiscountPaymentMethodTypes +
-            tipPaymentMethodTypes
+            personalDiscountPaymentMethodTypes
 
 internal object PaymentServiceProviderSerializer : KSerializer<PaymentServiceProvider?> {
     override val descriptor: SerialDescriptor = PaymentServiceProvider.Stripe.serializer().descriptor

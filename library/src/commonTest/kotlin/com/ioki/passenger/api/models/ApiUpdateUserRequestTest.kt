@@ -19,10 +19,7 @@ internal class ApiUpdateUserRequestTest : IokiApiModelTest() {
                 email = email,
                 termsAccepted = true,
                 tracking = null,
-                additionalData = ApiAdditionalData(
-                    marketingAutomationPushChannelEnabled = true,
-                    marketingAutomationMessageCenterChannelEnabled = false,
-                ),
+                additionalData = ApiAdditionalData,
             ),
             updateUserRequest,
         )

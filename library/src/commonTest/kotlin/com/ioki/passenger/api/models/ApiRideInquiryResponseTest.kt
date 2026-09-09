@@ -12,9 +12,7 @@ internal class ApiRideInquiryResponseTest : IokiApiModelTest() {
                     available = true,
                     nextAvailability = Instant.parse("1970-01-01T00:00:00Z"),
                 ),
-                constraints = ApiRideInquiryResponse.Constraints(
-                    area = ApiArea("MultiPolygon", emptyList()),
-                ),
+                constraints = ApiRideInquiryResponse.Constraints,
                 assistances = listOf(
                     ApiRideInquiryResponse.Assistance(
                         title = "title",

@@ -24,7 +24,7 @@ public data class ApiRideInquiryResponse(
     )
 
     @Serializable
-    public data class Constraints(val area: ApiArea?)
+    public object Constraints
 
     @Serializable
     public data class Assistance(
