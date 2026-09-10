@@ -35,7 +35,6 @@ import com.ioki.passenger.api.models.ApiRideInquiryRequest
 import com.ioki.passenger.api.models.ApiRideRequest
 import com.ioki.passenger.api.models.ApiRideSeriesRequest
 import com.ioki.passenger.api.models.ApiSettleDebitRequest
-import com.ioki.passenger.api.models.ApiSignUpRequest
 import com.ioki.passenger.api.models.ApiUpdatePassengersForRideRequest
 import com.ioki.passenger.api.models.ApiUpdatePaymentMethodForRideRequest
 import com.ioki.passenger.api.models.ApiUpdateClaimRequest
@@ -50,7 +49,6 @@ import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.patch
 import io.ktor.client.request.post
-import io.ktor.client.request.put
 import io.ktor.client.request.setBody
 import io.ktor.client.request.url
 import io.ktor.client.statement.HttpResponse
@@ -71,11 +69,6 @@ internal class IokiApi(private val client: IokiHttpClient, private val authHeade
         client.post("/api/passenger/request_tokens") {
             setBody(body)
         }
-
-    suspend fun signUp(body: ApiBody<ApiSignUpRequest>): HttpResponse = client.put("/api/passenger/user") {
-        header("Authorization", accessToken)
-        setBody(body)
-    }
 
     suspend fun updateUser(body: ApiBody<ApiUpdateUserRequest>): HttpResponse = client.patch("/api/passenger/user") {
         header("Authorization", accessToken)

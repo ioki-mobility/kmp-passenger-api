@@ -70,7 +70,6 @@ import com.ioki.passenger.api.models.ApiRideSeriesRequest
 import com.ioki.passenger.api.models.ApiRideSeriesResponse
 import com.ioki.passenger.api.models.ApiScheduleResponse
 import com.ioki.passenger.api.models.ApiSettleDebitRequest
-import com.ioki.passenger.api.models.ApiSignUpRequest
 import com.ioki.passenger.api.models.ApiStationResponse
 import com.ioki.passenger.api.models.ApiStationsRequest
 import com.ioki.passenger.api.models.ApiStripeSetupIntentResponse
@@ -183,8 +182,6 @@ public interface FirebaseService {
 
 public interface UserService {
     public suspend fun requestApiToken(request: ApiRequestTokenRequest): ApiResult<ApiRequestTokenResponse>
-
-    public suspend fun signUp(request: ApiSignUpRequest): ApiResult<ApiAuthenticatedUserResponse>
 
     public suspend fun getUser(): ApiResult<ApiAuthenticatedUserResponse>
 
@@ -438,11 +435,6 @@ private class DefaultIokiService(private val iokiApi: IokiApi, private val inter
     override suspend fun requestApiToken(request: ApiRequestTokenRequest): ApiResult<ApiRequestTokenResponse> =
         apiCall<ApiBody<ApiRequestTokenResponse>, ApiRequestTokenResponse> {
             requestApiToken(ApiBody(request))
-        }
-
-    override suspend fun signUp(request: ApiSignUpRequest): ApiResult<ApiAuthenticatedUserResponse> =
-        apiCall<ApiBody<ApiAuthenticatedUserResponse>, ApiAuthenticatedUserResponse> {
-            signUp(body = ApiBody(request))
         }
 
     override suspend fun createRide(request: ApiRideRequest): ApiResult<ApiRideResponse> =

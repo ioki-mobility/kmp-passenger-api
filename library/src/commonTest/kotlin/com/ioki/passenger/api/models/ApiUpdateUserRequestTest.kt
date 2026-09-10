@@ -19,10 +19,8 @@ internal class ApiUpdateUserRequestTest : IokiApiModelTest() {
                 email = email,
                 termsAccepted = true,
                 tracking = null,
-                additionalData = ApiAdditionalData(
-                    marketingAutomationPushChannelEnabled = true,
-                    marketingAutomationMessageCenterChannelEnabled = false,
-                ),
+                phoneNumber = "+491234567",
+                minimumAgeConfirmed = true,
             ),
             updateUserRequest,
         )
@@ -31,7 +29,16 @@ internal class ApiUpdateUserRequestTest : IokiApiModelTest() {
     @Test
     fun serializationMinimal() {
         testJsonStringCanBeConvertedToModel(
-            ApiUpdateUserRequest(2, null, null, null, null, null, null),
+            ApiUpdateUserRequest(
+                version = 2,
+                firstName = null,
+                lastName = null,
+                email = null,
+                termsAccepted = null,
+                tracking = null,
+                phoneNumber = null,
+                minimumAgeConfirmed = null,
+            ),
             updateUserRequestMinimal,
         )
     }
@@ -49,10 +56,8 @@ private val updateUserRequest =
     "newsletter": false,
     "receipt": true
   },
-  "additional_data": {
-      "marketing_automation_push_channel_enabled": true,
-      "marketing_automation_message_center_channel_enabled": false
-  }
+  "phone_number": "+491234567",
+  "minimum_age_confirmed": true
 }
 """
 
