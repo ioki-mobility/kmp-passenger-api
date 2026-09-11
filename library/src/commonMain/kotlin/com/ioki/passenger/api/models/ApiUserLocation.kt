@@ -23,6 +23,7 @@ public data class ApiUserLocation(
     val city: String?,
     val county: String?,
     val country: String?,
+    @SerialName(value = "formatted_address") val formattedAddress: String,
     @SerialName(value = "editable_by_user") val editableByUser: Boolean,
     @SerialName(value = "user_id") val userId: String,
     @SerialName(value = "custom_flags") val customFlags: List<CustomFlag>,
