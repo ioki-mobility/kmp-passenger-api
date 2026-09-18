@@ -1,5 +1,6 @@
 package com.ioki.passenger.api.internal.utils
 
+import io.ktor.client.engine.darwin.DarwinHttpRequestException
 import kotlin.time.Instant
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
@@ -7,14 +8,53 @@ import kotlinx.datetime.toLocalDateTime
 import platform.Foundation.NSDateFormatter
 import platform.Foundation.NSLocale
 import platform.Foundation.NSTimeZone
+import platform.Foundation.NSURLErrorCannotConnectToHost
+import platform.Foundation.NSURLErrorCannotFindHost
+import platform.Foundation.NSURLErrorClientCertificateRejected
+import platform.Foundation.NSURLErrorClientCertificateRequired
+import platform.Foundation.NSURLErrorDNSLookupFailed
+import platform.Foundation.NSURLErrorNetworkConnectionLost
+import platform.Foundation.NSURLErrorNotConnectedToInternet
+import platform.Foundation.NSURLErrorSecureConnectionFailed
+import platform.Foundation.NSURLErrorServerCertificateHasBadDate
+import platform.Foundation.NSURLErrorServerCertificateHasUnknownRoot
+import platform.Foundation.NSURLErrorServerCertificateNotYetValid
+import platform.Foundation.NSURLErrorServerCertificateUntrusted
 import platform.Foundation.localeWithLocaleIdentifier
 import platform.Foundation.timeIntervalSince1970
 import platform.Foundation.timeZoneForSecondsFromGMT
 
 private const val RFC1123_DATE_TIME_FORMAT = "EEE, dd MMM yyyy HH:mm:ss zzz"
 
+private val sslHandshakeErrorCodes = setOf(
+    NSURLErrorSecureConnectionFailed,
+    NSURLErrorServerCertificateHasBadDate,
+    NSURLErrorServerCertificateUntrusted,
+    NSURLErrorServerCertificateHasUnknownRoot,
+    NSURLErrorServerCertificateNotYetValid,
+    NSURLErrorClientCertificateRejected,
+    NSURLErrorClientCertificateRequired,
+)
+
+private val unknownHostErrorCodes = setOf(
+    NSURLErrorCannotFindHost,
+    NSURLErrorDNSLookupFailed,
+)
+
+private val socketErrorCodes = setOf(
+    NSURLErrorCannotConnectToHost,
+    NSURLErrorNotConnectedToInternet,
+)
+
+private val closedChannelErrorCodes = setOf(
+    NSURLErrorNetworkConnectionLost,
+)
+
+private val connectivityErrorCodes =
+    sslHandshakeErrorCodes + unknownHostErrorCodes + socketErrorCodes + closedChannelErrorCodes
+
 internal actual val Throwable.isPlatformConnectivityError: Boolean
-    get() = false
+    get() = this is DarwinHttpRequestException && origin.code in connectivityErrorCodes
 
 internal actual fun parseRfc1123DateTime(dateTimeString: String): LocalDateTime {
     val dateFormatter = NSDateFormatter().apply {
