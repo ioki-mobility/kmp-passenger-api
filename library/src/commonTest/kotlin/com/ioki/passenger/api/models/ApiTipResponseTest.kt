@@ -7,7 +7,8 @@ internal class ApiTipResponseTest : IokiApiModelTest() {
     fun serialization() {
         testJsonStringCanBeConvertedToModel(
             expectedModel = ApiTipResponse(
-                ApiMoney(
+                id = "tip_123",
+                amount = ApiMoney(
                     amount = 150,
                     currency = "EUR",
                 ),
@@ -20,6 +21,7 @@ internal class ApiTipResponseTest : IokiApiModelTest() {
 private val createTipResult =
     """
 {
+  "id": "tip_123",
   "amount": {
     "amount": 150,
     "currency": "EUR"
