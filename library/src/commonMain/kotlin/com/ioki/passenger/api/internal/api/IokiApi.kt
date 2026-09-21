@@ -509,6 +509,10 @@ internal class IokiApi(private val client: IokiHttpClient, private val authHeade
         header("Authorization", accessToken)
     }
 
+    suspend fun getCharge(id: String): HttpResponse = client.get(urlString = "/api/passenger/charges/$id") {
+        header("Authorization", accessToken)
+    }
+
     suspend fun settleDebit(purchaseId: String, body: ApiBody<ApiSettleDebitRequest>): HttpResponse =
         client.patch(urlString = "/api/passenger/purchases/$purchaseId/settle_debit") {
             header("Authorization", accessToken)
