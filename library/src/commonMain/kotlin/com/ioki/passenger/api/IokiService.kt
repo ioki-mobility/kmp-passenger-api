@@ -15,6 +15,7 @@ import com.ioki.passenger.api.models.ApiCancellationRequest
 import com.ioki.passenger.api.models.ApiCancellationVoucherRequest
 import com.ioki.passenger.api.models.ApiCancellationVoucherResponse
 import com.ioki.passenger.api.models.ApiCaptchaRequest
+import com.ioki.passenger.api.models.ApiChargeResponse
 import com.ioki.passenger.api.models.ApiClientChallengeRequest
 import com.ioki.passenger.api.models.ApiClientInfoResponse
 import com.ioki.passenger.api.models.ApiCreateLogPayPaymentMethodRequest
@@ -410,6 +411,7 @@ public interface PurchaseService {
     public suspend fun getPurchase(purchaseId: String): ApiResult<ApiPurchaseResponse>
     public suspend fun settleDebit(purchaseId: String, request: ApiSettleDebitRequest): ApiResult<ApiPurchaseResponse>
     public suspend fun resettleDebits(request: ApiResettleDebitsRequest): ApiResult<List<ApiPurchaseResponse>>
+    public suspend fun getCharge(chargeId: String): ApiResult<ApiChargeResponse>
 }
 
 public interface GeocodingService {
@@ -818,6 +820,9 @@ private class DefaultIokiService(private val iokiApi: IokiApi, private val inter
 
     override suspend fun getPurchase(purchaseId: String): ApiResult<ApiPurchaseResponse> =
         apiCall<ApiBody<ApiPurchaseResponse>, ApiPurchaseResponse> { getPurchase(id = purchaseId) }
+
+    override suspend fun getCharge(chargeId: String): ApiResult<ApiChargeResponse> =
+        apiCall<ApiBody<ApiChargeResponse>, ApiChargeResponse> { getCharge(id = chargeId) }
 
     override suspend fun settleDebit(
         purchaseId: String,
