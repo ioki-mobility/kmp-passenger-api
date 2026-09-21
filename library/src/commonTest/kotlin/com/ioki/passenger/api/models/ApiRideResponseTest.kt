@@ -97,7 +97,7 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                     id = "far_123",
                     bookingPrice = ApiMoney(amount = 1000, currency = "EUR"),
                 ),
-                booking = ApiBooking(verificationCode = "ABC123"),
+                booking = ApiBookingResponse(id = "boo_123", verificationCode = "ABC123"),
                 rating = ApiRatingResponse(
                     id = "abc123",
                     ratingLineItems = listOf(
@@ -424,6 +424,7 @@ private val rideResponse =
     "line_items": []
   },
   "booking": {
+    "id": "boo_123",
     "verification_code": "ABC123"
   },
   "rating": {

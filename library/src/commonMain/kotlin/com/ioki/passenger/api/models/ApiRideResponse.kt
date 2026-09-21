@@ -33,7 +33,7 @@ public data class ApiRideResponse(
     val vehicle: ApiVehicle?,
     val driver: ApiDriver?,
     val fare: ApiFareResponse?,
-    val booking: ApiBooking?,
+    val booking: ApiBookingResponse?,
     val rating: ApiRatingResponse?,
     @SerialName(value = "payment_method") val paymentMethod: ApiPaymentMethodResponse?,
     @SerialName(value = "matching_state") val matchingState: ApiMatchingState?,

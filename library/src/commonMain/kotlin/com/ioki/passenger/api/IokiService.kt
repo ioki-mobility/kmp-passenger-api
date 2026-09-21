@@ -7,6 +7,7 @@ import com.ioki.passenger.api.internal.authorisation.createAuthHeaderProvider
 import com.ioki.passenger.api.internal.utils.isPlatformConnectivityError
 import com.ioki.passenger.api.models.ApiAuthenticatedUserResponse
 import com.ioki.passenger.api.models.ApiBody
+import com.ioki.passenger.api.models.ApiBookingResponse
 import com.ioki.passenger.api.models.ApiBookingRequest
 import com.ioki.passenger.api.models.ApiBootstrapResponse
 import com.ioki.passenger.api.models.ApiCalculateNewFareRequest
@@ -251,7 +252,7 @@ public interface CurrentRideService {
 public interface RideService {
     public suspend fun createRide(request: ApiRideRequest): ApiResult<ApiRideResponse>
 
-    public suspend fun createBooking(rideId: String, request: ApiBookingRequest): ApiResult<Unit>
+    public suspend fun createBooking(rideId: String, request: ApiBookingRequest): ApiResult<ApiBookingResponse>
 
     public suspend fun cancelRide(
         rideId: String,
@@ -680,8 +681,8 @@ private class DefaultIokiService(private val iokiApi: IokiApi, private val inter
             solveClientChallenge(id = id, body = ApiBody(request))
         }
 
-    override suspend fun createBooking(rideId: String, request: ApiBookingRequest): ApiResult<Unit> =
-        apiCall<Unit, Unit> {
+    override suspend fun createBooking(rideId: String, request: ApiBookingRequest): ApiResult<ApiBookingResponse> =
+        apiCall<ApiBody<ApiBookingResponse>, ApiBookingResponse> {
             createBooking(rideId = rideId, body = ApiBody(request))
         }
 

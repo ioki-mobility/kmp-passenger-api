@@ -2,11 +2,11 @@ package com.ioki.passenger.api.models
 
 import kotlin.test.Test
 
-internal class ApiBookingTest : IokiApiModelTest() {
+internal class ApiBookingResponseTest : IokiApiModelTest() {
     @Test
     fun serialization() {
         testJsonStringCanBeConvertedToModel(
-            ApiBooking("ABC123"),
+            ApiBookingResponse(id = "boo_123", verificationCode = "ABC123"),
             bookingResponse,
         )
     }
@@ -15,6 +15,7 @@ internal class ApiBookingTest : IokiApiModelTest() {
 private val bookingResponse =
     """
 {
+  "id": "boo_123",
   "verification_code": "ABC123"
 }
 """

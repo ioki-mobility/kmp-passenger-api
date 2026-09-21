@@ -1,6 +1,7 @@
 package com.ioki.passenger.api.test
 
 import com.ioki.passenger.api.RideService
+import com.ioki.passenger.api.models.ApiBookingResponse
 import com.ioki.passenger.api.models.ApiBookingRequest
 import com.ioki.passenger.api.models.ApiCancellationRequest
 import com.ioki.passenger.api.models.ApiCancellationVoucherRequest
@@ -19,7 +20,7 @@ import com.ioki.passenger.api.result.ApiResult
 public open class FakeRideService : RideService {
     override suspend fun createRide(request: ApiRideRequest): ApiResult<ApiRideResponse> = error("Not overridden")
 
-    override suspend fun createBooking(rideId: String, request: ApiBookingRequest): ApiResult<Unit> =
+    override suspend fun createBooking(rideId: String, request: ApiBookingRequest): ApiResult<ApiBookingResponse> =
         error("Not overridden")
 
     override suspend fun cancelRide(
