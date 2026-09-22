@@ -96,6 +96,8 @@ private val rideResponse =
         paymentMethodRequired = false,
         matchingState = null,
         hasTicketingVouchers = false,
+        availableBookingPaymentMethodTypes = null,
+        availableTipPaymentMethodTypes = null,
     )
 
 private val rideSeriesResponseMinimal =

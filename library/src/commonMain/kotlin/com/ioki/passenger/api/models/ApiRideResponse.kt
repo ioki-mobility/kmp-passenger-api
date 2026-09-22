@@ -50,6 +50,10 @@ public data class ApiRideResponse(
     @SerialName(value = "show_pt_ticket_reminder") val showPublicTransportTicketReminder: Boolean,
     @SerialName(value = "payment_method_required") val paymentMethodRequired: Boolean,
     @SerialName(value = "has_ticketing_vouchers") val hasTicketingVouchers: Boolean,
+    @SerialName(value = "available_booking_payment_method_types")
+    val availableBookingPaymentMethodTypes: List<ApiPaymentMethodType>?,
+    @SerialName(value = "available_tip_payment_method_types")
+    val availableTipPaymentMethodTypes: List<ApiPaymentMethodType>?,
 ) : Entity {
     @Serializable
     public data class PassengerSelection(
