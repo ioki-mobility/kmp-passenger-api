@@ -11,6 +11,7 @@ import com.ioki.passenger.api.models.ApiMatchingState
 import com.ioki.passenger.api.models.ApiOfferedSolution
 import com.ioki.passenger.api.models.ApiOption
 import com.ioki.passenger.api.models.ApiPaymentMethodResponse
+import com.ioki.passenger.api.models.ApiPaymentMethodType
 import com.ioki.passenger.api.models.ApiRatingResponse
 import com.ioki.passenger.api.models.ApiRideResponse
 import com.ioki.passenger.api.models.ApiTipResponse
@@ -60,6 +61,8 @@ public fun createApiRideResponse(
     paymentMethodRequired: Boolean = false,
     matchingState: ApiMatchingState = createApiMatchingState(),
     hasTicketingVouchers: Boolean = false,
+    availableBookingPaymentMethodTypes: List<ApiPaymentMethodType>? = null,
+    availableTipPaymentMethodTypes: List<ApiPaymentMethodType>? = null,
 ): ApiRideResponse = ApiRideResponse(
     id = id,
     productId = productId,
@@ -103,6 +106,8 @@ public fun createApiRideResponse(
     paymentMethodRequired = paymentMethodRequired,
     matchingState = matchingState,
     hasTicketingVouchers = hasTicketingVouchers,
+    availableBookingPaymentMethodTypes = availableBookingPaymentMethodTypes,
+    availableTipPaymentMethodTypes = availableTipPaymentMethodTypes,
 )
 
 public fun createApiRideResponsePassengerSelection(

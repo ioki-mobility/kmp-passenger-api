@@ -221,6 +221,8 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                     finalSummary = "We couldn't find a ride.",
                 ),
                 hasTicketingVouchers = true,
+                availableBookingPaymentMethodTypes = listOf(ApiPaymentMethodType.STRIPE, ApiPaymentMethodType.CASH),
+                availableTipPaymentMethodTypes = listOf(ApiPaymentMethodType.STRIPE),
             ),
             jsonString = rideResponse,
         )
@@ -276,6 +278,8 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                 paymentMethodRequired = false,
                 matchingState = null,
                 hasTicketingVouchers = false,
+                availableBookingPaymentMethodTypes = null,
+                availableTipPaymentMethodTypes = null,
             ),
             jsonString = rideResponseMinimal,
         )
@@ -555,14 +559,16 @@ private val rideResponse =
     "payment_method_required": true,
     "matching_state": {
       "id": "matching-id",
-      "final_summary": "We couldn't find a ride."
+      "final_summary": "We couldn't find a ride.",
       "logs": [
         {
           "message": "log message"
         }
       ]
     },
-    "has_ticketing_vouchers": true
+    "has_ticketing_vouchers": true,
+    "available_booking_payment_method_types": ["stripe", "cash"],
+    "available_tip_payment_method_types": ["stripe"]
 }
 """
 
