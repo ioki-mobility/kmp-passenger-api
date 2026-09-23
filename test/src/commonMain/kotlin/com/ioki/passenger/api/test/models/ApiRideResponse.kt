@@ -11,7 +11,6 @@ import com.ioki.passenger.api.models.ApiMatchingState
 import com.ioki.passenger.api.models.ApiOfferedSolution
 import com.ioki.passenger.api.models.ApiOption
 import com.ioki.passenger.api.models.ApiPaymentMethodResponse
-import com.ioki.passenger.api.models.ApiRidePaymentMethodType
 import com.ioki.passenger.api.models.ApiRatingResponse
 import com.ioki.passenger.api.models.ApiRideResponse
 import com.ioki.passenger.api.models.ApiTipResponse

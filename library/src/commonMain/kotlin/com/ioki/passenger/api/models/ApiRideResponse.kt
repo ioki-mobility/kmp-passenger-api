@@ -86,7 +86,6 @@ public data class ApiRideResponse(
         UNSUPPORTED,
     }
 
-
     @Serializable
     public data class Route(@SerialName(value = "track") val track: String?)
 
