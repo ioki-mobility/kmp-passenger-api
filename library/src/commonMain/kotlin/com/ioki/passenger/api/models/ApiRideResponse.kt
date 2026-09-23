@@ -1,7 +1,12 @@
 package com.ioki.passenger.api.models
 
+import com.ioki.passenger.api.models.ApiRideResponse.PaymentMethodType
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotlin.time.Instant
 
 @Serializable
@@ -51,9 +56,9 @@ public data class ApiRideResponse(
     @SerialName(value = "payment_method_required") val paymentMethodRequired: Boolean,
     @SerialName(value = "has_ticketing_vouchers") val hasTicketingVouchers: Boolean,
     @SerialName(value = "available_booking_payment_method_types")
-    val availableBookingPaymentMethodTypes: List<ApiPaymentMethodType>?,
+    val availableBookingPaymentMethodTypes: List<PaymentMethodType>?,
     @SerialName(value = "available_tip_payment_method_types")
-    val availableTipPaymentMethodTypes: List<ApiPaymentMethodType>?,
+    val availableTipPaymentMethodTypes: List<PaymentMethodType>?,
 ) : Entity {
     @Serializable
     public data class PassengerSelection(
@@ -64,6 +69,23 @@ public data class ApiRideResponse(
         @SerialName(value = "last_name")
         val lastName: String?,
     )
+
+    @Serializable(with = RideResponsePaymentMethodTypeSerializer::class)
+    public enum class PaymentMethodType {
+        @SerialName(value = "cash")
+        CASH,
+
+        @SerialName(value = "psp_provided")
+        PSP_PROVIDED,
+
+        @SerialName(value = "service_credits")
+        SERVICE_CREDITS,
+
+        @SerialName(value = "pos_payment")
+        POS_PAYMENT,
+        UNSUPPORTED,
+    }
+
 
     @Serializable
     public data class Route(@SerialName(value = "track") val track: String?)
@@ -83,4 +105,27 @@ public data class ApiRideResponse(
     }
 }
 
+internal object RideResponsePaymentMethodTypeSerializer : KSerializer<PaymentMethodType> {
+    override val descriptor = String.serializer().descriptor
+
+    override fun deserialize(decoder: Decoder): PaymentMethodType = when (decoder.decodeString()) {
+        "cash" -> PaymentMethodType.CASH
+        "psp_provided" -> PaymentMethodType.PSP_PROVIDED
+        "service_credits" -> PaymentMethodType.SERVICE_CREDITS
+        "pos_payment" -> PaymentMethodType.POS_PAYMENT
+        else -> PaymentMethodType.UNSUPPORTED
+    }
+
+    override fun serialize(encoder: Encoder, value: PaymentMethodType) {
+        encoder.encodeString(
+            when (value) {
+                PaymentMethodType.CASH -> "cash"
+                PaymentMethodType.PSP_PROVIDED -> "psp_provided"
+                PaymentMethodType.SERVICE_CREDITS -> "service_credits"
+                PaymentMethodType.POS_PAYMENT -> "pos_payment"
+                PaymentMethodType.UNSUPPORTED -> "unsupported"
+            },
+        )
+    }
+}
 public typealias ApiBookedSolution = ApiOfferedSolution
