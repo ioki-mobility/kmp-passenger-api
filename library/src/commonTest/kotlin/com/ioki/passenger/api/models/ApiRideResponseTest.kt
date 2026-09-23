@@ -1,5 +1,6 @@
 package com.ioki.passenger.api.models
 
+import com.ioki.passenger.api.models.ApiRideResponse.PaymentMethodType
 import com.ioki.passenger.api.test.models.createApiFareResponse
 import com.ioki.passenger.api.test.models.createApiLocation
 import com.ioki.passenger.api.test.models.createApiMatchingState
@@ -221,8 +222,8 @@ internal class ApiRideResponseTest : IokiApiModelTest() {
                     finalSummary = "We couldn't find a ride.",
                 ),
                 hasTicketingVouchers = true,
-                availableBookingPaymentMethodTypes = listOf(ApiPaymentMethodType.STRIPE, ApiPaymentMethodType.CASH),
-                availableTipPaymentMethodTypes = listOf(ApiPaymentMethodType.STRIPE),
+                availableBookingPaymentMethodTypes = listOf(PaymentMethodType.PSP_PROVIDED, PaymentMethodType.CASH),
+                availableTipPaymentMethodTypes = listOf(PaymentMethodType.PSP_PROVIDED),
             ),
             jsonString = rideResponse,
         )
@@ -567,8 +568,8 @@ private val rideResponse =
       ]
     },
     "has_ticketing_vouchers": true,
-    "available_booking_payment_method_types": ["stripe", "cash"],
-    "available_tip_payment_method_types": ["stripe"]
+    "available_booking_payment_method_types": ["psp_provided", "cash"],
+    "available_tip_payment_method_types": ["psp_provided"]
 }
 """
 
