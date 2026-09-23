@@ -70,6 +70,7 @@ public fun createApiPurchaseResponseChargeSplits(
 )
 
 public fun createApiPurchaseResponseCharge(
+    id: String = "",
     chargeType: ApiPurchaseResponse.Charge.ChargeType = ApiPurchaseResponse.Charge.ChargeType.UNSUPPORTED,
     userId: String = "",
     paymentChargeId: String? = null,
@@ -80,6 +81,7 @@ public fun createApiPurchaseResponseCharge(
     amount: ApiMoney = createApiMoney(),
     receipt: ApiPurchaseResponse.Charge.Receipt? = null,
 ): ApiPurchaseResponse.Charge = ApiPurchaseResponse.Charge(
+    id = id,
     chargeType = chargeType,
     userId = userId,
     paymentChargeId = paymentChargeId,

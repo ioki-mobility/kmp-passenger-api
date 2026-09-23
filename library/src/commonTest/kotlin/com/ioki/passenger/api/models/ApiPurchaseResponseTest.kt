@@ -39,6 +39,7 @@ internal class ApiPurchaseResponseTest : IokiApiModelTest() {
                         purchaseId = "purchaseId",
                         amount = ApiMoney(amount = 140, currency = "EUR"),
                         charge = ApiPurchaseResponse.Charge(
+                            id = "chargeId",
                             chargeType = ApiPurchaseResponse.Charge.ChargeType.PAYMENT,
                             userId = "userId",
                             paymentChargeId = "paymentChargeId",
@@ -141,6 +142,7 @@ private val purchaseResponse =
             "currency": "EUR"
         },
         "charge": {
+            "id": "chargeId",
             "charge_type": "payment",
             "user_id": "userId",
             "payment_charge_id": "paymentChargeId",

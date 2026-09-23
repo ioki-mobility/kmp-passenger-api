@@ -1,7 +1,7 @@
 package com.ioki.passenger.api.test.models
 
 import com.ioki.passenger.api.models.ApiBookedSolution
-import com.ioki.passenger.api.models.ApiBooking
+import com.ioki.passenger.api.models.ApiBookingResponse
 import com.ioki.passenger.api.models.ApiBookingState
 import com.ioki.passenger.api.models.ApiCancellationReason
 import com.ioki.passenger.api.models.ApiDriver
@@ -44,7 +44,7 @@ public fun createApiRideResponse(
     vehicle: ApiVehicle? = null,
     driver: ApiDriver? = null,
     fare: ApiFareResponse? = null,
-    booking: ApiBooking? = null,
+    booking: ApiBookingResponse? = null,
     rating: ApiRatingResponse? = null,
     paymentMethod: ApiPaymentMethodResponse? = null,
     driverCanBeCalled: Boolean = false,
