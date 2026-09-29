@@ -10,12 +10,16 @@ public fun createApiPurchaseTicketingProductRequest(
     redemptionOptions: List<ApiPurchaseTicketingProductRequest.Option> = emptyList(),
     paymentMethod: ApiPaymentMethodRequest = createApiPaymentMethodRequest(),
     paypalSecureElement: String? = null,
+    onSession: Boolean? = null,
+    async: Boolean? = null,
 ): ApiPurchaseTicketingProductRequest = ApiPurchaseTicketingProductRequest(
     rideId = rideId,
     purchaseOptions = purchaseOptions,
     redemptionOptions = redemptionOptions,
     paymentMethod = paymentMethod,
     paypalSecureElement = paypalSecureElement,
+    onSession = onSession,
+    async = async,
 )
 
 public fun createApiPurchaseTicketingProductRequestOption(

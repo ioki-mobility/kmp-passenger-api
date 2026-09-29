@@ -8,9 +8,13 @@ public fun createApiBookingRequest(
     solutionId: String? = null,
     paymentMethod: ApiPaymentMethodRequest? = null,
     paypalSecureElement: String? = null,
+    onSession: Boolean? = null,
+    async: Boolean? = null,
 ): ApiBookingRequest = ApiBookingRequest(
     rideVersion = rideVersion,
     solutionId = solutionId,
     paymentMethod = paymentMethod,
     paypalSecureElement = paypalSecureElement,
+    onSession = onSession,
+    async = async,
 )

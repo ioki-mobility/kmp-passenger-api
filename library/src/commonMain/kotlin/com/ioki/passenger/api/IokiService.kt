@@ -242,6 +242,8 @@ public interface CurrentRideService {
         fareVersion: Int,
         paypalSecureElement: String?,
         requirePaymentMethodForPaidChange: Boolean,
+        onSession: Boolean? = null,
+        async: Boolean? = null,
     ): ApiResult<ApiRideResponse>
 
     public suspend fun updatePaymentMethodForRide(
@@ -535,14 +537,18 @@ private class DefaultIokiService(private val iokiApi: IokiApi, private val inter
         fareVersion: Int,
         paypalSecureElement: String?,
         requirePaymentMethodForPaidChange: Boolean,
+        onSession: Boolean?,
+        async: Boolean?,
     ): ApiResult<ApiRideResponse> = apiCall<ApiBody<ApiRideResponse>, ApiRideResponse> {
         val body = ApiBody(
             ApiUpdatePassengersForRideRequest(
-                passengers,
-                rideVersion,
-                fareVersion,
-                paypalSecureElement,
-                requirePaymentMethodForPaidChange,
+                passengers = passengers,
+                rideVersion = rideVersion,
+                fareVersion = fareVersion,
+                paypalSecureElement = paypalSecureElement,
+                requirePaymentMethodForPaidChange = requirePaymentMethodForPaidChange,
+                onSession = onSession,
+                async = async,
             ),
         )
         updatePassengersForRide(rideId = rideId, body = body)

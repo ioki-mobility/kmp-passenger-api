@@ -15,6 +15,9 @@ public data class ApiPurchaseTicketingProductRequest(
     val paymentMethod: ApiPaymentMethodRequest,
     @SerialName(value = "paypal_secure_element")
     val paypalSecureElement: String?,
+    @SerialName(value = "on_session")
+    val onSession: Boolean?,
+    val async: Boolean?,
 ) {
     @Serializable
     public data class Option(val slug: String, val value: AnyValue)

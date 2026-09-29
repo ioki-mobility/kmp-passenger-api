@@ -11,6 +11,8 @@ internal class ApiCreateTipRequestTest : IokiApiModelTest() {
                 amount = 150,
                 paymentMethod = createApiPaymentMethodRequest(ApiPaymentMethodType.SERVICE_CREDITS),
                 paypalSecureElement = null,
+                onSession = null,
+                async = null,
             ),
             createTipRequest,
         )

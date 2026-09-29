@@ -24,6 +24,8 @@ public open class FakeCurrentRideService : CurrentRideService {
         fareVersion: Int,
         paypalSecureElement: String?,
         requirePaymentMethodForPaidChange: Boolean,
+        onSession: Boolean?,
+        async: Boolean?,
     ): ApiResult<ApiRideResponse> = error("Not overridden")
 
     override suspend fun updatePaymentMethodForRide(

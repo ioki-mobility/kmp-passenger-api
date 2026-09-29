@@ -8,9 +8,13 @@ public fun createApiPurchasingCreditPackageRequest(
     value: Int = 0,
     paymentMethod: ApiPaymentMethodRequest = createApiPaymentMethodRequest(),
     paypalSecureElement: String? = null,
+    onSession: Boolean? = null,
+    async: Boolean? = null,
 ): ApiPurchasingCreditPackageRequest = ApiPurchasingCreditPackageRequest(
     cost = cost,
     value = value,
     paymentMethod = paymentMethod,
     paypalSecureElement = paypalSecureElement,
+    onSession = onSession,
+    async = async,
 )

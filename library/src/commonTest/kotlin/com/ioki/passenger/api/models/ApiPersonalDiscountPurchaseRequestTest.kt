@@ -12,6 +12,8 @@ internal class ApiPersonalDiscountPurchaseRequestTest : IokiApiModelTest() {
                 paymentMethod = createApiPaymentMethodRequest(ApiPaymentMethodType.SERVICE_CREDITS),
                 paypalSecureElement = null,
                 validFromDate = null,
+                onSession = null,
+                async = null,
             ),
             jsonString = personalDiscountPurchaseRequestMinimal,
         )
@@ -25,6 +27,8 @@ internal class ApiPersonalDiscountPurchaseRequestTest : IokiApiModelTest() {
                 paymentMethod = createApiPaymentMethodRequest(ApiPaymentMethodType.SERVICE_CREDITS),
                 paypalSecureElement = "secure_element",
                 validFromDate = "2024-05-15T16:33:46Z",
+                onSession = true,
+                async = false,
             ),
             personalDiscountPurchaseRequest,
         )
@@ -49,6 +53,8 @@ private val personalDiscountPurchaseRequest =
     "payment_method_type": "service_credits"
   },
   "paypal_secure_element": "secure_element",
-  "valid_from": "2024-05-15T16:33:46Z"
+  "valid_from": "2024-05-15T16:33:46Z",
+  "on_session": true,
+  "async": false
 }
 """
