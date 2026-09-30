@@ -1,6 +1,7 @@
 package com.ioki.passenger.api.test
 
 import com.ioki.passenger.api.PurchaseService
+import com.ioki.passenger.api.models.ApiChargeResponse
 import com.ioki.passenger.api.models.ApiPurchaseFilter
 import com.ioki.passenger.api.models.ApiPurchaseResponse
 import com.ioki.passenger.api.models.ApiResettleDebitsRequest
@@ -20,4 +21,6 @@ public open class FakePurchaseService : PurchaseService {
 
     override suspend fun resettleDebits(request: ApiResettleDebitsRequest): ApiResult<List<ApiPurchaseResponse>> =
         error("Not overridden")
+
+    override suspend fun getCharge(chargeId: String): ApiResult<ApiChargeResponse> = error("Not overridden")
 }

@@ -7,6 +7,7 @@ import com.ioki.passenger.api.internal.authorisation.createAuthHeaderProvider
 import com.ioki.passenger.api.internal.utils.isPlatformConnectivityError
 import com.ioki.passenger.api.models.ApiAuthenticatedUserResponse
 import com.ioki.passenger.api.models.ApiBody
+import com.ioki.passenger.api.models.ApiBookingResponse
 import com.ioki.passenger.api.models.ApiBookingRequest
 import com.ioki.passenger.api.models.ApiBootstrapResponse
 import com.ioki.passenger.api.models.ApiCalculateNewFareRequest
@@ -14,6 +15,7 @@ import com.ioki.passenger.api.models.ApiCancellationRequest
 import com.ioki.passenger.api.models.ApiCancellationVoucherRequest
 import com.ioki.passenger.api.models.ApiCancellationVoucherResponse
 import com.ioki.passenger.api.models.ApiCaptchaRequest
+import com.ioki.passenger.api.models.ApiChargeResponse
 import com.ioki.passenger.api.models.ApiClientChallengeRequest
 import com.ioki.passenger.api.models.ApiClientInfoResponse
 import com.ioki.passenger.api.models.ApiCreateLogPayPaymentMethodRequest
@@ -251,7 +253,7 @@ public interface CurrentRideService {
 public interface RideService {
     public suspend fun createRide(request: ApiRideRequest): ApiResult<ApiRideResponse>
 
-    public suspend fun createBooking(rideId: String, request: ApiBookingRequest): ApiResult<Unit>
+    public suspend fun createBooking(rideId: String, request: ApiBookingRequest): ApiResult<ApiBookingResponse>
 
     public suspend fun cancelRide(
         rideId: String,
@@ -409,6 +411,7 @@ public interface PurchaseService {
     public suspend fun getPurchase(purchaseId: String): ApiResult<ApiPurchaseResponse>
     public suspend fun settleDebit(purchaseId: String, request: ApiSettleDebitRequest): ApiResult<ApiPurchaseResponse>
     public suspend fun resettleDebits(request: ApiResettleDebitsRequest): ApiResult<List<ApiPurchaseResponse>>
+    public suspend fun getCharge(chargeId: String): ApiResult<ApiChargeResponse>
 }
 
 public interface GeocodingService {
@@ -680,8 +683,8 @@ private class DefaultIokiService(private val iokiApi: IokiApi, private val inter
             solveClientChallenge(id = id, body = ApiBody(request))
         }
 
-    override suspend fun createBooking(rideId: String, request: ApiBookingRequest): ApiResult<Unit> =
-        apiCall<Unit, Unit> {
+    override suspend fun createBooking(rideId: String, request: ApiBookingRequest): ApiResult<ApiBookingResponse> =
+        apiCall<ApiBody<ApiBookingResponse>, ApiBookingResponse> {
             createBooking(rideId = rideId, body = ApiBody(request))
         }
 
@@ -817,6 +820,9 @@ private class DefaultIokiService(private val iokiApi: IokiApi, private val inter
 
     override suspend fun getPurchase(purchaseId: String): ApiResult<ApiPurchaseResponse> =
         apiCall<ApiBody<ApiPurchaseResponse>, ApiPurchaseResponse> { getPurchase(id = purchaseId) }
+
+    override suspend fun getCharge(chargeId: String): ApiResult<ApiChargeResponse> =
+        apiCall<ApiBody<ApiChargeResponse>, ApiChargeResponse> { getCharge(id = chargeId) }
 
     override suspend fun settleDebit(
         purchaseId: String,

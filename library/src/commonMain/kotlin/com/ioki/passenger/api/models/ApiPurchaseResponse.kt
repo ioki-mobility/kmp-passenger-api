@@ -38,6 +38,7 @@ public data class ApiPurchaseResponse(
 
     @Serializable
     public data class Charge(
+        val id: String,
         @SerialName(value = "charge_type") val chargeType: ChargeType,
         @SerialName(value = "user_id") val userId: String,
         @SerialName(value = "payment_charge_id") val paymentChargeId: String?,
