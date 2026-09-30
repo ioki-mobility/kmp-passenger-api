@@ -28,6 +28,7 @@ public data class ApiChargeResponse(
     val amount: ApiMoney,
     val receipt: Receipt?,
     @SerialName(value = "pending_action") val pendingAction: PendingAction?,
+    @SerialName(value = "earliest_reservable_at") val earliestReservableAt: Instant?,
 ) {
     @Serializable
     public enum class State {
