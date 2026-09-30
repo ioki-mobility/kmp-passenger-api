@@ -14,4 +14,7 @@ public data class ApiUpdatePassengersForRideRequest(
     val paypalSecureElement: String?,
     @SerialName(value = "require_payment_method_for_paid_change")
     val requirePaymentMethodForPaidChange: Boolean,
+    @SerialName(value = "on_session")
+    val onSession: Boolean?,
+    val async: Boolean?,
 )

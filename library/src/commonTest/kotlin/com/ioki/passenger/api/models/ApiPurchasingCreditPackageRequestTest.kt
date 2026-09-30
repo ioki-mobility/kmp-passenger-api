@@ -14,6 +14,8 @@ internal class ApiPurchasingCreditPackageRequestTest : IokiApiModelTest() {
                     id = null,
                 ),
                 paypalSecureElement = null,
+                onSession = null,
+                async = null,
             ),
             purchasingCreditPackageMinimal,
         )
@@ -30,6 +32,8 @@ internal class ApiPurchasingCreditPackageRequestTest : IokiApiModelTest() {
                     id = null,
                 ),
                 paypalSecureElement = "secure_element",
+                onSession = true,
+                async = false,
             ),
             purchasingCreditPackage,
         )
@@ -55,6 +59,8 @@ private val purchasingCreditPackage =
   "payment_method": {
     "payment_method_type": "stripe"
   },
-  "paypal_secure_element": "secure_element"
+  "paypal_secure_element": "secure_element",
+  "on_session": true,
+  "async": false
 }
 """

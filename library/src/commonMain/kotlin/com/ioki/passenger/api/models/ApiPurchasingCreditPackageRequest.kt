@@ -9,4 +9,6 @@ public data class ApiPurchasingCreditPackageRequest(
     val value: Int,
     @SerialName(value = "payment_method") val paymentMethod: ApiPaymentMethodRequest,
     @SerialName(value = "paypal_secure_element") val paypalSecureElement: String?,
+    @SerialName(value = "on_session") val onSession: Boolean?,
+    val async: Boolean?,
 )

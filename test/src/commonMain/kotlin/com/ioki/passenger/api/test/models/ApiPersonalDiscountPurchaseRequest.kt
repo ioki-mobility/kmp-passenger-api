@@ -8,9 +8,13 @@ public fun createApiPersonalDiscountPurchaseRequest(
     paymentMethod: ApiPaymentMethodRequest = createApiPaymentMethodRequest(),
     paypalSecureElement: String? = null,
     validFromDate: String? = null,
+    onSession: Boolean? = null,
+    async: Boolean? = null,
 ): ApiPersonalDiscountPurchaseRequest = ApiPersonalDiscountPurchaseRequest(
     personalDiscountTypeId = personalDiscountTypeId,
     paymentMethod = paymentMethod,
     paypalSecureElement = paypalSecureElement,
     validFromDate = validFromDate,
+    onSession = onSession,
+    async = async,
 )

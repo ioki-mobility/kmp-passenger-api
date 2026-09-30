@@ -9,4 +9,6 @@ public data class ApiBookingRequest(
     @SerialName(value = "solution_id") val solutionId: String?,
     @SerialName(value = "payment_method") val paymentMethod: ApiPaymentMethodRequest?,
     @SerialName(value = "paypal_secure_element") val paypalSecureElement: String?,
+    @SerialName(value = "on_session") val onSession: Boolean?,
+    val async: Boolean?,
 )

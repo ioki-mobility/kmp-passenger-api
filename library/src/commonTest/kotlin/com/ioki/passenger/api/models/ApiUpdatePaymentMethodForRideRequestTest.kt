@@ -13,6 +13,8 @@ internal class ApiUpdatePaymentMethodForRideRequestTest : IokiApiModelTest() {
                 ),
                 rideVersion = 42,
                 paypalSecureElement = "1234",
+                onSession = true,
+                async = false,
             ),
             jsonString = updatePaymentMethodForRideRequestJson,
         )
@@ -26,6 +28,8 @@ private val updatePaymentMethodForRideRequestJson: String = """
     "id": "pam_123"
   },
   "ride_version": 42,
-  "paypal_secure_element": "1234"
+  "paypal_secure_element": "1234",
+  "on_session": true,
+  "async": false
 }
 """.trimIndent()
