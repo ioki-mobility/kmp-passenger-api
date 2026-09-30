@@ -29,6 +29,7 @@ internal class ApiChargeResponseTest : IokiApiModelTest() {
                         url = "https://example.com/challenge",
                     ),
                 ),
+                earliestReservableAt = Instant.parse("2023-07-21T13:17:42Z"),
             ),
             chargeResponse,
         )
@@ -48,6 +49,7 @@ internal class ApiChargeResponseTest : IokiApiModelTest() {
                 amount = createApiMoney(amount = 0, currency = "EUR"),
                 receipt = null,
                 pendingAction = null,
+                earliestReservableAt = null,
             ),
             chargeResponseMinimal,
         )
@@ -69,6 +71,7 @@ internal class ApiChargeResponseTest : IokiApiModelTest() {
                 pendingAction = ApiChargeResponse.PendingAction(
                     action = ApiChargeResponse.PendingAction.Action.Unsupported,
                 ),
+                earliestReservableAt = null,
             ),
             chargeResponseUnsupportedPendingActionActionType,
         )
@@ -102,7 +105,8 @@ private val chargeResponse =
             "type": "open_url",
             "url": "https://example.com/challenge"
         }
-    }
+    },
+    "earliest_reservable_at": "2023-07-21T13:17:42Z"
 }
 """
 

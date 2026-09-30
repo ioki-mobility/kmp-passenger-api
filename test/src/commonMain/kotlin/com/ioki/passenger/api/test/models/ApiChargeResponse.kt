@@ -3,6 +3,7 @@ package com.ioki.passenger.api.test.models
 import com.ioki.passenger.api.models.ApiChargeResponse
 import com.ioki.passenger.api.models.ApiMoney
 import com.ioki.passenger.api.models.ApiPaymentMethodResponse
+import kotlin.time.Instant
 
 public fun createApiChargeResponse(
     id: String = "",
@@ -15,6 +16,7 @@ public fun createApiChargeResponse(
     amount: ApiMoney = createApiMoney(),
     receipt: ApiChargeResponse.Receipt? = null,
     pendingAction: ApiChargeResponse.PendingAction? = null,
+    earliestReservableAt: Instant? = null,
 ): ApiChargeResponse = ApiChargeResponse(
     id = id,
     chargeType = chargeType,
@@ -26,6 +28,7 @@ public fun createApiChargeResponse(
     amount = amount,
     receipt = receipt,
     pendingAction = pendingAction,
+    earliestReservableAt = earliestReservableAt,
 )
 
 public fun createApiChargeResponsePendingAction(
