@@ -44,6 +44,12 @@ public data class ApiRideInquiryResponse(
             @SerialName("destination_outside_of_service_area")
             DESTINATION_OUTSIDE_OF_SERVICE_AREA,
 
+            @SerialName("user_email_address_missing")
+            USER_EMAIL_ADDRESS_MISSING,
+
+            @SerialName("user_phone_number_missing")
+            USER_PHONE_NUMBER_MISSING,
+
             UNSUPPORTED,
         }
     }
@@ -58,6 +64,8 @@ internal object ErrorCodeSerializer : KSerializer<ErrorCode> {
                 ErrorCode.SERVICE_NOT_AVAILABLE -> "service_not_available"
                 ErrorCode.ORIGIN_OUTSIDE_OF_SERVICE_AREA -> "origin_outside_of_service_area"
                 ErrorCode.DESTINATION_OUTSIDE_OF_SERVICE_AREA -> "destination_outside_of_service_area"
+                ErrorCode.USER_EMAIL_ADDRESS_MISSING -> "user_email_address_missing"
+                ErrorCode.USER_PHONE_NUMBER_MISSING -> "user_phone_number_missing"
                 ErrorCode.UNSUPPORTED -> "unsupported"
             },
         )
@@ -67,6 +75,8 @@ internal object ErrorCodeSerializer : KSerializer<ErrorCode> {
         "service_not_available" -> ErrorCode.SERVICE_NOT_AVAILABLE
         "origin_outside_of_service_area" -> ErrorCode.ORIGIN_OUTSIDE_OF_SERVICE_AREA
         "destination_outside_of_service_area" -> ErrorCode.DESTINATION_OUTSIDE_OF_SERVICE_AREA
+        "user_phone_number_missing" -> ErrorCode.USER_PHONE_NUMBER_MISSING
+        "user_email_address_missing" -> ErrorCode.USER_EMAIL_ADDRESS_MISSING
         else -> ErrorCode.UNSUPPORTED
     }
 }
