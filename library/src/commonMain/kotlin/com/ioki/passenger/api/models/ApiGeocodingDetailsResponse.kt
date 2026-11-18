@@ -15,7 +15,6 @@ public data class ApiGeocodingDetailsResponse(
     val vendor: String,
     @SerialName(value = "vendor_id") val vendorId: String,
     @SerialName(value = "vendor_type") val vendorType: VendorType,
-    @SerialName(value = "location_name") val locationName: String?,
     @SerialName(value = "formatted_address") val formattedAddress: String?,
     @SerialName(value = "street_name") val streetName: String?,
     @SerialName(value = "street_number") val streetNumber: String?,
