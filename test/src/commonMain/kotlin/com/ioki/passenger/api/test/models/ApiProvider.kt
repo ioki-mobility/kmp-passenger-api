@@ -3,6 +3,7 @@ package com.ioki.passenger.api.test.models
 import com.ioki.passenger.api.models.ApiAvatar
 import com.ioki.passenger.api.models.ApiLogPayType
 import com.ioki.passenger.api.models.ApiOfferedCreditPackage
+import com.ioki.passenger.api.models.ApiPayoneType
 import com.ioki.passenger.api.models.ApiProvider
 import com.ioki.passenger.api.models.ApiProvider.PaymentMethodType
 import com.ioki.passenger.api.models.ApiStripeType
@@ -56,6 +57,12 @@ public fun createLogPayPaymentServiceProvider(
 ): PaymentServiceProvider.LogPay = PaymentServiceProvider.LogPay(
     logPayTypes = logPayTypes,
     useLegacyPaypalFlow = useLegacyPaypalFlow,
+)
+
+public fun createPayonePaymentServiceProvider(
+    payoneTypes: List<ApiPayoneType>? = null,
+): PaymentServiceProvider.Payone = PaymentServiceProvider.Payone(
+    payoneTypes = payoneTypes,
 )
 
 public fun createApiProviderCreditOptions(

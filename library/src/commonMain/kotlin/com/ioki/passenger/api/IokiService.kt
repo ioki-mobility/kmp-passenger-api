@@ -19,6 +19,7 @@ import com.ioki.passenger.api.models.ApiChargeResponse
 import com.ioki.passenger.api.models.ApiClientChallengeRequest
 import com.ioki.passenger.api.models.ApiClientInfoResponse
 import com.ioki.passenger.api.models.ApiCreateLogPayPaymentMethodRequest
+import com.ioki.passenger.api.models.ApiCreatePayonePaymentMethodRequest
 import com.ioki.passenger.api.models.ApiCreateTipRequest
 import com.ioki.passenger.api.models.ApiDeviceRequest
 import com.ioki.passenger.api.models.ApiDeviceResponse
@@ -43,6 +44,8 @@ import com.ioki.passenger.api.models.ApiNotificationResponse
 import com.ioki.passenger.api.models.ApiPassengerSelectionRequest
 import com.ioki.passenger.api.models.ApiPaymentMethodCreationRequest
 import com.ioki.passenger.api.models.ApiPaymentMethodResponse
+import com.ioki.passenger.api.models.ApiPayoneType
+import com.ioki.passenger.api.models.ApiPayoneUrlResponse
 import com.ioki.passenger.api.models.ApiPaypalClientTokenResponse
 import com.ioki.passenger.api.models.ApiPersonalDiscountPurchaseRequest
 import com.ioki.passenger.api.models.ApiPersonalDiscountResponse
@@ -153,6 +156,7 @@ public interface IokiService :
     GetPaymentService,
     RedeemService,
     LogPayService,
+    PayoneService,
     StripeService,
     PayPalService,
     PaymentService,
@@ -311,6 +315,10 @@ public interface LogPayService {
     public suspend fun createLogPayCustomer(request: ApiLogPayAccountRequest): ApiResult<ApiLogPayUrlResponse>
 
     public suspend fun getLogPayUrl(paymentMethodType: ApiLogPayType): ApiResult<ApiLogPayUrlResponse>
+}
+
+public interface PayoneService {
+    public suspend fun getPayoneUrl(paymentMethodType: ApiPayoneType): ApiResult<ApiPayoneUrlResponse>
 }
 
 public interface StripeService {
@@ -672,6 +680,11 @@ private class DefaultIokiService(private val iokiApi: IokiApi, private val inter
     override suspend fun getLogPayUrl(paymentMethodType: ApiLogPayType): ApiResult<ApiLogPayUrlResponse> =
         apiCall<ApiBody<ApiLogPayUrlResponse>, ApiLogPayUrlResponse> {
             getLogPayUrl(body = ApiBody(ApiCreateLogPayPaymentMethodRequest(paymentMethodType)))
+        }
+
+    override suspend fun getPayoneUrl(paymentMethodType: ApiPayoneType): ApiResult<ApiPayoneUrlResponse> =
+        apiCall<ApiBody<ApiPayoneUrlResponse>, ApiPayoneUrlResponse> {
+            getPayoneUrl(body = ApiBody(ApiCreatePayonePaymentMethodRequest(paymentMethodType)))
         }
 
     override suspend fun updateUserFlags(request: ApiUserFlagsRequest): ApiResult<ApiAuthenticatedUserResponse> =

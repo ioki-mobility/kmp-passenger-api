@@ -3,6 +3,7 @@ package com.ioki.passenger.api.models
 import com.ioki.passenger.api.models.ApiProvider.PaymentMethodType
 import com.ioki.passenger.api.test.models.createApiProvider
 import com.ioki.passenger.api.test.models.createLogPayPaymentServiceProvider
+import com.ioki.passenger.api.test.models.createPayonePaymentServiceProvider
 import com.ioki.passenger.api.test.models.createStripePaymentServiceProvider
 import kotlin.test.Test
 
@@ -95,6 +96,21 @@ internal class ApiProviderTest : IokiApiModelTest() {
                 ),
             ),
             providerWithLogPay,
+        )
+    }
+
+    @Test
+    fun serializationPayonePSP() {
+        testJsonStringCanBeConvertedToModel(
+            createApiProvider(
+                name = "Ioki GmbH",
+                countryCode = "DE",
+                features = ApiProvider.Features.NONE,
+                paymentServiceProvider = createPayonePaymentServiceProvider(
+                    payoneTypes = listOf(ApiPayoneType.CARD),
+                ),
+            ),
+            providerWithPayone,
         )
     }
 
@@ -258,6 +274,38 @@ private val providerUnknownPSP =
   "name": "Ioki GmbH",
    "payment_service_provider": {
     "type": "payment_service_provider/unknown_psp"
+  },
+  "country_code": "DE",
+  "ride_payment_method_types": [],
+  "ticketing_payment_method_types": [],
+  "service_credit_payment_method_types": [],
+  "personal_discount_payment_method_types": [],
+  "tip_payment_method_types": [],
+  "custom_urls": [],
+  "features": {
+    "non_purchasable_personal_discounts": false,
+    "payment": false,
+    "promo_codes": false,
+    "purchasable_personal_discounts": false,
+    "service_credits": false,
+    "analytics_tracking": false,
+    "user_email_required": false,
+    "marketing_automation": false,
+    "newsletter": false,
+    "receipts": false,
+    "apply_for_non_purchasable_personal_discounts": false,
+    "tickets": false
+  }
+}
+"""
+
+private val providerWithPayone =
+    """
+{
+  "name": "Ioki GmbH",
+  "payment_service_provider": {
+    "type": "payment_service_provider/payone",
+    "payone_payment_method_types": ["card"]
   },
   "country_code": "DE",
   "ride_payment_method_types": [],
