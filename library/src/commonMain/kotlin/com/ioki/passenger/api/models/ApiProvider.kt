@@ -171,6 +171,8 @@ internal object PaymentServiceProviderSerializer : KSerializer<PaymentServicePro
             encoder.encodeNullableSerializableValue(PaymentServiceProvider.Stripe.serializer(), value)
         is PaymentServiceProvider.LogPay ->
             encoder.encodeNullableSerializableValue(PaymentServiceProvider.LogPay.serializer(), value)
+        is PaymentServiceProvider.Payone ->
+            encoder.encodeNullableSerializableValue(PaymentServiceProvider.Payone.serializer(), value)
         else -> encoder.encodeNullableSerializableValue(NothingSerializer(), null)
     }
 
@@ -183,6 +185,8 @@ internal object PaymentServiceProviderSerializer : KSerializer<PaymentServicePro
                 input.json.decodeFromJsonElement(PaymentServiceProvider.Stripe.serializer(), element)
             "payment_service_provider/logpay" ->
                 input.json.decodeFromJsonElement(PaymentServiceProvider.LogPay.serializer(), element)
+            "payment_service_provider/payone" ->
+                input.json.decodeFromJsonElement(PaymentServiceProvider.Payone.serializer(), element)
             else -> null
         }
     }
@@ -201,5 +205,10 @@ public sealed class PaymentServiceProvider {
     public data class LogPay(
         @SerialName(value = "logpay_payment_method_types") val logPayTypes: List<ApiLogPayType>?,
         @SerialName(value = "use_legacy_paypal_flow") val useLegacyPaypalFlow: Boolean,
+    ) : PaymentServiceProvider()
+
+    @Serializable
+    public data class Payone(
+        @SerialName(value = "payone_payment_method_types") val payoneTypes: List<ApiPayoneType>?,
     ) : PaymentServiceProvider()
 }

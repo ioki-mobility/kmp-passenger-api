@@ -26,6 +26,7 @@ internal class ApiPaymentMethodResponseTypeTest {
                 arrayOf(ApiPaymentMethodType.CASH, "\"cash\""),
                 arrayOf(ApiPaymentMethodType.STRIPE, "\"stripe\""),
                 arrayOf(ApiPaymentMethodType.LOGPAY, "\"logpay\""),
+                arrayOf(ApiPaymentMethodType.PAYONE, "\"payone\""),
                 arrayOf(
                     ApiPaymentMethodType.PUBLIC_TRANSPORT_TICKET,
                     "\"public_transport_ticket\"",

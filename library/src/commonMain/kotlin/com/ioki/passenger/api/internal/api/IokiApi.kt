@@ -10,6 +10,7 @@ import com.ioki.passenger.api.models.ApiCancellationVoucherRequest
 import com.ioki.passenger.api.models.ApiCaptchaRequest
 import com.ioki.passenger.api.models.ApiClientChallengeRequest
 import com.ioki.passenger.api.models.ApiCreateLogPayPaymentMethodRequest
+import com.ioki.passenger.api.models.ApiCreatePayonePaymentMethodRequest
 import com.ioki.passenger.api.models.ApiCreateTipRequest
 import com.ioki.passenger.api.models.ApiDeviceRequest
 import com.ioki.passenger.api.models.ApiDoorStateChangeRequest
@@ -297,6 +298,12 @@ internal class IokiApi(private val client: IokiHttpClient, private val authHeade
 
     suspend fun getLogPayUrl(body: ApiBody<ApiCreateLogPayPaymentMethodRequest>): HttpResponse =
         client.post("/api/passenger/logpay/payment_method") {
+            header("Authorization", accessToken)
+            setBody(body)
+        }
+
+    suspend fun getPayoneUrl(body: ApiBody<ApiCreatePayonePaymentMethodRequest>): HttpResponse =
+        client.post("/api/passenger/payone/payment_method") {
             header("Authorization", accessToken)
             setBody(body)
         }

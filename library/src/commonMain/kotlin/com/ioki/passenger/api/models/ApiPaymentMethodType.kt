@@ -18,6 +18,9 @@ public enum class ApiPaymentMethodType {
     @SerialName(value = "logpay")
     LOGPAY,
 
+    @SerialName(value = "payone")
+    PAYONE,
+
     @SerialName(value = "public_transport_ticket")
     PUBLIC_TRANSPORT_TICKET,
 
@@ -36,6 +39,7 @@ internal object ApiPaymentMethodTypeSerializer : KSerializer<ApiPaymentMethodTyp
         "cash" -> ApiPaymentMethodType.CASH
         "stripe" -> ApiPaymentMethodType.STRIPE
         "logpay" -> ApiPaymentMethodType.LOGPAY
+        "payone" -> ApiPaymentMethodType.PAYONE
         "public_transport_ticket" -> ApiPaymentMethodType.PUBLIC_TRANSPORT_TICKET
         "service_credits" -> ApiPaymentMethodType.SERVICE_CREDITS
         "pos_payment" -> ApiPaymentMethodType.POS_PAYMENT
@@ -48,6 +52,7 @@ internal object ApiPaymentMethodTypeSerializer : KSerializer<ApiPaymentMethodTyp
                 ApiPaymentMethodType.CASH -> "cash"
                 ApiPaymentMethodType.STRIPE -> "stripe"
                 ApiPaymentMethodType.LOGPAY -> "logpay"
+                ApiPaymentMethodType.PAYONE -> "payone"
                 ApiPaymentMethodType.PUBLIC_TRANSPORT_TICKET -> "public_transport_ticket"
                 ApiPaymentMethodType.SERVICE_CREDITS -> "service_credits"
                 ApiPaymentMethodType.POS_PAYMENT -> "pos_payment"
